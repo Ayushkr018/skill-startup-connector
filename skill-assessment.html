@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Assessments - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Skill Test Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --tech-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .skills-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Test Categories */
+        .test-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: var(--tech-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-info p {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 600;
+        }
+
+        .test-list {
+            margin-bottom: 2rem;
+        }
+
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--dashboard-border);
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .test-item:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            transform: translateX(5px);
+        }
+
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .test-difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .difficulty-beginner {
+            background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+            color: var(--success-color);
+        }
+
+        .difficulty-intermediate {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            color: var(--warning-color);
+        }
+
+        .difficulty-advanced {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            color: var(--error-color);
+        }
+
+        .test-details h5 {
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .test-meta {
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+        }
+
+        .start-test-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .view-all-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Test Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dashboard-text-light);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--dashboard-border);
+            color: var(--dashboard-text);
+        }
+
+        .test-progress {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dashboard-text-light);
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dashboard-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-item:hover {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .option-item.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--dashboard-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-item.selected .option-radio {
+            border-color: white;
+            background: white;
+        }
+
+        .option-item.selected .option-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .test-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .prev-btn, .next-btn, .submit-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .prev-btn {
+            background: transparent;
+            color: var(--dashboard-text);
+            border: 2px solid var(--dashboard-border);
+        }
+
+        .next-btn, .submit-btn {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .prev-btn:hover {
+            background: var(--dashboard-text);
+            color: white;
+        }
+
+        .next-btn:hover, .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Results Modal */
+        .results-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .results-score {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .results-message {
+            font-size: 1.3rem;
+            color: var(--dashboard-text);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .results-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-stat {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .result-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-stat-label {
+            font-size: 0.9rem;
+            color: var(--dashboard-text-light);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .test-categories {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skills-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .category-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .test-actions {
+                flex-direction: column;
+            }
+
+            .results-details {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: var(--secondary-gradient);
+        }
+
+        .notification.info {
+            background: var(--primary-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Ayush Kumar</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="skills-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🏆 Skill Assessments</h1>
+            <p>Test your skills, get certified, and boost your profile credibility!</p>
+        </div>
+
+        <!-- Test Categories -->
+        <div class="test-categories">
+            <!-- Programming Tests -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Programming & Development</h3>
+                        <p>Test your coding skills across various technologies</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>JavaScript Fundamentals</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('JavaScript Fundamentals', 'programming')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>React.js Mastery</h5>
+                                <div class="test-meta">40 questions • 60 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('React.js Mastery', 'programming')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Python Basics</h5>
+                                <div class="test-meta">25 questions • 30 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Python Basics', 'programming')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('programming')">
+                    View All Programming Tests (22 more)
+                </button>
+            </div>
+
+            <!-- Design Tests -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Design & Creativity</h3>
+                        <p>Assess your design thinking and creative skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>UI/UX Design Principles</h5>
+                                <div class="test-meta">20 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('UI/UX Design Principles', 'design')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Figma Mastery</h5>
+                                <div class="test-meta">25 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Figma Mastery', 'design')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Graphic Design Fundamentals</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Graphic Design Fundamentals', 'design')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('design')">
+                    View All Design Tests (15 more)
+                </button>
+            </div>
+
+            <!-- Marketing Tests -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Digital Marketing</h3>
+                        <p>Prove your marketing and analytics expertise</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.6</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Digital Marketing Basics</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Digital Marketing Basics', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>SEO & Analytics</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('SEO & Analytics', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Social Media Strategy</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Social Media Strategy', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('marketing')">
+                    View All Marketing Tests (12 more)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div class="modal-overlay" id="testModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="testTitle">JavaScript Fundamentals Test</h3>
+                <button class="close-modal" onclick="closeTest()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Test Progress -->
+            <div class="test-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span></span>
+                    <span id="timeRemaining">45:00</span>
+                </div>
+            </div>
+
+            <!-- Question Content -->
+            <div id="questionContent">
+                <div class="question-card">
+                    <div class="question-text" id="questionText">
+                        What is the correct way to declare a variable in JavaScript?
+                    </div>
+                    
+                    <div class="options-list" id="optionsList">
+                        <div class="option-item" onclick="selectOption(this, 0)">
+                            <div class="option-radio"></div>
+                            <span>var myVariable;</span>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 1)">
+                            <div class="option-radio"></div>
+                            <span>let myVariable;</span>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 2)">
+                            <div class="option-radio"></div>
+                            <span>const myVariable;</span>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 3)">
+                            <div class="option-radio"></div>
+                            <span>All of the above</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Actions -->
+            <div class="test-actions">
+                <button class="prev-btn" onclick="previousQuestion()" disabled>Previous</button>
+                <div style="flex: 1;"></div>
+                <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎉 Test Complete!</h3>
+                <button class="close-modal" onclick="closeResults()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="results-content">
+                <div class="results-score" id="finalScore">85%</div>
+                <div class="results-message" id="resultsMessage">Excellent! You've passed the test!</div>
+
+                <div class="results-details">
+                    <div class="result-stat">
+                        <div class="result-stat-number" id="correctAnswers">17</div>
+                        <div class="result-stat-label">Correct Answers</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-number" id="totalTime">32</div>
+                        <div class="result-stat-label">Minutes Taken</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-number" id="rankPercentile">Top 15%</div>
+                        <div class="result-stat-label">Your Rank</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="start-test-btn" style="margin-right: 1rem;" onclick="downloadCertificate()">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </button>
+                    <button class="view-all-btn" onclick="shareResults()">
+                        <i class="fas fa-share"></i> Share Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Global test variables
+        let currentTestData = null;
+        let currentQuestionIndex = 0;
+        let selectedAnswers = [];
+        let testTimer = null;
+        let timeLeft = 0;
+
+        // Demo questions for different tests
+        const testQuestions = {
+            'JavaScript Fundamentals': [
+                {
+                    question: "What is the correct way to declare a variable in JavaScript?",
+                    options: ["var myVariable;", "let myVariable;", "const myVariable;", "All of the above"],
+                    correct: 3
+                },
+                {
+                    question: "Which method is used to add an element to the end of an array?",
+                    options: ["push()", "add()", "append()", "insert()"],
+                    correct: 0
+                },
+                {
+                    question: "What does '===' operator do in JavaScript?",
+                    options: ["Assigns a value", "Compares values only", "Compares both value and type", "None of the above"],
+                    correct: 2
+                },
+                {
+                    question: "How do you write a comment in JavaScript?",
+                    options: ["<!-- comment -->", "// comment", "/* comment */", "Both B and C"],
+                    correct: 3
+                },
+                {
+                    question: "Which of the following is NOT a JavaScript data type?",
+                    options: ["String", "Boolean", "Float", "Undefined"],
+                    correct: 2
+                }
+            ],
+            'React.js Mastery': [
+                {
+                    question: "What is JSX in React?",
+                    options: ["A database", "A syntax extension for JavaScript", "A CSS framework", "A testing library"],
+                    correct: 1
+                },
+                {
+                    question: "Which hook is used to manage state in functional components?",
+                    options: ["useEffect", "useState", "useContext", "useReducer"],
+                    correct: 1
+                },
+                {
+                    question: "What is the purpose of useEffect hook?",
+                    options: ["To manage state", "To handle side effects", "To create components", "To style components"],
+                    correct: 1
+                },
+                {
+                    question: "How do you pass data from parent to child component?",
+                    options: ["Through props", "Through state", "Through context", "Through refs"],
+                    correct: 0
+                },
+                {
+                    question: "What is the virtual DOM?",
+                    options: ["A real DOM", "A JavaScript representation of the real DOM", "A CSS technique", "A database"],
+                    correct: 1
+                }
+            ],
+            'UI/UX Design Principles': [
+                {
+                    question: "What does UX stand for?",
+                    options: ["User Experience", "User Extension", "Universal Experience", "User Expert"],
+                    correct: 0
+                },
+                {
+                    question: "Which principle focuses on making important elements stand out?",
+                    options: ["Proximity", "Alignment", "Contrast", "Repetition"],
+                    correct: 2
+                },
+                {
+                    question: "What is a wireframe?",
+                    options: ["A final design", "A basic structural blueprint", "A color scheme", "A font selection"],
+                    correct: 1
+                },
+                {
+                    question: "Which color scheme uses colors opposite on the color wheel?",
+                    options: ["Monochromatic", "Analogous", "Complementary", "Triadic"],
+                    correct: 2
+                },
+                {
+                    question: "What is the purpose of white space in design?",
+                    options: ["To save ink", "To improve readability and focus", "To make it look empty", "To reduce file size"],
+                    correct: 1
+                }
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏆 Skill Assessments Loaded');
+        });
+
+        // Start a test
+        function startTest(testName, category) {
+            console.log(`Starting test: ${testName}`);
+            
+            // Set up test data
+            currentTestData = {
+                name: testName,
+                category: category,
+                questions: testQuestions[testName] || testQuestions['JavaScript Fundamentals'],
+                timeLimit: 45 * 60 // 45 minutes in seconds
+            };
+            
+            currentQuestionIndex = 0;
+            selectedAnswers = new Array(currentTestData.questions.length).fill(-1);
+            timeLeft = currentTestData.timeLimit;
+            
+            // Open test modal
+            document.getElementById('testTitle').textContent = testName;
+            document.getElementById('totalQuestions').textContent = currentTestData.questions.length;
+            document.getElementById('testModal').classList.add('active');
+            
+            // Load first question
+            loadQuestion();
+            
+            // Start timer
+            startTestTimer();
+            
+            showNotification(`${testName} test started! Good luck! 🚀`, 'success');
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = currentTestData.questions[currentQuestionIndex];
+            
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            
+            // Update progress
+            const progress = ((currentQuestionIndex + 1) / currentTestData.questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Load options
+            const optionsList = document.getElementById('optionsList');
+            optionsList.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option-item';
+                optionDiv.onclick = () => selectOption(optionDiv, index);
+                
+                // Check if this option was previously selected
+                if (selectedAnswers[currentQuestionIndex] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.innerHTML = `
+                    <div class="option-radio"></div>
+                    <span>${option}</span>
+                `;
+                
+                optionsList.appendChild(optionDiv);
+            });
+            
+            // Update buttons
+            document.querySelector('.prev-btn').disabled = currentQuestionIndex === 0;
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if (currentQuestionIndex === currentTestData.questions.length - 1) {
+                nextBtn.textContent = 'Submit Test';
+                nextBtn.className = 'submit-btn';
+            } else {
+                nextBtn.textContent = 'Next Question';
+                nextBtn.className = 'next-btn';
+            }
+        }
+
+        // Select an option
+        function selectOption(element, optionIndex) {
+            // Remove previous selection
+            element.parentNode.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Select current option
+            element.classList.add('selected');
+            selectedAnswers[currentQuestionIndex] = optionIndex;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestionIndex === currentTestData.questions.length - 1) {
+                // Submit test
+                submitTest();
+            } else {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        // Previous question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        // Start test timer
+        function startTestTimer() {
+            testTimer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                document.getElementById('timeRemaining').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    // Time up - auto submit
+                    clearInterval(testTimer);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        // Submit test
+        function submitTest() {
+            clearInterval(testTimer);
+            
+            // Calculate score
+            let correctCount = 0;
+            currentTestData.questions.forEach((question, index) => {
+                if (selectedAnswers[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const scorePercentage = Math.round((correctCount / currentTestData.questions.length) * 100);
+            const timeTaken = Math.round((currentTestData.timeLimit - timeLeft) / 60);
+            
+            // Show results
+            document.getElementById('finalScore').textContent = scorePercentage + '%';
+            document.getElementById('correctAnswers').textContent = correctCount;
+            document.getElementById('totalTime').textContent = timeTaken;
+            
+            let message = '';
+            let rank = '';
+            
+            if (scorePercentage >= 80) {
+                message = 'Excellent! You\'ve mastered this skill! 🌟';
+                rank = 'Top 10%';
+            } else if (scorePercentage >= 60) {
+                message = 'Good job! Keep practicing to improve! 👍';
+                rank = 'Top 30%';
+            } else {
+                message = 'Keep learning and try again! 📚';
+                rank = 'Keep Improving';
+            }
+            
+            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('rankPercentile').textContent = rank;
+            
+            // Close test modal and show results
+            document.getElementById('testModal').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('resultsModal').classList.add('active');
+            }, 300);
+            
+            showNotification('Test submitted successfully! 🎉', 'success');
+        }
+
+        // Close test
+        function closeTest() {
+            if (confirm('Are you sure you want to exit the test? Your progress will be lost.')) {
+                clearInterval(testTimer);
+                document.getElementById('testModal').classList.remove('active');
+            }
+        }
+
+        // Close results
+        function closeResults() {
+            document.getElementById('resultsModal').classList.remove('active');
+        }
+
+        // Download certificate
+        function downloadCertificate() {
+            showNotification('Certificate download started! 📄', 'success');
+            // In real app, this would generate and download certificate
+        }
+
+        // Share results
+        function shareResults() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My SkillSync Test Results',
+                    text: `I just scored ${document.getElementById('finalScore').textContent} on ${currentTestData.name}!`,
+                    url: window.location.href,
+                });
+            } else {
+                showNotification('Results copied to clipboard! 📋', 'success');
+            }
+        }
+
+        // View all tests
+        function viewAllTests(category) {
+            showNotification(`Showing all ${category} tests...`, 'info');
+            // In real app, this would show expanded test list
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                if (e.target.id === 'testModal') {
+                    closeTest();
+                } else if (e.target.id === 'resultsModal') {
+                    closeResults();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

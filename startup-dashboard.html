@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Dashboard - SkillSync AI</title>
+    <meta name="description" content="Startup dashboard for SkillSync AI - find talent, manage hiring pipeline, and track your team growth.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <!-- Startup Dashboard Specific CSS -->
+    <style>
+        /* Dashboard Variables for Startup */
+        :root {
+            --startup-primary: #7C3AED;
+            --startup-primary-dark: #6D28D9;
+            --startup-primary-light: #A78BFA;
+            --startup-secondary: #F59E0B;
+            --startup-success: #10B981;
+            --startup-warning: #F59E0B;
+            --startup-error: #EF4444;
+            --startup-info: #3B82F6;
+        }
+
+        /* Startup-specific styling */
+        .startup-dashboard .sidebar-menu-link.active {
+            background: var(--startup-primary) !important;
+        }
+
+        .startup-dashboard .stat-icon.primary {
+            background: var(--startup-primary) !important;
+        }
+
+        .startup-dashboard .btn-primary {
+            background: var(--startup-primary) !important;
+        }
+
+        .startup-dashboard .btn-primary:hover {
+            background: var(--startup-primary-dark) !important;
+        }
+
+        .startup-dashboard .user-avatar {
+            background: var(--startup-primary) !important;
+        }
+
+        /* Hiring Pipeline Specific Styles */
+        .pipeline-stage {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+
+        .pipeline-stage:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stage-name {
+            font-weight: 600;
+            color: #1A202C;
+            font-size: 1.1rem;
+        }
+
+        .stage-count {
+            background: var(--startup-primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .stage-progress {
+            margin-top: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #F1F5F9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--startup-primary), var(--startup-primary-light));
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        /* Candidate Cards */
+        .candidate-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .candidate-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            border-color: var(--startup-primary);
+        }
+
+        .candidate-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .candidate-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .candidate-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1A202C;
+            margin-bottom: 0.25rem;
+        }
+
+        .candidate-info p {
+            color: #64748B;
+            margin-bottom: 0.25rem;
+        }
+
+        .candidate-match-score {
+            background: var(--startup-success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .candidate-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .candidate-skill {
+            background: #F1F5F9;
+            color: #475569;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .candidate-skill.matched {
+            background: var(--startup-primary);
+            color: white;
+        }
+
+        .candidate-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-candidate-action {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .btn-view-profile {
+            background: #F1F5F9;
+            color: #475569;
+        }
+
+        .btn-view-profile:hover {
+            background: #E2E8F0;
+            color: #334155;
+        }
+
+        .btn-contact {
+            background: var(--startup-primary);
+            color: white;
+        }
+
+        .btn-contact:hover {
+            background: var(--startup-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Job Post Cards */
+        .job-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1A202C;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 1rem;
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+
+        .job-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #F1F5F9;
+        }
+
+        .job-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748B;
+            font-size: 0.875rem;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-job-action {
+            padding: 0.375rem 0.75rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            background: white;
+            color: #64748B;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .btn-job-action:hover {
+            border-color: var(--startup-primary);
+            color: var(--startup-primary);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .team-member-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-member-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .team-member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--startup-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .team-member-name {
+            font-weight: 600;
+            color: #1A202C;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member-role {
+            color: #64748B;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #DCFCE7;
+            color: #166534;
+        }
+
+        .status-away {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* Analytics Cards */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .analytics-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .analytics-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1A202C;
+            margin-bottom: 1rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #1A202C;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .candidate-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            
+            .candidate-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+            
+            .btn-candidate-action {
+                flex: 1;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .job-actions {
+                width: 100%;
+            }
+            
+            .btn-job-action {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard-body startup-dashboard">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Header Search -->
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search candidates, skills, projects..." id="headerSearch">
+            </div>
+            
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Notifications -->
+                <div class="notification-bell" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-read">Mark all as read</button>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon" style="background: #10B981; color: white;">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">New Candidate Applied!</div>
+                                    <div class="notification-message">Priya Kumar applied for Frontend Developer position</div>
+                                    <div class="notification-time">5 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon" style="background: #3B82F6; color: white;">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Perfect Match Found</div>
+                                    <div class="notification-message">95% match candidate available for your ML Engineer role</div>
+                                    <div class="notification-time">30 minutes ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="user-menu-toggle" onclick="toggleUserMenu()">
+                    <div class="user-avatar">
+                        <span>T</span>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">TechStart Inc.</div>
+                        <div class="user-type">Startup</div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                    
+                    <div class="user-menu">
+                        <div class="user-menu-header">
+                            <div class="user-avatar-large">T</div>
+                            <div class="user-details">
+                                <div class="user-name">TechStart Inc.</div>
+                                <div class="user-email">founder@techstart.com</div>
+                            </div>
+                        </div>
+                        <div class="user-menu-items">
+                            <a href="#company-profile" class="menu-item" onclick="showSection('company-profile')">
+                                <i class="fas fa-building"></i>
+                                <span>Company Profile</span>
+                            </a>
+                            <a href="#candidates" class="menu-item" onclick="showSection('candidates')">
+                                <i class="fas fa-users"></i>
+                                <span>Candidates</span>
+                            </a>
+                            <a href="chat.html" class="menu-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>Messages</span>
+                            </a>
+                            <a href="#settings" class="menu-item">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <div class="menu-divider"></div>
+                            <button class="menu-item logout-btn" onclick="handleLogout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-content">
+                <!-- Main Navigation -->
+                <nav class="sidebar-nav">
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Main Menu</div>
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="#dashboard" class="sidebar-menu-link active" onclick="showSection('dashboard')">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#candidates" class="sidebar-menu-link" onclick="showSection('candidates')">
+                                    <i class="fas fa-users"></i>
+                                    <span>Candidates</span>
+                                    <span class="menu-badge badge-hot">🔥</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#jobs" class="sidebar-menu-link" onclick="showSection('jobs')">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Job Posts</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#company-profile" class="sidebar-menu-link" onclick="showSection('company-profile')">
+                                    <i class="fas fa-building"></i>
+                                    <span>Company Profile</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="chat.html" class="sidebar-menu-link">
+                                    <i class="fas fa-comments"></i>
+                                    <span>Messages</span>
+                                    <span class="menu-badge badge-new">3</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#interviews" class="sidebar-menu-link" onclick="showSection('interviews')">
+                                    <i class="fas fa-video"></i>
+                                    <span>Interviews</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#team" class="sidebar-menu-link" onclick="showSection('team')">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>Team</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#analytics" class="sidebar-menu-link" onclick="showSection('analytics')">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Analytics</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Tools</div>
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="#ai-insights" class="sidebar-menu-link" onclick="showSection('ai-insights')">
+                                    <i class="fas fa-brain"></i>
+                                    <span>AI Insights</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#skill-tests" class="sidebar-menu-link">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    <span>Skill Assessments</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#reports" class="sidebar-menu-link">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Reports</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Dashboard Overview -->
+            <div id="dashboard" class="content-section active">
+                <div class="dashboard-content">
+                    <!-- Welcome Section -->
+                    <div class="welcome-section">
+                        <h1>Welcome to TechStart Inc. Dashboard! 🚀</h1>
+                        <p>Manage your hiring pipeline and find the best talent for your startup.</p>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="45">0</div>
+                                <div class="stat-label">Active Candidates</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+12 this week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon success">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="8">0</div>
+                                <div class="stat-label">Open Positions</div>
+                                <div class="stat-change neutral">
+                                    <i class="fas fa-minus"></i>
+                                    <span>Same as last week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon warning">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="12">0</div>
+                                <div class="stat-label">Interviews Scheduled</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+4 this week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon info">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="3">0</div>
+                                <div class="stat-label">Offers Extended</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+2 this month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Dashboard Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Top Candidates -->
+                        <div class="dashboard-card candidates-card">
+                            <div class="card-header">
+                                <h2>Top Matched Candidates</h2>
+                                <a href="#candidates" class="btn-link" onclick="showSection('candidates')">View All</a>
+                            </div>
+                            <div class="card-content">
+                                <div class="candidates-list" id="topCandidatesList">
+                                    <!-- Candidate cards will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hiring Pipeline -->
+                        <div class="dashboard-card pipeline-card">
+                            <div class="card-header">
+                                <h2>Hiring Pipeline</h2>
+                                <button class="btn-card-action" onclick="showSection('candidates')">View Details</button>
+                            </div>
+                            <div class="card-content">
+                                <div class="pipeline-stages">
+                                    <div class="pipeline-stage">
+                                        <div class="stage-header">
+                                            <span class="stage-name">Applied</span>
+                                            <span class="stage-count">45</span>
+                                        </div>
+                                        <div class="stage-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-stage">
+                                        <div class="stage-header">
+                                            <span class="stage-name">Screening</span>
+                                            <span class="stage-count">28</span>
+                                        </div>
+                                        <div class="stage-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 62%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-stage">
+                                        <div class="stage-header">
+                                            <span class="stage-name">Interview</span>
+                                            <span class="stage-count">12</span>
+                                        </div>
+                                        <div class="stage-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 27%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-stage">
+                                        <div class="stage-header">
+                                            <span class="stage-name">Offer</span>
+                                            <span class="stage-count">3</span>
+                                        </div>
+                                        <div class="stage-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 7%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Job Posts -->
+                        <div class="dashboard-card jobs-card">
+                            <div class="card-header">
+                                <h2>Active Job Posts</h2>
+                                <button class="btn-card-action" onclick="createNewJob()">+ Post New Job</button>
+                            </div>
+                            <div class="card-content">
+                                <div class="jobs-list">
+                                    <div class="job-card">
+                                        <div class="job-header">
+                                            <div>
+                                                <div class="job-title">Full Stack Developer</div>
+                                                <div class="job-details">
+                                                    <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                                                    <span><i class="fas fa-rupee-sign"></i> ₹80k-120k</span>
+                                                    <span><i class="fas fa-clock"></i> Full-time</span>
+                                                </div>
+                                            </div>
+                                            <div class="job-actions">
+                                                <button class="btn-job-action">Edit</button>
+                                                <button class="btn-job-action">View</button>
+                                            </div>
+                                        </div>
+                                        <div class="job-stats">
+                                            <div class="job-stat">
+                                                <i class="fas fa-users"></i>
+                                                <span>23 candidates</span>
+                                            </div>
+                                            <div class="job-stat">
+                                                <i class="fas fa-eye"></i>
+                                                <span>156 views</span>
+                                            </div>
+                                            <div class="job-stat">
+                                                <i class="fas fa-calendar"></i>
+                                                <span>Posted 3 days ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="job-card">
+                                        <div class="job-header">
+                                            <div>
+                                                <div class="job-title">UI/UX Designer</div>
+                                                <div class="job-details">
+                                                    <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                                                    <span><i class="fas fa-rupee-sign"></i> ₹60k-90k</span>
+                                                    <span><i class="fas fa-clock"></i> Contract</span>
+                                                </div>
+                                            </div>
+                                            <div class="job-actions">
+                                                <button class="btn-job-action">Edit</button>
+                                                <button class="btn-job-action">View</button>
+                                            </div>
+                                        </div>
+                                        <div class="job-stats">
+                                            <div class="job-stat">
+                                                <i class="fas fa-users"></i>
+                                                <span>15 candidates</span>
+                                            </div>
+                                            <div class="job-stat">
+                                                <i class="fas fa-eye"></i>
+                                                <span>89 views</span>
+                                            </div>
+                                            <div class="job-stat">
+                                                <i class="fas fa-calendar"></i>
+                                                <span>Posted 1 week ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="dashboard-card actions-card">
+                            <div class="card-header">
+                                <h2>Quick Actions</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quick-actions">
+                                    <button class="quick-action-btn" onclick="showSection('candidates')">
+                                        <i class="fas fa-search"></i>
+                                        <span>Find Candidates</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="createNewJob()">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Post New Job</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="showSection('interviews')">
+                                        <i class="fas fa-video"></i>
+                                        <span>Schedule Interview</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="showSection('analytics')">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>View Analytics</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidates Section -->
+            <div id="candidates" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>Candidate Pool</h1>
+                        <div class="section-actions">
+                            <button class="btn-filter">
+                                <i class="fas fa-filter"></i>
+                                <span>Filter</span>
+                            </button>
+                            <button class="btn-sort">
+                                <i class="fas fa-sort"></i>
+                                <span>Sort by Match Score</span>
+                            </button>
+                            <button class="btn-primary">
+                                <i class="fas fa-search"></i>
+                                <span>AI Search</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="candidates-grid" id="candidatesContainer">
+                        <!-- Candidate cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other sections would be similar placeholders... -->
+            <div id="jobs" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>Job Management</h1>
+                        <button class="btn-primary" onclick="createNewJob()">
+                            <i class="fas fa-plus"></i>
+                            <span>Create New Job</span>
+                        </button>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #E2E8F0;">
+                        <h2>Job posting management coming soon...</h2>
+                        <p>This section will contain job creation and management tools.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="team" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>Team Management</h1>
+                        <button class="btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Add Team Member</span>
+                        </button>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-member-card">
+                            <div class="team-member-avatar">AK</div>
+                            <div class="team-member-name">Arjun Kumar</div>
+                            <div class="team-member-role">Founder & CEO</div>
+                            <div class="team-member-status status-active">Active</div>
+                        </div>
+                        <div class="team-member-card">
+                            <div class="team-member-avatar">PS</div>
+                            <div class="team-member-name">Priya Kumar</div>
+                            <div class="team-member-role">CTO</div>
+                            <div class="team-member-status status-active">Active</div>
+                        </div>
+                        <div class="team-member-card">
+                            <div class="team-member-avatar">RG</div>
+                            <div class="team-member-name">Ayush Gupta</div>
+                            <div class="team-member-role">Lead Developer</div>
+                            <div class="team-member-status status-away">Away</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analytics" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>Analytics & Insights</h1>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Hiring Metrics</h3>
+                            <div class="metric-item">
+                                <span class="metric-label">Time to Hire</span>
+                                <span class="metric-value">12 days</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Cost per Hire</span>
+                                <span class="metric-value">₹15,000</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Offer Acceptance Rate</span>
+                                <span class="metric-value">85%</span>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>Source Performance</h3>
+                            <div class="metric-item">
+                                <span class="metric-label">SkillSync AI</span>
+                                <span class="metric-value">65%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Direct Applications</span>
+                                <span class="metric-value">25%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Referrals</span>
+                                <span class="metric-value">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Global state for startup dashboard
+        let currentSection = 'dashboard';
+        let sidebarOpen = false;
+
+        // Initialize startup dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏢 Startup Dashboard Loaded');
+            
+            // Load demo data
+            loadDemoCandidates();
+            animateCounters();
+            
+            // Setup interactions
+            setupStartupInteractions();
+            
+            // Auto-close dropdowns when clicking outside
+            document.addEventListener('click', closeDropdowns);
+        });
+
+        // Load demo candidates
+        function loadDemoCandidates() {
+            const demoCandidates = [
+                {
+                    id: 1,
+                    name: "Ayush Kumar",
+                    title: "Full Stack Developer",
+                    location: "Remote",
+                    experience: "3 years",
+                    matchScore: 95,
+                    skills: ["React", "Node.js", "AWS", "MongoDB"],
+                    matchingSkills: ["React", "Node.js", "AWS"],
+                    availability: "Immediately",
+                    expectedSalary: "₹80k-100k"
+                },
+                {
+                    id: 2,
+                    name: "Priya Patel",
+                    title: "UI/UX Designer",
+                    location: "Bangalore",
+                    experience: "2 years",
+                    matchScore: 88,
+                    skills: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
+                    matchingSkills: ["Figma", "Sketch"],
+                    availability: "2 weeks notice",
+                    expectedSalary: "₹60k-80k"
+                },
+                {
+                    id: 3,
+                    name: "Amit Kumar",
+                    title: "Backend Developer",
+                    location: "Delhi",
+                    experience: "4 years",
+                    matchScore: 82,
+                    skills: ["Python", "Django", "PostgreSQL", "Redis"],
+                    matchingSkills: ["Python", "Django"],
+                    availability: "1 month notice",
+                    expectedSalary: "₹90k-120k"
+                }
+            ];
+
+            // Add to candidates containers
+            const topCandidatesList = document.getElementById('topCandidatesList');
+            const candidatesContainer = document.getElementById('candidatesContainer');
+            
+            demoCandidates.forEach((candidate, index) => {
+                // Add to main candidates grid
+                if (candidatesContainer) {
+                    const candidateCard = createCandidateCard(candidate);
+                    candidatesContainer.appendChild(candidateCard);
+                }
+                
+                // Add to top candidates (first 2 only)
+                if (index < 2 && topCandidatesList) {
+                    const topCandidateCard = createTopCandidateCard(candidate);
+                    topCandidatesList.appendChild(topCandidateCard);
+                }
+            });
+        }
+
+        // Create full candidate card
+        function createCandidateCard(candidate) {
+            const card = document.createElement('div');
+            card.className = 'candidate-card';
+            card.innerHTML = `
+                <div class="candidate-header">
+                    <div class="candidate-avatar">
+                        <span>${candidate.name.charAt(0)}</span>
+                    </div>
+                    <div class="candidate-info">
+                        <h3>${candidate.name}</h3>
+                        <p>${candidate.title}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> ${candidate.location} • ${candidate.experience} experience</p>
+                    </div>
+                    <div class="candidate-match-score">
+                        ${candidate.matchScore}% Match
+                    </div>
+                </div>
+                <div class="candidate-skills">
+                    ${candidate.skills.map(skill => {
+                        const isMatched = candidate.matchingSkills.includes(skill);
+                        return `<span class="candidate-skill ${isMatched ? 'matched' : ''}">${skill}</span>`;
+                    }).join('')}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <p><strong>Availability:</strong> ${candidate.availability}</p>
+                    <p><strong>Expected Salary:</strong> ${candidate.expectedSalary}</p>
+                </div>
+                <div class="candidate-actions">
+                    <button class="btn-candidate-action btn-view-profile" onclick="viewCandidateProfile(${candidate.id})">
+                        <i class="fas fa-eye"></i>
+                        <span>View Profile</span>
+                    </button>
+                    <button class="btn-candidate-action btn-contact" onclick="contactCandidate(${candidate.id})">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Create top candidate card (simplified)
+        function createTopCandidateCard(candidate) {
+            const card = document.createElement('div');
+            card.className = 'candidate-card';
+            card.style.marginBottom = '1rem';
+            card.innerHTML = `
+                <div class="candidate-header">
+                    <div class="candidate-avatar">
+                        <span>${candidate.name.charAt(0)}</span>
+                    </div>
+                    <div class="candidate-info">
+                        <h3>${candidate.name}</h3>
+                        <p>${candidate.title}</p>
+                    </div>
+                    <div class="candidate-match-score">
+                        ${candidate.matchScore}%
+                    </div>
+                </div>
+                <div class="candidate-actions">
+                    <button class="btn-candidate-action btn-view-profile" onclick="viewCandidateProfile(${candidate.id})">View</button>
+                    <button class="btn-candidate-action btn-contact" onclick="contactCandidate(${candidate.id})">Contact</button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Handle candidate actions
+        function viewCandidateProfile(candidateId) {
+            if (window.showNotification) {
+                window.showNotification('📋 Opening candidate profile...', 'info');
+            }
+            console.log('Viewing candidate profile:', candidateId);
+        }
+
+        function contactCandidate(candidateId) {
+            if (window.showNotification) {
+                window.showNotification('💬 Opening chat with candidate...', 'success');
+            }
+            setTimeout(() => {
+                window.location.href = 'chat.html';
+            }, 1000);
+        }
+
+        function createNewJob() {
+            if (window.showNotification) {
+                window.showNotification('📝 Opening job creation form...', 'info');
+            }
+            console.log('Creating new job post');
+        }
+
+        // Setup startup-specific interactions
+        function setupStartupInteractions() {
+            // Header search
+            const headerSearch = document.getElementById('headerSearch');
+            if (headerSearch) {
+                headerSearch.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase();
+                    console.log('🔍 Searching candidates for:', query);
+                    // In real app, this would filter candidates
+                });
+            }
+        }
+
+        // Animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-value[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                let current = 0;
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 20);
+            });
+        }
+
+        // Navigation functions (reuse from student dashboard)
+        function showSection(sectionId) {
+            console.log('📍 Navigating to:', sectionId);
+            
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionId;
+            }
+            
+            // Update active sidebar link
+            document.querySelectorAll('.sidebar-menu-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick')?.includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile sidebar
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+
+            // Close user menu
+            closeUserMenu();
+        }
+
+        // Sidebar functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            sidebarOpen = !sidebarOpen;
+            
+            if (sidebarOpen) {
+                sidebar.classList.add('open');
+            } else {
+                sidebar.classList.remove('open');
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            sidebar.classList.remove('open');
+            sidebarOpen = false;
+        }
+
+        // Dropdown functions
+        function toggleNotifications() {
+            const bell = document.querySelector('.notification-bell');
+            bell.classList.toggle('active');
+            
+            // Close user menu if open
+            closeUserMenu();
+        }
+
+        function toggleUserMenu() {
+            const userMenu = document.querySelector('.user-menu-toggle');
+            userMenu.classList.toggle('active');
+            
+            // Close notifications if open
+            const bell = document.querySelector('.notification-bell');
+            bell.classList.remove('active');
+        }
+
+        function closeUserMenu() {
+            const userMenu = document.querySelector('.user-menu-toggle');
+            userMenu.classList.remove('active');
+        }
+
+        function closeDropdowns(event) {
+            // Close dropdowns when clicking outside
+            if (!event.target.closest('.notification-bell')) {
+                document.querySelector('.notification-bell').classList.remove('active');
+            }
+            
+            if (!event.target.closest('.user-menu-toggle')) {
+                closeUserMenu();
+            }
+
+            if (!event.target.closest('.dashboard-sidebar') && 
+                !event.target.closest('.sidebar-toggle') && 
+                window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        // Logout function
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear session data
+                localStorage.removeItem('skillsync_token');
+                localStorage.removeItem('skillsync_user');
+                
+                if (window.showNotification) {
+                    window.showNotification('👋 Logged out successfully!', 'info');
+                }
+                
+                // Redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Utility functions
+        function showNotificationDemo(message, type) {
+            // Simple notification for demo
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#7C3AED'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-weight: 500;
+                max-width: 350px;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Set global showNotification if not available
+        if (!window.showNotification) {
+            window.showNotification = showNotificationDemo;
+        }
+    </script>
+</body>
+</html>

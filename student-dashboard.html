@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - SkillSync AI</title>
+    <meta name="description" content="Student dashboard for SkillSync AI - manage your profile, view matches, and connect with startups.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Dashboard Variables */
+        :root {
+            --dashboard-sidebar-width: 280px;
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            --sidebar-bg: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+            --sidebar-text: #e2e8f0;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --primary-dark: #5a67d8;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header - FIXED POSITIONING */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .dashboard-logo a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Header Search */
+        .header-search {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+        }
+
+        .header-search input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            outline: none;
+            font-size: 0.9rem;
+            background: linear-gradient(white, white) padding-box, var(--primary-gradient) border-box;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .header-search input:focus {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1rem;
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--dashboard-text);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .notification-bell:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0.3rem;
+            right: 0.3rem;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* User Menu */
+        .user-menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .user-menu-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            color: var(--dashboard-text);
+            font-size: 0.9rem;
+        }
+
+        .user-type {
+            font-size: 0.75rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+        }
+
+        /* SIDEBAR - NO OVERLAP LAYOUT */
+        .dashboard-layout {
+            padding-top: var(--dashboard-header-height);
+            display: flex;
+            min-height: calc(100vh - var(--dashboard-header-height));
+        }
+
+        .dashboard-sidebar {
+            width: var(--dashboard-sidebar-width);
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            height: calc(100vh - var(--dashboard-header-height));
+            position: fixed;
+            top: var(--dashboard-header-height);
+            left: 0;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar-content {
+            padding: 2rem 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section-title {
+            padding: 0 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding-left: 2.5rem;
+        }
+
+        .sidebar-menu-link:hover::before {
+            background: var(--success-gradient);
+        }
+
+        .sidebar-menu-link.active {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), transparent);
+            color: white;
+            font-weight: 600;
+        }
+
+        .sidebar-menu-link.active::before {
+            background: var(--primary-gradient);
+        }
+
+        .sidebar-menu-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .menu-badge {
+            margin-left: auto;
+            background: var(--secondary-gradient);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .menu-badge.badge-new {
+            background: var(--success-gradient);
+            animation: pulse 2s infinite;
+        }
+
+        /* MAIN CONTENT - PROPER MARGIN TO AVOID OVERLAP */
+        .dashboard-main {
+            flex: 1;
+            margin-left: var(--dashboard-sidebar-width);
+            padding: 2rem;
+            background: transparent;
+            min-height: calc(100vh - var(--dashboard-header-height));
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            margin-bottom: 2.5rem;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--dashboard-card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .welcome-section h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            color: var(--dashboard-text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.primary { background: var(--primary-gradient); }
+        .stat-icon.success { background: var(--success-gradient); }
+        .stat-icon.warning { background: var(--warning-gradient); }
+        .stat-icon.info { background: var(--success-gradient); }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .stat-change.positive { 
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success-color);
+        }
+        .stat-change.negative { 
+            background: rgba(245, 101, 101, 0.1);
+            color: var(--error-color);
+        }
+        .stat-change.neutral { 
+            background: rgba(113, 128, 150, 0.1);
+            color: var(--dashboard-text-light);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Dashboard Card */
+        .dashboard-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-bottom: 1px solid var(--dashboard-border);
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin: 0;
+        }
+
+        .btn-card-action {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-card-action:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-link {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        /* Profile Completion */
+        .profile-completion {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .completion-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .completion-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .completion-percentage {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .completion-label {
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 600;
+        }
+
+        .completion-details {
+            flex: 1;
+        }
+
+        .completion-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .completion-item.completed {
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success-color);
+        }
+
+        .completion-item.pending {
+            background: rgba(113, 128, 150, 0.1);
+            color: var(--dashboard-text-light);
+        }
+
+        .completion-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* Recent Matches */
+        .matches-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .recent-match-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--dashboard-border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .recent-match-item:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .match-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .match-details {
+            flex: 1;
+        }
+
+        .match-name {
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .match-title {
+            color: var(--dashboard-text-light);
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .match-score {
+            font-size: 0.8rem;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .match-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-mini {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-connect {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-view {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-view:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .quick-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 1rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            background: var(--dashboard-card-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--dashboard-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .quick-action-btn:hover {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quick-action-btn:hover::before {
+            left: 0;
+        }
+
+        .quick-action-btn i {
+            font-size: 1.5rem;
+        }
+
+        .quick-action-btn span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Activity List */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: var(--dashboard-text);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .activity-time {
+            color: var(--dashboard-text-light);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Section Header */
+        .section-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn-filter, .btn-sort {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dashboard-text);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .btn-filter:hover, .btn-sort:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Matches Grid */
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .match-card {
+            background: white;
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .match-score-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--success-gradient);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .match-card-content {
+            padding: 1.5rem;
+        }
+
+        .match-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .match-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .match-info p {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .match-location {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+        }
+
+        .match-description {
+            margin-bottom: 1rem;
+        }
+
+        .match-description p {
+            color: var(--dashboard-text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .match-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            color: var(--dashboard-text);
+            padding: 0.3rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .skill-tag.matched {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .match-details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .match-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+            padding: 0.4rem;
+            border-radius: 6px;
+        }
+
+        .match-detail i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .match-actions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .btn-match-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .btn-pass {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            color: var(--error-color);
+            border: 1px solid #fed7d7;
+        }
+
+        .btn-pass:hover {
+            background: var(--error-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-connect {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Mobile Sidebar Toggle */
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--dashboard-text);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        /* RESPONSIVE DESIGN - NO OVERLAP */
+        @media (max-width: 1024px) {
+            .dashboard-main {
+                margin-left: 250px;
+                padding: 1.5rem;
+            }
+            
+            .dashboard-sidebar {
+                width: 250px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                display: block;
+            }
+            
+            .dashboard-sidebar {
+                position: fixed;
+                left: -100%;
+                width: 280px;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .dashboard-sidebar.open {
+                left: 0;
+            }
+            
+            .dashboard-main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .profile-completion {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-search {
+                display: none;
+            }
+
+            .dashboard-header-content {
+                padding: 0 1rem;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .welcome-section {
+                padding: 1.5rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .match-actions-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-main {
+                padding: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .welcome-section {
+                padding: 1rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Sidebar Overlay for Mobile */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Header Search -->
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search matches, companies, skills..." id="headerSearch">
+            </div>
+            
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Notifications -->
+                <div class="notification-bell" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="user-menu-toggle" onclick="toggleUserMenu()">
+                    <div class="user-avatar">
+                        <span>R</span>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Ayush Kumar</div>
+                        <div class="user-type">Student</div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-content">
+                <!-- Main Navigation -->
+                <nav class="sidebar-nav">
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Main Menu</div>
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="#dashboard" class="sidebar-menu-link active" onclick="showSection('dashboard')">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#matches" class="sidebar-menu-link" onclick="showSection('matches')">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Matches</span>
+                                    <span class="menu-badge">5</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                               <a href="profile.html" class="sidebar-menu-link">
+    <i class="fas fa-user"></i>
+    <span>My Profile</span>
+</a>
+
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#applications" class="sidebar-menu-link" onclick="showSection('applications')">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span>Applications</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="chat.html" class="sidebar-menu-link">
+                                    <i class="fas fa-comments"></i>
+                                    <span>Messages</span>
+                                    <span class="menu-badge badge-new">2</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                               <li class="sidebar-menu-item">
+    <a href="skill.html" class="sidebar-menu-link">
+        <i class="fas fa-code"></i>
+        <span>Skills & Tests</span>
+    </a>
+</li>
+                            
+                            <li class="sidebar-menu-item">
+                                <a href="portfolio.html" class="sidebar-menu-link">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Portfolio</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="#analytics" class="sidebar-menu-link" onclick="showSection('analytics')">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Analytics</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Tools</div>
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="resume-builder.html" class="sidebar-menu-link">
+    <i class="fas fa-file-alt"></i>
+    <span>Resume Builder</span>
+</a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="skill-assessment.html" class="sidebar-menu-link">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    <span>Skill Tests</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item">
+                                <a href="Interview-prep.html" class="sidebar-menu-link">
+                                    <i class="fas fa-microphone"></i>
+                                    <span>Interview Prep</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Dashboard Overview -->
+            <div id="dashboard" class="content-section active">
+                <div class="dashboard-content">
+                    <!-- Welcome Section -->
+                    <div class="welcome-section">
+                        <h1>Welcome back, Ayush! 👋</h1>
+                        <p>Here's what's happening with your job search today.</p>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="12">0</div>
+                                <div class="stat-label">New Matches</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+3 today</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon success">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="8">0</div>
+                                <div class="stat-label">Applications</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+2 this week</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon warning">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="5">0</div>
+                                <div class="stat-label">Messages</div>
+                                <div class="stat-change neutral">
+                                    <i class="fas fa-minus"></i>
+                                    <span>Same as yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon info">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" data-count="156">0</div>
+                                <div class="stat-label">Profile Views</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+23 this week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Dashboard Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Profile Completeness -->
+                        <div class="dashboard-card profile-card">
+                            <div class="card-header">
+                                <h2>Profile Completeness</h2>
+                                <button class="btn-card-action" onclick="showSection('profile')">Complete Now</button>
+                            </div>
+                            <div class="card-content">
+                                <div class="profile-completion">
+                                    <div class="completion-circle">
+                                        <svg class="progress-ring" width="120" height="120">
+                                            <circle cx="60" cy="60" r="50" fill="none" stroke="#E2E8F0" stroke-width="8"/>
+                                            <circle cx="60" cy="60" r="50" fill="none" stroke="url(#gradient)" stroke-width="8" 
+                                                    stroke-dasharray="314" stroke-dashoffset="62.8" 
+                                                    stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                                            <defs>
+                                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#667eea"/>
+                                                    <stop offset="100%" stop-color="#764ba2"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="completion-text">
+                                            <span class="completion-percentage">80%</span>
+                                            <span class="completion-label">Complete</span>
+                                        </div>
+                                    </div>
+                                    <div class="completion-details">
+                                        <div class="completion-item completed">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Basic Information</span>
+                                        </div>
+                                        <div class="completion-item completed">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Skills & Experience</span>
+                                        </div>
+                                        <div class="completion-item completed">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Portfolio Projects</span>
+                                        </div>
+                                        <div class="completion-item pending">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Certifications</span>
+                                        </div>
+                                        <div class="completion-item pending">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Profile Picture</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Matches -->
+                        <div class="dashboard-card matches-card">
+                            <div class="card-header">
+                                <h2>Recent Matches</h2>
+                                <a href="#matches" class="btn-link" onclick="showSection('matches')">View All</a>
+                            </div>
+                            <div class="card-content">
+                                <div class="matches-list" id="recentMatchesList">
+                                    <!-- Match items will be dynamically inserted here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="dashboard-card actions-card">
+                            <div class="card-header">
+                                <h2>Quick Actions</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quick-actions">
+                                    <button class="quick-action-btn" onclick="showSection('matches')">
+                                        <i class="fas fa-search"></i>
+                                        <span>Find Matches</span>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="showSection('profile')">
+                                        <i class="fas fa-edit"></i>
+                                        <span>Update Profile</span>
+                                    </button>
+                                    <button class="quick-action-btn">
+                                        <i class="fas fa-file-upload"></i>
+                                        <span>Upload Resume</span>
+                                    </button>
+                                    <button class="quick-action-btn">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Take Skill Test</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="dashboard-card activity-card">
+                            <div class="card-header">
+                                <h2>Recent Activity</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-text">
+                                                <strong>New match found:</strong> 92% compatibility with TechStart Inc.
+                                            </div>
+                                            <div class="activity-time">2 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-text">
+                                                <strong>Profile viewed:</strong> DesignCorp checked your profile
+                                            </div>
+                                            <div class="activity-time">5 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-text">
+                                                <strong>Application sent:</strong> Applied to Full Stack Developer position
+                                            </div>
+                                            <div class="activity-time">1 day ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matches Section -->
+            <div id="matches" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>Your Matches</h1>
+                        <div class="section-actions">
+                            <button class="btn-filter">
+                                <i class="fas fa-filter"></i>
+                                <span>Filter</span>
+                            </button>
+                            <button class="btn-sort">
+                                <i class="fas fa-sort"></i>
+                                <span>Sort by Match Score</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="matches-grid" id="matchesContainer">
+                        <!-- Match cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>My Profile</h1>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-md);">
+                        <h2 style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Profile management coming soon...</h2>
+                        <p style="color: var(--dashboard-text-light); font-size: 1rem;">This section will contain profile editing capabilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div id="applications" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <h1>My Applications</h1>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-md);">
+                        <h2 style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Applications tracking coming soon...</h2>
+                        <p style="color: var(--dashboard-text-light); font-size: 1rem;">This section will show your job applications and their status.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- Scripts -->
+    <script>
+        // Global state
+        let currentSection = 'dashboard';
+        let sidebarOpen = false;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Student Dashboard Loaded');
+            
+            // Load demo data
+            loadDemoMatches();
+            animateCounters();
+            
+            // Setup interactions
+            setupDashboardInteractions();
+            
+            // Auto-close dropdowns when clicking outside
+            document.addEventListener('click', closeDropdowns);
+        });
+
+        // Load demo matches
+        function loadDemoMatches() {
+            const demoMatches = [
+                {
+                    id: 1,
+                    name: "TechStart Inc.",
+                    title: "Full Stack Developer",
+                    location: "Remote",
+                    description: "We're looking for a passionate full-stack developer to join our growing team and help build the next generation of fintech solutions.",
+                    matchScore: 92,
+                    skills: ["React", "Node.js", "MongoDB", "TypeScript"],
+                    matchingSkills: ["React", "Node.js"],
+                    experience: "2-4 years",
+                    duration: "Full-time",
+                    salary: "₹80k-120k"
+                },
+                {
+                    id: 2,
+                    name: "DesignCorp",
+                    title: "Frontend Developer",
+                    location: "Bangalore",
+                    description: "Join our creative team to build beautiful, user-friendly interfaces for our design platform used by thousands of designers worldwide.",
+                    matchScore: 88,
+                    skills: ["React", "Vue.js", "CSS", "Figma"],
+                    matchingSkills: ["React", "CSS"],
+                    experience: "1-3 years",
+                    duration: "Contract",
+                    salary: "₹60k-90k"
+                },
+                {
+                    id: 3,
+                    name: "AI Innovations",
+                    title: "Machine Learning Engineer",
+                    location: "Hyderabad",
+                    description: "Be part of our AI research team working on cutting-edge machine learning algorithms and neural network architectures.",
+                    matchScore: 75,
+                    skills: ["Python", "TensorFlow", "PyTorch", "SQL"],
+                    matchingSkills: ["Python"],
+                    experience: "2-5 years",
+                    duration: "Full-time",
+                    salary: "₹100k-150k"
+                }
+            ];
+
+            // Add to containers
+            const container = document.getElementById('matchesContainer');
+            const recentMatchesList = document.getElementById('recentMatchesList');
+            
+            demoMatches.forEach((match, index) => {
+                // Add to main matches grid
+                if (container) {
+                    const matchCard = createMatchCard(match);
+                    container.appendChild(matchCard);
+                }
+                
+                // Add to recent matches (first 2 only)
+                if (index < 2 && recentMatchesList) {
+                    const recentMatchCard = createRecentMatchCard(match);
+                    recentMatchesList.appendChild(recentMatchCard);
+                }
+            });
+        }
+
+        // Create full match card
+        function createMatchCard(match) {
+            const card = document.createElement('div');
+            card.className = 'match-card';
+            card.innerHTML = `
+                <div class="match-score-badge">
+                    ${match.matchScore}% Match
+                </div>
+                <div class="match-card-content">
+                    <div class="match-header">
+                        <div class="match-avatar">
+                            <span>${match.name.charAt(0)}</span>
+                        </div>
+                        <div class="match-info">
+                            <h3>${match.name}</h3>
+                            <p>${match.title}</p>
+                            <div class="match-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${match.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-description">
+                        <p>${match.description}</p>
+                    </div>
+                    <div class="match-skills">
+                        ${match.skills.map(skill => {
+                            const isMatched = match.matchingSkills.includes(skill);
+                            return `<span class="skill-tag ${isMatched ? 'matched' : ''}">${skill}</span>`;
+                        }).join('')}
+                    </div>
+                    <div class="match-details-grid">
+                        <div class="match-detail">
+                            <i class="fas fa-briefcase"></i>
+                            <span>${match.experience}</span>
+                        </div>
+                        <div class="match-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>${match.duration}</span>
+                        </div>
+                        <div class="match-detail">
+                            <i class="fas fa-rupee-sign"></i>
+                            <span>${match.salary}</span>
+                        </div>
+                    </div>
+                    <div class="match-actions-grid">
+                        <button class="btn-match-action btn-pass" onclick="handleMatchAction('pass', ${match.id})">
+                            <i class="fas fa-times"></i>
+                            <span>Pass</span>
+                        </button>
+                        <button class="btn-match-action btn-connect" onclick="handleMatchAction('connect', ${match.id})">
+                            <i class="fas fa-heart"></i>
+                            <span>Connect</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Create recent match card
+        function createRecentMatchCard(match) {
+            const card = document.createElement('div');
+            card.className = 'recent-match-item';
+            card.innerHTML = `
+                <div class="match-avatar">
+                    <span>${match.name.charAt(0)}</span>
+                </div>
+                <div class="match-details">
+                    <div class="match-name">${match.name}</div>
+                    <div class="match-title">${match.title}</div>
+                    <div class="match-score">${match.matchScore}% match</div>
+                </div>
+                <div class="match-actions">
+                    <button class="btn-mini btn-connect" onclick="handleMatchAction('connect', ${match.id})">Connect</button>
+                    <button class="btn-mini btn-view" onclick="viewMatchDetails(${match.id})">View</button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Handle match actions
+        function handleMatchAction(action, matchId) {
+            const messages = {
+                connect: `✅ Connection request sent successfully!`,
+                pass: `⏭️ Match passed. Looking for more matches...`
+            };
+
+            showNotificationDemo(messages[action], 'success');
+
+            // Remove card if passed
+            if (action === 'pass') {
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.match-card, .recent-match-item');
+                    cards.forEach(card => {
+                        if (card.innerHTML.includes(`onclick="handleMatchAction('pass', ${matchId})`)) {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateX(-100%)';
+                            setTimeout(() => card.remove(), 300);
+                        }
+                    });
+                }, 500);
+            }
+        }
+
+        // View match details
+        function viewMatchDetails(matchId) {
+            showNotificationDemo('📋 Opening detailed match view...', 'info');
+        }
+
+        // Setup dashboard interactions
+        function setupDashboardInteractions() {
+            const headerSearch = document.getElementById('headerSearch');
+            if (headerSearch) {
+                headerSearch.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase();
+                    console.log('🔍 Searching for:', query);
+                });
+            }
+        }
+
+        // Animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-value[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                let current = 0;
+                const increment = target / 40;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 30);
+            });
+        }
+
+        // Navigation functions
+        function showSection(sectionId) {
+            console.log('📍 Navigating to:', sectionId);
+            
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionId;
+            }
+            
+            // Update active sidebar link
+            document.querySelectorAll('.sidebar-menu-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick')?.includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile sidebar
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        // Sidebar functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebarOpen = !sidebarOpen;
+            
+            if (sidebarOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            sidebarOpen = false;
+        }
+
+        // Dropdown functions
+        function toggleNotifications() {
+            console.log('🔔 Notifications clicked');
+        }
+
+        function toggleUserMenu() {
+            console.log('👤 User menu clicked');
+        }
+
+        function closeDropdowns(event) {
+            // Close sidebar when clicking outside on mobile
+            if (!event.target.closest('.dashboard-sidebar') && 
+                !event.target.closest('.sidebar-toggle') && 
+                window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        // Utility functions
+        function showNotificationDemo(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success-gradient)' : type === 'error' ? 'var(--secondary-gradient)' : 'var(--primary-gradient)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                font-weight: 600;
+                max-width: 300px;
+                font-size: 0.9rem;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Auto-close sidebar on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && sidebarOpen) {
+                closeSidebar();
+            }
+        });
+    </script>
+</body>
+</html>

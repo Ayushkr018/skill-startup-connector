@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Interview Prep Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --interview-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .interview-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--interview-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Prep Categories */
+        .prep-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--interview-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: var(--interview-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-info p {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .feature-list {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--success-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-weight: 600;
+            color: var(--dashboard-text);
+        }
+
+        .start-prep-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--interview-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .start-prep-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Mock Interview Section */
+        .mock-interview-section {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--interview-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interview-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .interview-option {
+            padding: 1.5rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .interview-option:hover {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            transform: translateY(-3px);
+        }
+
+        .interview-option.selected {
+            border-color: var(--primary-color);
+            background: var(--interview-gradient);
+            color: white;
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* AI Chatbot Interface */
+        .chatbot-interface {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--interview-gradient);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .ai-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .ai-status {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            max-width: 80%;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: var(--interview-gradient);
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .message-bubble {
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .message.ai .message-bubble {
+            background: white;
+            color: var(--dashboard-text);
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--dashboard-text-light);
+            margin-top: 0.5rem;
+        }
+
+        .chat-input {
+            padding: 1.5rem;
+            border-top: 1px solid var(--dashboard-border);
+            background: white;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .message-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn, .voice-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .send-btn {
+            background: var(--interview-gradient);
+            color: white;
+        }
+
+        .voice-btn {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .send-btn:hover, .voice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            font-style: italic;
+            color: var(--dashboard-text-light);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dashboard-text-light);
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-top: 1px solid var(--dashboard-border);
+        }
+
+        .quick-actions h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            color: var(--dashboard-text);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .prep-categories {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .interview-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .interview-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .chatbot-interface {
+                height: 500px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .input-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .message-input {
+                width: 100%;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: var(--secondary-gradient);
+        }
+
+        .notification.info {
+            background: var(--interview-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--interview-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Ayush Kumar</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="interview-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🎯 Interview Prep</h1>
+            <p>Practice with AI, master your skills, and ace your next interview!</p>
+        </div>
+
+        <!-- Prep Categories -->
+        <div class="prep-categories">
+            <!-- Technical Interview Prep -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Technical Interviews</h3>
+                        <p>Practice coding problems, system design, and technical concepts</p>
+                    </div>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="feature-text">Coding Challenges & Solutions</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="feature-text">System Design Questions</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="feature-text">Data Structures & Algorithms</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="feature-text">Mock Technical Interviews</div>
+                    </div>
+                </div>
+
+                <button class="start-prep-btn" onclick="startTechnicalPrep()">
+                    <i class="fas fa-play"></i>
+                    Start Technical Prep
+                </button>
+            </div>
+
+            <!-- Behavioral Interview Prep -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Behavioral Interviews</h3>
+                        <p>Master soft skills, communication, and behavioral questions</p>
+                    </div>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="feature-text">Common HR Questions</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="feature-text">STAR Method Practice</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="feature-text">Situational Scenarios</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <div class="feature-text">Communication Skills</div>
+                    </div>
+                </div>
+
+                <button class="start-prep-btn" onclick="startBehavioralPrep()">
+                    <i class="fas fa-play"></i>
+                    Start Behavioral Prep
+                </button>
+            </div>
+        </div>
+
+        <!-- Mock Interview Section -->
+        <div class="mock-interview-section">
+            <div class="section-header">
+                <h2 class="section-title">🤖 AI Mock Interview</h2>
+            </div>
+
+            <div class="interview-options">
+                <div class="interview-option" onclick="selectInterviewType('quick')">
+                    <div class="option-icon">⚡</div>
+                    <div class="option-title">Quick Practice</div>
+                    <div class="option-description">15-minute focused session</div>
+                </div>
+                <div class="interview-option" onclick="selectInterviewType('full')">
+                    <div class="option-icon">🎯</div>
+                    <div class="option-title">Full Interview</div>
+                    <div class="option-description">45-minute comprehensive session</div>
+                </div>
+                <div class="interview-option" onclick="selectInterviewType('custom')">
+                    <div class="option-icon">⚙️</div>
+                    <div class="option-title">Custom Session</div>
+                    <div class="option-description">Tailored to your needs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chatbot Interface -->
+        <div class="chatbot-interface" id="chatInterface" style="display: none;">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div class="ai-avatar">🤖</div>
+                <div class="ai-info">
+                    <h4>InterviewBot AI</h4>
+                    <div class="ai-status">
+                        <div class="status-indicator"></div>
+                        <span>Ready to help you practice</span>
+                    </div>
+                </div>
+                <div style="margin-left: auto;">
+                    <button style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 50%; cursor: pointer;" onclick="endInterview()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Hi! I'm your AI Interview Coach. I'm here to help you practice and improve your interview skills. 
+                            Let's start with some basic questions. Tell me about yourself!
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="message-avatar">🤖</div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                    <span>AI is thinking...</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h5>Quick Responses:</h5>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="sendQuickMessage('Tell me about yourself')">Tell me about yourself</button>
+                    <button class="action-btn" onclick="sendQuickMessage('What are your strengths?')">What are your strengths?</button>
+                    <button class="action-btn" onclick="sendQuickMessage('Why do you want this job?')">Why do you want this job?</button>
+                    <button class="action-btn" onclick="sendQuickMessage('Where do you see yourself in 5 years?')">Future goals</button>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input">
+                <div class="input-group">
+                    <input type="text" class="message-input" id="messageInput" placeholder="Type your response here..." onkeypress="handleKeyPress(event)">
+                    <button class="voice-btn" onclick="toggleVoiceRecording()" title="Voice Input">
+                        <i class="fas fa-microphone" id="voiceIcon"></i>
+                    </button>
+                    <button class="send-btn" onclick="sendMessage()" title="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Global variables
+        let interviewType = null;
+        let isRecording = false;
+        let questionCount = 0;
+        let interviewStartTime = null;
+
+        // AI responses database
+        const aiResponses = {
+            greeting: [
+                "Great! Tell me more about your background and experience.",
+                "That's interesting! What specific skills do you bring to the table?",
+                "Nice to meet you! What motivated you to apply for this position?"
+            ],
+            strengths: [
+                "Those are valuable strengths! Can you give me a specific example of when you used these skills?",
+                "Excellent! How do these strengths help you in challenging situations?",
+                "Great strengths! Tell me about a time when these qualities made a difference in your work."
+            ],
+            experience: [
+                "That sounds like great experience! What was the most challenging project you worked on?",
+                "Interesting background! How do you think this experience prepares you for this role?",
+                "Impressive! What did you learn from that experience that you'd apply here?"
+            ],
+            technical: [
+                "Good technical knowledge! Can you walk me through how you would approach a complex problem?",
+                "That's a solid foundation! How do you stay updated with the latest technologies?",
+                "Excellent! Tell me about a technical challenge you overcame recently."
+            ],
+            goals: [
+                "Those are ambitious goals! How does this position align with your career aspirations?",
+                "Interesting vision! What steps are you taking to achieve these goals?",
+                "Great forward thinking! How would this role help you develop professionally?"
+            ],
+            default: [
+                "That's a thoughtful answer! Let me ask you something else...",
+                "I appreciate your honesty! Here's another question for you...",
+                "Good response! Let's explore this topic further...",
+                "Thank you for sharing! Now I'd like to know...",
+                "Interesting perspective! Tell me more about..."
+            ]
+        };
+
+        // Common interview questions
+        const interviewQuestions = [
+            "What are your biggest weaknesses?",
+            "Why are you leaving your current job?",
+            "Describe a time when you faced a difficult challenge at work.",
+            "How do you handle stress and pressure?",
+            "What questions do you have for us?",
+            "Describe your ideal work environment.",
+            "Tell me about a time you disagreed with a colleague.",
+            "What's your greatest professional achievement?",
+            "How do you prioritize multiple tasks?",
+            "What makes you unique compared to other candidates?"
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Interview Prep Loaded');
+        });
+
+        // Start technical prep
+        function startTechnicalPrep() {
+            showNotification('Loading technical interview questions...', 'info');
+            setTimeout(() => {
+                showNotification('Technical prep session started! 💻', 'success');
+            }, 1000);
+        }
+
+        // Start behavioral prep
+        function startBehavioralPrep() {
+            showNotification('Loading behavioral interview scenarios...', 'info');
+            setTimeout(() => {
+                showNotification('Behavioral prep session started! 🗣️', 'success');
+            }, 1000);
+        }
+
+        // Select interview type
+        function selectInterviewType(type) {
+            // Remove previous selection
+            document.querySelectorAll('.interview-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select current option
+            event.target.closest('.interview-option').classList.add('selected');
+            
+            interviewType = type;
+            
+            // Start interview after selection
+            setTimeout(() => {
+                startMockInterview();
+            }, 500);
+        }
+
+        // Start mock interview
+        function startMockInterview() {
+            document.getElementById('chatInterface').style.display = 'flex';
+            interviewStartTime = new Date();
+            questionCount = 0;
+            
+            // Scroll to chat interface
+            document.getElementById('chatInterface').scrollIntoView({ behavior: 'smooth' });
+            
+            let message = '';
+            switch(interviewType) {
+                case 'quick':
+                    message = 'Starting your 15-minute quick practice session! 🚀';
+                    break;
+                case 'full':
+                    message = 'Starting your comprehensive interview session! 🎯';
+                    break;
+                case 'custom':
+                    message = 'Starting your custom interview session! ⚙️';
+                    break;
+            }
+            
+            showNotification(message, 'success');
+        }
+
+        // End interview
+        function endInterview() {
+            if (confirm('Are you sure you want to end the interview session?')) {
+                document.getElementById('chatInterface').style.display = 'none';
+                
+                // Reset selections
+                document.querySelectorAll('.interview-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // Calculate session time
+                const sessionTime = Math.round((new Date() - interviewStartTime) / 60000);
+                showNotification(`Interview session ended! Duration: ${sessionTime} minutes 📊`, 'info');
+                
+                // Show feedback
+                setTimeout(() => {
+                    showInterviewFeedback();
+                }, 1000);
+            }
+        }
+
+        // Handle key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage('user', message);
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Generate AI response
+            setTimeout(() => {
+                generateAIResponse(message);
+            }, 1500 + Math.random() * 1000); // Random delay between 1.5-2.5 seconds
+        }
+
+        // Send quick message
+        function sendQuickMessage(message) {
+            document.getElementById('messageInput').value = message;
+            sendMessage();
+        }
+
+        // Add message to chat
+        function addMessage(sender, text) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'ai' ? '🤖' : 'R'}</div>
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    <div class="message-time">${currentTime}</div>
+                </div>
+            `;
+            
+            // Remove typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'none';
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            if (sender === 'user') {
+                questionCount++;
+            }
+        }
+
+        // Show typing indicator
+        function showTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'flex';
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Generate AI response
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            let responseType = 'default';
+            let aiResponse = '';
+            
+            // Determine response type based on user message
+            if (message.includes('myself') || message.includes('about me') || message.includes('background')) {
+                responseType = 'greeting';
+            } else if (message.includes('strength') || message.includes('good at') || message.includes('skills')) {
+                responseType = 'strengths';
+            } else if (message.includes('experience') || message.includes('worked') || message.includes('project')) {
+                responseType = 'experience';
+            } else if (message.includes('technical') || message.includes('code') || message.includes('programming')) {
+                responseType = 'technical';
+            } else if (message.includes('goal') || message.includes('future') || message.includes('years')) {
+                responseType = 'goals';
+            }
+            
+            // Get appropriate response
+            const responses = aiResponses[responseType];
+            let baseResponse = responses[Math.floor(Math.random() * responses.length)];
+            
+            // Add follow-up question occasionally
+            if (Math.random() > 0.5 && questionCount < 8) {
+                const followUpQuestion = interviewQuestions[Math.floor(Math.random() * interviewQuestions.length)];
+                aiResponse = baseResponse + " " + followUpQuestion;
+            } else {
+                aiResponse = baseResponse;
+            }
+            
+            // Add congratulations if it's a longer session
+            if (questionCount >= 5 && Math.random() > 0.7) {
+                aiResponse = "You're doing great so far! " + aiResponse;
+            }
+            
+            // Add interview completion check
+            if (questionCount >= 10 || (interviewType === 'quick' && questionCount >= 5)) {
+                aiResponse += " We're nearing the end of our session. Do you have any questions for me about the role or company?";
+            }
+            
+            addMessage('ai', aiResponse);
+        }
+
+        // Toggle voice recording
+        function toggleVoiceRecording() {
+            const voiceIcon = document.getElementById('voiceIcon');
+            
+            if (!isRecording) {
+                // Start recording
+                isRecording = true;
+                voiceIcon.className = 'fas fa-stop';
+                voiceIcon.parentElement.style.background = 'var(--error-color)';
+                showNotification('Voice recording started! 🎤', 'info');
+                
+                // Simulate voice recording
+                setTimeout(() => {
+                    stopVoiceRecording();
+                }, 3000);
+            } else {
+                stopVoiceRecording();
+            }
+        }
+
+        // Stop voice recording
+        function stopVoiceRecording() {
+            isRecording = false;
+            const voiceIcon = document.getElementById('voiceIcon');
+            voiceIcon.className = 'fas fa-microphone';
+            voiceIcon.parentElement.style.background = 'var(--success-gradient)';
+            
+            // Simulate voice to text conversion
+            showNotification('Converting speech to text...', 'info');
+            
+            setTimeout(() => {
+                const sampleResponses = [
+                    "I have 3 years of experience in full stack development, working primarily with React and Node.js.",
+                    "My greatest strength is my ability to learn quickly and adapt to new technologies.",
+                    "I'm passionate about creating user-friendly applications that solve real-world problems.",
+                    "I believe in continuous learning and staying updated with the latest industry trends."
+                ];
+                
+                const response = sampleResponses[Math.floor(Math.random() * sampleResponses.length)];
+                document.getElementById('messageInput').value = response;
+                showNotification('Speech converted! You can edit before sending.', 'success');
+            }, 1500);
+        }
+
+        // Show interview feedback
+        function showInterviewFeedback() {
+            const feedbackMessages = [
+                "🌟 Great job! Your responses showed confidence and good communication skills.",
+                "👍 Well done! You demonstrated good technical knowledge and problem-solving abilities.",
+                "💪 Excellent session! Your examples were specific and relevant to the questions.",
+                "🎯 Outstanding! You maintained good eye contact and professional demeanor throughout."
+            ];
+            
+            const feedback = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+            
+            setTimeout(() => {
+                showNotification(feedback, 'success');
+            }, 500);
+            
+            setTimeout(() => {
+                showNotification("💡 Tip: Practice the STAR method for behavioral questions!", 'info');
+            }, 2500);
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
