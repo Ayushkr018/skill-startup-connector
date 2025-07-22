@@ -148,6 +148,51 @@
             margin: 0 auto;
         }
 
+        /* Search Section */
+        .search-section {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 50px;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
+            background: var(--dashboard-card-bg);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+            transform: scale(1.02);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dashboard-text-light);
+            font-size: 1.1rem;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--primary-color);
+        }
+
         /* Test Categories */
         .test-categories {
             display: grid;
@@ -592,6 +637,11 @@
             font-weight: 600;
         }
 
+        /* Hidden class for filtering */
+        .hidden {
+            display: none !important;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .test-categories {
@@ -625,6 +675,10 @@
             .modal-content {
                 padding: 1.5rem;
                 width: 95%;
+            }
+
+            .search-container {
+                max-width: 100%;
             }
         }
 
@@ -674,7 +728,7 @@
     <header class="dashboard-header">
         <div class="dashboard-header-content">
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="dashboard.html" class="back-btn">
+                <a href="student-dashboard.html" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
                     <span>Back to Dashboard</span>
                 </a>
@@ -687,7 +741,7 @@
             </div>
             
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">A</div>
                 <span style="font-weight: 600; color: var(--dashboard-text);">Ayush Kumar</span>
             </div>
         </div>
@@ -701,10 +755,18 @@
             <p>Test your skills, get certified, and boost your profile credibility!</p>
         </div>
 
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for tests, skills, or categories...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
         <!-- Test Categories -->
-        <div class="test-categories">
+        <div class="test-categories" id="testCategories">
             <!-- Programming Tests -->
-            <div class="category-card">
+            <div class="category-card" data-category="programming">
                 <div class="category-header">
                     <div class="category-icon">
                         <i class="fas fa-code"></i>
@@ -777,7 +839,7 @@
             </div>
 
             <!-- Design Tests -->
-            <div class="category-card">
+            <div class="category-card" data-category="design">
                 <div class="category-header">
                     <div class="category-icon">
                         <i class="fas fa-palette"></i>
@@ -850,7 +912,7 @@
             </div>
 
             <!-- Marketing Tests -->
-            <div class="category-card">
+            <div class="category-card" data-category="marketing">
                 <div class="category-header">
                     <div class="category-icon">
                         <i class="fas fa-bullhorn"></i>
@@ -919,6 +981,590 @@
 
                 <button class="view-all-btn" onclick="viewAllTests('marketing')">
                     View All Marketing Tests (12 more)
+                </button>
+            </div>
+
+            <!-- Data Science Tests -->
+            <div class="category-card" data-category="data">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Data Science & Analytics</h3>
+                        <p>Validate your data analysis and ML skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Excel Data Analysis</h5>
+                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Excel Data Analysis', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>SQL Database Queries</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('SQL Database Queries', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Machine Learning Fundamentals</h5>
+                                <div class="test-meta">40 questions • 60 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Machine Learning Fundamentals', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('data')">
+                    View All Data Science Tests (17 more)
+                </button>
+            </div>
+
+            <!-- Business & Management -->
+            <div class="category-card" data-category="business">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Business & Management</h3>
+                        <p>Test your business acumen and leadership skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.5</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Business Communication</h5>
+                                <div class="test-meta">15 questions • 25 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Business Communication', 'business')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Project Management</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Project Management', 'business')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Strategic Planning</h5>
+                                <div class="test-meta">25 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Strategic Planning', 'business')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('business')">
+                    View All Business Tests (9 more)
+                </button>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="category-card" data-category="cloud">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Cloud & DevOps</h3>
+                        <p>Master cloud platforms and DevOps practices</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">16</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>AWS Cloud Fundamentals</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('AWS Cloud Fundamentals', 'cloud')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Docker & Containerization</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Docker & Containerization', 'cloud')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Kubernetes Orchestration</h5>
+                                <div class="test-meta">35 questions • 55 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Kubernetes Orchestration', 'cloud')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('cloud')">
+                    View All Cloud & DevOps Tests (13 more)
+                </button>
+            </div>
+
+            <!-- Cybersecurity -->
+            <div class="category-card" data-category="security">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Cybersecurity</h3>
+                        <p>Assess your security knowledge and practices</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Network Security Basics</h5>
+                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Network Security Basics', 'security')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Ethical Hacking</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Ethical Hacking', 'security')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Security Audit & Compliance</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Security Audit & Compliance', 'security')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('security')">
+                    View All Cybersecurity Tests (11 more)
+                </button>
+            </div>
+
+            <!-- Mobile Development -->
+            <div class="category-card" data-category="mobile">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Mobile Development</h3>
+                        <p>Test your mobile app development skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.6</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Android Development Basics</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Android Development Basics', 'mobile')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>React Native Development</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('React Native Development', 'mobile')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>iOS Swift Programming</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('iOS Swift Programming', 'mobile')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('mobile')">
+                    View All Mobile Development Tests (15 more)
+                </button>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="category-card" data-category="ai">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>AI & Machine Learning</h3>
+                        <p>Validate your AI/ML knowledge and implementation skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">22</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>AI Fundamentals</h5>
+                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('AI Fundamentals', 'ai')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Python for Machine Learning</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Python for Machine Learning', 'ai')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Deep Learning & Neural Networks</h5>
+                                <div class="test-meta">40 questions • 60 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Deep Learning & Neural Networks', 'ai')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('ai')">
+                    View All AI & ML Tests (19 more)
+                </button>
+            </div>
+
+            <!-- Quality Assurance -->
+            <div class="category-card" data-category="qa">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Quality Assurance</h3>
+                        <p>Master software testing and QA methodologies</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">13</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.5</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Software Testing Fundamentals</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Software Testing Fundamentals', 'qa')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Automated Testing with Selenium</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Automated Testing with Selenium', 'qa')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Performance Testing</h5>
+                                <div class="test-meta">28 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Performance Testing', 'qa')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('qa')">
+                    View All QA Tests (10 more)
+                </button>
+            </div>
+
+            <!-- Blockchain & Crypto -->
+            <div class="category-card" data-category="blockchain">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Blockchain & Cryptocurrency</h3>
+                        <p>Explore decentralized technologies and smart contracts</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Blockchain Basics</h5>
+                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Blockchain Basics', 'blockchain')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Ethereum Smart Contracts</h5>
+                                <div class="test-meta">25 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Ethereum Smart Contracts', 'blockchain')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>DeFi & Web3 Development</h5>
+                                <div class="test-meta">30 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('DeFi & Web3 Development', 'blockchain')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('blockchain')">
+                    View All Blockchain Tests (7 more)
                 </button>
             </div>
         </div>
@@ -1120,7 +1766,59 @@
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🏆 Skill Assessments Loaded');
+            
+            // Initialize search functionality
+            initializeSearch();
         });
+
+        // Initialize search functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase().trim();
+                filterTests(query);
+            });
+        }
+
+        // Filter tests based on search query
+        function filterTests(query) {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            if (!query) {
+                // Show all cards if search is empty
+                categoryCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+                return;
+            }
+            
+            categoryCards.forEach(card => {
+                const categoryName = card.querySelector('.category-info h3').textContent.toLowerCase();
+                const categoryDescription = card.querySelector('.category-info p').textContent.toLowerCase();
+                const testNames = Array.from(card.querySelectorAll('.test-details h5'))
+                    .map(h5 => h5.textContent.toLowerCase());
+                
+                // Check if query matches category name, description, or any test name
+                const matches = categoryName.includes(query) || 
+                               categoryDescription.includes(query) || 
+                               testNames.some(name => name.includes(query));
+                
+                if (matches) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Show notification for search results
+            const visibleCards = document.querySelectorAll('.category-card:not(.hidden)').length;
+            if (visibleCards === 0) {
+                showNotification(`No tests found for "${query}" 🔍`, 'info');
+            } else {
+                showNotification(`Found ${visibleCards} categories matching "${query}" ✨`, 'success');
+            }
+        }
 
         // Start a test
         function startTest(testName, category) {
