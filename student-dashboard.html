@@ -148,6 +148,11 @@
             gap: 1rem;
         }
 
+        /* Notification Bell with Dropdown */
+        .notification-container {
+            position: relative;
+        }
+
         .notification-bell {
             position: relative;
             cursor: pointer;
@@ -156,6 +161,7 @@
             transition: all 0.3s ease;
             color: var(--dashboard-text);
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
         }
 
         .notification-bell:hover {
@@ -187,7 +193,137 @@
             100% { transform: scale(1); }
         }
 
-        /* User Menu */
+        /* Notification Dropdown */
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 380px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--dashboard-border);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .notification-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--dashboard-border);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .notification-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+        }
+
+        .mark-all-read {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mark-all-read:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .notification-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--dashboard-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .notification-item.unread {
+            background: rgba(102, 126, 234, 0.05);
+            position: relative;
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.match { background: var(--success-gradient); }
+        .notification-icon.message { background: var(--primary-gradient); }
+        .notification-icon.view { background: var(--warning-gradient); }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-text {
+            color: var(--dashboard-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            color: var(--dashboard-text-light);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* User Menu with Dropdown */
+        .user-menu-container {
+            position: relative;
+        }
+
         .user-menu-toggle {
             display: flex;
             align-items: center;
@@ -198,6 +334,7 @@
             transition: all 0.3s ease;
             position: relative;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
         }
 
         .user-menu-toggle:hover {
@@ -235,6 +372,176 @@
             font-size: 0.75rem;
             color: var(--dashboard-text-light);
             font-weight: 500;
+        }
+
+        /* User Dropdown */
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 240px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--dashboard-border);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .user-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .user-dropdown-item:first-child {
+            border-radius: 16px 16px 0 0;
+        }
+
+        .user-dropdown-item:last-child {
+            border-radius: 0 0 16px 16px;
+            border-top: 1px solid var(--dashboard-border);
+        }
+
+        .user-dropdown-item:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .user-dropdown-item.logout {
+            color: var(--error-color);
+        }
+
+        .user-dropdown-item.logout:hover {
+            background: rgba(245, 101, 101, 0.1);
+        }
+
+        .user-dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Confirmation Dialog */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dialog-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .confirmation-dialog {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .dialog-overlay.active .confirmation-dialog {
+            transform: scale(1);
+        }
+
+        .dialog-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dialog-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(245, 101, 101, 0.1);
+            color: var(--error-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .dialog-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+        }
+
+        .dialog-message {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .dialog-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .dialog-btn.cancel {
+            background: #f7fafc;
+            color: var(--dashboard-text);
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .dialog-btn.cancel:hover {
+            background: #e2e8f0;
+        }
+
+        .dialog-btn.confirm {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .dialog-btn.confirm:hover {
+            background: #e53e3e;
+            transform: translateY(-2px);
         }
 
         /* SIDEBAR - NO OVERLAP LAYOUT */
@@ -1107,6 +1414,14 @@
             .section-header h1 {
                 font-size: 1.6rem;
             }
+
+            .notification-dropdown {
+                width: 340px;
+            }
+
+            .user-dropdown {
+                width: 220px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1180,6 +1495,16 @@
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
             }
+
+            .notification-dropdown {
+                width: 300px;
+                right: -50px;
+            }
+
+            .user-dropdown {
+                width: 200px;
+                right: -20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1201,6 +1526,16 @@
 
             .welcome-section h1 {
                 font-size: 1.3rem;
+            }
+
+            .notification-dropdown {
+                width: 280px;
+                right: -60px;
+            }
+
+            .user-dropdown {
+                width: 180px;
+                right: -30px;
             }
         }
 
@@ -1267,22 +1602,53 @@
             
             <!-- Header Actions -->
             <div class="header-actions">
-                <!-- Notifications -->
-                <div class="notification-bell" onclick="toggleNotifications()">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
+                <!-- Notifications with Dropdown -->
+                <div class="notification-container">
+                    <button class="notification-bell" onclick="toggleNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3 class="notification-title">Notifications</h3>
+                            <button class="mark-all-read" onclick="markAllAsRead()">Mark all as read</button>
+                        </div>
+                        <div class="notification-list" id="notificationList">
+                            <!-- Notifications will be dynamically inserted here -->
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- User Menu -->
-                <div class="user-menu-toggle" onclick="toggleUserMenu()">
-                    <div class="user-avatar">
-                        <span>R</span>
+                <!-- User Menu with Dropdown -->
+                <div class="user-menu-container">
+                    <button class="user-menu-toggle" onclick="toggleUserMenu()">
+                        <div class="user-avatar">
+                            <span>A</span>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">Ayush Kumar</div>
+                            <div class="user-type">Student</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <!-- User Dropdown -->
+                   <div class="user-dropdown" id="userDropdown">
+    <button class="user-dropdown-item" onclick="goToSetting()">
+        <i class="fas fa-cog"></i>
+        <span>Setting</span>
+    </button>
+    <button class="user-dropdown-item" onclick="goToHelp()">
+        <i class="fas fa-question-circle"></i>
+        <span>Help</span>
+    </button>
+                        <button class="user-dropdown-item logout" onclick="showLogoutDialog()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
                     </div>
-                    <div class="user-info">
-                        <div class="user-name">Ayush Kumar</div>
-                        <div class="user-type">Student</div>
-                    </div>
-                    <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
         </div>
@@ -1319,10 +1685,9 @@
 
                             </li>
                             <li class="sidebar-menu-item">
-                                <a href="#applications" class="sidebar-menu-link" onclick="showSection('applications')">
-                                    <i class="fas fa-paper-plane"></i>
-                                    <span>Applications</span>
-                                </a>
+                               <a href="application.html" class="sidebar-menu-link">
+  <i class="fas fa-paper-plane"></i><span>Applications</span>
+</a>
                             </li>
                             <li class="sidebar-menu-item">
                                 <a href="chat.html" class="sidebar-menu-link">
@@ -1346,10 +1711,9 @@
                                 </a>
                             </li>
                             <li class="sidebar-menu-item">
-                                <a href="#analytics" class="sidebar-menu-link" onclick="showSection('analytics')">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Analytics</span>
-                                </a>
+                                <a href="analytics.html" class="sidebar-menu-link">
+  <i class="fas fa-chart-line"></i><span>Analytics</span>
+</a>
                             </li>
                         </ul>
                     </div>
@@ -1388,7 +1752,7 @@
                 <div class="dashboard-content">
                     <!-- Welcome Section -->
                     <div class="welcome-section">
-                        <h1>Welcome back, Ayush! 👋</h1>
+                        <h1>Welcome, Ayush! 👋</h1>
                         <p>Here's what's happening with your job search today.</p>
                     </div>
 
@@ -1455,57 +1819,57 @@
                     <div class="dashboard-grid">
                         <!-- Profile Completeness -->
                         <div class="dashboard-card profile-card">
-                            <div class="card-header">
-                                <h2>Profile Completeness</h2>
-                                <button class="btn-card-action" onclick="showSection('profile')">Complete Now</button>
-                            </div>
-                            <div class="card-content">
-                                <div class="profile-completion">
-                                    <div class="completion-circle">
-                                        <svg class="progress-ring" width="120" height="120">
-                                            <circle cx="60" cy="60" r="50" fill="none" stroke="#E2E8F0" stroke-width="8"/>
-                                            <circle cx="60" cy="60" r="50" fill="none" stroke="url(#gradient)" stroke-width="8" 
-                                                    stroke-dasharray="314" stroke-dashoffset="62.8" 
-                                                    stroke-linecap="round" transform="rotate(-90 60 60)"/>
-                                            <defs>
-                                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                    <stop offset="0%" stop-color="#667eea"/>
-                                                    <stop offset="100%" stop-color="#764ba2"/>
-                                                </linearGradient>
-                                            </defs>
-                                        </svg>
-                                        <div class="completion-text">
-                                            <span class="completion-percentage">80%</span>
-                                            <span class="completion-label">Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="completion-details">
-                                        <div class="completion-item completed">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Basic Information</span>
-                                        </div>
-                                        <div class="completion-item completed">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Skills & Experience</span>
-                                        </div>
-                                        <div class="completion-item completed">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Portfolio Projects</span>
-                                        </div>
-                                        <div class="completion-item pending">
-                                            <i class="fas fa-circle"></i>
-                                            <span>Certifications</span>
-                                        </div>
-                                        <div class="completion-item pending">
-                                            <i class="fas fa-circle"></i>
-                                            <span>Profile Picture</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="card-header">
+        <h2>Profile Completeness</h2>
+        <button class="btn-card-action" onclick="window.location.href='profile.html'">Complete Now</button>
+    </div>
+    <div class="card-content">
+        <div class="profile-completion">
+            <div class="completion-circle">
+                <svg class="progress-ring" width="120" height="120">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#E2E8F0" stroke-width="8"/>
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="url(#gradient)" stroke-width="8" 
+                            stroke-dasharray="314" stroke-dashoffset="62.8" 
+                            stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#667eea"/>
+                            <stop offset="100%" stop-color="#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="completion-text">
+                    <span class="completion-percentage">80%</span>
+                    <span class="completion-label">Complete</span>
+                </div>
+            </div>
+            <div class="completion-details">
+                <div class="completion-item completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Basic Information</span>
+                </div>
+                <div class="completion-item completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Skills & Experience</span>
+                </div>
+                <div class="completion-item completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Portfolio Projects</span>
+                </div>
+                <div class="completion-item pending">
+                    <i class="fas fa-circle"></i>
+                    <span>Certifications</span>
+                </div>
+                <div class="completion-item pending">
+                    <i class="fas fa-circle"></i>
+                    <span>Profile Picture</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <!-- Recent Matches -->
+    <!-- Recent Matches -->
                         <div class="dashboard-card matches-card">
                             <div class="card-header">
                                 <h2>Recent Matches</h2>
@@ -1529,15 +1893,15 @@
                                         <i class="fas fa-search"></i>
                                         <span>Find Matches</span>
                                     </button>
-                                    <button class="quick-action-btn" onclick="showSection('profile')">
+                                    <button class="quick-action-btn" onclick="window.location.href='profile.html'">
                                         <i class="fas fa-edit"></i>
                                         <span>Update Profile</span>
                                     </button>
-                                    <button class="quick-action-btn">
+                                    <button class="quick-action-btn" onclick="window.location.href='resume-builder.html'">
                                         <i class="fas fa-file-upload"></i>
                                         <span>Upload Resume</span>
                                     </button>
-                                    <button class="quick-action-btn">
+                                    <button class="quick-action-btn" onclick="window.location.href='skill-assessment.html'">
                                         <i class="fas fa-trophy"></i>
                                         <span>Take Skill Test</span>
                                     </button>
@@ -1645,11 +2009,76 @@
     <!-- Mobile Sidebar Overlay -->
     <div class="sidebar-overlay" onclick="closeSidebar()"></div>
 
+    <!-- Logout Confirmation Dialog -->
+    <div class="dialog-overlay" id="logoutDialog">
+        <div class="confirmation-dialog">
+            <div class="dialog-header">
+                <div class="dialog-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <div class="dialog-title">Confirm Logout</div>
+            </div>
+            <div class="dialog-message">
+                Are you sure you want to log out? You'll need to sign in again to access your dashboard.
+            </div>
+            <div class="dialog-actions">
+                <button class="dialog-btn cancel" onclick="hideLogoutDialog()">Cancel</button>
+                <button class="dialog-btn confirm" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Global state
         let currentSection = 'dashboard';
         let sidebarOpen = false;
+        let notificationDropdownOpen = false;
+        let userDropdownOpen = false;
+
+        // Notification data
+        const notifications = [
+            {
+                id: 1,
+                type: 'match',
+                title: 'New Match Found',
+                message: '92% compatibility with TechStart Inc.',
+                time: '2 hours ago',
+                unread: true
+            },
+            {
+                id: 2,
+                type: 'message',
+                title: 'New Message',
+                message: 'DesignCorp sent you a message',
+                time: '4 hours ago',
+                unread: true
+            },
+            {
+                id: 3,
+                type: 'view',
+                title: 'Profile Viewed',
+                message: 'AI Innovations checked your profile',
+                time: '6 hours ago',
+                unread: false
+            },
+            {
+                id: 4,
+                type: 'match',
+                title: 'Match Update',
+                message: 'You have 3 new potential matches',
+                time: '1 day ago',
+                unread: true
+            },
+            {
+                id: 5,
+                type: 'message',
+                title: 'Interview Invitation',
+                message: 'StartupXYZ wants to schedule an interview',
+                time: '2 days ago',
+                unread: false
+            }
+        ];
 
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
@@ -1657,14 +2086,187 @@
             
             // Load demo data
             loadDemoMatches();
+            loadNotifications();
             animateCounters();
             
             // Setup interactions
             setupDashboardInteractions();
             
             // Auto-close dropdowns when clicking outside
-            document.addEventListener('click', closeDropdowns);
+            document.addEventListener('click', handleOutsideClick);
         });
+
+        // Load notifications
+        function loadNotifications() {
+            const notificationList = document.getElementById('notificationList');
+            const notificationBadge = document.getElementById('notificationBadge');
+            
+            // Count unread notifications
+            const unreadCount = notifications.filter(n => n.unread).length;
+            notificationBadge.textContent = unreadCount;
+            
+            // Hide badge if no unread notifications
+            if (unreadCount === 0) {
+                notificationBadge.style.display = 'none';
+            }
+            
+            // Clear and populate notification list
+            notificationList.innerHTML = '';
+            
+            notifications.forEach(notification => {
+                const notificationItem = createNotificationItem(notification);
+                notificationList.appendChild(notificationItem);
+            });
+        }
+
+        // Create notification item
+        function createNotificationItem(notification) {
+            const item = document.createElement('div');
+            item.className = `notification-item ${notification.unread ? 'unread' : ''}`;
+            item.onclick = () => markAsRead(notification.id);
+            
+            const iconClass = {
+                match: 'fas fa-heart',
+                message: 'fas fa-envelope',
+                view: 'fas fa-eye'
+            }[notification.type] || 'fas fa-bell';
+            
+            item.innerHTML = `
+                <div class="notification-icon ${notification.type}">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-text">
+                        <strong>${notification.title}:</strong> ${notification.message}
+                    </div>
+                    <div class="notification-time">${notification.time}</div>
+                </div>
+            `;
+            
+            return item;
+        }
+
+        // Toggle notifications dropdown
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notificationDropdown');
+            
+            if (userDropdownOpen) {
+                toggleUserMenu(); // Close user dropdown if open
+            }
+            
+            notificationDropdownOpen = !notificationDropdownOpen;
+            
+            if (notificationDropdownOpen) {
+                dropdown.classList.add('active');
+            } else {
+                dropdown.classList.remove('active');
+            }
+        }
+
+        // Toggle user menu dropdown
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            
+            if (notificationDropdownOpen) {
+                toggleNotifications(); // Close notifications if open
+            }
+            
+            userDropdownOpen = !userDropdownOpen;
+            
+            if (userDropdownOpen) {
+                dropdown.classList.add('active');
+            } else {
+                dropdown.classList.remove('active');
+            }
+        }
+
+        // Mark notification as read
+        function markAsRead(notificationId) {
+            const notification = notifications.find(n => n.id === notificationId);
+            if (notification && notification.unread) {
+                notification.unread = false;
+                loadNotifications(); // Refresh notifications
+                showNotificationDemo('✅ Notification marked as read', 'success');
+            }
+        }
+
+        // Mark all notifications as read
+        function markAllAsRead() {
+            notifications.forEach(notification => {
+                notification.unread = false;
+            });
+            loadNotifications(); // Refresh notifications
+            showNotificationDemo('✅ All notifications marked as read', 'success');
+        }
+
+        // User menu actions
+        function goToSetting() {
+    showNotificationDemo('⚙️ Opening Settings...', 'info');
+    toggleUserMenu();
+
+    // Redirect after slight delay
+    setTimeout(function() {
+        window.location.href = 'setting.html';
+    }, 1000); // 1 second delay for notification effect
+}
+
+function goToHelp() {
+    showNotificationDemo('❓ Opening Help Center...', 'info');
+    toggleUserMenu();
+
+    // Redirect after slight delay
+    setTimeout(function() {
+        window.location.href = 'help.html';
+    }, 1000); // 1 second delay for notification effect
+}
+
+
+        // Logout functions
+        function showLogoutDialog() {
+            const dialog = document.getElementById('logoutDialog');
+            dialog.classList.add('active');
+            toggleUserMenu(); // Close user menu
+        }
+
+        function hideLogoutDialog() {
+            const dialog = document.getElementById('logoutDialog');
+            dialog.classList.remove('active');
+        }
+
+        function confirmLogout() {
+            showNotificationDemo('👋 Logging out...', 'info');
+            
+            // Simulate logout process
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        // Handle outside clicks to close dropdowns
+        function handleOutsideClick(event) {
+            const notificationContainer = document.querySelector('.notification-container');
+            const userMenuContainer = document.querySelector('.user-menu-container');
+            const sidebarContainer = document.getElementById('dashboardSidebar');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            
+            // Close notification dropdown
+            if (!notificationContainer.contains(event.target) && notificationDropdownOpen) {
+                toggleNotifications();
+            }
+            
+            // Close user dropdown
+            if (!userMenuContainer.contains(event.target) && userDropdownOpen) {
+                toggleUserMenu();
+            }
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768 && 
+                !sidebarContainer.contains(event.target) && 
+                !sidebarToggle.contains(event.target) && 
+                sidebarOpen) {
+                closeSidebar();
+            }
+        }
 
         // Load demo matches
         function loadDemoMatches() {
@@ -1925,24 +2527,6 @@
             overlay.classList.remove('active');
             document.body.style.overflow = 'auto';
             sidebarOpen = false;
-        }
-
-        // Dropdown functions
-        function toggleNotifications() {
-            console.log('🔔 Notifications clicked');
-        }
-
-        function toggleUserMenu() {
-            console.log('👤 User menu clicked');
-        }
-
-        function closeDropdowns(event) {
-            // Close sidebar when clicking outside on mobile
-            if (!event.target.closest('.dashboard-sidebar') && 
-                !event.target.closest('.sidebar-toggle') && 
-                window.innerWidth <= 768) {
-                closeSidebar();
-            }
         }
 
         // Utility functions
