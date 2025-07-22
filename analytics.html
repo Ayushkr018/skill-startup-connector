@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Enhanced Analytics Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --analytics-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .analytics-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--analytics-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Time Period Selector */
+        .time-selector {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .time-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--dashboard-text);
+        }
+
+        .time-btn.active {
+            background: var(--analytics-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .time-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .analytics-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analytics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--analytics-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .analytics-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--analytics-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .card-metric {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--analytics-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--dashboard-text-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .metric-change {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .change-positive {
+            color: var(--success-color);
+        }
+
+        .change-negative {
+            color: var(--error-color);
+        }
+
+        .change-neutral {
+            color: var(--dashboard-text-light);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 250px;
+            margin-top: 1rem;
+        }
+
+        .chart-container canvas {
+            max-height: 250px;
+        }
+
+        /* Large Charts Section */
+        .large-charts {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .large-chart-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .large-chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        /* Skills Analysis */
+        .skills-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-progress {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--dashboard-text);
+        }
+
+        .skill-score {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--analytics-gradient);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Activity Heatmap */
+        .heatmap-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+            margin-top: 1rem;
+        }
+
+        .heatmap-day {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            background: #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .heatmap-day:hover {
+            transform: scale(1.1);
+        }
+
+        .heatmap-day.level-1 { background: #c6f6d5; }
+        .heatmap-day.level-2 { background: #9ae6b4; }
+        .heatmap-day.level-3 { background: #68d391; }
+        .heatmap-day.level-4 { background: var(--success-color); }
+
+        /* Insights Section */
+        .insights-section {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .insight-item {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid var(--dashboard-border);
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .insight-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--analytics-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-description {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .large-charts {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .analytics-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .time-selector {
+                justify-content: start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-analysis {
+                grid-template-columns: 1fr;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.info {
+            background: var(--analytics-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="student-dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--analytics-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Rahul Sharma</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="analytics-container">
+        <!-- Page Header -->
+        <div class="page-header fade-in">
+            <h1>📊 Career Analytics</h1>
+            <p>Track your job search progress, analyze your performance, and get insights to improve your success rate.</p>
+        </div>
+
+        <!-- Time Period Selector -->
+        <div class="time-selector fade-in">
+            <button class="time-btn" onclick="setTimePeriod('7d')">Last 7 Days</button>
+            <button class="time-btn active" onclick="setTimePeriod('30d')">Last 30 Days</button>
+            <button class="time-btn" onclick="setTimePeriod('90d')">Last 3 Months</button>
+            <button class="time-btn" onclick="setTimePeriod('1y')">Last Year</button>
+        </div>
+
+        <!-- Analytics Overview -->
+        <div class="analytics-grid fade-in">
+            <!-- Profile Views -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        Profile Views
+                    </div>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value">2,847</div>
+                    <div class="metric-label">Total Views</div>
+                    <div class="metric-change change-positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+18% from last month</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="profileViewsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Application Rate -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        Applications
+                    </div>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value">47</div>
+                    <div class="metric-label">Total Applications</div>
+                    <div class="metric-change change-positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+23% success rate</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="applicationsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Response Rate -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-reply"></i>
+                        </div>
+                        Response Rate
+                    </div>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value">34%</div>
+                    <div class="metric-label">Companies Responded</div>
+                    <div class="metric-change change-positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+5% improvement</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="responseRateChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Interview Rate -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        Interview Rate
+                    </div>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value">12%</div>
+                    <div class="metric-label">Got Interviews</div>
+                    <div class="metric-change change-positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Above average</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="interviewRateChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Large Charts Section -->
+        <div class="large-charts fade-in">
+            <!-- Application Timeline -->
+            <div class="large-chart-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        Application Timeline
+                    </div>
+                </div>
+                <div class="large-chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Categories -->
+            <div class="large-chart-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        Job Categories
+                    </div>
+                </div>
+                <div class="large-chart-container">
+                    <canvas id="categoriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Analysis -->
+        <div class="skills-analysis fade-in">
+            <!-- Skills Performance -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        Skills Performance
+                    </div>
+                </div>
+                
+                <div class="skill-progress">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-score">92%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-progress">
+                    <div class="skill-header">
+                        <span class="skill-name">React</span>
+                        <span class="skill-score">88%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 88%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-progress">
+                    <div class="skill-header">
+                        <span class="skill-name">Node.js</span>
+                        <span class="skill-score">85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-progress">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-score">78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-progress">
+                    <div class="skill-header">
+                        <span class="skill-name">MongoDB</span>
+                        <span class="skill-score">82%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Heatmap -->
+            <div class="analytics-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        Activity Heatmap
+                    </div>
+                </div>
+                
+                <div style="font-size: 0.8rem; color: var(--dashboard-text-light); margin-bottom: 1rem;">
+                    Last 30 days of job search activity
+                </div>
+
+                <div class="heatmap-container" id="activityHeatmap">
+                    <!-- Heatmap will be generated by JavaScript -->
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.8rem; color: var(--dashboard-text-light);">
+                    <span>Less active</span>
+                    <div style="display: flex; gap: 0.25rem;">
+                        <div class="heatmap-day"></div>
+                        <div class="heatmap-day level-1"></div>
+                        <div class="heatmap-day level-2"></div>
+                        <div class="heatmap-day level-3"></div>
+                        <div class="heatmap-day level-4"></div>
+                    </div>
+                    <span>More active</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Insights Section -->
+        <div class="insights-section fade-in">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    AI-Powered Insights
+                </div>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-trending-up"></i>
+                    </div>
+                    <div class="insight-title">Profile Optimization</div>
+                    <div class="insight-description">
+                        Your profile views increased by 18% this month! Adding more projects and certifications 
+                        could boost visibility further.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <div class="insight-title">Application Strategy</div>
+                    <div class="insight-description">
+                        Companies respond 34% more to applications sent on Tuesday-Thursday. 
+                        Consider timing your applications strategically.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="insight-title">Skill Recommendations</div>
+                    <div class="insight-description">
+                        TypeScript and AWS are trending in your target roles. 
+                        Adding these skills could increase your match rate by 25%.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="insight-title">Best Time to Apply</div>
+                    <div class="insight-description">
+                        Your highest response rates occur when applying between 9-11 AM. 
+                        Schedule your applications during this window.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="insight-title">Network Growth</div>
+                    <div class="insight-description">
+                        Your professional network grew by 23 connections this month. 
+                        Active networking correlates with 40% higher job placement rates.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="insight-title">Market Trends</div>
+                    <div class="insight-description">
+                        Full-stack developer positions increased by 15% in your location. 
+                        Now is a great time to focus on these opportunities.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Global variables
+        let currentTimePeriod = '30d';
+        let charts = {};
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📊 Analytics Page Loaded');
+            initializeCharts();
+            generateActivityHeatmap();
+        });
+
+        // Set time period
+        function setTimePeriod(period) {
+            currentTimePeriod = period;
+            
+            // Update active button
+            document.querySelectorAll('.time-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update charts with new data
+            updateChartsData(period);
+            showNotification(`Updated data for ${period.replace('d', ' days').replace('y', ' year')}`, 'info');
+        }
+
+        // Initialize all charts
+        function initializeCharts() {
+            // Profile Views Chart
+            const profileCtx = document.getElementById('profileViewsChart').getContext('2d');
+            charts.profileViews = new Chart(profileCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        data: [45, 67, 78, 92],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions()
+            });
+
+            // Applications Chart
+            const appsCtx = document.getElementById('applicationsChart').getContext('2d');
+            charts.applications = new Chart(appsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        data: [8, 12, 15, 12],
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c'],
+                        borderRadius: 8
+                    }]
+                },
+                options: getChartOptions()
+            });
+
+            // Response Rate Chart
+            const responseCtx = document.getElementById('responseRateChart').getContext('2d');
+            charts.responseRate = new Chart(responseCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        data: [25, 30, 35, 34],
+                        borderColor: '#4facfe',
+                        backgroundColor: 'rgba(79, 172, 254, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions()
+            });
+
+            // Interview Rate Chart
+            const interviewCtx = document.getElementById('interviewRateChart').getContext('2d');
+            charts.interviewRate = new Chart(interviewCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Interviews', 'No Response'],
+                    datasets: [{
+                        data: [12, 88],
+                        backgroundColor: ['#43e97b', '#e2e8f0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    ...getChartOptions(),
+                    cutout: '70%'
+                }
+            });
+
+            // Timeline Chart
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            charts.timeline = new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Applications',
+                            data: [12, 19, 15, 25, 22, 30],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Interviews',
+                            data: [2, 5, 3, 8, 6, 9],
+                            borderColor: '#f093fb',
+                            backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...getChartOptions(),
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+
+            // Categories Chart
+            const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+            charts.categories = new Chart(categoriesCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Full-Stack', 'Frontend', 'Backend', 'Mobile', 'DevOps'],
+                    datasets: [{
+                        data: [35, 25, 20, 12, 8],
+                        backgroundColor: [
+                            '#667eea',
+                            '#f093fb',
+                            '#4facfe',
+                            '#43e97b',
+                            '#ed8936'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    ...getChartOptions(),
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Get default chart options
+        function getChartOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        display: true,
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    }
+                }
+            };
+        }
+
+        // Update charts data based on time period
+        function updateChartsData(period) {
+            // Simulate different data for different periods
+            const multipliers = {
+                '7d': 0.3,
+                '30d': 1,
+                '90d': 2.5,
+                '1y': 8
+            };
+            
+            const multiplier = multipliers[period] || 1;
+            
+            // Update each chart with new data
+            Object.keys(charts).forEach(chartKey => {
+                const chart = charts[chartKey];
+                if (chart.data.datasets[0]) {
+                    chart.data.datasets[0].data = chart.data.datasets[0].data.map(value => 
+                        Math.round(value * multiplier * (0.8 + Math.random() * 0.4))
+                    );
+                    chart.update();
+                }
+            });
+        }
+
+        // Generate activity heatmap
+        function generateActivityHeatmap() {
+            const heatmapContainer = document.getElementById('activityHeatmap');
+            heatmapContainer.innerHTML = '';
+            
+            // Generate 30 days of activity data
+            for (let i = 0; i < 30; i++) {
+                const day = document.createElement('div');
+                day.className = 'heatmap-day';
+                
+                // Random activity level (0-4)
+                const activityLevel = Math.floor(Math.random() * 5);
+                if (activityLevel > 0) {
+                    day.classList.add(`level-${activityLevel}`);
+                }
+                
+                // Add day number
+                day.textContent = i + 1;
+                
+                // Add tooltip
+                day.title = `Day ${i + 1}: ${activityLevel} activities`;
+                
+                heatmapContainer.appendChild(day);
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.transform = 'scaleX(1)';
+                }, index * 200);
+            });
+        }
+
+        // Initialize animations
+        setTimeout(animateProgressBars, 1000);
+    </script>
+</body>
+</html>

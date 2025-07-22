@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Applications Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .applications-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-btn, .sort-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--dashboard-card-bg);
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dashboard-text);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .sort-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.total { background: var(--primary-gradient); }
+        .stat-icon.pending { background: var(--warning-gradient); }
+        .stat-icon.interview { background: var(--info-color); }
+        .stat-icon.rejected { background: var(--error-color); }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Applications List */
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .application-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .application-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .application-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .job-details h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .company-name {
+            color: var(--dashboard-text-light);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .job-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+        }
+
+        .application-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            color: var(--warning-color);
+            border: 2px solid #fed7aa;
+        }
+
+        .status-interview {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: var(--info-color);
+            border: 2px solid #bfdbfe;
+        }
+
+        .status-rejected {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            color: var(--error-color);
+            border: 2px solid #fecaca;
+        }
+
+        .status-accepted {
+            background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+            color: var(--success-color);
+            border: 2px solid #bbf7d0;
+        }
+
+        .applied-date {
+            font-size: 0.8rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+        }
+
+        .application-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .job-description {
+            color: var(--dashboard-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-requirements {
+            margin-bottom: 1.5rem;
+        }
+
+        .job-requirements h5 {
+            color: var(--dashboard-text);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .application-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 200px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .timeline-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-text {
+            flex: 1;
+            font-weight: 500;
+            color: var(--dashboard-text);
+        }
+
+        .application-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dashboard-text);
+            border: 2px solid var(--dashboard-border);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            color: var(--error-color);
+            border: 2px solid #fed7d7;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dashboard-text);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: var(--error-color);
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--dashboard-card-bg);
+            border: 2px dashed var(--dashboard-border);
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--dashboard-text-light);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: var(--dashboard-text);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .find-jobs-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .find-jobs-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .application-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .application-timeline {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .applications-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .application-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .application-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: var(--secondary-gradient);
+        }
+
+        .notification.info {
+            background: var(--primary-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="student-dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Rahul Sharma</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="applications-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>📋 My Applications</h1>
+            <div class="header-actions">
+                <button class="filter-btn" onclick="toggleFilter()">
+                    <i class="fas fa-filter"></i>
+                    <span>Filter</span>
+                </button>
+                <button class="sort-btn" onclick="toggleSort()">
+                    <i class="fas fa-sort"></i>
+                    <span>Sort by Date</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon total">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon pending">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon interview">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Interviews Scheduled</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon rejected">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Rejected</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications List -->
+        <div class="applications-list">
+            <!-- Application 1 - Interview Stage -->
+            <div class="application-card">
+                <div class="application-header">
+                    <div class="company-info">
+                        <div class="company-logo">TS</div>
+                        <div class="job-details">
+                            <h3>Senior Full Stack Developer</h3>
+                            <div class="company-name">TechStart Inc.</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Remote • Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <div class="status-badge status-interview">Interview Scheduled</div>
+                        <div class="applied-date">Applied 5 days ago</div>
+                    </div>
+                </div>
+
+                <div class="application-content">
+                    <div class="job-info">
+                        <div class="job-description">
+                            Build and maintain scalable web applications using React, Node.js, and modern development practices. 
+                            Work with cross-functional teams to deliver high-quality products that impact millions of users.
+                        </div>
+                        <div class="job-requirements">
+                            <h5>Required Skills:</h5>
+                            <div class="skills-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="application-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-text">Application Submitted</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="timeline-text">Profile Reviewed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="timeline-text">Interview Scheduled</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-actions">
+                    <button class="action-btn btn-primary" onclick="viewInterviewDetails()">
+                        <i class="fas fa-video"></i>
+                        View Interview Details
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="sendMessage('techstart')">
+                        <i class="fas fa-envelope"></i>
+                        Send Message
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="viewJobDetails('techstart')">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Job Posting
+                    </button>
+                </div>
+            </div>
+
+            <!-- Application 2 - Pending -->
+            <div class="application-card">
+                <div class="application-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: var(--success-gradient);">DC</div>
+                        <div class="job-details">
+                            <h3>Frontend Developer</h3>
+                            <div class="company-name">DesignCorp</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bangalore • Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <div class="status-badge status-pending">Under Review</div>
+                        <div class="applied-date">Applied 3 days ago</div>
+                    </div>
+                </div>
+
+                <div class="application-content">
+                    <div class="job-info">
+                        <div class="job-description">
+                            Create stunning user interfaces and exceptional user experiences for our design platform. 
+                            Work with designers and backend developers to bring creative visions to life.
+                        </div>
+                        <div class="job-requirements">
+                            <h5>Required Skills:</h5>
+                            <div class="skills-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Vue.js</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Figma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="application-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-text">Application Submitted</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="timeline-text">Waiting for Review</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-actions">
+                    <button class="action-btn btn-secondary" onclick="sendMessage('designcorp')">
+                        <i class="fas fa-envelope"></i>
+                        Follow Up
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="viewJobDetails('designcorp')">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Job Posting
+                    </button>
+                    <button class="action-btn btn-danger" onclick="withdrawApplication('designcorp')">
+                        <i class="fas fa-times"></i>
+                        Withdraw
+                    </button>
+                </div>
+            </div>
+
+            <!-- Application 3 - Accepted -->
+            <div class="application-card">
+                <div class="application-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: var(--warning-gradient);">AI</div>
+                        <div class="job-details">
+                            <h3>Machine Learning Engineer</h3>
+                            <div class="company-name">AI Innovations</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Hyderabad • Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <div class="status-badge status-accepted">Offer Received</div>
+                        <div class="applied-date">Applied 2 weeks ago</div>
+                    </div>
+                </div>
+
+                <div class="application-content">
+                    <div class="job-info">
+                        <div class="job-description">
+                            Join our AI research team to develop cutting-edge machine learning models and deploy them at scale. 
+                            Work on exciting projects in computer vision, NLP, and predictive analytics.
+                        </div>
+                        <div class="job-requirements">
+                            <h5>Required Skills:</h5>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">Docker</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="application-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-text">Application Submitted</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="timeline-text">Interview Completed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="timeline-text">Offer Received</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-actions">
+                    <button class="action-btn btn-primary" onclick="viewOffer('ai-innovations')">
+                        <i class="fas fa-file-contract"></i>
+                        View Offer Details
+                    </button>
+                    <button class="action-btn btn-primary" onclick="acceptOffer('ai-innovations')">
+                        <i class="fas fa-handshake"></i>
+                        Accept Offer
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="negotiateOffer('ai-innovations')">
+                        <i class="fas fa-comments"></i>
+                        Negotiate
+                    </button>
+                </div>
+            </div>
+
+            <!-- More applications can be added here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Applications Page Loaded');
+        });
+
+        // Filter applications
+        function toggleFilter() {
+            showNotification('Filter options coming soon! 🔍', 'info');
+        }
+
+        // Sort applications
+        function toggleSort() {
+            showNotification('Sorting applications by date... 📅', 'info');
+        }
+
+        // View interview details
+        function viewInterviewDetails() {
+            showNotification('Opening interview details... 🎥', 'info');
+            // In real app, this would open interview modal
+        }
+
+        // Send message to recruiter
+        function sendMessage(company) {
+            showNotification(`Opening chat with ${company}... 💬`, 'info');
+            // In real app, this would open chat interface
+        }
+
+        // View job details
+        function viewJobDetails(company) {
+            showNotification(`Opening job posting for ${company}... 🔗`, 'info');
+            // In real app, this would open job posting
+        }
+
+        // Withdraw application
+        function withdrawApplication(company) {
+            if (confirm('Are you sure you want to withdraw this application?')) {
+                showNotification(`Application withdrawn from ${company} ❌`, 'error');
+                // In real app, this would update the application status
+            }
+        }
+
+        // View offer details
+        function viewOffer(company) {
+            showNotification('Opening offer letter... 📄', 'success');
+            // In real app, this would show detailed offer
+        }
+
+        // Accept offer
+        function acceptOffer(company) {
+            if (confirm('Are you sure you want to accept this offer?')) {
+                showNotification('🎉 Congratulations! Offer accepted successfully!', 'success');
+                // In real app, this would process offer acceptance
+            }
+        }
+
+        // Negotiate offer
+        function negotiateOffer(company) {
+            showNotification('Opening negotiation chat... 💼', 'info');
+            // In real app, this would open negotiation interface
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

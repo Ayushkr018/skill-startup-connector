@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Settings Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --settings-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .settings-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--settings-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Settings Grid */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        /* Settings Sidebar */
+        .settings-sidebar {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: calc(var(--dashboard-header-height) + 2rem);
+        }
+
+        .settings-nav {
+            list-style: none;
+        }
+
+        .settings-nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .settings-nav-link:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .settings-nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-left-color: white;
+        }
+
+        .settings-nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Settings Content */
+        .settings-content {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--settings-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Settings Forms */
+        .setting-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid var(--dashboard-border);
+        }
+
+        .setting-group h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-check input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-color);
+        }
+
+        .form-check label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 25px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 3.5px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: var(--primary-gradient);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dashboard-text);
+            border: 2px solid var(--dashboard-border);
+        }
+
+        .btn-danger {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dashboard-text);
+            color: white;
+        }
+
+        /* Profile Picture Upload */
+        .profile-picture-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .current-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .upload-controls {
+            flex: 1;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--success-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            background: rgba(245, 101, 101, 0.05);
+            border: 2px solid rgba(245, 101, 101, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .danger-zone h4 {
+            color: var(--error-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .danger-zone p {
+            color: var(--dashboard-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .settings-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .settings-nav-item {
+                margin-bottom: 0;
+            }
+
+            .settings-nav-link {
+                padding: 0.75rem 1rem;
+                border-left: none;
+                border-radius: 8px;
+                border: 2px solid var(--dashboard-border);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .profile-picture-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .settings-nav {
+                justify-content: center;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: var(--secondary-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="student-dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--settings-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Rahul Sharma</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="settings-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>⚙️ Settings</h1>
+            <p>Manage your account preferences, privacy settings, and application behavior</p>
+        </div>
+
+        <!-- Settings Grid -->
+        <div class="settings-grid">
+            <!-- Settings Sidebar -->
+            <div class="settings-sidebar">
+                <ul class="settings-nav">
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link active" onclick="showSettingsSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link" onclick="showSettingsSection('account')">
+                            <i class="fas fa-cog"></i>
+                            <span>Account</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link" onclick="showSettingsSection('privacy')">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Privacy</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link" onclick="showSettingsSection('notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link" onclick="showSettingsSection('preferences')">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Preferences</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#" class="settings-nav-link" onclick="showSettingsSection('security')">
+                            <i class="fas fa-lock"></i>
+                            <span>Security</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Settings -->
+                <div id="profile" class="settings-section active">
+                    <h2 class="section-title">Profile Settings</h2>
+                    <p class="section-description">Update your personal information and profile picture</p>
+
+                    <div class="profile-picture-section">
+                        <div class="current-avatar">R</div>
+                        <div class="upload-controls">
+                            <h4>Profile Picture</h4>
+                            <p style="color: var(--dashboard-text-light); margin-bottom: 1rem;">JPG, PNG or GIF. Max size 2MB.</p>
+                            <input type="file" class="file-input" id="profilePicture" accept="image/*">
+                            <button class="upload-btn" onclick="document.getElementById('profilePicture').click()">
+                                <i class="fas fa-upload"></i>
+                                Upload New Picture
+                            </button>
+                            <button class="btn btn-secondary" onclick="removeProfilePicture()">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-user"></i> Personal Information</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" value="Rahul">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" value="Sharma">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Professional Title</label>
+                            <input type="text" class="form-control" value="Full Stack Developer">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea class="form-control" rows="4" placeholder="Tell us about yourself...">Passionate developer with 3+ years of experience building scalable web applications.</textarea>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-map-marker-alt"></i> Location & Contact</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" value="Mumbai">
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select class="form-control form-select">
+                                    <option value="IN" selected>India</option>
+                                    <option value="US">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="CA">Canada</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>LinkedIn Profile</label>
+                            <input type="url" class="form-control" placeholder="https://linkedin.com/in/yourprofile">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Portfolio Website</label>
+                            <input type="url" class="form-control" placeholder="https://yourwebsite.com">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveProfileSettings()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+
+                <!-- Account Settings -->
+                <div id="account" class="settings-section">
+                    <h2 class="section-title">Account Settings</h2>
+                    <p class="section-description">Manage your account information and email preferences</p>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-envelope"></i> Email Settings</h4>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" value="rahul@example.com">
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="emailVerified" checked disabled>
+                            <label for="emailVerified">Email Verified ✅</label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-phone"></i> Phone Settings</h4>
+                        
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" value="+91 98765 43210">
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="phoneVerified" checked disabled>
+                            <label for="phoneVerified">Phone Verified ✅</label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-key"></i> Password</h4>
+                        
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" class="form-control" placeholder="Enter current password">
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm new password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveAccountSettings()">
+                        <i class="fas fa-save"></i>
+                        Update Account
+                    </button>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div id="privacy" class="settings-section">
+                    <h2 class="section-title">Privacy Settings</h2>
+                    <p class="section-description">Control who can see your information and how it's used</p>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-eye"></i> Profile Visibility</h4>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="publicProfile" checked>
+                            <label for="publicProfile">Make my profile visible to recruiters</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="showExperience" checked>
+                            <label for="showExperience">Show my work experience</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="showSkills" checked>
+                            <label for="showSkills">Display my skills and certifications</label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-search"></i> Search & Discovery</h4>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="searchable" checked>
+                            <label for="searchable">Allow companies to find me in search</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="showActivity">
+                            <label for="showActivity">Show when I'm active on the platform</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="savePrivacySettings()">
+                        <i class="fas fa-save"></i>
+                        Save Privacy Settings
+                    </button>
+                </div>
+
+                <!-- Notification Settings -->
+                <div id="notifications" class="settings-section">
+                    <h2 class="section-title">Notification Settings</h2>
+                    <p class="section-description">Choose what notifications you want to receive and how</p>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-envelope"></i> Email Notifications</h4>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>New job matches</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Get notified when new jobs match your profile</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>Messages from recruiters</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Receive emails for new recruiter messages</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>Interview reminders</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Get reminded about upcoming interviews</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-mobile"></i> Push Notifications</h4>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>Instant messages</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Real-time push notifications for messages</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>Profile views</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Know when recruiters view your profile</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveNotificationSettings()">
+                        <i class="fas fa-save"></i>
+                        Save Notification Settings
+                    </button>
+                </div>
+
+                <!-- Preferences -->
+                <div id="preferences" class="settings-section">
+                    <h2 class="section-title">Preferences</h2>
+                    <p class="section-description">Customize your experience on the platform</p>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-briefcase"></i> Job Preferences</h4>
+                        
+                        <div class="form-group">
+                            <label>Preferred Job Types</label>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                                <div class="form-check">
+                                    <input type="checkbox" id="fullTime" checked>
+                                    <label for="fullTime">Full-time</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="partTime">
+                                    <label for="partTime">Part-time</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="contract" checked>
+                                    <label for="contract">Contract</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="freelance">
+                                    <label for="freelance">Freelance</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Salary Expectations (₹ per month)</label>
+                            <select class="form-control form-select">
+                                <option>₹20,000 - ₹40,000</option>
+                                <option>₹40,000 - ₹60,000</option>
+                                <option>₹60,000 - ₹80,000</option>
+                                <option selected>₹80,000 - ₹1,00,000</option>
+                                <option>₹1,00,000 - ₹1,50,000</option>
+                                <option>₹1,50,000+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-palette"></i> Appearance</h4>
+                        
+                        <div class="form-group">
+                            <label>Theme</label>
+                            <select class="form-control form-select">
+                                <option selected>Light</option>
+                                <option>Dark</option>
+                                <option>Auto (System)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Language</label>
+                            <select class="form-control form-select">
+                                <option selected>English</option>
+                                <option>Hindi</option>
+                                <option>Bengali</option>
+                                <option>Tamil</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="savePreferences()">
+                        <i class="fas fa-save"></i>
+                        Save Preferences
+                    </button>
+                </div>
+
+                <!-- Security Settings -->
+                <div id="security" class="settings-section">
+                    <h2 class="section-title">Security Settings</h2>
+                    <p class="section-description">Manage your account security and login settings</p>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-shield-alt"></i> Two-Factor Authentication</h4>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <strong>Enable 2FA</strong>
+                                <p style="color: var(--dashboard-text-light); margin: 0;">Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-secondary" onclick="setup2FA()">
+                            <i class="fas fa-mobile-alt"></i>
+                            Setup Authenticator App
+                        </button>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4><i class="fas fa-history"></i> Login Activity</h4>
+                        
+                        <div style="padding: 1rem; background: white; border-radius: 8px; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Current Session</strong>
+                                    <p style="color: var(--dashboard-text-light); margin: 0;">Chrome on Windows • Mumbai, India</p>
+                                </div>
+                                <span style="color: var(--success-color); font-weight: 600;">Active</span>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 1rem; background: white; border-radius: 8px; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Mobile App</strong>
+                                    <p style="color: var(--dashboard-text-light); margin: 0;">iPhone • Mumbai, India</p>
+                                </div>
+                                <span style="color: var(--dashboard-text-light); font-weight: 600;">2 hours ago</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-secondary" onclick="viewAllSessions()">
+                            <i class="fas fa-list"></i>
+                            View All Sessions
+                        </button>
+                    </div>
+
+                    <div class="danger-zone">
+                        <h4>🚨 Danger Zone</h4>
+                        <p>These actions are irreversible. Please be careful.</p>
+                        
+                        <button class="btn btn-danger" onclick="deactivateAccount()">
+                            <i class="fas fa-user-times"></i>
+                            Deactivate Account
+                        </button>
+                        
+                        <button class="btn btn-danger" onclick="deleteAccount()" style="margin-left: 1rem;">
+                            <i class="fas fa-trash"></i>
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize settings page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('⚙️ Settings Page Loaded');
+        });
+
+        // Show settings section
+        function showSettingsSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.settings-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Save functions
+        function saveProfileSettings() {
+            showNotification('Profile settings saved successfully! 👤', 'success');
+        }
+
+        function saveAccountSettings() {
+            showNotification('Account settings updated! 🔑', 'success');
+        }
+
+        function savePrivacySettings() {
+            showNotification('Privacy settings saved! 🔒', 'success');
+        }
+
+        function saveNotificationSettings() {
+            showNotification('Notification preferences updated! 🔔', 'success');
+        }
+
+        function savePreferences() {
+            showNotification('Preferences saved successfully! ⚙️', 'success');
+        }
+
+        // Profile picture functions
+        function removeProfilePicture() {
+            if (confirm('Are you sure you want to remove your profile picture?')) {
+                showNotification('Profile picture removed! 🖼️', 'success');
+            }
+        }
+
+        // Security functions
+        function setup2FA() {
+            showNotification('Opening 2FA setup... 🔐', 'info');
+        }
+
+        function viewAllSessions() {
+            showNotification('Loading all active sessions... 📱', 'info');
+        }
+
+        function deactivateAccount() {
+            if (confirm('Are you sure you want to deactivate your account? You can reactivate it anytime.')) {
+                showNotification('Account deactivation process started... ⚠️', 'info');
+            }
+        }
+
+        function deleteAccount() {
+            const confirmation = prompt('Type "DELETE" to confirm account deletion:');
+            if (confirmation === 'DELETE') {
+                showNotification('Account deletion process initiated... 🗑️', 'error');
+            } else if (confirmation !== null) {
+                showNotification('Account deletion cancelled - incorrect confirmation.', 'error');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Handle file upload
+        document.getElementById('profilePicture').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    showNotification('File size must be less than 2MB!', 'error');
+                    return;
+                }
+                showNotification('Profile picture uploaded successfully! 📸', 'success');
+            }
+        });
+    </script>
+</body>
+</html>
