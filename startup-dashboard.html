@@ -3,536 +3,1752 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startup Dashboard - SkillSync AI</title>
-    <meta name="description" content="Startup dashboard for SkillSync AI - find talent, manage hiring pipeline, and track your team growth.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    <title>SkillSync AI - Professional Startup Dashboard</title>
+    <meta name="description" content="Professional startup dashboard for SkillSync AI - Streamlined talent management and hiring pipeline">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
-    
-    <!-- Startup Dashboard Specific CSS -->
+    <!-- EMBEDDED CSS -->
     <style>
-        /* Dashboard Variables for Startup */
         :root {
-            --startup-primary: #7C3AED;
-            --startup-primary-dark: #6D28D9;
-            --startup-primary-light: #A78BFA;
-            --startup-secondary: #F59E0B;
-            --startup-success: #10B981;
-            --startup-warning: #F59E0B;
-            --startup-error: #EF4444;
-            --startup-info: #3B82F6;
+            /* Brand Colors */
+            --primary-color: #7C3AED;
+            --primary-dark: #6D28D9;
+            --primary-light: #A78BFA;
+            --primary-lighter: #F3F4F6;
+            
+            /* Secondary Colors */
+            --secondary-color: #F59E0B;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --info-color: #3B82F6;
+            
+            /* Neutral Colors */
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            /* Font Sizes */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            
+            /* Font Weights */
+            --font-light: 300;
+            --font-normal: 400;
+            --font-medium: 500;
+            --font-semibold: 600;
+            --font-bold: 700;
+            --font-extrabold: 800;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-base: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Layout */
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --container-max-width: 1400px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease-in-out;
+            --transition-base: 0.25s ease-in-out;
+            --transition-slow: 0.35s ease-in-out;
+            
+            /* Z-Index Scale */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal-backdrop: 1040;
+            --z-modal: 1050;
+            --z-popover: 1060;
+            --z-tooltip: 1070;
+            --z-overlay: 1080;
         }
 
-        /* Startup-specific styling */
-        .startup-dashboard .sidebar-menu-link.active {
-            background: var(--startup-primary) !important;
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .startup-dashboard .stat-icon.primary {
-            background: var(--startup-primary) !important;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
-        .startup-dashboard .btn-primary {
-            background: var(--startup-primary) !important;
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            font-weight: var(--font-normal);
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--gray-50);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .startup-dashboard .btn-primary:hover {
-            background: var(--startup-primary-dark) !important;
+        /* Loading Spinner */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-modal);
+            transition: opacity var(--transition-base);
         }
 
-        .startup-dashboard .user-avatar {
-            background: var(--startup-primary) !important;
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* Hiring Pipeline Specific Styles */
-        .pipeline-stage {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s ease;
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--gray-200);
+            border-top: 4px solid var(--primary-color);
+            border-radius: var(--radius-full);
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--space-4);
         }
 
-        .pipeline-stage:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: var(--z-overlay);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: var(--z-fixed);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 var(--space-6);
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: var(--space-2);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            color: var(--gray-600);
+            transition: all var(--transition-fast);
+            min-width: 40px;
+            min-height: 40px;
+            touch-action: manipulation;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        .sidebar-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: var(--font-bold);
+            font-size: var(--text-xl);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: var(--text-lg);
+        }
+
+        .logo-text {
+            font-family: var(--font-secondary);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Header Search */
+        .header-search {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 var(--space-8);
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4) var(--space-3) var(--space-10);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            background: var(--white);
+            font-size: var(--text-sm);
+            transition: all var(--transition-fast);
+            outline: none;
+            touch-action: manipulation;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: var(--text-sm);
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .quick-action-item {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .quick-action-item:hover {
+            background: var(--primary-color);
+            color: var(--white);
             transform: translateY(-2px);
         }
 
-        .stage-header {
+        .quick-action-item:active {
+            transform: translateY(0);
+        }
+
+        /* Enhanced User Menu */
+        .user-menu-container {
+            position: relative;
+        }
+
+        .user-menu-toggle {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            gap: var(--space-3);
+            background: none;
+            border: none;
+            padding: var(--space-2);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            touch-action: manipulation;
         }
 
-        .stage-name {
-            font-weight: 600;
-            color: #1A202C;
-            font-size: 1.1rem;
+        .user-menu-toggle:hover {
+            background: var(--gray-100);
         }
 
-        .stage-count {
-            background: var(--startup-primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-weight: 600;
-            font-size: 0.875rem;
+        .user-menu-toggle:active {
+            transform: scale(0.98);
         }
 
-        .stage-progress {
-            margin-top: 0.5rem;
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-full);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-semibold);
+            font-size: var(--text-sm);
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #F1F5F9;
-            border-radius: 4px;
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .user-name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .user-type {
+            font-size: var(--text-xs);
+            color: var(--gray-500);
+            line-height: 1.2;
+        }
+
+        /* Enhanced User Dropdown Menu */
+        .user-menu {
+            position: absolute;
+            top: calc(100% + var(--space-2));
+            right: 0;
+            width: 320px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all var(--transition-base);
+            z-index: var(--z-dropdown);
             overflow: hidden;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--startup-primary), var(--startup-primary-light));
-            border-radius: 4px;
-            transition: width 0.8s ease;
+        .user-menu-container.active .user-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
-        /* Candidate Cards */
-        .candidate-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+        .user-menu-header {
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .user-profile-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .user-avatar-large {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-xl);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-bold);
+            font-size: var(--text-xl);
+        }
+
+        .user-details h3 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .user-email {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
+            margin-bottom: var(--space-2);
+        }
+
+        .user-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-1) var(--space-3);
+            background: var(--success-color);
+            color: var(--white);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: var(--radius-full);
+        }
+
+        .user-menu-section {
+            padding: var(--space-4) 0;
+        }
+
+        .user-menu-section:not(:last-child) {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-6);
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            transition: all var(--transition-fast);
             cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            touch-action: manipulation;
+        }
+
+        .menu-item:hover {
+            background: var(--gray-50);
+            color: var(--primary-color);
+        }
+
+        .menu-item:active {
+            background: var(--gray-100);
+        }
+
+        .menu-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .menu-item-badge {
+            margin-left: auto;
+            background: var(--primary-color);
+            color: var(--white);
+            font-size: var(--text-xs);
+            padding: 2px 6px;
+            border-radius: var(--radius-full);
+        }
+
+        .logout-btn {
+            color: var(--error-color) !important;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: var(--error-color) !important;
+        }
+
+        /* Sidebar Styles */
+        .dashboard-sidebar {
+            width: var(--sidebar-width);
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+            position: fixed;
+            left: 0;
+            top: var(--header-height);
+            bottom: 0;
+            overflow-y: auto;
+            z-index: var(--z-sticky);
+            transition: transform var(--transition-base);
+        }
+
+        .sidebar-content {
+            padding: var(--space-6);
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--space-8);
+        }
+
+        .sidebar-section-title {
+            font-size: var(--text-xs);
+            font-weight: var(--font-semibold);
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-4);
+            padding-left: var(--space-4);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu-item {
+            margin-bottom: var(--space-1);
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: var(--gray-700);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            transition: all var(--transition-fast);
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .sidebar-menu-link:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        .sidebar-menu-link:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-menu-link.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .sidebar-menu-link i {
+            font-size: var(--text-base);
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-badge {
+            margin-left: auto;
+            font-size: var(--text-xs);
+            padding: 2px 6px;
+            border-radius: var(--radius-full);
+            font-weight: var(--font-semibold);
+        }
+
+        .badge-hot {
+            background: transparent;
+        }
+
+        /* Main Content */
+        .dashboard-main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding-top: var(--header-height);
+            min-height: 100vh;
+        }
+
+        .dashboard-content {
+            padding: var(--space-8);
+            max-width: var(--container-max-width);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            margin-bottom: var(--space-8);
+            color: var(--white);
+        }
+
+        .welcome-content h1 {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            margin-bottom: var(--space-2);
+            font-family: var(--font-secondary);
+        }
+
+        .welcome-content p {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--space-8);
+        }
+
+        .section-title h1 {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--gray-900);
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .section-title p {
+            font-size: var(--text-base);
+            color: var(--gray-600);
+        }
+
+        .section-actions {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        /* Button Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            outline: none;
+            white-space: nowrap;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .btn:focus {
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: var(--white);
+            color: var(--gray-700);
+            border: 2px solid var(--gray-200);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card:active {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+            color: var(--white);
+        }
+
+        .stat-icon.primary { background: var(--primary-color); }
+        .stat-icon.success { background: var(--success-color); }
+        .stat-icon.warning { background: var(--warning-color); }
+        .stat-icon.info { background: var(--info-color); }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--gray-900);
+            line-height: 1.2;
+            margin-bottom: var(--space-1);
+        }
+
+        .stat-label {
+            font-size: var(--text-base);
+            color: var(--gray-600);
+            font-weight: var(--font-medium);
+            margin-bottom: var(--space-2);
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        .stat-change.positive { color: var(--success-color); }
+        .stat-change.negative { color: var(--error-color); }
+        .stat-change.neutral { color: var(--gray-500); }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-8);
+            margin-bottom: var(--space-8);
+        }
+
+        .dashboard-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--gray-50);
+        }
+
+        .card-header h2 {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .card-content {
+            padding: var(--space-6);
+        }
+
+        /* Quick Actions Grid */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .quick-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-6);
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            touch-action: manipulation;
+            min-height: 100px;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quick-action-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .quick-action-btn i {
+            font-size: var(--text-2xl);
+        }
+
+        /* Candidates Grid */
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .candidate-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            touch-action: manipulation;
         }
 
         .candidate-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .candidate-card:active {
             transform: translateY(-2px);
-            border-color: var(--startup-primary);
         }
 
         .candidate-header {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
         }
 
         .candidate-avatar {
             width: 60px;
             height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-xl);
+            color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.3rem;
+            font-weight: var(--font-bold);
+            font-size: var(--text-lg);
+            flex-shrink: 0;
+        }
+
+        .candidate-info {
+            flex: 1;
         }
 
         .candidate-info h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1A202C;
-            margin-bottom: 0.25rem;
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
+            margin-bottom: var(--space-1);
         }
 
-        .candidate-info p {
-            color: #64748B;
-            margin-bottom: 0.25rem;
+        .candidate-title {
+            font-size: var(--text-base);
+            color: var(--gray-600);
+            margin-bottom: var(--space-2);
+        }
+
+        .candidate-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            font-size: var(--text-sm);
+            color: var(--gray-500);
+        }
+
+        .candidate-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
         }
 
         .candidate-match-score {
-            background: var(--startup-success);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 600;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .match-percentage {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            color: var(--success-color);
+            line-height: 1;
+        }
+
+        .match-label {
+            font-size: var(--text-sm);
+            color: var(--gray-500);
+            margin-top: var(--space-1);
         }
 
         .candidate-skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
         }
 
         .candidate-skill {
-            background: #F1F5F9;
-            color: #475569;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+            padding: var(--space-1) var(--space-3);
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
         }
 
         .candidate-skill.matched {
-            background: var(--startup-primary);
-            color: white;
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .candidate-details {
+            margin-bottom: var(--space-6);
+        }
+
+        .detail-item {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
+            margin-bottom: var(--space-2);
+        }
+
+        .detail-item strong {
+            color: var(--gray-800);
         }
 
         .candidate-actions {
             display: flex;
-            gap: 0.75rem;
+            gap: var(--space-3);
         }
 
-        .btn-candidate-action {
-            padding: 0.5rem 1rem;
+        .candidate-action-btn {
+            flex: 1;
+        }
+
+        /* Top Candidates List */
+        .candidates-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .top-candidate-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .top-candidate-card:hover {
+            background: var(--gray-100);
+        }
+
+        .top-candidate-card:active {
+            transform: scale(0.98);
+        }
+
+        .candidate-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .candidate-avatar-sm {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-lg);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-semibold);
+            font-size: var(--text-sm);
+        }
+
+        .candidate-quick-info h4 {
+            font-size: var(--text-base);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .candidate-quick-info p {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
+            margin-bottom: var(--space-1);
+        }
+
+        .match-score-sm {
+            font-size: var(--text-xs);
+            color: var(--success-color);
+            font-weight: var(--font-semibold);
+        }
+
+        .candidate-quick-actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
             border: none;
-            border-radius: 0.5rem;
-            font-weight: 500;
+            border-radius: var(--radius-base);
+            background: var(--white);
+            color: var(--gray-600);
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
         }
 
-        .btn-view-profile {
-            background: #F1F5F9;
-            color: #475569;
+        .btn-icon:hover {
+            background: var(--gray-200);
+            color: var(--gray-800);
         }
 
-        .btn-view-profile:hover {
-            background: #E2E8F0;
-            color: #334155;
+        .btn-icon:active {
+            transform: scale(0.95);
         }
 
-        .btn-contact {
-            background: var(--startup-primary);
-            color: white;
+        .btn-icon.primary {
+            background: var(--primary-color);
+            color: var(--white);
         }
 
-        .btn-contact:hover {
-            background: var(--startup-primary-dark);
-            transform: translateY(-1px);
+        .btn-icon.primary:hover {
+            background: var(--primary-dark);
         }
 
-        /* Job Post Cards */
+        /* Pipeline Stages */
+        .pipeline-stages {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            text-align: center;
+            padding: var(--space-4);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            position: relative;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .pipeline-stage:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        .pipeline-stage.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .stage-number {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            margin-bottom: var(--space-2);
+        }
+
+        .stage-label {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        /* Jobs List */
+        .jobs-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
         .job-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            touch-action: manipulation;
         }
 
         .job-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        .job-card:active {
+            transform: translateY(0);
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+            align-items: center;
+            margin-bottom: var(--space-2);
         }
 
         .job-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1A202C;
-            margin-bottom: 0.5rem;
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
         }
 
-        .job-details {
-            display: flex;
-            gap: 1rem;
-            color: #64748B;
-            font-size: 0.9rem;
+        .job-status {
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: var(--font-semibold);
+            background: var(--success-color);
+            color: var(--white);
         }
 
-        .job-stats {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #F1F5F9;
+        .job-meta {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
         }
 
-        .job-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #64748B;
-            font-size: 0.875rem;
-        }
-
-        .job-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-job-action {
-            padding: 0.375rem 0.75rem;
-            border: 1px solid #E2E8F0;
-            border-radius: 0.5rem;
-            background: white;
-            color: #64748B;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.8rem;
-        }
-
-        .btn-job-action:hover {
-            border-color: var(--startup-primary);
-            color: var(--startup-primary);
-        }
-
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .team-member-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 1rem;
-            padding: 1.5rem;
+        /* Empty State */
+        .empty-state {
             text-align: center;
-            transition: all 0.3s ease;
+            padding: var(--space-16);
+            color: var(--gray-500);
         }
 
-        .team-member-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .empty-state i {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-4);
+            opacity: 0.5;
         }
 
-        .team-member-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--startup-primary);
-            color: white;
+        .empty-state h3 {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-2);
+            color: var(--gray-700);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.5rem;
-            margin: 0 auto 1rem;
+            z-index: var(--z-modal);
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
         }
 
-        .team-member-name {
-            font-weight: 600;
-            color: #1A202C;
-            margin-bottom: 0.25rem;
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .team-member-role {
-            color: #64748B;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform var(--transition-base);
+            box-shadow: var(--shadow-xl);
         }
 
-        .team-member-status {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+        .modal-overlay.active .modal {
+            transform: translateY(0);
         }
 
-        .status-active {
-            background: #DCFCE7;
-            color: #166534;
-        }
-
-        .status-away {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        /* Analytics Cards */
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .analytics-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 1rem;
-            padding: 1.5rem;
-        }
-
-        .analytics-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1A202C;
-            margin-bottom: 1rem;
-        }
-
-        .metric-item {
+        .modal-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #F1F5F9;
+            justify-content: space-between;
+            margin-bottom: var(--space-6);
         }
 
-        .metric-item:last-child {
-            border-bottom: none;
+        .modal-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--gray-900);
         }
 
-        .metric-label {
-            color: #64748B;
-            font-size: 0.9rem;
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: var(--radius-base);
+            background: var(--gray-100);
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .metric-value {
-            font-weight: 600;
-            color: #1A202C;
+        .modal-close:hover {
+            background: var(--gray-200);
+            color: var(--gray-800);
         }
 
-        /* Responsive adjustments */
+        .modal-content p {
+            margin-bottom: var(--space-4);
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: flex-end;
+            margin-top: var(--space-6);
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 400px;
+            border-left: 4px solid;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .notification-success { border-left-color: #10B981; color: #065F46; }
+        .notification-error { border-left-color: #EF4444; color: #991B1B; }
+        .notification-warning { border-left-color: #F59E0B; color: #92400E; }
+        .notification-info { border-left-color: #3B82F6; color: #1E40AF; }
+        
+        .notification-content { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            flex: 1; 
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+            opacity: 0.7;
+            padding: 4px;
+            touch-action: manipulation;
+        }
+        
+        .notification-close:hover { opacity: 1; }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .candidates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: flex;
+            }
+            
+            .dashboard-sidebar {
+                transform: translateX(-100%);
+                z-index: var(--z-overlay);
+            }
+            
+            .dashboard-sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .dashboard-main {
+                margin-left: 0;
+            }
+            
+            .dashboard-header-content {
+                padding: 0 var(--space-4);
+            }
+            
+            .header-search {
+                margin: 0 var(--space-4);
+                max-width: none;
+            }
+            
+            .dashboard-content {
+                padding: var(--space-4);
+            }
+            
+            .welcome-section {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-6);
+            }
+            
+            .section-header {
+                flex-direction: column;
+                gap: var(--space-4);
+                align-items: stretch;
+            }
+            
+            .section-actions {
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+            
+            .section-actions .btn {
+                flex: 1;
+                min-width: 140px;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .candidates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-stages {
+                flex-direction: column;
+            }
+
+            .pipeline-stage {
+                padding: var(--space-3);
+            }
+
+            .user-menu {
+                width: 300px;
+                right: -var(--space-4);
+            }
+
+            .mobile-overlay {
+                display: block;
+            }
+
+            /* Touch-friendly improvements */
+            .btn {
+                min-height: 48px;
+                padding: var(--space-4) var(--space-6);
+            }
+
+            .sidebar-menu-link {
+                padding: var(--space-4);
+                font-size: var(--text-base);
+            }
+
+            .menu-item {
+                padding: var(--space-4) var(--space-6);
+                font-size: var(--text-base);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .welcome-section {
+                padding: var(--space-6);
+            }
+            
+            .welcome-content h1 {
+                font-size: var(--text-2xl);
+            }
+
+            .dashboard-content {
+                padding: var(--space-3);
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: var(--space-3);
+                align-items: stretch;
+            }
+
             .candidate-header {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
+                align-items: center;
+                text-align: center;
             }
-            
+
             .candidate-actions {
-                width: 100%;
-                justify-content: stretch;
-            }
-            
-            .btn-candidate-action {
-                flex: 1;
-            }
-            
-            .job-header {
                 flex-direction: column;
-                gap: 1rem;
             }
-            
-            .job-actions {
-                width: 100%;
+
+            .modal {
+                width: 95%;
+                padding: var(--space-6);
             }
-            
-            .btn-job-action {
-                flex: 1;
+
+            .header-actions {
+                gap: var(--space-2);
             }
+
+            .user-menu {
+                width: 280px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animate-fadeIn { 
+            animation: fadeIn 0.5s ease-out; 
+        }
+        
+        .animate-slideIn { 
+            animation: slideIn 0.3s ease-out; 
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .visible { display: block !important; }
+        .text-center { text-align: center !important; }
+        .font-bold { font-weight: var(--font-bold) !important; }
+        .text-primary { color: var(--primary-color) !important; }
+        .text-success { color: var(--success-color) !important; }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            :root {
+                --gray-200: #D1D5DB;
+                --gray-300: #9CA3AF;
+                --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+                --shadow-base: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+                --shadow-lg: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Focus visible for better keyboard navigation */
+        .btn:focus-visible,
+        .sidebar-menu-link:focus-visible,
+        .menu-item:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
         }
     </style>
 </head>
+
 <body class="dashboard-body startup-dashboard">
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading Dashboard...</p>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()"></div>
+
     <!-- Dashboard Header -->
     <header class="dashboard-header">
         <div class="dashboard-header-content">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <div class="header-left">
+                <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="dashboard-logo">
-                    <a href="index.html">
-                        <i class="fas fa-network-wired"></i>
-                        <span>SkillSync AI</span>
+                    <a href="index.html" onclick="showSection('dashboard')">
+                        <div class="logo-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <span class="logo-text">SkillSync AI</span>
                     </a>
                 </div>
             </div>
             
-            <!-- Header Search -->
+            <!-- Enhanced Search -->
             <div class="header-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search candidates, skills, projects..." id="headerSearch">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" 
+                           placeholder="Search candidates, skills, projects..." 
+                           id="headerSearch"
+                           class="search-input">
+                </div>
             </div>
             
             <!-- Header Actions -->
             <div class="header-actions">
-                <!-- Notifications -->
-                <div class="notification-bell" onclick="toggleNotifications()">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">2</span>
-                    <div class="notification-dropdown">
-                        <div class="notification-header">
-                            <h3>Notifications</h3>
-                            <button class="mark-all-read">Mark all as read</button>
-                        </div>
-                        <div class="notifications-list">
-                            <div class="notification-item unread">
-                                <div class="notification-icon" style="background: #10B981; color: white;">
-                                    <i class="fas fa-user-plus"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <div class="notification-title">New Candidate Applied!</div>
-                                    <div class="notification-message">Priya Kumar applied for Frontend Developer position</div>
-                                    <div class="notification-time">5 minutes ago</div>
-                                </div>
-                            </div>
-                            <div class="notification-item unread">
-                                <div class="notification-icon" style="background: #3B82F6; color: white;">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <div class="notification-title">Perfect Match Found</div>
-                                    <div class="notification-message">95% match candidate available for your ML Engineer role</div>
-                                    <div class="notification-time">30 minutes ago</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Quick Actions -->
+                <div class="quick-action-item" onclick="showSection('candidates')" title="Find Candidates">
+                    <i class="fas fa-users"></i>
                 </div>
                 
-                <!-- User Menu -->
-                <div class="user-menu-toggle" onclick="toggleUserMenu()">
-                    <div class="user-avatar">
-                        <span>T</span>
-                    </div>
-                    <div class="user-info">
-                        <div class="user-name">TechStart Inc.</div>
-                        <div class="user-type">Startup</div>
-                    </div>
-                    <i class="fas fa-chevron-down"></i>
-                    
-                    <div class="user-menu">
+                <!-- Enhanced User Menu -->
+                <div class="user-menu-container" id="userMenuContainer">
+                    <button class="user-menu-toggle" onclick="toggleUserMenu()" aria-label="User Menu">
+                        <div class="user-avatar">
+                            <span>T</span>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">TechStart Inc.</div>
+                            <div class="user-type">Startup</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                    <!-- Enhanced User Dropdown Menu -->
+                    <div class="user-menu" id="userMenu">
                         <div class="user-menu-header">
-                            <div class="user-avatar-large">T</div>
-                            <div class="user-details">
-                                <div class="user-name">TechStart Inc.</div>
-                                <div class="user-email">founder@techstart.com</div>
+                            <div class="user-profile-info">
+                                <div class="user-avatar-large">
+                                    <span>T</span>
+                                </div>
+                                <div class="user-details">
+                                    <h3>TechStart Inc.</h3>
+                                    <div class="user-email">founder@techstart.com</div>
+                                    <div class="user-status">
+                                        <div class="status-indicator"></div>
+                                        <span>Active</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="user-menu-items">
-                            <a href="#company-profile" class="menu-item" onclick="showSection('company-profile')">
-                                <i class="fas fa-building"></i>
-                                <span>Company Profile</span>
-                            </a>
-                            <a href="#candidates" class="menu-item" onclick="showSection('candidates')">
-                                <i class="fas fa-users"></i>
-                                <span>Candidates</span>
-                            </a>
-                            <a href="chat.html" class="menu-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>Messages</span>
-                            </a>
-                            <a href="#settings" class="menu-item">
+
+                        <!-- Profile Section -->
+                        <div class="user-menu-section">
+                            <button class="menu-item" onclick="showProfile()">
+                                <i class="fas fa-user"></i>
+                                <span>My Profile</span>
+                            </button>
+                            <button class="menu-item" onclick="window.location.href='company-setting.html'">
+    <i class="fas fa-building"></i>
+    <span>Company Settings</span>
+</button>
+
+<!-- Billing & Plans Button -->
+<button class="menu-item" onclick="window.location.href='billing-pla.html'">
+    <i class="fas fa-credit-card"></i>
+    <span>Billing & Plans</span>
+    <span class="menu-item-badge">Pro</span>
+</button>
+                        </div>
+
+                        <!-- Activity Section -->
+                        <div class="user-menu-section">
+                           <a href="danalytics.html" class="menu-item">
+  <i class="fas fa-chart-bar"></i>
+  <span>Analytics</span>
+</a>
+
+                             <button class="menu-item" onclick="window.location.href='recent.html'">
+    <i class="fas fa-calendar-alt"></i>
+    <span>Recent Activity</span>
+</button>
+                            
+                        </div>
+
+                        <!-- Settings & Help Section -->
+                        <div class="user-menu-section">
+                            <button class="menu-item" onclick="window.location.href='startup setting.html'">
                                 <i class="fas fa-cog"></i>
                                 <span>Settings</span>
-                            </a>
-                            <div class="menu-divider"></div>
-                            <button class="menu-item logout-btn" onclick="handleLogout()">
+                            </button>
+                            <button class="menu-item" onclick="window.location.href='help&support.html'">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help & Support</span>
+                            </button>
+                            <button class="menu-item" onclick="showKeyboardShortcuts()">
+                                <i class="fas fa-keyboard"></i>
+                                <span>Keyboard Shortcuts</span>
+                            </button>
+                        </div>
+
+                        <!-- Logout Section -->
+                        <div class="user-menu-section">
+                            <button class="menu-item logout-btn" onclick="confirmLogout()">
                                 <i class="fas fa-sign-out-alt"></i>
-                                <span>Logout</span>
+                                <span>Sign Out</span>
                             </button>
                         </div>
                     </div>
@@ -543,10 +1759,9 @@
 
     <!-- Dashboard Layout -->
     <div class="dashboard-layout">
-        <!-- Sidebar -->
+        <!-- Enhanced Sidebar -->
         <aside class="dashboard-sidebar" id="dashboardSidebar">
             <div class="sidebar-content">
-                <!-- Main Navigation -->
                 <nav class="sidebar-nav">
                     <div class="sidebar-section">
                         <div class="sidebar-section-title">Main Menu</div>
@@ -571,19 +1786,6 @@
                                 </a>
                             </li>
                             <li class="sidebar-menu-item">
-                                <a href="#company-profile" class="sidebar-menu-link" onclick="showSection('company-profile')">
-                                    <i class="fas fa-building"></i>
-                                    <span>Company Profile</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-menu-item">
-                                <a href="chat.html" class="sidebar-menu-link">
-                                    <i class="fas fa-comments"></i>
-                                    <span>Messages</span>
-                                    <span class="menu-badge badge-new">3</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-menu-item">
                                 <a href="#interviews" class="sidebar-menu-link" onclick="showSection('interviews')">
                                     <i class="fas fa-video"></i>
                                     <span>Interviews</span>
@@ -596,7 +1798,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-menu-item">
-                                <a href="#analytics" class="sidebar-menu-link" onclick="showSection('analytics')">
+                                <a href="danalytics.html" class="sidebar-menu-link" onclick="showSection('analytics')">
                                     <i class="fas fa-chart-line"></i>
                                     <span>Analytics</span>
                                 </a>
@@ -605,24 +1807,18 @@
                     </div>
 
                     <div class="sidebar-section">
-                        <div class="sidebar-section-title">Tools</div>
+                        <div class="sidebar-section-title">AI Tools</div>
                         <ul class="sidebar-menu">
                             <li class="sidebar-menu-item">
-                                <a href="#ai-insights" class="sidebar-menu-link" onclick="showSection('ai-insights')">
+                                <a href="ai-insights.html" class="sidebar-menu-link" onclick="showSection('ai-insights')">
                                     <i class="fas fa-brain"></i>
                                     <span>AI Insights</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item">
-                                <a href="#skill-tests" class="sidebar-menu-link">
+                                <a href="skill-tests.html" class="sidebar-menu-link">
                                     <i class="fas fa-clipboard-check"></i>
                                     <span>Skill Assessments</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-menu-item">
-                                <a href="#reports" class="sidebar-menu-link">
-                                    <i class="fas fa-chart-bar"></i>
-                                    <span>Reports</span>
                                 </a>
                             </li>
                         </ul>
@@ -638,18 +1834,26 @@
                 <div class="dashboard-content">
                     <!-- Welcome Section -->
                     <div class="welcome-section">
-                        <h1>Welcome to TechStart Inc. Dashboard! 🚀</h1>
-                        <p>Manage your hiring pipeline and find the best talent for your startup.</p>
+                        <div class="welcome-content">
+                            <h1>Welcome to TechStart Inc. Dashboard! 🚀</h1>
+                            <p>Streamline your hiring process with AI-powered candidate matching and analytics.</p>
+                        </div>
+                        <div class="welcome-actions">
+                            <button class="btn btn-primary" onclick="showSection('candidates')">
+                                <i class="fas fa-search"></i>
+                                Find Candidates
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Quick Stats -->
+                    <!-- Enhanced Stats Grid -->
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card" data-stat="candidates">
                             <div class="stat-icon primary">
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="stat-content">
-                                <div class="stat-value" data-count="45">0</div>
+                                <div class="stat-value" id="candidatesCount">0</div>
                                 <div class="stat-label">Active Candidates</div>
                                 <div class="stat-change positive">
                                     <i class="fas fa-arrow-up"></i>
@@ -658,12 +1862,12 @@
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" data-stat="jobs">
                             <div class="stat-icon success">
                                 <i class="fas fa-briefcase"></i>
                             </div>
                             <div class="stat-content">
-                                <div class="stat-value" data-count="8">0</div>
+                                <div class="stat-value" id="jobsCount">0</div>
                                 <div class="stat-label">Open Positions</div>
                                 <div class="stat-change neutral">
                                     <i class="fas fa-minus"></i>
@@ -672,12 +1876,12 @@
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" data-stat="interviews">
                             <div class="stat-icon warning">
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <div class="stat-content">
-                                <div class="stat-value" data-count="12">0</div>
+                                <div class="stat-value" id="interviewsCount">0</div>
                                 <div class="stat-label">Interviews Scheduled</div>
                                 <div class="stat-change positive">
                                     <i class="fas fa-arrow-up"></i>
@@ -686,12 +1890,12 @@
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" data-stat="offers">
                             <div class="stat-icon info">
                                 <i class="fas fa-user-check"></i>
                             </div>
                             <div class="stat-content">
-                                <div class="stat-value" data-count="3">0</div>
+                                <div class="stat-value" id="offersCount">0</div>
                                 <div class="stat-label">Offers Extended</div>
                                 <div class="stat-change positive">
                                     <i class="fas fa-arrow-up"></i>
@@ -701,17 +1905,22 @@
                         </div>
                     </div>
 
-                    <!-- Main Dashboard Grid -->
+                    <!-- Dashboard Grid -->
                     <div class="dashboard-grid">
-                        <!-- Top Candidates -->
+                        <!-- Top Candidates Card -->
                         <div class="dashboard-card candidates-card">
                             <div class="card-header">
-                                <h2>Top Matched Candidates</h2>
-                                <a href="#candidates" class="btn-link" onclick="showSection('candidates')">View All</a>
+                                <h2>
+                                    <i class="fas fa-star"></i>
+                                    Top Matched Candidates
+                                </h2>
+                                <button class="btn btn-outline" onclick="showSection('candidates')">
+                                    View All
+                                </button>
                             </div>
                             <div class="card-content">
                                 <div class="candidates-list" id="topCandidatesList">
-                                    <!-- Candidate cards will be inserted here -->
+                                    <!-- Top candidates will be loaded here -->
                                 </div>
                             </div>
                         </div>
@@ -719,54 +1928,35 @@
                         <!-- Hiring Pipeline -->
                         <div class="dashboard-card pipeline-card">
                             <div class="card-header">
-                                <h2>Hiring Pipeline</h2>
-                                <button class="btn-card-action" onclick="showSection('candidates')">View Details</button>
+                                <h2>
+                                    <i class="fas fa-filter"></i>
+                                    Hiring Pipeline
+                                </h2>
+                                <button class="btn btn-outline" onclick="showPipelineDetails()">
+                                    View Details
+                                </button>
                             </div>
                             <div class="card-content">
-                                <div class="pipeline-stages">
-                                    <div class="pipeline-stage">
-                                        <div class="stage-header">
-                                            <span class="stage-name">Applied</span>
-                                            <span class="stage-count">45</span>
-                                        </div>
-                                        <div class="stage-progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 100%"></div>
-                                            </div>
-                                        </div>
+                                <div class="pipeline-stages" id="pipelineStages">
+                                    <div class="pipeline-stage active">
+                                        <div class="stage-number">45</div>
+                                        <div class="stage-label">Applied</div>
                                     </div>
                                     <div class="pipeline-stage">
-                                        <div class="stage-header">
-                                            <span class="stage-name">Screening</span>
-                                            <span class="stage-count">28</span>
-                                        </div>
-                                        <div class="stage-progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 62%"></div>
-                                            </div>
-                                        </div>
+                                        <div class="stage-number">28</div>
+                                        <div class="stage-label">Screening</div>
                                     </div>
                                     <div class="pipeline-stage">
-                                        <div class="stage-header">
-                                            <span class="stage-name">Interview</span>
-                                            <span class="stage-count">12</span>
-                                        </div>
-                                        <div class="stage-progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 27%"></div>
-                                            </div>
-                                        </div>
+                                        <div class="stage-number">12</div>
+                                        <div class="stage-label">Interview</div>
                                     </div>
                                     <div class="pipeline-stage">
-                                        <div class="stage-header">
-                                            <span class="stage-name">Offer</span>
-                                            <span class="stage-count">3</span>
-                                        </div>
-                                        <div class="stage-progress">
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 7%"></div>
-                                            </div>
-                                        </div>
+                                        <div class="stage-number">5</div>
+                                        <div class="stage-label">Final</div>
+                                    </div>
+                                    <div class="pipeline-stage">
+                                        <div class="stage-number">3</div>
+                                        <div class="stage-label">Offer</div>
                                     </div>
                                 </div>
                             </div>
@@ -775,72 +1965,18 @@
                         <!-- Active Job Posts -->
                         <div class="dashboard-card jobs-card">
                             <div class="card-header">
-                                <h2>Active Job Posts</h2>
-                                <button class="btn-card-action" onclick="createNewJob()">+ Post New Job</button>
+                                <h2>
+                                    <i class="fas fa-briefcase"></i>
+                                    Active Job Posts
+                                </h2>
+                                <button class="btn btn-primary" onclick="createNewJob()">
+                                    <i class="fas fa-plus"></i>
+                                    Post New Job
+                                </button>
                             </div>
                             <div class="card-content">
-                                <div class="jobs-list">
-                                    <div class="job-card">
-                                        <div class="job-header">
-                                            <div>
-                                                <div class="job-title">Full Stack Developer</div>
-                                                <div class="job-details">
-                                                    <span><i class="fas fa-map-marker-alt"></i> Remote</span>
-                                                    <span><i class="fas fa-rupee-sign"></i> ₹80k-120k</span>
-                                                    <span><i class="fas fa-clock"></i> Full-time</span>
-                                                </div>
-                                            </div>
-                                            <div class="job-actions">
-                                                <button class="btn-job-action">Edit</button>
-                                                <button class="btn-job-action">View</button>
-                                            </div>
-                                        </div>
-                                        <div class="job-stats">
-                                            <div class="job-stat">
-                                                <i class="fas fa-users"></i>
-                                                <span>23 candidates</span>
-                                            </div>
-                                            <div class="job-stat">
-                                                <i class="fas fa-eye"></i>
-                                                <span>156 views</span>
-                                            </div>
-                                            <div class="job-stat">
-                                                <i class="fas fa-calendar"></i>
-                                                <span>Posted 3 days ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="job-card">
-                                        <div class="job-header">
-                                            <div>
-                                                <div class="job-title">UI/UX Designer</div>
-                                                <div class="job-details">
-                                                    <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
-                                                    <span><i class="fas fa-rupee-sign"></i> ₹60k-90k</span>
-                                                    <span><i class="fas fa-clock"></i> Contract</span>
-                                                </div>
-                                            </div>
-                                            <div class="job-actions">
-                                                <button class="btn-job-action">Edit</button>
-                                                <button class="btn-job-action">View</button>
-                                            </div>
-                                        </div>
-                                        <div class="job-stats">
-                                            <div class="job-stat">
-                                                <i class="fas fa-users"></i>
-                                                <span>15 candidates</span>
-                                            </div>
-                                            <div class="job-stat">
-                                                <i class="fas fa-eye"></i>
-                                                <span>89 views</span>
-                                            </div>
-                                            <div class="job-stat">
-                                                <i class="fas fa-calendar"></i>
-                                                <span>Posted 1 week ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="jobs-list" id="activeJobsList">
+                                    <!-- Job cards will be loaded here -->
                                 </div>
                             </div>
                         </div>
@@ -848,10 +1984,13 @@
                         <!-- Quick Actions -->
                         <div class="dashboard-card actions-card">
                             <div class="card-header">
-                                <h2>Quick Actions</h2>
+                                <h2>
+                                    <i class="fas fa-bolt"></i>
+                                    Quick Actions
+                                </h2>
                             </div>
                             <div class="card-content">
-                                <div class="quick-actions">
+                                <div class="quick-actions-grid">
                                     <button class="quick-action-btn" onclick="showSection('candidates')">
                                         <i class="fas fa-search"></i>
                                         <span>Find Candidates</span>
@@ -860,7 +1999,7 @@
                                         <i class="fas fa-plus"></i>
                                         <span>Post New Job</span>
                                     </button>
-                                    <button class="quick-action-btn" onclick="showSection('interviews')">
+                                    <button class="quick-action-btn" onclick="scheduleInterview()">
                                         <i class="fas fa-video"></i>
                                         <span>Schedule Interview</span>
                                     </button>
@@ -879,41 +2018,57 @@
             <div id="candidates" class="content-section">
                 <div class="dashboard-content">
                     <div class="section-header">
-                        <h1>Candidate Pool</h1>
+                        <div class="section-title">
+                            <h1>
+                                <i class="fas fa-users"></i>
+                                Candidate Pool
+                            </h1>
+                            <p>Manage and discover top talent for your startup</p>
+                        </div>
                         <div class="section-actions">
-                            <button class="btn-filter">
+                            <button class="btn btn-outline" onclick="showFilters()">
                                 <i class="fas fa-filter"></i>
-                                <span>Filter</span>
+                                Filter
                             </button>
-                            <button class="btn-sort">
+                            <button class="btn btn-outline" onclick="toggleSort()">
                                 <i class="fas fa-sort"></i>
-                                <span>Sort by Match Score</span>
+                                Sort by Match
                             </button>
-                            <button class="btn-primary">
-                                <i class="fas fa-search"></i>
-                                <span>AI Search</span>
+                            <button class="btn btn-primary" onclick="aiSearch()">
+                                <i class="fas fa-brain"></i>
+                                AI Search
                             </button>
                         </div>
                     </div>
+                    
                     <div class="candidates-grid" id="candidatesContainer">
-                        <!-- Candidate cards will be inserted here -->
+                        <!-- Candidate cards will be loaded here -->
                     </div>
                 </div>
             </div>
 
-            <!-- Other sections would be similar placeholders... -->
+            <!-- Other Sections -->
             <div id="jobs" class="content-section">
                 <div class="dashboard-content">
                     <div class="section-header">
-                        <h1>Job Management</h1>
-                        <button class="btn-primary" onclick="createNewJob()">
+                        <div class="section-title">
+                            <h1>
+                                <i class="fas fa-briefcase"></i>
+                                Job Management
+                            </h1>
+                            <p>Create and manage your job postings</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="createNewJob()">
                             <i class="fas fa-plus"></i>
-                            <span>Create New Job</span>
+                            Create New Job
                         </button>
                     </div>
-                    <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #E2E8F0;">
-                        <h2>Job posting management coming soon...</h2>
-                        <p>This section will contain job creation and management tools.</p>
+                    <div id="jobsContainer" class="jobs-container">
+                        <div class="empty-state">
+                            <i class="fas fa-briefcase"></i>
+                            <h3>No active job posts</h3>
+                            <p>Create your first job post to start finding candidates</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -921,30 +2076,23 @@
             <div id="team" class="content-section">
                 <div class="dashboard-content">
                     <div class="section-header">
-                        <h1>Team Management</h1>
-                        <button class="btn-primary">
+                        <div class="section-title">
+                            <h1>
+                                <i class="fas fa-user-friends"></i>
+                                Team Management
+                            </h1>
+                            <p>Manage your startup team members</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="addTeamMember()">
                             <i class="fas fa-user-plus"></i>
-                            <span>Add Team Member</span>
+                            Add Team Member
                         </button>
                     </div>
-                    <div class="team-grid">
-                        <div class="team-member-card">
-                            <div class="team-member-avatar">AK</div>
-                            <div class="team-member-name">Arjun Kumar</div>
-                            <div class="team-member-role">Founder & CEO</div>
-                            <div class="team-member-status status-active">Active</div>
-                        </div>
-                        <div class="team-member-card">
-                            <div class="team-member-avatar">PS</div>
-                            <div class="team-member-name">Priya Kumar</div>
-                            <div class="team-member-role">CTO</div>
-                            <div class="team-member-status status-active">Active</div>
-                        </div>
-                        <div class="team-member-card">
-                            <div class="team-member-avatar">RG</div>
-                            <div class="team-member-name">Ayush Gupta</div>
-                            <div class="team-member-role">Lead Developer</div>
-                            <div class="team-member-status status-away">Away</div>
+                    <div class="team-grid" id="teamContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-user-friends"></i>
+                            <h3>Build your team</h3>
+                            <p>Add team members to collaborate on hiring</p>
                         </div>
                     </div>
                 </div>
@@ -953,39 +2101,44 @@
             <div id="analytics" class="content-section">
                 <div class="dashboard-content">
                     <div class="section-header">
-                        <h1>Analytics & Insights</h1>
-                    </div>
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <h3>Hiring Metrics</h3>
-                            <div class="metric-item">
-                                <span class="metric-label">Time to Hire</span>
-                                <span class="metric-value">12 days</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Cost per Hire</span>
-                                <span class="metric-value">₹15,000</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Offer Acceptance Rate</span>
-                                <span class="metric-value">85%</span>
-                            </div>
+                        <div class="section-title">
+                            <h1>
+                                <i class="fas fa-chart-line"></i>
+                                Analytics & Insights
+                            </h1>
+                            <p>Track your hiring performance and metrics</p>
                         </div>
+                    </div>
+                    <div class="analytics-grid" id="analyticsContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analytics Coming Soon</h3>
+                            <p>Comprehensive hiring analytics will be available soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="analytics-card">
-                            <h3>Source Performance</h3>
-                            <div class="metric-item">
-                                <span class="metric-label">SkillSync AI</span>
-                                <span class="metric-value">65%</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Direct Applications</span>
-                                <span class="metric-value">25%</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Referrals</span>
-                                <span class="metric-value">10%</span>
-                            </div>
+            <div id="interviews" class="content-section">
+                <div class="dashboard-content">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <h1>
+                                <i class="fas fa-video"></i>
+                                Interview Management
+                            </h1>
+                            <p>Schedule and manage candidate interviews</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="scheduleInterview()">
+                            <i class="fas fa-plus"></i>
+                            Schedule Interview
+                        </button>
+                    </div>
+                    <div class="interviews-grid" id="interviewsContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-video"></i>
+                            <h3>No scheduled interviews</h3>
+                            <p>Schedule interviews with your top candidates</p>
                         </div>
                     </div>
                 </div>
@@ -993,351 +2146,808 @@
         </main>
     </div>
 
-    <!-- Scripts -->
+    <!-- Logout Confirmation Modal -->
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Sign Out</h3>
+                <button class="modal-close" onclick="closeLogoutModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <p>Are you sure you want to sign out of your TechStart Inc. account?</p>
+                <p>You'll need to sign in again to access your dashboard.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeLogoutModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="performLogout()" style="background: var(--error-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMBEDDED JAVASCRIPT -->
     <script>
-        // Global state for startup dashboard
-        let currentSection = 'dashboard';
-        let sidebarOpen = false;
-
-        // Initialize startup dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🏢 Startup Dashboard Loaded');
-            
-            // Load demo data
-            loadDemoCandidates();
-            animateCounters();
-            
-            // Setup interactions
-            setupStartupInteractions();
-            
-            // Auto-close dropdowns when clicking outside
-            document.addEventListener('click', closeDropdowns);
-        });
-
-        // Load demo candidates
-        function loadDemoCandidates() {
-            const demoCandidates = [
-                {
-                    id: 1,
-                    name: "Ayush Kumar",
-                    title: "Full Stack Developer",
-                    location: "Remote",
-                    experience: "3 years",
-                    matchScore: 95,
-                    skills: ["React", "Node.js", "AWS", "MongoDB"],
-                    matchingSkills: ["React", "Node.js", "AWS"],
-                    availability: "Immediately",
-                    expectedSalary: "₹80k-100k"
-                },
-                {
-                    id: 2,
-                    name: "Priya Patel",
-                    title: "UI/UX Designer",
-                    location: "Bangalore",
-                    experience: "2 years",
-                    matchScore: 88,
-                    skills: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
-                    matchingSkills: ["Figma", "Sketch"],
-                    availability: "2 weeks notice",
-                    expectedSalary: "₹60k-80k"
-                },
-                {
-                    id: 3,
-                    name: "Amit Kumar",
-                    title: "Backend Developer",
-                    location: "Delhi",
-                    experience: "4 years",
-                    matchScore: 82,
-                    skills: ["Python", "Django", "PostgreSQL", "Redis"],
-                    matchingSkills: ["Python", "Django"],
-                    availability: "1 month notice",
-                    expectedSalary: "₹90k-120k"
-                }
-            ];
-
-            // Add to candidates containers
-            const topCandidatesList = document.getElementById('topCandidatesList');
-            const candidatesContainer = document.getElementById('candidatesContainer');
-            
-            demoCandidates.forEach((candidate, index) => {
-                // Add to main candidates grid
-                if (candidatesContainer) {
-                    const candidateCard = createCandidateCard(candidate);
-                    candidatesContainer.appendChild(candidateCard);
-                }
-                
-                // Add to top candidates (first 2 only)
-                if (index < 2 && topCandidatesList) {
-                    const topCandidateCard = createTopCandidateCard(candidate);
-                    topCandidatesList.appendChild(topCandidateCard);
-                }
-            });
-        }
-
-        // Create full candidate card
-        function createCandidateCard(candidate) {
-            const card = document.createElement('div');
-            card.className = 'candidate-card';
-            card.innerHTML = `
-                <div class="candidate-header">
-                    <div class="candidate-avatar">
-                        <span>${candidate.name.charAt(0)}</span>
-                    </div>
-                    <div class="candidate-info">
-                        <h3>${candidate.name}</h3>
-                        <p>${candidate.title}</p>
-                        <p><i class="fas fa-map-marker-alt"></i> ${candidate.location} • ${candidate.experience} experience</p>
-                    </div>
-                    <div class="candidate-match-score">
-                        ${candidate.matchScore}% Match
-                    </div>
-                </div>
-                <div class="candidate-skills">
-                    ${candidate.skills.map(skill => {
-                        const isMatched = candidate.matchingSkills.includes(skill);
-                        return `<span class="candidate-skill ${isMatched ? 'matched' : ''}">${skill}</span>`;
-                    }).join('')}
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <p><strong>Availability:</strong> ${candidate.availability}</p>
-                    <p><strong>Expected Salary:</strong> ${candidate.expectedSalary}</p>
-                </div>
-                <div class="candidate-actions">
-                    <button class="btn-candidate-action btn-view-profile" onclick="viewCandidateProfile(${candidate.id})">
-                        <i class="fas fa-eye"></i>
-                        <span>View Profile</span>
-                    </button>
-                    <button class="btn-candidate-action btn-contact" onclick="contactCandidate(${candidate.id})">
-                        <i class="fas fa-envelope"></i>
-                        <span>Contact</span>
-                    </button>
-                </div>
-            `;
-            return card;
-        }
-
-        // Create top candidate card (simplified)
-        function createTopCandidateCard(candidate) {
-            const card = document.createElement('div');
-            card.className = 'candidate-card';
-            card.style.marginBottom = '1rem';
-            card.innerHTML = `
-                <div class="candidate-header">
-                    <div class="candidate-avatar">
-                        <span>${candidate.name.charAt(0)}</span>
-                    </div>
-                    <div class="candidate-info">
-                        <h3>${candidate.name}</h3>
-                        <p>${candidate.title}</p>
-                    </div>
-                    <div class="candidate-match-score">
-                        ${candidate.matchScore}%
-                    </div>
-                </div>
-                <div class="candidate-actions">
-                    <button class="btn-candidate-action btn-view-profile" onclick="viewCandidateProfile(${candidate.id})">View</button>
-                    <button class="btn-candidate-action btn-contact" onclick="contactCandidate(${candidate.id})">Contact</button>
-                </div>
-            `;
-            return card;
-        }
-
-        // Handle candidate actions
-        function viewCandidateProfile(candidateId) {
-            if (window.showNotification) {
-                window.showNotification('📋 Opening candidate profile...', 'info');
+        // Global Application State
+        const AppState = {
+            currentSection: 'dashboard',
+            isLoading: false,
+            candidates: [],
+            jobs: [],
+            userMenuOpen: false,
+            sidebarOpen: false,
+            sessionActive: true,
+            currentUser: {
+                id: 'startup_001',
+                name: 'TechStart Inc.',
+                email: 'founder@techstart.com',
+                type: 'startup',
+                avatar: 'T',
+                plan: 'professional',
+                lastActivity: new Date()
             }
-            console.log('Viewing candidate profile:', candidateId);
-        }
+        };
 
-        function contactCandidate(candidateId) {
-            if (window.showNotification) {
-                window.showNotification('💬 Opening chat with candidate...', 'success');
-            }
-            setTimeout(() => {
-                window.location.href = 'chat.html';
-            }, 1000);
-        }
+        // Enhanced Utility Functions
+        const Utils = {
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            },
 
-        function createNewJob() {
-            if (window.showNotification) {
-                window.showNotification('📝 Opening job creation form...', 'info');
-            }
-            console.log('Creating new job post');
-        }
-
-        // Setup startup-specific interactions
-        function setupStartupInteractions() {
-            // Header search
-            const headerSearch = document.getElementById('headerSearch');
-            if (headerSearch) {
-                headerSearch.addEventListener('input', function(e) {
-                    const query = e.target.value.toLowerCase();
-                    console.log('🔍 Searching candidates for:', query);
-                    // In real app, this would filter candidates
-                });
-            }
-        }
-
-        // Animate counters
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-value[data-count]');
-            counters.forEach(counter => {
-                const target = parseInt(counter.dataset.count);
-                let current = 0;
-                const increment = target / 50;
+            animateCounter(element, target, duration = 1500) {
+                let start = 0;
+                const increment = target / (duration / 16);
                 
                 const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
+                    start += increment;
+                    if (start >= target) {
+                        start = target;
                         clearInterval(timer);
                     }
-                    counter.textContent = Math.floor(current);
-                }, 20);
-            });
-        }
+                    element.textContent = Math.floor(start);
+                }, 16);
+            },
 
-        // Navigation functions (reuse from student dashboard)
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            },
+
+            showNotification(message, type = 'info', duration = 4000) {
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    error: 'fas fa-exclamation-circle',
+                    warning: 'fas fa-exclamation-triangle',
+                    info: 'fas fa-info-circle'
+                };
+                
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <i class="${icons[type]}"></i>
+                        <span>${message}</span>
+                    </div>
+                    <button class="notification-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                }, duration);
+                
+                return notification;
+            },
+
+            storage: {
+                set(key, value) {
+                    try {
+                        localStorage.setItem(key, JSON.stringify(value));
+                    } catch (error) {
+                        console.error('Failed to save to localStorage:', error);
+                    }
+                },
+                
+                get(key, defaultValue = null) {
+                    try {
+                        const item = localStorage.getItem(key);
+                        return item ? JSON.parse(item) : defaultValue;
+                    } catch (error) {
+                        console.error('Failed to read from localStorage:', error);
+                        return defaultValue;
+                    }
+                },
+                
+                remove(key) {
+                    localStorage.removeItem(key);
+                }
+            }
+        };
+
+        // Enhanced Dashboard Controller
+        const DashboardController = {
+            init() {
+                console.log('🚀 Initializing SkillSync Dashboard v2.1.0');
+                this.setupEventListeners();
+                this.loadDashboardData();
+                this.hideLoader();
+            },
+
+            setupEventListeners() {
+                document.addEventListener('click', this.handleGlobalClick.bind(this));
+                
+                const searchInput = document.getElementById('headerSearch');
+                if (searchInput) {
+                    searchInput.addEventListener('input', 
+                        Utils.debounce(this.handleSearch.bind(this), 300)
+                    );
+                }
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (event) => {
+                    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+                        event.preventDefault();
+                        const searchInput = document.getElementById('headerSearch');
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }
+
+                    if (event.key === 'Escape') {
+                        closeUserMenu();
+                        closeSidebar();
+                        closeLogoutModal();
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768 && AppState.sidebarOpen) {
+                        closeSidebar();
+                    }
+                });
+            },
+
+            async loadDashboardData() {
+                try {
+                    AppState.isLoading = true;
+                    
+                    await Promise.all([
+                        CandidateManager.loadCandidates(),
+                        JobManager.loadJobs()
+                    ]);
+                    
+                    this.animateStats();
+                    console.log('📊 Dashboard data loaded successfully');
+                } catch (error) {
+                    console.error('Failed to load dashboard data:', error);
+                    Utils.showNotification('Failed to load dashboard data', 'error');
+                } finally {
+                    AppState.isLoading = false;
+                }
+            },
+
+            animateStats() {
+                const stats = [
+                    { id: 'candidatesCount', value: 45 },
+                    { id: 'jobsCount', value: 8 },
+                    { id: 'interviewsCount', value: 12 },
+                    { id: 'offersCount', value: 3 }
+                ];
+
+                stats.forEach(stat => {
+                    const element = document.getElementById(stat.id);
+                    if (element) {
+                        Utils.animateCounter(element, stat.value);
+                    }
+                });
+            },
+
+            hideLoader() {
+                const loader = document.getElementById('loadingSpinner');
+                if (loader) {
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                    }, 800);
+                }
+            },
+
+            handleGlobalClick(event) {
+                if (!event.target.closest('.user-menu-container')) {
+                    closeUserMenu();
+                }
+                
+                if (!event.target.closest('.dashboard-sidebar') && 
+                    !event.target.closest('.sidebar-toggle') && 
+                    window.innerWidth <= 768) {
+                    closeSidebar();
+                }
+            },
+
+            handleSearch(event) {
+                const query = event.target.value.trim();
+                if (query.length > 2) {
+                    console.log('🔍 Searching for:', query);
+                    CandidateManager.search(query);
+                    Utils.showNotification(`Searching for "${query}"...`, 'info');
+                }
+            }
+        };
+
+        // Enhanced Candidate Manager
+        const CandidateManager = {
+            candidates: [],
+
+            async loadCandidates() {
+                console.log('👥 Loading candidates...');
+                
+                await Utils.delay(500);
+                
+                this.candidates = this.generateDemoCandidates();
+                AppState.candidates = this.candidates;
+                
+                this.renderCandidates();
+                this.renderTopCandidates();
+                
+                console.log(`✅ Loaded ${this.candidates.length} candidates`);
+            },
+
+            generateDemoCandidates() {
+                return [
+                    {
+                        id: 1,
+                        name: "Ayush Kumar",
+                        title: "Full Stack Developer",
+                        location: "Remote",
+                        experience: "3 years",
+                        matchScore: 95,
+                        skills: ["React", "Node.js", "AWS", "MongoDB", "TypeScript"],
+                        matchingSkills: ["React", "Node.js", "AWS"],
+                        availability: "Immediately",
+                        expectedSalary: "₹80k-100k",
+                        education: "B.Tech Computer Science",
+                        previousCompany: "Tech Startup",
+                        rating: 4.8,
+                        avatar: "AK"
+                    },
+                    {
+                        id: 2,
+                        name: "Priya Patel",
+                        title: "UI/UX Designer",
+                        location: "Bangalore",
+                        experience: "2 years",
+                        matchScore: 88,
+                        skills: ["Figma", "Adobe XD", "Sketch", "Prototyping", "User Research"],
+                        matchingSkills: ["Figma", "Sketch", "Prototyping"],
+                        availability: "2 weeks notice",
+                        expectedSalary: "₹60k-80k",
+                        education: "Design Institute",
+                        previousCompany: "Design Agency",
+                        rating: 4.6,
+                        avatar: "PP"
+                    },
+                    {
+                        id: 3,
+                        name: "Amit Singh",
+                        title: "Backend Developer",
+                        location: "Delhi",
+                        experience: "4 years",
+                        matchScore: 82,
+                        skills: ["Python", "Django", "PostgreSQL", "Redis", "Docker"],
+                        matchingSkills: ["Python", "Django"],
+                        availability: "1 month notice",
+                        expectedSalary: "₹90k-120k",
+                        education: "M.Tech Software Engineering",
+                        previousCompany: "Fintech Company",
+                        rating: 4.7,
+                        avatar: "AS"
+                    },
+                    {
+                        id: 4,
+                        name: "Sneha Sharma",
+                        title: "Data Scientist",
+                        location: "Mumbai",
+                        experience: "2.5 years",
+                        matchScore: 78,
+                        skills: ["Python", "Machine Learning", "TensorFlow", "SQL", "Tableau"],
+                        matchingSkills: ["Python", "Machine Learning"],
+                        availability: "Immediately",
+                        expectedSalary: "₹70k-95k",
+                        education: "M.Sc Data Science",
+                        previousCompany: "Analytics Firm",
+                        rating: 4.5,
+                        avatar: "SS"
+                    },
+                    {
+                        id: 5,
+                        name: "Rahul Gupta",
+                        title: "Mobile Developer",
+                        location: "Hyderabad",
+                        experience: "3.5 years",
+                        matchScore: 85,
+                        skills: ["React Native", "Flutter", "iOS", "Android", "Firebase"],
+                        matchingSkills: ["React Native", "Flutter"],
+                        availability: "3 weeks notice",
+                        expectedSalary: "₹75k-100k",
+                        education: "B.Tech Information Technology",
+                        previousCompany: "Mobile App Startup",
+                        rating: 4.9,
+                        avatar: "RG"
+                    }
+                ];
+            },
+
+            renderCandidates() {
+                const container = document.getElementById('candidatesContainer');
+                if (!container) return;
+
+                container.innerHTML = '';
+
+                if (this.candidates.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-users"></i>
+                            <h3>No candidates found</h3>
+                            <p>Try adjusting your search or filters</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.candidates.forEach(candidate => {
+                    const candidateCard = this.createCandidateCard(candidate);
+                    container.appendChild(candidateCard);
+                });
+            },
+
+            renderTopCandidates() {
+                const container = document.getElementById('topCandidatesList');
+                if (!container) return;
+
+                container.innerHTML = '';
+                
+                const topCandidates = this.candidates
+                    .sort((a, b) => b.matchScore - a.matchScore)
+                    .slice(0, 3);
+
+                topCandidates.forEach(candidate => {
+                    const card = this.createTopCandidateCard(candidate);
+                    container.appendChild(card);
+                });
+            },
+
+            createCandidateCard(candidate) {
+                const card = document.createElement('div');
+                card.className = 'candidate-card animate-fadeIn';
+                card.setAttribute('data-candidate-id', candidate.id);
+                
+                card.innerHTML = `
+                    <div class="candidate-header">
+                        <div class="candidate-avatar">
+                            <span>${candidate.avatar}</span>
+                        </div>
+                        <div class="candidate-info">
+                            <h3>${candidate.name}</h3>
+                            <p class="candidate-title">${candidate.title}</p>
+                            <div class="candidate-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> ${candidate.location}</span>
+                                <span><i class="fas fa-briefcase"></i> ${candidate.experience} exp</span>
+                                <span><i class="fas fa-star"></i> ${candidate.rating}</span>
+                            </div>
+                        </div>
+                        <div class="candidate-match-score">
+                            <div class="match-percentage">${candidate.matchScore}%</div>
+                            <div class="match-label">Match</div>
+                        </div>
+                    </div>
+                    
+                    <div class="candidate-skills">
+                        ${candidate.skills.map(skill => {
+                            const isMatched = candidate.matchingSkills.includes(skill);
+                            return `<span class="candidate-skill ${isMatched ? 'matched' : ''}">${skill}</span>`;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="candidate-details">
+                        <div class="detail-item">
+                            <strong>Availability:</strong> ${candidate.availability}
+                        </div>
+                        <div class="detail-item">
+                            <strong>Expected Salary:</strong> ${candidate.expectedSalary}
+                        </div>
+                        <div class="detail-item">
+                            <strong>Education:</strong> ${candidate.education}
+                        </div>
+                    </div>
+                    
+                    <div class="candidate-actions">
+                        <button class="btn btn-outline candidate-action-btn" onclick="viewProfile(${candidate.id})">
+                            <i class="fas fa-eye"></i>
+                            <span>View Profile</span>
+                        </button>
+                        <button class="btn btn-primary candidate-action-btn" onclick="contactCandidate(${candidate.id})">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact</span>
+                        </button>
+                    </div>
+                `;
+                
+                return card;
+            },
+
+            createTopCandidateCard(candidate) {
+                const card = document.createElement('div');
+                card.className = 'top-candidate-card';
+                
+                card.innerHTML = `
+                    <div class="candidate-summary">
+                        <div class="candidate-avatar-sm">
+                            <span>${candidate.avatar}</span>
+                        </div>
+                        <div class="candidate-quick-info">
+                            <h4>${candidate.name}</h4>
+                            <p>${candidate.title}</p>
+                            <div class="match-score-sm">${candidate.matchScore}% Match</div>
+                        </div>
+                    </div>
+                    <div class="candidate-quick-actions">
+                        <button class="btn-icon" onclick="viewProfile(${candidate.id})" title="View Profile">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-icon primary" onclick="contactCandidate(${candidate.id})" title="Contact">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                `;
+                
+                return card;
+            },
+
+            search(query) {
+                if (!query || query.length < 2) {
+                    this.candidates = AppState.candidates;
+                } else {
+                    this.candidates = AppState.candidates.filter(candidate => {
+                        const searchString = `${candidate.name} ${candidate.title} ${candidate.skills.join(' ')} ${candidate.location}`.toLowerCase();
+                        return searchString.includes(query.toLowerCase());
+                    });
+                }
+                
+                this.renderCandidates();
+                console.log(`🔍 Search results: ${this.candidates.length} candidates found`);
+            }
+        };
+
+        // Enhanced Job Manager
+        const JobManager = {
+            jobs: [],
+
+            async loadJobs() {
+                console.log('💼 Loading jobs...');
+                
+                await Utils.delay(300);
+                
+                this.jobs = this.generateDemoJobs();
+                this.renderActiveJobs();
+                
+                console.log(`✅ Loaded ${this.jobs.length} jobs`);
+            },
+
+            generateDemoJobs() {
+                return [
+                    {
+                        id: 1,
+                        title: "Senior React Developer",
+                        status: "Active",
+                        applicants: 23,
+                        posted: "2 days ago"
+                    },
+                    {
+                        id: 2,
+                        title: "UX Designer",
+                        status: "Active",
+                        applicants: 18,
+                        posted: "1 week ago"
+                    },
+                    {
+                        id: 3,
+                        title: "Backend Engineer",
+                        status: "Active",
+                        applicants: 31,
+                        posted: "3 days ago"
+                    }
+                ];
+            },
+
+            renderActiveJobs() {
+                const container = document.getElementById('activeJobsList');
+                if (!container) return;
+
+                container.innerHTML = '';
+
+                this.jobs.forEach(job => {
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'job-card';
+                    
+                    jobCard.innerHTML = `
+                        <div class="job-header">
+                            <div class="job-title">${job.title}</div>
+                            <div class="job-status">${job.status}</div>
+                        </div>
+                        <div class="job-meta">
+                            ${job.applicants} applicants • Posted ${job.posted}
+                        </div>
+                    `;
+                    
+                    container.appendChild(jobCard);
+                });
+            }
+        };
+
+        // Enhanced Global Functions
         function showSection(sectionId) {
-            console.log('📍 Navigating to:', sectionId);
+            console.log(`📍 Navigating to: ${sectionId}`);
             
-            // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Show target section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
-                currentSection = sectionId;
+                AppState.currentSection = sectionId;
+                targetSection.style.animation = 'fadeIn 0.3s ease-out';
             }
             
-            // Update active sidebar link
+            updateActiveLink(sectionId);
+            
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+            
+            updatePageTitle(sectionId);
+        }
+
+        function updateActiveLink(sectionId) {
             document.querySelectorAll('.sidebar-menu-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick')?.includes(sectionId)) {
                     link.classList.add('active');
                 }
             });
-
-            // Close mobile sidebar
-            if (window.innerWidth <= 768) {
-                closeSidebar();
-            }
-
-            // Close user menu
-            closeUserMenu();
         }
 
-        // Sidebar functions
+        function updatePageTitle(sectionId) {
+            const titles = {
+                dashboard: 'Dashboard',
+                candidates: 'Candidates',
+                jobs: 'Jobs',
+                interviews: 'Interviews',
+                team: 'Team',
+                analytics: 'Analytics'
+            };
+            
+            document.title = `${titles[sectionId] || 'Dashboard'} - SkillSync AI`;
+        }
+
+        // Enhanced Sidebar Functions
         function toggleSidebar() {
             const sidebar = document.getElementById('dashboardSidebar');
-            sidebarOpen = !sidebarOpen;
+            const overlay = document.getElementById('mobileOverlay');
             
-            if (sidebarOpen) {
+            AppState.sidebarOpen = !AppState.sidebarOpen;
+            
+            if (AppState.sidebarOpen) {
                 sidebar.classList.add('open');
+                overlay.classList.add('active');
+                sidebar.style.animation = 'slideIn 0.3s ease-out';
+                
+                if (window.innerWidth <= 768) {
+                    document.body.style.overflow = 'hidden';
+                }
             } else {
-                sidebar.classList.remove('open');
+                closeSidebar();
             }
         }
 
         function closeSidebar() {
             const sidebar = document.getElementById('dashboardSidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
             sidebar.classList.remove('open');
-            sidebarOpen = false;
-        }
-
-        // Dropdown functions
-        function toggleNotifications() {
-            const bell = document.querySelector('.notification-bell');
-            bell.classList.toggle('active');
+            overlay.classList.remove('active');
+            AppState.sidebarOpen = false;
             
-            // Close user menu if open
-            closeUserMenu();
+            document.body.style.overflow = '';
         }
 
+        // Enhanced User Menu Functions
         function toggleUserMenu() {
-            const userMenu = document.querySelector('.user-menu-toggle');
-            userMenu.classList.toggle('active');
+            const container = document.getElementById('userMenuContainer');
+            AppState.userMenuOpen = !AppState.userMenuOpen;
             
-            // Close notifications if open
-            const bell = document.querySelector('.notification-bell');
-            bell.classList.remove('active');
+            if (AppState.userMenuOpen) {
+                container.classList.add('active');
+                closeSidebar();
+            } else {
+                closeUserMenu();
+            }
         }
 
         function closeUserMenu() {
-            const userMenu = document.querySelector('.user-menu-toggle');
-            userMenu.classList.remove('active');
+            const container = document.getElementById('userMenuContainer');
+            container.classList.remove('active');
+            AppState.userMenuOpen = false;
         }
 
-        function closeDropdowns(event) {
-            // Close dropdowns when clicking outside
-            if (!event.target.closest('.notification-bell')) {
-                document.querySelector('.notification-bell').classList.remove('active');
-            }
+        // User Profile & Settings Functions
+        function showProfile() {
+            closeUserMenu();
+            Utils.showNotification('Opening user profile...', 'info');
+            console.log('👤 Opening user profile');
+        }
+
+        function showSettings() {
+            closeUserMenu();
+            Utils.showNotification('Opening settings panel...', 'info');
+            console.log('⚙️ Opening settings');
+        }
+
+        function showHelp() {
+            closeUserMenu();
+            Utils.showNotification('Opening help & support...', 'info');
+            console.log('❓ Opening help');
+        }
+
+        function showKeyboardShortcuts() {
+            closeUserMenu();
+            Utils.showNotification('Keyboard shortcuts: Ctrl+K for search, Esc to close', 'info', 6000);
+            console.log('⌨️ Showing keyboard shortcuts');
+        }
+
+        function showBilling() {
+            closeUserMenu();
+            Utils.showNotification('Opening billing & plans...', 'info');
+            console.log('💳 Opening billing');
+        }
+
+        function showActivity() {
+            closeUserMenu();
+            Utils.showNotification('Loading recent activity...', 'info');
+            console.log('📈 Loading activity');
+        }
+
+        function showNotifications() {
+            closeUserMenu();
+            Utils.showNotification('Opening notifications...', 'info');
+            console.log('🔔 Opening notifications');
+        }
+
+        // Enhanced Logout Functions
+        function confirmLogout() {
+            closeUserMenu();
+            const modal = document.getElementById('logoutModal');
+            modal.classList.add('active');
+        }
+
+        function closeLogoutModal() {
+            const modal = document.getElementById('logoutModal');
+            modal.classList.remove('active');
+        }
+
+        function performLogout() {
+            closeLogoutModal();
             
-            if (!event.target.closest('.user-menu-toggle')) {
-                closeUserMenu();
-            }
+            Utils.showNotification('Signing out...', 'info');
 
-            if (!event.target.closest('.dashboard-sidebar') && 
-                !event.target.closest('.sidebar-toggle') && 
-                window.innerWidth <= 768) {
-                closeSidebar();
-            }
-        }
-
-        // Logout function
-        function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Clear session data
-                localStorage.removeItem('skillsync_token');
-                localStorage.removeItem('skillsync_user');
-                
-                if (window.showNotification) {
-                    window.showNotification('👋 Logged out successfully!', 'info');
-                }
-                
-                // Redirect to home page
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1000);
-            }
-        }
-
-        // Utility functions
-        function showNotificationDemo(message, type) {
-            // Simple notification for demo
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#7C3AED'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 0.5rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                z-index: 10000;
-                font-weight: 500;
-                max-width: 350px;
-            `;
-            notification.textContent = message;
+             setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        
             
-            document.body.appendChild(notification);
+            // Clear session data
+            Utils.storage.remove('skillsync_token');
+            Utils.storage.remove('skillsync_user_data');
+            Utils.storage.remove('skillsync_preferences');
+            Utils.storage.remove('skillsync_last_activity');
+            Utils.storage.remove('skillsync_session');
+            
+            // Clear application state
+            AppState.sessionActive = false;
+            AppState.currentUser = null;
+            AppState.userMenuOpen = false;
+            AppState.sidebarOpen = false;
+            
+            // Clear cached data
+            AppState.candidates = [];
+            AppState.jobs = [];
             
             setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+                Utils.showNotification('Successfully signed out. Redirecting...', 'success');
+            }, 500);
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
         }
 
-        // Set global showNotification if not available
-        if (!window.showNotification) {
-            window.showNotification = showNotificationDemo;
+        // Other Functions
+        function viewProfile(candidateId) {
+            const candidate = AppState.candidates.find(c => c.id === candidateId);
+            if (candidate) {
+                console.log('👤 Viewing profile:', candidate.name);
+                Utils.showNotification(`Opening ${candidate.name}'s profile...`, 'info');
+            }
         }
+
+        function contactCandidate(candidateId) {
+            const candidate = AppState.candidates.find(c => c.id === candidateId);
+            if (candidate) {
+                console.log('💬 Contacting:', candidate.name);
+                Utils.showNotification(`Initiating conversation with ${candidate.name}...`, 'success');
+            }
+        }
+
+        function createNewJob() {
+            Utils.showNotification('Opening job creation form...', 'info');
+            console.log('💼 Creating new job');
+        }
+
+        function scheduleInterview() {
+            Utils.showNotification('Opening interview scheduler...', 'info');
+            console.log('📅 Scheduling interview');
+        }
+
+        function addTeamMember() {
+            Utils.showNotification('Opening team member invitation...', 'info');
+            console.log('👥 Adding team member');
+        }
+
+        function showFilters() {
+            Utils.showNotification('Filter panel coming soon...', 'info');
+            console.log('🔍 Showing filters');
+        }
+
+        function toggleSort() {
+            Utils.showNotification('Sorting candidates by match score...', 'info');
+            console.log('📊 Toggling sort');
+        }
+
+        function aiSearch() {
+            Utils.showNotification('AI search is analyzing your requirements...', 'info');
+            console.log('🧠 AI search initiated');
+            
+            setTimeout(() => {
+                Utils.showNotification('Found 3 perfect matches based on AI analysis!', 'success');
+            }, 2000);
+        }
+
+        function showPipelineDetails() {
+            Utils.showNotification('Opening detailed pipeline view...', 'info');
+            console.log('🔄 Showing pipeline details');
+        }
+
+        // Initialize Dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 SkillSync Dashboard v2.1.0 Initializing...');
+            DashboardController.init();
+        });
     </script>
 </body>
 </html>

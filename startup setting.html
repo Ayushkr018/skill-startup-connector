@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SkillSync AI</title>
+    <meta name="description" content="Professional settings and preferences dashboard for SkillSync AI">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Professional CSS Architecture -->
+    <style>
+        :root {
+            /* Enhanced Brand System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            --info-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            --error-gradient: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            --settings-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            
+            /* Professional Color Palette */
+            --primary-color: #7C3AED;
+            --primary-dark: #6D28D9;
+            --primary-light: #A78BFA;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --info-color: #3B82F6;
+            
+            /* Neutral Colors */
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius Scale */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadow System */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Animation System */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Layout Constants */
+            --container-max-width: 1200px;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--settings-gradient);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Settings Background */
+        .settings-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .settings-gear {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            color: var(--primary-color);
+            animation: rotate-gear 20s infinite linear;
+        }
+
+        @keyframes rotate-gear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Enhanced Header */
+        .settings-header {
+            background: var(--settings-gradient);
+            color: var(--gray-800);
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 3rem 3rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .header-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: var(--radius-xl);
+            color: var(--gray-800);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            backdrop-filter: blur(15px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+            margin: 0 var(--space-xl);
+        }
+
+        .header-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            font-family: var(--font-secondary);
+            background: linear-gradient(45deg, var(--gray-800), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Layout */
+        .settings-container {
+            max-width: var(--container-max-width);
+            margin: -var(--space-2xl) auto 0;
+            padding: 0 var(--space-xl) var(--space-3xl);
+            position: relative;
+            z-index: 3;
+            display: flex;
+            gap: var(--space-2xl);
+        }
+
+        /* Settings Sidebar */
+        .settings-sidebar {
+            width: var(--sidebar-width);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: var(--space-xl);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-md);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Settings Content */
+        .settings-content {
+            flex: 1;
+        }
+
+        .settings-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            font-family: var(--font-secondary);
+        }
+
+        /* Settings Cards */
+        .settings-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            border: 2px solid transparent;
+            transition: all var(--transition-base);
+        }
+
+        .settings-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            background: white;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-300);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background: var(--primary-gradient);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--error-gradient);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-xl);
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            box-shadow: var(--shadow-xl);
+            min-width: 300px;
+        }
+
+        .toast.success { background: var(--success-gradient); }
+        .toast.error { background: var(--error-gradient); }
+        .toast.warning { background: var(--warning-gradient); }
+        .toast.info { background: var(--info-gradient); }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .settings-container {
+                flex-direction: column;
+            }
+
+            .settings-sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: var(--space-md);
+                padding-bottom: var(--space-sm);
+            }
+
+            .nav-item {
+                white-space: nowrap;
+                min-width: fit-content;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .settings-container {
+                padding: 0 var(--space-md) var(--space-2xl);
+                margin-top: -var(--space-lg);
+            }
+
+            .settings-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Settings Background -->
+    <div class="settings-background" id="settingsBackground"></div>
+
+    <!-- Enhanced Header -->
+    <header class="settings-header">
+        <div class="header-container">
+            <a href="startup-dashboard.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </a>
+            
+            <div class="header-content">
+                <h1 class="header-title">Settings</h1>
+                <p class="header-subtitle">
+                    Customize your SkillSync AI experience with personalized settings and preferences
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="settings-container">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">General</div>
+                    <a href="#profile" class="nav-item active" onclick="showSection('profile', this)">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#preferences" class="nav-item" onclick="showSection('preferences', this)">
+                        <i class="fas fa-cog"></i>
+                        <span>Preferences</span>
+                    </a>
+                    <a href="#notifications" class="nav-item" onclick="showSection('notifications', this)">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Security</div>
+                    <a href="#security" class="nav-item" onclick="showSection('security', this)">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security</span>
+                    </a>
+                    <a href="#privacy" class="nav-item" onclick="showSection('privacy', this)">
+                        <i class="fas fa-lock"></i>
+                        <span>Privacy</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Advanced</div>
+                    <a href="#integrations" class="nav-item" onclick="showSection('integrations', this)">
+                        <i class="fas fa-plug"></i>
+                        <span>Integrations</span>
+                    </a>
+                    <a href="#backup" class="nav-item" onclick="showSection('backup', this)">
+                        <i class="fas fa-download"></i>
+                        <span>Backup</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+            <!-- Profile Settings -->
+            <div id="profile" class="settings-section active">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-user" style="color: var(--primary-color);"></i>
+                        Profile Settings
+                    </h2>
+                    <button class="btn btn-primary" onclick="saveProfile()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Personal Information</div>
+                                <div class="card-description">Update your personal details and contact information</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" value="Rajesh Kumar" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" value="rajesh@techstart.com" placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" value="+91 98765 43210" placeholder="Enter your phone">
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Professional Details</div>
+                                <div class="card-description">Manage your professional information and role</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" class="form-input" value="HR Manager" placeholder="Enter your job title">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Department</label>
+                            <select class="form-input">
+                                <option>Human Resources</option>
+                                <option>Engineering</option>
+                                <option>Product</option>
+                                <option>Marketing</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Bio</label>
+                            <textarea class="form-input" rows="3" placeholder="Tell us about yourself...">Experienced HR professional with 8+ years in talent acquisition and team management.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Settings -->
+            <div id="preferences" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-cog" style="color: var(--info-color);"></i>
+                        Preferences
+                    </h2>
+                    <button class="btn btn-primary" onclick="savePreferences()">
+                        <i class="fas fa-save"></i>
+                        Save Preferences
+                    </button>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Appearance</div>
+                                <div class="card-description">Customize the look and feel of your dashboard</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Theme</label>
+                            <select class="form-input">
+                                <option>Light Theme</option>
+                                <option>Dark Theme</option>
+                                <option>Auto (System)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Language</label>
+                            <select class="form-input">
+                                <option>English</option>
+                                <option>हिंदी (Hindi)</option>
+                                <option>मराठी (Marathi)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Time & Date</div>
+                                <div class="card-description">Configure your timezone and date format preferences</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Timezone</label>
+                            <select class="form-input">
+                                <option>Asia/Kolkata (IST)</option>
+                                <option>America/New_York (EST)</option>
+                                <option>Europe/London (GMT)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Date Format</label>
+                            <select class="form-input">
+                                <option>DD/MM/YYYY</option>
+                                <option>MM/DD/YYYY</option>
+                                <option>YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div id="notifications" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell" style="color: var(--warning-color);"></i>
+                        Notification Settings
+                    </h2>
+                    <button class="btn btn-primary" onclick="saveNotifications()">
+                        <i class="fas fa-save"></i>
+                        Save Settings
+                    </button>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Email Notifications</div>
+                                <div class="card-description">Manage email notification preferences</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">New Candidate Applications</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Get notified when new candidates apply</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">Interview Reminders</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Reminders for upcoming interviews</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">Weekly Reports</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Weekly hiring analytics reports</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Push Notifications</div>
+                                <div class="card-description">Manage browser and mobile push notifications</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">Browser Notifications</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Show desktop notifications</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">Sound Alerts</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Play sound for notifications</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div id="security" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-shield-alt" style="color: var(--error-color);"></i>
+                        Security Settings
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Password Security</div>
+                                <div class="card-description">Manage your password and authentication settings</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" onclick="changePassword()" style="margin-bottom: var(--space-lg);">
+                            <i class="fas fa-edit"></i>
+                            Change Password
+                        </button>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label" style="margin-bottom: 4px;">Two-Factor Authentication</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Add extra security layer to your account</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Login Activity</div>
+                                <div class="card-description">Monitor your account login activity</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" onclick="viewLoginHistory()">
+                            <i class="fas fa-eye"></i>
+                            View Login History
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div id="privacy" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-lock" style="color: var(--success-color);"></i>
+                        Privacy Settings
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Profile Visibility</div>
+                                <div class="card-description">Control who can see your profile information</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Profile Visibility</label>
+                            <select class="form-input">
+                                <option>Team Members Only</option>
+                                <option>Company Wide</option>
+                                <option>Public</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Data Export</div>
+                                <div class="card-description">Download your personal data</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" onclick="exportData()">
+                            <i class="fas fa-download"></i>
+                            Export My Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrations Settings -->
+            <div id="integrations" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-plug" style="color: var(--info-color);"></i>
+                        Integrations
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fab fa-slack"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Slack Integration</div>
+                                <div class="card-description">Connect with Slack for notifications</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" onclick="connectSlack()">
+                            <i class="fas fa-link"></i>
+                            Connect Slack
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Google Calendar</div>
+                                <div class="card-description">Sync interviews with Google Calendar</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="disconnectGoogle()">
+                            <i class="fas fa-unlink"></i>
+                            Connected
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Settings -->
+            <div id="backup" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-download" style="color: var(--warning-color);"></i>
+                        Backup & Restore
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-cloud-download-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Data Backup</div>
+                                <div class="card-description">Create backup of your data and settings</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="createBackup()">
+                            <i class="fas fa-download"></i>
+                            Create Backup
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Account Deletion</div>
+                                <div class="card-description">Permanently delete your account and data</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-danger" onclick="deleteAccount()">
+                            <i class="fas fa-trash"></i>
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Professional Settings Controller
+        class SettingsController {
+            constructor() {
+                this.currentSection = 'profile';
+                this.unsavedChanges = false;
+                this.init();
+            }
+
+            init() {
+                console.log('⚙️ Settings Dashboard Initialized');
+                this.createSettingsBackground();
+                this.setupEventListeners();
+            }
+
+            createSettingsBackground() {
+                const container = document.getElementById('settingsBackground');
+                for (let i = 0; i < 8; i++) {
+                    const gear = document.createElement('i');
+                    gear.className = 'fas fa-cog settings-gear';
+                    gear.style.left = Math.random() * 100 + '%';
+                    gear.style.top = Math.random() * 100 + '%';
+                    gear.style.animationDelay = Math.random() * 20 + 's';
+                    gear.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                    if (i % 2 === 0) {
+                        gear.style.animationDirection = 'reverse';
+                    }
+                    container.appendChild(gear);
+                }
+            }
+
+            setupEventListeners() {
+                // Track form changes
+                document.querySelectorAll('input, select, textarea').forEach(element => {
+                    element.addEventListener('change', () => {
+                        this.unsavedChanges = true;
+                    });
+                });
+            }
+
+            showToast(message, type = 'success', duration = 4000) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-${this.getToastIcon(type)}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 300);
+                }, duration);
+            }
+
+            getToastIcon(type) {
+                const icons = {
+                    success: 'check-circle',
+                    error: 'exclamation-circle',
+                    warning: 'exclamation-triangle',
+                    info: 'info-circle'
+                };
+                return icons[type] || 'info-circle';
+            }
+        }
+
+        // Global variables
+        let settingsController;
+
+        // Navigation functions
+        function showSection(sectionId, navElement) {
+            // Update active nav
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            navElement.classList.add('active');
+
+            // Update active section
+            document.querySelectorAll('.settings-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            console.log('📄 Switched to section:', sectionId);
+        }
+
+        // Save functions
+        function saveProfile() {
+            settingsController.showToast('Profile settings saved successfully!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        function savePreferences() {
+            settingsController.showToast('Preferences updated successfully!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        function saveNotifications() {
+            settingsController.showToast('Notification settings saved!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        // Action functions
+        function changePassword() {
+            settingsController.showToast('Password change form opening...', 'info');
+        }
+
+        function viewLoginHistory() {
+            settingsController.showToast('Loading login history...', 'info');
+        }
+
+        function exportData() {
+            settingsController.showToast('Preparing data export...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Data export completed!', 'success');
+            }, 3000);
+        }
+
+        function connectSlack() {
+            settingsController.showToast('Connecting to Slack...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Slack connected successfully!', 'success');
+            }, 2000);
+        }
+
+        function disconnectGoogle() {
+            settingsController.showToast('Google Calendar disconnected', 'warning');
+        }
+
+        function createBackup() {
+            settingsController.showToast('Creating backup...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Backup created successfully!', 'success');
+            }, 4000);
+        }
+
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                settingsController.showToast('Account deletion process initiated...', 'error');
+            }
+        }
+
+        // Initialize controller
+        document.addEventListener('DOMContentLoaded', function() {
+            settingsController = new SettingsController();
+        });
+    </script>
+</body>
+</html>

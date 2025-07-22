@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Settings - SkillSync AI</title>
+    <meta name="description" content="Professional company settings and configuration dashboard for SkillSync AI">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Professional CSS Architecture -->
+    <style>
+        :root {
+            /* Enhanced Brand System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            --info-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            --error-gradient: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            
+            /* Professional Color Palette */
+            --primary-color: #7C3AED;
+            --primary-dark: #6D28D9;
+            --primary-light: #A78BFA;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --info-color: #3B82F6;
+            
+            /* Neutral Colors */
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius Scale */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadow System */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Animation System */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Layout Constants */
+            --container-max-width: 1200px;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Enhanced Header */
+        .settings-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-2xl) var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 2rem 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .settings-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,20 Q250,80 500,20 T1000,20 V100 H0 Z"/></svg>') no-repeat bottom center;
+            background-size: cover;
+        }
+
+        .header-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: var(--radius-xl);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-4px);
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+            margin: 0 var(--space-xl);
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: var(--space-md);
+            font-family: var(--font-secondary);
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        /* Main Layout */
+        .settings-container {
+            max-width: var(--container-max-width);
+            margin: -var(--space-xl) auto 0;
+            padding: 0 var(--space-xl) var(--space-3xl);
+            position: relative;
+            z-index: 3;
+            display: flex;
+            gap: var(--space-2xl);
+        }
+
+        /* Settings Sidebar */
+        .settings-sidebar {
+            width: var(--sidebar-width);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: var(--space-xl);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Settings Content */
+        .settings-content {
+            flex: 1;
+        }
+
+        .settings-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            font-family: var(--font-secondary);
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-base);
+            transition: all var(--transition-fast);
+            background: white;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-300);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Settings Cards */
+        .settings-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            border: 2px solid transparent;
+            transition: all var(--transition-base);
+        }
+
+        .settings-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: var(--gray-400);
+            margin-bottom: var(--space-md);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--error-gradient);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-xl);
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            box-shadow: var(--shadow-xl);
+            min-width: 300px;
+        }
+
+        .toast.success { background: var(--success-gradient); }
+        .toast.error { background: var(--error-gradient); }
+        .toast.warning { background: var(--warning-gradient); }
+        .toast.info { background: var(--info-gradient); }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .settings-container {
+                flex-direction: column;
+            }
+
+            .settings-sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: var(--space-md);
+                padding-bottom: var(--space-sm);
+            }
+
+            .nav-item {
+                white-space: nowrap;
+                min-width: fit-content;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .settings-container {
+                padding: 0 var(--space-md) var(--space-2xl);
+                margin-top: -var(--space-md);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="settings-header">
+        <div class="header-container">
+            <a href="startup-dashboard.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </a>
+            
+            <div class="header-content">
+                <h1 class="header-title">Company Settings</h1>
+                <p class="header-subtitle">Configure your company profile and organizational preferences</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="settings-container">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+            <nav class="sidebar-nav">
+                <a href="#general" class="nav-item active" onclick="showSection('general', this)">
+                    <i class="fas fa-building"></i>
+                    <span>General Info</span>
+                </a>
+                <a href="#team" class="nav-item" onclick="showSection('team', this)">
+                    <i class="fas fa-users"></i>
+                    <span>Team & Roles</span>
+                </a>
+                <a href="#branding" class="nav-item" onclick="showSection('branding', this)">
+                    <i class="fas fa-palette"></i>
+                    <span>Branding</span>
+                </a>
+                <a href="#integrations" class="nav-item" onclick="showSection('integrations', this)">
+                    <i class="fas fa-plug"></i>
+                    <span>Integrations</span>
+                </a>
+                <a href="#security" class="nav-item" onclick="showSection('security', this)">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Security</span>
+                </a>
+                <a href="#notifications" class="nav-item" onclick="showSection('notifications', this)">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+            <!-- General Information -->
+            <div id="general" class="settings-section active">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-building" style="color: var(--primary-color);"></i>
+                        General Information
+                    </h2>
+                    <button class="btn btn-primary" onclick="saveGeneralSettings()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-input" value="TechStart Inc." placeholder="Enter company name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Industry</label>
+                        <select class="form-input">
+                            <option>Technology</option>
+                            <option>Healthcare</option>
+                            <option>Finance</option>
+                            <option>Education</option>
+                            <option>E-commerce</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company Size</label>
+                        <select class="form-input">
+                            <option>1-10 employees</option>
+                            <option>11-50 employees</option>
+                            <option>51-200 employees</option>
+                            <option>201-1000 employees</option>
+                            <option>1000+ employees</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Founded Year</label>
+                        <input type="number" class="form-input" value="2022" placeholder="2022">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Website URL</label>
+                        <input type="url" class="form-input" value="https://techstart.com" placeholder="https://yourcompany.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">LinkedIn URL</label>
+                        <input type="url" class="form-input" placeholder="https://linkedin.com/company/yourcompany">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Description</label>
+                    <textarea class="form-input form-textarea" placeholder="Tell us about your company...">TechStart Inc. is an innovative technology startup focused on revolutionizing the hiring process through AI-powered solutions. We help companies find the best talent faster and more efficiently.</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Address</label>
+                    <textarea class="form-input" placeholder="Enter your company address...">123 Tech Street, Innovation District, San Francisco, CA 94105, USA</textarea>
+                </div>
+            </div>
+
+            <!-- Team & Roles -->
+            <div id="team" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users" style="color: var(--success-color);"></i>
+                        Team & Roles Management
+                    </h2>
+                    <button class="btn btn-primary" onclick="inviteTeamMember()">
+                        <i class="fas fa-user-plus"></i>
+                        Invite Member
+                    </button>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Admin Rights</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Manage admin permissions</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Two-Factor Authentication</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">HR Manager</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Hiring and recruitment access</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Access Level</label>
+                            <select class="form-input">
+                                <option>Full Access</option>
+                                <option>Limited Access</option>
+                                <option>View Only</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Team Members</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Basic team access</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Default Permissions</label>
+                            <select class="form-input">
+                                <option>View Only</option>
+                                <option>Comment & Review</option>
+                                <option>Edit Access</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Branding -->
+            <div id="branding" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-palette" style="color: var(--warning-color);"></i>
+                        Branding & Appearance
+                    </h2>
+                    <button class="btn btn-primary" onclick="saveBrandingSettings()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Company Logo</label>
+                        <div class="file-upload" onclick="uploadLogo()">
+                            <div class="file-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div>Click to upload logo</div>
+                            <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: var(--space-sm);">PNG, JPG up to 2MB</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Brand Colors</label>
+                        <div style="display: flex; gap: var(--space-md);">
+                            <input type="color" value="#7C3AED" style="width: 60px; height: 40px; border: none; border-radius: var(--radius-md);">
+                            <input type="color" value="#10B981" style="width: 60px; height: 40px; border: none; border-radius: var(--radius-md);">
+                            <input type="color" value="#F59E0B" style="width: 60px; height: 40px; border: none; border-radius: var(--radius-md);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrations -->
+            <div id="integrations" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-plug" style="color: var(--info-color);"></i>
+                        Integrations
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fab fa-slack"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Slack Integration</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Get notifications in Slack</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="connectIntegration('slack')">
+                            <i class="fas fa-link"></i>
+                            Connect
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Google Workspace</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Calendar and email integration</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="disconnectIntegration('google')">
+                            <i class="fas fa-unlink"></i>
+                            Connected
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">LinkedIn Recruiter</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Import candidates from LinkedIn</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="connectIntegration('linkedin')">
+                            <i class="fas fa-link"></i>
+                            Connect
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security -->
+            <div id="security" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-shield-alt" style="color: var(--error-color);"></i>
+                        Security Settings
+                    </h2>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Two-Factor Authentication</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Add extra security layer</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Session Management</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Control active sessions</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="viewActiveSessions()">
+                            <i class="fas fa-eye"></i>
+                            View Sessions
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Data Export</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Download your company data</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="exportData()">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div id="notifications" class="settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell" style="color: var(--warning-color);"></i>
+                        Notification Preferences
+                    </h2>
+                    <button class="btn btn-primary" onclick="saveNotificationSettings()">
+                        <i class="fas fa-save"></i>
+                        Save Preferences
+                    </button>
+                </div>
+
+                <div class="settings-cards">
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Email Notifications</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Receive updates via email</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Push Notifications</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Browser and mobile alerts</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <div class="card-title">Weekly Reports</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Analytics and insights summary</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Professional Settings Controller
+        class CompanySettingsController {
+            constructor() {
+                this.currentSection = 'general';
+                this.unsavedChanges = false;
+                this.init();
+            }
+
+            init() {
+                console.log('⚙️ Company Settings Initialized');
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Track form changes
+                document.querySelectorAll('input, select, textarea').forEach(element => {
+                    element.addEventListener('change', () => {
+                        this.unsavedChanges = true;
+                    });
+                });
+
+                // Prevent accidental navigation
+                window.addEventListener('beforeunload', (e) => {
+                    if (this.unsavedChanges) {
+                        e.preventDefault();
+                        e.returnValue = '';
+                    }
+                });
+            }
+
+            showToast(message, type = 'success', duration = 4000) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-${this.getToastIcon(type)}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 300);
+                }, duration);
+            }
+
+            getToastIcon(type) {
+                const icons = {
+                    success: 'check-circle',
+                    error: 'exclamation-circle',
+                    warning: 'exclamation-triangle',
+                    info: 'info-circle'
+                };
+                return icons[type] || 'info-circle';
+            }
+        }
+
+        // Global variables
+        let settingsController;
+
+        // Navigation functions
+        function showSection(sectionId, navElement) {
+            // Update active nav
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            navElement.classList.add('active');
+
+            // Update active section
+            document.querySelectorAll('.settings-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            console.log('📄 Switched to section:', sectionId);
+        }
+
+        // Save functions
+        function saveGeneralSettings() {
+            settingsController.showToast('General settings saved successfully!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        function saveBrandingSettings() {
+            settingsController.showToast('Branding settings updated!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        function saveNotificationSettings() {
+            settingsController.showToast('Notification preferences saved!', 'success');
+            settingsController.unsavedChanges = false;
+        }
+
+        // Action functions
+        function inviteTeamMember() {
+            settingsController.showToast('Team member invitation sent!', 'success');
+        }
+
+        function uploadLogo() {
+            settingsController.showToast('Logo upload feature coming soon...', 'info');
+        }
+
+        function connectIntegration(service) {
+            settingsController.showToast(`Connecting to ${service}...`, 'info');
+            setTimeout(() => {
+                settingsController.showToast(`Successfully connected to ${service}!`, 'success');
+            }, 2000);
+        }
+
+        function disconnectIntegration(service) {
+            settingsController.showToast(`Disconnected from ${service}`, 'warning');
+        }
+
+        function viewActiveSessions() {
+            settingsController.showToast('Opening active sessions panel...', 'info');
+        }
+
+        function exportData() {
+            settingsController.showToast('Preparing data export...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Data export completed! Check your downloads.', 'success');
+            }, 3000);
+        }
+
+        // Initialize controller
+        document.addEventListener('DOMContentLoaded', function() {
+            settingsController = new CompanySettingsController();
+        });
+    </script>
+</body>
+</html>

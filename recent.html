@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Activity - SkillSync AI</title>
+    <meta name="description" content="Professional activity tracking dashboard for SkillSync AI - Monitor all system activities and user interactions">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Professional CSS Architecture -->
+    <style>
+        :root {
+            /* Enhanced Brand System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            --info-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            --error-gradient: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            --activity-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            
+            /* Professional Color Palette */
+            --primary-color: #7C3AED;
+            --primary-dark: #6D28D9;
+            --primary-light: #A78BFA;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --info-color: #3B82F6;
+            
+            /* Neutral Colors */
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius Scale */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadow System */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Animation System */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Layout Constants */
+            --container-max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--activity-gradient);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Activity Background Animation */
+        .activity-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .activity-pulse {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            border-radius: var(--radius-full);
+            animation: pulse-activity 6s infinite ease-in-out;
+        }
+
+        @keyframes pulse-activity {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 0.3; }
+        }
+
+        /* Enhanced Header */
+        .activity-header {
+            background: var(--activity-gradient);
+            color: var(--gray-800);
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 3rem 3rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .activity-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(124,58,237,0.1)"><circle cx="100" cy="30" r="3"/><circle cx="200" cy="50" r="2"/><circle cx="300" cy="20" r="4"/><circle cx="400" cy="40" r="2"/><circle cx="500" cy="60" r="3"/><circle cx="600" cy="25" r="2"/><circle cx="700" cy="45" r="3"/><circle cx="800" cy="35" r="2"/><circle cx="900" cy="55" r="4"/></svg>') repeat-x;
+            animation: activity-dots 15s infinite linear;
+        }
+
+        @keyframes activity-dots {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .header-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: var(--radius-xl);
+            color: var(--gray-800);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            backdrop-filter: blur(15px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+            margin: 0 var(--space-xl);
+        }
+
+        .header-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            font-family: var(--font-secondary);
+            background: linear-gradient(45deg, var(--gray-800), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Live Status */
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-top: var(--space-lg);
+            padding: var(--space-sm) var(--space-lg);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-full);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--success-color);
+            border-radius: var(--radius-full);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Main Container */
+        .activity-container {
+            max-width: var(--container-max-width);
+            margin: -var(--space-2xl) auto 0;
+            padding: 0 var(--space-xl) var(--space-3xl);
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Activity Filters */
+        .activity-filters {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .filters-row {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .filter-select {
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            background: white;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        /* Activity Timeline */
+        .activity-timeline {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .timeline-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            font-family: var(--font-secondary);
+        }
+
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: var(--space-lg);
+            padding: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            border: 2px solid transparent;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .activity-item:hover {
+            border-color: var(--primary-color);
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-sm);
+        }
+
+        .activity-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+
+        .activity-meta {
+            display: flex;
+            gap: var(--space-lg);
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .activity-time {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--space-sm);
+            text-align: right;
+        }
+
+        .time-stamp {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .activity-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-new {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .badge-update {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .badge-error {
+            background: var(--error-color);
+            color: white;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-xl);
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            box-shadow: var(--shadow-xl);
+            min-width: 300px;
+        }
+
+        .toast.success { background: var(--success-gradient); }
+        .toast.error { background: var(--error-gradient); }
+        .toast.warning { background: var(--warning-gradient); }
+        .toast.info { background: var(--info-gradient); }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .activity-container {
+                padding: 0 var(--space-md) var(--space-2xl);
+                margin-top: -var(--space-lg);
+            }
+
+            .filters-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .activity-time {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Activity Background -->
+    <div class="activity-background" id="activityBackground"></div>
+
+    <!-- Enhanced Header -->
+    <header class="activity-header">
+        <div class="header-container">
+            <a href="startup-dashboard.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </a>
+            
+            <div class="header-content">
+                <h1 class="header-title">Recent Activity</h1>
+                <p class="header-subtitle">
+                    Monitor all system activities, user interactions, and important updates in real-time
+                </p>
+                
+                <div class="live-status">
+                    <div class="status-dot"></div>
+                    <span style="font-weight: 600; font-size: 0.875rem;">Live Activity Tracking</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="activity-container">
+        <!-- Activity Filters -->
+        <div class="activity-filters">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label class="filter-label">Activity Type</label>
+                    <select class="filter-select" onchange="filterActivities('type', this.value)">
+                        <option value="all">All Activities</option>
+                        <option value="user">User Actions</option>
+                        <option value="system">System Updates</option>
+                        <option value="hiring">Hiring Process</option>
+                        <option value="notifications">Notifications</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Time Range</label>
+                    <select class="filter-select" onchange="filterActivities('time', this.value)">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Priority</label>
+                    <select class="filter-select" onchange="filterActivities('priority', this.value)">
+                        <option value="all">All Priorities</option>
+                        <option value="high">High Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <button class="btn btn-primary" onclick="refreshActivities()">
+                        <i class="fas fa-sync"></i>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="activity-timeline">
+            <div class="timeline-header">
+                <h2 class="timeline-title">Activity Timeline</h2>
+                <button class="btn btn-outline" onclick="markAllAsRead()">
+                    <i class="fas fa-check-double"></i>
+                    Mark All Read
+                </button>
+            </div>
+
+            <div class="timeline-list">
+                <!-- Activity Item 1 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--success-gradient);">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">New Candidate Application</div>
+                        <div class="activity-description">
+                            Priya Sharma applied for Senior Frontend Developer position. Profile completed with 95% skill match.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-user"></i> Priya Sharma</span>
+                            <span><i class="fas fa-briefcase"></i> Frontend Developer</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai, India</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">2 minutes ago</span>
+                        <span class="activity-badge badge-new">New</span>
+                    </div>
+                </div>
+
+                <!-- Activity Item 2 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--info-gradient);">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Interview Scheduled</div>
+                        <div class="activity-description">
+                            Technical interview scheduled for Rajesh Kumar tomorrow at 3:00 PM. Meeting link and details sent.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-user"></i> Rajesh Kumar</span>
+                            <span><i class="fas fa-clock"></i> Tomorrow 3:00 PM</span>
+                            <span><i class="fas fa-video"></i> Video Call</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">15 minutes ago</span>
+                        <span class="activity-badge badge-update">Update</span>
+                    </div>
+                </div>
+
+                <!-- Activity Item 3 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--primary-gradient);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">AI Model Updated</div>
+                        <div class="activity-description">
+                            Skill matching algorithm updated with improved accuracy. New machine learning model deployed successfully.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-robot"></i> AI System</span>
+                            <span><i class="fas fa-chart-line"></i> 98.5% Accuracy</span>
+                            <span><i class="fas fa-server"></i> Model v2.1</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">1 hour ago</span>
+                        <span class="activity-badge badge-update">Update</span>
+                    </div>
+                </div>
+
+                <!-- Activity Item 4 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--warning-gradient);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">System Maintenance Alert</div>
+                        <div class="activity-description">
+                            Scheduled maintenance window tonight from 2:00 AM to 4:00 AM IST. Some features may be temporarily unavailable.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-tools"></i> System Maintenance</span>
+                            <span><i class="fas fa-clock"></i> 2:00 AM - 4:00 AM</span>
+                            <span><i class="fas fa-calendar"></i> Tonight</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">3 hours ago</span>
+                        <span class="activity-badge badge-warning">Alert</span>
+                    </div>
+                </div>
+
+                <!-- Activity Item 5 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--success-gradient);">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Candidate Hired</div>
+                        <div class="activity-description">
+                            Amit Patel accepted the offer for Backend Developer position. Onboarding process initiated successfully.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-user"></i> Amit Patel</span>
+                            <span><i class="fas fa-briefcase"></i> Backend Developer</span>
+                            <span><i class="fas fa-rupee-sign"></i> ₹12,00,000 CTC</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">5 hours ago</span>
+                        <span class="activity-badge badge-new">Hired</span>
+                    </div>
+                </div>
+
+                <!-- Activity Item 6 -->
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: var(--info-gradient);">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Weekly Report Generated</div>
+                        <div class="activity-description">
+                            Hiring analytics report for this week generated. 23 applications received, 8 interviews conducted, 2 offers extended.
+                        </div>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-file-alt"></i> Weekly Report</span>
+                            <span><i class="fas fa-users"></i> 23 Applications</span>
+                            <span><i class="fas fa-handshake"></i> 2 Offers</span>
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">1 day ago</span>
+                        <span class="activity-badge badge-update">Report</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: var(--space-2xl);">
+                <button class="btn btn-outline" onclick="loadMoreActivities()">
+                    <i class="fas fa-plus"></i>
+                    Load More Activities
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Professional Activity Controller
+        class ActivityController {
+            constructor() {
+                this.activities = [];
+                this.filters = {
+                    type: 'all',
+                    time: 'today',
+                    priority: 'all'
+                };
+                this.init();
+            }
+
+            init() {
+                console.log('📊 Recent Activity Dashboard Initialized');
+                this.createActivityBackground();
+                this.setupEventListeners();
+                this.startRealTimeUpdates();
+            }
+
+            createActivityBackground() {
+                const container = document.getElementById('activityBackground');
+                for (let i = 0; i < 12; i++) {
+                    const pulse = document.createElement('div');
+                    pulse.className = 'activity-pulse';
+                    pulse.style.left = Math.random() * 100 + '%';
+                    pulse.style.top = Math.random() * 100 + '%';
+                    pulse.style.animationDelay = Math.random() * 6 + 's';
+                    container.appendChild(pulse);
+                }
+            }
+
+            setupEventListeners() {
+                // Auto-refresh activities every 30 seconds
+                setInterval(() => {
+                    if (document.visibilityState === 'visible') {
+                        this.refreshActivities();
+                    }
+                }, 30000);
+            }
+
+            startRealTimeUpdates() {
+                // Simulate real-time activity updates
+                setInterval(() => {
+                    this.simulateNewActivity();
+                }, 45000);
+            }
+
+            simulateNewActivity() {
+                const activities = [
+                    'New candidate application received',
+                    'Interview feedback submitted',
+                    'Job posting updated',
+                    'Team member added to project'
+                ];
+                
+                const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                this.showToast(`🔔 ${randomActivity}`, 'info');
+            }
+
+            filterActivities(filterType, value) {
+                this.filters[filterType] = value;
+                console.log(`🔍 Filtering ${filterType}:`, value);
+                this.showToast(`Filter applied: ${filterType} = ${value}`, 'success');
+            }
+
+            refreshActivities() {
+                this.showToast('🔄 Refreshing activities...', 'info');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    this.showToast('✅ Activities refreshed successfully!', 'success');
+                }, 1500);
+            }
+
+            markAllAsRead() {
+                this.showToast('📖 All activities marked as read', 'success');
+                
+                // Remove all badges
+                document.querySelectorAll('.activity-badge').forEach(badge => {
+                    badge.style.opacity = '0.5';
+                });
+            }
+
+            loadMoreActivities() {
+                this.showToast('📥 Loading more activities...', 'info');
+                
+                setTimeout(() => {
+                    this.showToast('✅ More activities loaded!', 'success');
+                }, 2000);
+            }
+
+            showToast(message, type = 'info', duration = 4000) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-${this.getToastIcon(type)}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 300);
+                }, duration);
+            }
+
+            getToastIcon(type) {
+                const icons = {
+                    success: 'check-circle',
+                    error: 'exclamation-circle',
+                    warning: 'exclamation-triangle',
+                    info: 'info-circle'
+                };
+                return icons[type] || 'info-circle';
+            }
+        }
+
+        // Global variables
+        let activityController;
+
+        // Global functions
+        function filterActivities(filterType, value) {
+            activityController.filterActivities(filterType, value);
+        }
+
+        function refreshActivities() {
+            activityController.refreshActivities();
+        }
+
+        function markAllAsRead() {
+            activityController.markAllAsRead();
+        }
+
+        function loadMoreActivities() {
+            activityController.loadMoreActivities();
+        }
+
+        // Initialize controller
+        document.addEventListener('DOMContentLoaded', function() {
+            activityController = new ActivityController();
+        });
+    </script>
+</body>
+</html>
