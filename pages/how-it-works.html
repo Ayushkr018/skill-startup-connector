@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - SkillSync AI</title>
+    <meta name="description" content="Learn how SkillSync AI connects talented students with innovative startups through our intelligent matching platform.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --info-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-color: #e2e8f0;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e2e8f0" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* How It Works Steps */
+        .steps-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .step-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .step-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .step-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .step-features li::before {
+            content: '✓';
+            color: #48bb78;
+            font-weight: bold;
+            background: rgba(72, 187, 120, 0.1);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flow-timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .flow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-gradient);
+            transform: translateX(-50%);
+        }
+
+        .flow-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .flow-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .flow-content {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            width: calc(50% - 2rem);
+            position: relative;
+        }
+
+        .flow-item:nth-child(even) .flow-content {
+            margin-right: 4rem;
+        }
+
+        .flow-item:nth-child(odd) .flow-content {
+            margin-left: 4rem;
+        }
+
+        .flow-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+        }
+
+        .flow-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .flow-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* User Types */
+        .user-types {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .user-types-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .user-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .user-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .user-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--secondary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .user-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .user-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .user-benefits {
+            list-style: none;
+            text-align: left;
+        }
+
+        .user-benefits li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+
+        .user-benefits li:last-child {
+            border-bottom: none;
+        }
+
+        .user-benefits li::before {
+            content: '→';
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-list {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 200px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: #f5576c;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-btn.secondary:hover {
+            background: white;
+            color: #f5576c;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .flow-timeline::before {
+                left: 2rem;
+            }
+
+            .flow-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .flow-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .flow-content {
+                width: 100%;
+                margin: 0 0 2rem 4rem !important;
+            }
+
+            .flow-icon {
+                left: 2rem;
+            }
+
+            .user-cards {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-network-wired"></i>
+                SkillSync AI
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="how-it-works.html" class="nav-link">How It Works</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="login.html" class="cta-button">Get Started</a>
+            </nav>
+            
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title fade-in">How SkillSync AI Works</h1>
+            <p class="hero-subtitle fade-in">Discover how our intelligent platform connects talented students with innovative startups through advanced AI matching technology</p>
+            
+            <div class="hero-stats fade-in">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="10000">0</span>
+                    <div class="stat-label">Students Matched</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="500">0</span>
+                    <div class="stat-label">Partner Startups</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="95">0</span>
+                    <div class="stat-label">Success Rate %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Steps -->
+    <section class="steps-section">
+        <div class="steps-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">🚀 Simple 4-Step Process</h2>
+                <p class="section-subtitle">Our streamlined process makes it easy for both students and startups to find perfect matches</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card fade-in">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Create Your Profile</h3>
+                    <p class="step-description">Build a comprehensive profile showcasing your skills, experience, and career aspirations.</p>
+                    <ul class="step-features">
+                        <li>Skill assessment tests</li>
+                        <li>Portfolio showcase</li>
+                        <li>Career preferences</li>
+                        <li>Achievement highlights</li>
+                    </ul>
+                </div>
+
+                <div class="step-card fade-in">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">AI-Powered Matching</h3>
+                    <p class="step-description">Our advanced AI analyzes your profile and matches you with the most suitable opportunities.</p>
+                    <ul class="step-features">
+                        <li>Skills compatibility analysis</li>
+                        <li>Culture fit assessment</li>
+                        <li>Growth potential evaluation</li>
+                        <li>Location preferences</li>
+                    </ul>
+                </div>
+
+                <div class="step-card fade-in">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Connect & Interview</h3>
+                    <p class="step-description">Connect with matched startups and participate in streamlined interview processes.</p>
+                    <ul class="step-features">
+                        <li>Direct messaging</li>
+                        <li>Video interviews</li>
+                        <li>Technical assessments</li>
+                        <li>Schedule coordination</li>
+                    </ul>
+                </div>
+
+                <div class="step-card fade-in">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Start Your Journey</h3>
+                    <p class="step-description">Begin your career with the perfect startup and access ongoing support and resources.</p>
+                    <ul class="step-features">
+                        <li>Onboarding assistance</li>
+                        <li>Mentorship programs</li>
+                        <li>Skill development</li>
+                        <li>Career tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Flow -->
+    <section class="process-flow">
+        <div class="process-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">🔄 Detailed Process Flow</h2>
+                <p class="section-subtitle">Step-by-step breakdown of how our platform creates perfect matches</p>
+            </div>
+
+            <div class="flow-timeline">
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">Profile Creation & Verification</h3>
+                        <p class="flow-description">Students create detailed profiles with skills, projects, and career goals. Our system verifies credentials and achievements to ensure authenticity.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
+
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">AI Analysis & Scoring</h3>
+                        <p class="flow-description">Advanced algorithms analyze student profiles and startup requirements to generate compatibility scores based on skills, culture, and growth potential.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">Smart Matching Algorithm</h3>
+                        <p class="flow-description">Our proprietary matching engine considers multiple factors including technical skills, soft skills, career goals, and startup culture to find perfect fits.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                </div>
+
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">Connection & Communication</h3>
+                        <p class="flow-description">Matched pairs receive notifications and can connect through our platform. Built-in messaging and video call features facilitate easy communication.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">Interview & Assessment</h3>
+                        <p class="flow-description">Streamlined interview process with integrated scheduling, technical assessments, and feedback collection to ensure the best possible outcomes.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                </div>
+
+                <div class="flow-item fade-in">
+                    <div class="flow-content">
+                        <h3 class="flow-title">Onboarding & Success</h3>
+                        <p class="flow-description">Successful matches receive onboarding support, mentorship programs, and ongoing career development resources to ensure long-term success.</p>
+                    </div>
+                    <div class="flow-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Types -->
+    <section class="user-types">
+        <div class="user-types-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">👥 Built for Everyone</h2>
+                <p class="section-subtitle">Whether you're a student seeking opportunities or a startup looking for talent, we've got you covered</p>
+            </div>
+
+            <div class="user-cards">
+                <div class="user-card fade-in">
+                    <div class="user-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="user-title">For Students</h3>
+                    <p class="user-description">Discover exciting opportunities at innovative startups that match your skills and career aspirations.</p>
+                    <ul class="user-benefits">
+                        <li>Access to exclusive startup opportunities</li>
+                        <li>Skill-based matching technology</li>
+                        <li>Portfolio and resume builder</li>
+                        <li>Interview preparation resources</li>
+                        <li>Mentorship and career guidance</li>
+                        <li>Salary negotiation support</li>
+                    </ul>
+                </div>
+
+                <div class="user-card fade-in">
+                    <div class="user-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="user-title">For Startups</h3>
+                    <p class="user-description">Find talented, motivated students who are perfect fits for your company culture and technical needs.</p>
+                    <ul class="user-benefits">
+                        <li>Pre-screened, qualified candidates</li>
+                        <li>AI-powered skill matching</li>
+                        <li>Streamlined hiring process</li>
+                        <li>Cultural fit assessment</li>
+                        <li>Reduced time-to-hire</li>
+                        <li>Cost-effective recruitment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="features-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">✨ Powerful Features</h2>
+                <p class="section-subtitle">Advanced technology and thoughtful design make finding the perfect match easier than ever</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Matching</h3>
+                    <p class="feature-description">Advanced machine learning algorithms analyze skills, preferences, and compatibility for perfect matches.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Verified Profiles</h3>
+                    <p class="feature-description">All profiles undergo thorough verification to ensure authenticity and quality of connections.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="feature-title">Integrated Interviews</h3>
+                    <p class="feature-description">Built-in video calling and assessment tools streamline the interview and hiring process.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Analytics Dashboard</h3>
+                    <p class="feature-description">Comprehensive analytics help both students and startups track progress and optimize their approach.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Mobile Optimized</h3>
+                    <p class="feature-description">Access all features seamlessly across devices with our responsive design and mobile apps.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">24/7 Support</h3>
+                    <p class="feature-description">Round-the-clock customer support ensures you get help whenever you need it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                <p class="section-subtitle">Get answers to common questions about how SkillSync AI works</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How accurate is the AI matching system?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI matching system has a 95% accuracy rate based on user feedback and successful placements. The algorithm continuously learns and improves from each interaction, considering factors like skills compatibility, cultural fit, career goals, and growth potential.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is SkillSync AI free for students?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! SkillSync AI is completely free for students. We believe in democratizing access to opportunities, so students can create profiles, take assessments, connect with startups, and access all platform features at no cost.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How long does the matching process take?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once you complete your profile, initial matches typically appear within 24 hours. The AI continuously analyzes new opportunities and profiles, so you may receive new matches daily. The entire process from signup to job offer averages 2-3 weeks.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What types of startups are on the platform?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We partner with startups across various industries including tech, fintech, healthcare, e-commerce, AI/ML, blockchain, and more. Our startup partners range from early-stage companies to well-funded scale-ups, all committed to hiring and developing young talent.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I work remotely through SkillSync AI?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Many of our startup partners offer remote, hybrid, and flexible work arrangements. You can specify your location preferences during profile creation, and our matching algorithm will prioritize opportunities that align with your preferred work style.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What support do you provide after matching?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide comprehensive post-match support including interview preparation, salary negotiation guidance, onboarding assistance, mentorship programs, and ongoing career development resources. Our success team stays involved throughout your journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title fade-in">Ready to Find Your Perfect Match?</h2>
+            <p class="cta-description fade-in">Join thousands of students and startups who have already found success through SkillSync AI</p>
+            
+            <div class="cta-buttons fade-in">
+                <a href="student-dashboard.html" class="cta-btn primary">
+                    <i class="fas fa-graduation-cap"></i>
+                    Join as Student
+                </a>
+                <a href="startup-dashboard.html" class="cta-btn secondary">
+                    <i class="fas fa-rocket"></i>
+                    Join as Startup
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkillSync AI</h3>
+                    <p>Connecting talented students with innovative startups through intelligent matching technology.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Platform</h3>
+                    <ul>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="success-stories.html">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="api.html">API Documentation</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SkillSync AI. All rights reserved. Built with ❤️ for the future of work.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 100;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current) + (target === 95 ? '%' : '');
+                }, 20);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters when hero section is visible
+                    if (entry.target.classList.contains('hero-stats')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentNode;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open current item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functionality (if implemented)
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            // Mobile menu toggle logic would go here
+            console.log('Mobile menu toggled');
+        });
+
+        // Page load animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+            
+            // Add staggered animation to step cards
+            const stepCards = document.querySelectorAll('.step-card');
+            stepCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animationDelay = `${index * 0.2}s`;
+                }, 100);
+            });
+        });
+
+        // Add loading state to body
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+
+        console.log('🚀 SkillSync AI - How It Works page loaded successfully!');
+    </script>
+</body>
+</html>

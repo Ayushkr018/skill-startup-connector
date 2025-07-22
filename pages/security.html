@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Privacy - SkillSync AI</title>
+    <meta name="description" content="Enterprise-grade security measures, data protection, and privacy policies protecting your information with bank-level encryption and compliance standards.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ═══════════════ DESIGN SYSTEM ═══════════════ */
+        :root {
+            /* Security Color Palette */
+            --security-primary: #1e40af;
+            --security-secondary: #3b82f6;
+            --security-accent: #0ea5e9;
+            --security-success: #10b981;
+            --security-warning: #f59e0b;
+            --security-error: #ef4444;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #0ea5e9 100%);
+            --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #f0f9ff 100%);
+            --gradient-shield: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+            --gradient-cert: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            
+            /* Colors */
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+            --surface-accent: #f1f5f9;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-light: #64748b;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ═══════════════ RESET & BASE ═══════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* ═══════════════ HEADER ═══════════════ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--security-primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .btn-login,
+        .btn-signup {
+            padding: var(--space-xs) var(--space-md);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--security-primary);
+            border-color: var(--security-primary);
+        }
+
+        .btn-login:hover {
+            background: var(--security-primary);
+            color: white;
+        }
+
+        .btn-signup {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* ═══════════════ HERO SECTION ═══════════════ */
+        .security-hero {
+            background: var(--gradient-hero);
+            padding: 8rem 0 var(--space-3xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="security-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(30,64,175,0.1)"/><circle cx="0" cy="0" r="1" fill="rgba(59,130,246,0.05)"/><circle cx="20" cy="20" r="1" fill="rgba(14,165,233,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23security-pattern)"/></svg>');
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+        }
+
+        .security-highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+
+        .security-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: white;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            font-weight: 600;
+            color: var(--security-primary);
+            transition: var(--transition);
+        }
+
+        .security-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .security-badge i {
+            font-size: 1.2rem;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shield-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-main {
+            font-size: 8rem;
+            background: var(--gradient-shield);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 3;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .security-orbit {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .orbit-1 {
+            width: 200px;
+            height: 200px;
+            border-color: rgba(30, 64, 175, 0.3);
+            animation-duration: 15s;
+        }
+
+        .orbit-2 {
+            width: 250px;
+            height: 250px;
+            border-color: rgba(59, 130, 246, 0.2);
+            animation-duration: 20s;
+            animation-direction: reverse;
+        }
+
+        .orbit-3 {
+            width: 300px;
+            height: 300px;
+            border-color: rgba(14, 165, 233, 0.1);
+            animation-duration: 25s;
+        }
+
+        .security-nodes {
+            position: absolute;
+            inset: 0;
+        }
+
+        .node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            animation: pulse 2s infinite;
+        }
+
+        .node:nth-child(1) { top: 20%; left: 50%; transform: translateX(-50%); }
+        .node:nth-child(2) { top: 50%; right: 20%; transform: translateY(-50%); }
+        .node:nth-child(3) { bottom: 20%; left: 50%; transform: translateX(-50%); }
+        .node:nth-child(4) { top: 50%; left: 20%; transform: translateY(-50%); }
+
+        /* ═══════════════ ANIMATIONS ═══════════════ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* ═══════════════ SECURITY FEATURES ═══════════════ */
+        .security-features {
+            padding: var(--space-3xl) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .security-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .security-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .security-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            transition: var(--transition-bounce);
+        }
+
+        .security-card:hover .security-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .security-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .security-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .security-card > p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            line-height: 1.7;
+        }
+
+        .security-list {
+            list-style: none;
+        }
+
+        .security-list li {
+            padding: var(--space-xs) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .security-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--security-success);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .security-list li:hover {
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        /* ═══════════════ DATA PROTECTION ═══════════════ */
+        .data-protection {
+            background: var(--surface-accent);
+            padding: var(--space-3xl) 0;
+        }
+
+        .protection-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+        }
+
+        .protection-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .data-principles {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: white;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .principle:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .principle-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .principle-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .principle h4 {
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+
+        .principle p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Data Flow Visualization */
+        .protection-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .data-flow {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            background: white;
+            padding: var(--space-md);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .flow-step:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flow-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .flow-step:nth-child(1) .flow-icon {
+            background: var(--gradient-primary);
+        }
+
+        .flow-step:nth-child(2) .flow-icon {
+            background: var(--gradient-cert);
+        }
+
+        .flow-step:nth-child(3) .flow-icon {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .flow-icon i {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .flow-text {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--security-primary);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ═══════════════ CERTIFICATIONS ═══════════════ */
+        .certifications {
+            padding: var(--space-3xl) 0;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .cert-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(30, 64, 175, 0.05), transparent);
+            animation: rotate 10s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--security-primary);
+        }
+
+        .cert-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-cert);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            position: relative;
+            z-index: 1;
+            transition: var(--transition-bounce);
+        }
+
+        .cert-card:hover .cert-logo {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .cert-logo i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .cert-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════════════ SECURITY CONTACT ═══════════════ */
+        .security-contact {
+            background: var(--gradient-dark);
+            color: white;
+            padding: var(--space-3xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contact-pattern" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23contact-pattern)"/></svg>');
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-description {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .contact-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .contact-btn.primary {
+            background: white;
+            color: var(--security-primary);
+        }
+
+        .contact-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: white;
+        }
+
+        /* ═══════════════ FOOTER ═══════════════ */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: var(--space-3xl) 0 var(--space-lg);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-md);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-description {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--security-primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-section h4 {
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: var(--space-lg);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-badge {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* ═══════════════ MODALS ═══════════════ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: var(--space-xl);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: var(--space-xs);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            background: var(--surface-accent);
+            color: var(--text-primary);
+        }
+
+        /* ═══════════════ RESPONSIVE ═══════════════ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content,
+            .protection-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+
+            .security-badges {
+                justify-content: center;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .data-flow {
+                gap: var(--space-md);
+            }
+
+            .flow-step {
+                flex-direction: column;
+                text-align: center;
+                padding: var(--space-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .security-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shield-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .shield-main {
+                font-size: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SkillSync AI</span>
+                </a>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#features" class="nav-link">Features</a>
+                    <a href="how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="security.html" class="nav-link active">Security</a>
+                    <div class="nav-buttons">
+                        <button class="btn-login" onclick="openLoginModal()">Login</button>
+                        <button class="btn-signup" onclick="openSignupModal()">Get Started</button>
+                    </div>
+                </div>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="security-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in-up">
+                    <h1 class="hero-title">
+                        <span class="security-highlight">Enterprise-Grade</span><br>
+                        Security & Privacy
+                    </h1>
+                    <p class="hero-description">
+                        Your data is protected by military-grade security measures, end-to-end encryption, 
+                        and comprehensive privacy controls. Trust and security are at the core of everything we do.
+                    </p>
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SOC 2 Type II</span>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>AES-256 Encryption</span>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-user-shield"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in-up">
+                    <div class="shield-container">
+                        <div class="shield-main">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="security-orbit orbit-1"></div>
+                        <div class="security-orbit orbit-2"></div>
+                        <div class="security-orbit orbit-3"></div>
+                        <div class="security-nodes">
+                            <div class="node"></div>
+                            <div class="node"></div>
+                            <div class="node"></div>
+                            <div class="node"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Features Section -->
+    <section class="security-features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">🔐 Comprehensive Security Framework</h2>
+                <p class="section-subtitle">
+                    Multi-layered protection ensuring your data remains secure, private, and under your control
+                </p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Advanced Authentication</h3>
+                    <p>Multi-factor authentication, JWT tokens, and biometric login options for maximum account security and seamless access control.</p>
+                    <ul class="security-list">
+                        <li>Two-factor authentication (2FA)</li>
+                        <li>OAuth 2.0 & SSO integration</li>
+                        <li>Biometric authentication support</li>
+                        <li>Advanced session management</li>
+                        <li>Risk-based authentication</li>
+                    </ul>
+                </div>
+
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Encryption</h3>
+                    <p>End-to-end encryption for all data transmissions and storage using military-grade protocols and industry standards.</p>
+                    <ul class="security-list">
+                        <li>AES-256 encryption at rest</li>
+                        <li>TLS 1.3 for data in transit</li>
+                        <li>Encrypted database storage</li>
+                        <li>Hardware security modules (HSM)</li>
+                        <li>Zero-knowledge architecture</li>
+                    </ul>
+                </div>
+
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <h3>Privacy Controls</h3>
+                    <p>Granular privacy settings giving you complete control over your personal information visibility and data usage.</p>
+                    <ul class="security-list">
+                        <li>Profile visibility controls</li>
+                        <li>Granular data sharing preferences</li>
+                        <li>Right to be forgotten (RTBF)</li>
+                        <li>Consent management platform</li>
+                        <li>Data portability tools</li>
+                    </ul>
+                </div>
+
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Infrastructure Security</h3>
+                    <p>Cloud-native security with automated monitoring, AI-powered threat detection, and rapid incident response capabilities.</p>
+                    <ul class="security-list">
+                        <li>24/7/365 security monitoring</li>
+                        <li>AI-powered threat detection</li>
+                        <li>DDoS protection & mitigation</li>
+                        <li>Regular penetration testing</li>
+                        <li>Automated incident response</li>
+                    </ul>
+                </div>
+
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Compliance Standards</h3>
+                    <p>Adherence to international data protection regulations and industry security standards with regular third-party audits.</p>
+                    <ul class="security-list">
+                        <li>GDPR & CCPA compliance</li>
+                        <li>SOC 2 Type II certified</li>
+                        <li>ISO 27001 implementation</li>
+                        <li>HIPAA security measures</li>
+                        <li>Regular compliance audits</li>
+                    </ul>
+                </div>
+
+                <div class="security-card fade-in-up">
+                    <div class="security-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Vulnerability Management</h3>
+                    <p>Proactive security testing and vulnerability assessment to maintain system integrity and prevent security breaches.</p>
+                    <ul class="security-list">
+                        <li>Regular penetration testing</li>
+                        <li>Active bug bounty program</li>
+                        <li>Automated security scanning</li>
+                        <li>Comprehensive incident response</li>
+                        <li>Security awareness training</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Protection Section -->
+    <section class="data-protection">
+        <div class="container">
+            <div class="protection-content">
+                <div class="protection-text fade-in-up">
+                    <h2 class="section-title">🛡️ Your Data, Your Control</h2>
+                    <p class="protection-description">
+                        We believe in complete transparency about how we collect, use, and protect your data. 
+                        You maintain full ownership and control over your information at all times, with the ability 
+                        to modify, export, or delete your data whenever you choose.
+                    </p>
+                    <div class="data-principles">
+                        <div class="principle">
+                            <div class="principle-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div>
+                                <h4>Data Minimization</h4>
+                                <p>We collect only the data necessary to provide our matching services and enhance your experience</p>
+                            </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Limited Retention</h4>
+                                <p>Personal data is retained only as long as necessary for service provision or as required by law</p>
+                            </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h4>No Third-Party Sales</h4>
+                                <p>We never sell your personal information to advertisers, data brokers, or any third parties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="protection-visual fade-in-up">
+                    <div class="data-flow">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="flow-text">Your Data</div>
+                        </div>
+                        <div class="flow-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="flow-text">Encrypted Storage</div>
+                        </div>
+                        <div class="flow-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="flow-text">AI Processing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Certifications -->
+    <section class="certifications">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">🏆 Security Certifications & Compliance</h2>
+                <p class="section-subtitle">Trusted by industry standards and regulatory frameworks worldwide</p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card fade-in-up">
+                    <div class="cert-logo">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>SOC 2 Type II</h3>
+                    <p>Comprehensive audit of security controls, availability, processing integrity, and confidentiality</p>
+                </div>
+                <div class="cert-card fade-in-up">
+                    <div class="cert-logo">
+                        <i class="fas fa-globe-europe"></i>
+                    </div>
+                    <h3>GDPR Compliant</h3>
+                    <p>Full compliance with European Union data protection regulations and privacy rights</p>
+                </div>
+                <div class="cert-card fade-in-up">
+                    <div class="cert-logo">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3>ISO 27001</h3>
+                    <p>International standard for information security management systems and risk management</p>
+                </div>
+                <div class="cert-card fade-in-up">
+                    <div class="cert-logo">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Cloud Security</h3>
+                    <p>AWS Well-Architected Framework and Azure security best practices implementation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Security Team -->
+    <section class="security-contact">
+        <div class="container">
+            <div class="contact-content fade-in-up">
+                <h2 class="section-title" style="color: white;">🤝 Security Questions?</h2>
+                <p class="contact-description">
+                    Our dedicated security team is here to help. Report vulnerabilities, ask questions about our security practices, 
+                    or request detailed security documentation for your organization.
+                </p>
+                <div class="contact-actions">
+                    <a href="mailto:security@skillsync.ai" class="contact-btn primary">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Security Team</span>
+                    </a>
+                    <a href="mailto:bugbounty@skillsync.ai" class="contact-btn secondary">
+                        <i class="fas fa-bug"></i>
+                        <span>Report Vulnerability</span>
+                    </a>
+                    <a href="#security-docs" class="contact-btn secondary">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Security Documentation</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered platform connecting talented students with innovative startups. 
+                        Building the future of work, one secure match at a time.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/skillsync_ai" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/skillsync-ai" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/skillsync-ai" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://instagram.com/skillsync.ai" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#status">System Status</a></li>
+                        <li><a href="#feedback">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#press">Press Kit</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 SkillSync AI. All rights reserved.</p>
+                    <div class="footer-badge">
+                        <span class="badge">🔒 Enterprise Secure</span>
+                        <span class="badge">🏆 SOC 2 Certified</span>
+                        <span class="badge">🌍 GDPR Compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Welcome Back</h3>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="userType">I am a</label>
+                    <select id="userType" name="userType" required>
+                        <option value="student">🎓 Student</option>
+                        <option value="startup">🚀 Startup</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary full-width" style="width: 100%; margin-top: 1rem;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In Securely</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: #64748b;">
+                    Don't have an account? <a href="#" onclick="switchToSignup()" style="color: #1e40af; font-weight: 600;">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Join SkillSync AI</h3>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <div class="signup-tabs" style="display: flex; margin-bottom: 1.5rem; background: #f1f5f9; border-radius: 8px; padding: 4px;">
+                <button class="tab-btn active" onclick="switchSignupTab('student')" style="flex: 1; padding: 0.5rem; border: none; background: white; border-radius: 6px; font-weight: 600; cursor: pointer;">🎓 Student</button>
+                <button class="tab-btn" onclick="switchSignupTab('startup')" style="flex: 1; padding: 0.5rem; border: none; background: transparent; border-radius: 6px; font-weight: 600; cursor: pointer;">🚀 Startup</button>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div id="studentSignup" class="signup-content active">
+                    <div class="form-group">
+                        <label for="studentName">Full Name</label>
+                        <input type="text" id="studentName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEmail">Email Address</label>
+                        <input type="email" id="studentEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentCollege">College/University</label>
+                        <input type="text" id="studentCollege" name="college" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentSkills">Primary Skills</label>
+                        <input type="text" id="studentSkills" name="skills" placeholder="e.g. React, Python, UI/UX" required>
+                    </div>
+                </div>
+                <div id="startupSignup" class="signup-content" style="display: none;">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="founderEmail">Founder Email</label>
+                        <input type="email" id="founderEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companySize">Company Size</label>
+                        <select id="companySize" name="size" required>
+                            <option value="1-5">1-5 employees</option>
+                            <option value="6-20">6-20 employees</option>
+                            <option value="21-50">21-50 employees</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <input type="text" id="industry" name="industry" placeholder="e.g. FinTech, HealthTech, AI" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary full-width" style="width: 100%; margin-top: 1rem;">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Create Secure Account</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: #64748b;">
+                    Already have an account? <a href="#" onclick="switchToLogin()" style="color: #1e40af; font-weight: 600;">Sign in here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        }
+
+        function openLoginModal() {
+            openModal('loginModal');
+        }
+
+        function openSignupModal() {
+            openModal('signupModal');
+        }
+
+        function switchToLogin() {
+            closeModal('signupModal');
+            setTimeout(() => openModal('loginModal'), 100);
+        }
+
+        function switchToSignup() {
+            closeModal('loginModal');
+            setTimeout(() => openModal('signupModal'), 100);
+        }
+
+        function switchSignupTab(tabType) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (tabType === 'student' && btn.textContent.includes('Student')) {
+                    btn.classList.add('active');
+                    btn.style.background = 'white';
+                } else if (tabType === 'startup' && btn.textContent.includes('Startup')) {
+                    btn.classList.add('active');
+                    btn.style.background = 'white';
+                } else {
+                    btn.style.background = 'transparent';
+                }
+            });
+
+            // Update content
+            document.querySelectorAll('.signup-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(`${tabType}Signup`);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (navMenu && hamburger) {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            }
+        }
+
+        // Close modals on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                closeModal(e.target.id);
+            }
+        });
+
+        // Form styling
+        document.addEventListener('DOMContentLoaded', function() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .form-group {
+                    margin-bottom: 1.5rem;
+                }
+                .form-group label {
+                    display: block;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                    color: var(--text-primary);
+                }
+                .form-group input,
+                .form-group select {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    transition: all 0.3s ease;
+                }
+                .form-group input:focus,
+                .form-group select:focus {
+                    outline: none;
+                    border-color: #1e40af;
+                    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Scroll animations
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            
+            handleScrollAnimation();
+        });
+
+        window.addEventListener('scroll', handleScrollAnimation);
+
+        // Console message
+        console.log('🔒 SkillSync AI Security Page loaded with enterprise-grade protection!');
+    </script>
+</body>
+</html>

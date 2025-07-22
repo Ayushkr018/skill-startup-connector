@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - SkillSync AI | Legal Terms & Conditions</title>
+    <meta name="description" content="SkillSync AI Terms of Service - Complete legal terms and conditions for using our AI-powered skill development platform.">
+    <meta name="keywords" content="terms of service, legal terms, conditions, user agreement, SkillSync AI, platform rules">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Enhanced Color System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+            --info-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --danger-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            --legal-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-lighter: #a0aec0;
+            --text-white: #ffffff;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-tertiary: #edf2f7;
+            --bg-dark: #1a202c;
+            --bg-overlay: rgba(26, 32, 44, 0.9);
+            
+            /* Border Colors */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e0;
+            --border-dark: #a0aec0;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.15s ease-out;
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+            --space-5xl: 8rem;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.875rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        a:hover {
+            color: #4c51bf;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition-normal);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header.scrolled::before {
+            opacity: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: var(--transition-normal);
+        }
+
+        .logo a:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(2deg); }
+            50% { transform: translateY(-1px) rotate(0deg); }
+            75% { transform: translateY(-3px) rotate(-2deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            list-style: none;
+            background: rgba(255, 255, 255, 0.8);
+            padding: var(--space-sm);
+            border-radius: var(--radius-2xl);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.925rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .btn-login,
+        .btn-signup {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-login:hover {
+            color: #667eea;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-sm) var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        /* Legal Hero Section */
+        .legal-hero {
+            background: var(--legal-gradient);
+            color: var(--text-white);
+            padding: 10rem 0 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><defs><pattern id="legal-pattern" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M30 10L50 30L30 50L10 30Z" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23legal-pattern)"/></svg>');
+            animation: legalBackground 25s ease-in-out infinite;
+        }
+
+        @keyframes legalBackground {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-10px) translateY(-5px) rotate(1deg); }
+            50% { transform: translateX(8px) translateY(-8px) rotate(-1deg); }
+            75% { transform: translateX(-5px) translateY(3px) rotate(1deg); }
+        }
+
+        .legal-hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .legal-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .legal-hero h1::before {
+            content: '⚖️';
+            font-size: 0.8em;
+            animation: scaleFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes scaleFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .legal-hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 0;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-white);
+            line-height: 1.8;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            padding: var(--space-5xl) 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-lg) var(--space-2xl);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: var(--radius-xl);
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-xl) var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            position: relative;
+            z-index: 10;
+        }
+
+        .table-of-contents::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--legal-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .table-of-contents h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .table-of-contents h3::before {
+            content: '📋';
+            font-size: 1rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-xs);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .toc-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            border: 1px solid transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        .toc-item a::before {
+            content: '📄';
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .toc-item a:hover {
+            background: rgba(124, 58, 237, 0.08);
+            color: #7c3aed;
+            border-color: rgba(124, 58, 237, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .toc-item a.active {
+            background: var(--legal-gradient);
+            color: var(--text-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Legal Sections */
+        .legal-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .legal-section:hover::before {
+            opacity: 1;
+        }
+
+        .legal-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .legal-section h2::before {
+            content: '📋';
+            font-size: 1.5rem;
+        }
+
+        .legal-section h3 {
+            color: var(--text-primary);
+            margin: var(--space-2xl) 0 var(--space-lg);
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            padding: var(--space-md) var(--space-lg);
+            border-left: 4px solid #7c3aed;
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: var(--radius-md);
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            font-size: 1.05rem;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: var(--space-lg) 0;
+            padding-left: var(--space-2xl);
+        }
+
+        .legal-section li {
+            margin-bottom: var(--space-md);
+            font-size: 1.05rem;
+        }
+
+        .legal-section li strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Important Notice Boxes */
+        .important-notice {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .important-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--danger-gradient);
+        }
+
+        .important-notice h4 {
+            color: #dc2626;
+            margin-bottom: var(--space-md);
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .important-notice h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .important-notice p {
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Terms Highlight Boxes */
+        .terms-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terms-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--info-gradient);
+        }
+
+        .terms-highlight h4 {
+            color: #1e40af;
+            margin-bottom: var(--space-md);
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .terms-highlight h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .terms-highlight ul {
+            margin: 0;
+            padding-left: var(--space-xl);
+        }
+
+        .terms-highlight li {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(124, 58, 237, 0.05) 100%);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+            position: relative;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--success-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        .contact-info h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .contact-info h4::before {
+            content: '📞';
+            font-size: 1.2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .contact-info strong {
+            color: #7c3aed;
+        }
+
+        /* User Rights Grid */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .right-item {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .right-item:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .right-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--legal-gradient);
+            color: var(--text-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto var(--space-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .right-item h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .right-item p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Prohibited Activities Grid */
+        .prohibited-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .prohibited-item {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: var(--transition-normal);
+        }
+
+        .prohibited-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .prohibited-item h4 {
+            color: #dc2626;
+            margin-bottom: var(--space-md);
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .prohibited-item h4::before {
+            content: '🚫';
+            font-size: 1.2rem;
+        }
+
+        .prohibited-item p {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            padding: var(--space-5xl) 0 var(--space-xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin-bottom: var(--space-xl);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            transition: var(--transition-normal);
+            font-size: 1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: var(--space-lg);
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-2xl);
+            animation: modalSlideIn 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition-normal);
+            background: var(--bg-secondary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            transform: scale(1.1);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: var(--space-lg);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--bg-primary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 var(--space-lg);
+            }
+
+            .legal-content {
+                max-width: 900px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: var(--space-xs);
+            }
+
+            .nav-link {
+                padding: var(--space-xs) var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .toc-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: var(--space-xs);
+            }
+
+            .toc-item a {
+                font-size: 0.8rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .nav-menu,
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .legal-hero {
+                padding: 8rem 0 6rem;
+            }
+
+            .table-of-contents {
+                padding: var(--space-lg);
+                margin-bottom: var(--space-lg);
+            }
+
+            .table-of-contents h3 {
+                font-size: 1.1rem;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xs);
+            }
+
+            .toc-item a {
+                font-size: 0.75rem;
+                padding: var(--space-xs);
+            }
+
+            .legal-section {
+                padding: var(--space-xl);
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prohibited-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 95%;
+                padding: var(--space-xl);
+            }
+
+            .legal-section {
+                padding: var(--space-lg);
+            }
+
+            .terms-highlight {
+                padding: var(--space-lg);
+            }
+
+            .contact-info {
+                padding: var(--space-lg);
+            }
+
+            .table-of-contents {
+                padding: var(--space-md);
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header,
+            .legal-hero,
+            .footer {
+                display: none !important;
+            }
+
+            .table-of-contents {
+                position: static;
+                break-inside: avoid;
+            }
+
+            .legal-section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="features.html" class="nav-link">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="how-it-works.html" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>How It Works</span>
+                    </a>
+                    <a href="pricing.html" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <span>Pricing</span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="btn-signup" onclick="openModal('signupModal')">
+                        <i class="fas fa-rocket"></i>
+                        <span>Get Started</span>
+                    </button>
+                </div>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Legal Hero Section -->
+    <section class="legal-hero">
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <p>Our comprehensive terms and conditions governing your use of SkillSync AI platform. Please read carefully to understand your rights and responsibilities.</p>
+        </div>
+    </section>
+
+    <!-- Legal Content -->
+    <section class="legal-content">
+        <div class="container">
+            <div class="last-updated">
+                <strong>Last Updated:</strong> December 15, 2024 • <strong>Effective Date:</strong> January 1, 2025
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="table-of-contents" id="table-of-contents">
+                <h3>Terms Overview</h3>
+                <ul class="toc-grid">
+                    <li class="toc-item"><a href="#acceptance">Acceptance of Terms</a></li>
+                    <li class="toc-item"><a href="#definitions">Definitions</a></li>
+                    <li class="toc-item"><a href="#eligibility">Eligibility</a></li>
+                    <li class="toc-item"><a href="#account">Account Registration</a></li>
+                    <li class="toc-item"><a href="#platform-use">Platform Use</a></li>
+                    <li class="toc-item"><a href="#prohibited-activities">Prohibited Activities</a></li>
+                    <li class="toc-item"><a href="#intellectual-property">Intellectual Property</a></li>
+                    <li class="toc-item"><a href="#payment-terms">Payment & Billing</a></li>
+                    <li class="toc-item"><a href="#privacy-data">Privacy & Data</a></li>
+                    <li class="toc-item"><a href="#disclaimers">Disclaimers</a></li>
+                    <li class="toc-item"><a href="#limitation-liability">Limitation of Liability</a></li>
+                    <li class="toc-item"><a href="#termination">Termination</a></li>
+                    <li class="toc-item"><a href="#dispute-resolution">Dispute Resolution</a></li>
+                    <li class="toc-item"><a href="#governing-law">Governing Law</a></li>
+                    <li class="toc-item"><a href="#modifications">Modifications</a></li>
+                    <li class="toc-item"><a href="#contact">Contact Information</a></li>
+                </ul>
+            </div>
+
+            <!-- Acceptance of Terms -->
+            <div class="legal-section" id="acceptance">
+                <h2>Acceptance of Terms</h2>
+                
+                <p>Welcome to SkillSync AI! These Terms of Service ("Terms") govern your access to and use of SkillSync AI's website, platform, services, and applications (collectively, the "Service") operated by SkillSync AI Inc. ("we," "us," or "our").</p>
+
+                <div class="important-notice">
+                    <h4>Important Legal Agreement</h4>
+                    <p>By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of these terms, then you may not access the Service. These Terms apply to all visitors, users, and others who access or use the Service.</p>
+                </div>
+
+                <h3>Binding Agreement</h3>
+                <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. By:</p>
+                <ul>
+                    <li>Creating an account on our platform</li>
+                    <li>Accessing any part of our Service</li>
+                    <li>Using our AI-powered learning tools</li>
+                    <li>Participating in our learning programs</li>
+                    <li>Downloading our mobile applications</li>
+                </ul>
+                <p>You acknowledge that you have read, understood, and agree to these Terms and our Privacy Policy.</p>
+
+                <div class="terms-highlight">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>These Terms create a legally binding agreement between you and SkillSync AI</li>
+                        <li>You must be eligible to enter into this agreement</li>
+                        <li>Continued use of our Service constitutes ongoing acceptance</li>
+                        <li>We may update these Terms from time to time with notice</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Definitions -->
+            <div class="legal-section" id="definitions">
+                <h2>Definitions</h2>
+                
+                <p>For the purposes of these Terms, the following definitions apply:</p>
+
+                <h3>Service-Related Terms</h3>
+                <ul>
+                    <li><strong>"Service"</strong> refers to the SkillSync AI platform, website, mobile applications, and all related services</li>
+                    <li><strong>"Platform"</strong> means our AI-powered learning management system and all its features</li>
+                    <li><strong>"Content"</strong> includes all text, data, information, software, graphics, or other materials</li>
+                    <li><strong>"User Content"</strong> means any content you submit, post, or transmit through our Service</li>
+                    <li><strong>"AI Engine"</strong> refers to our artificial intelligence algorithms and machine learning systems</li>
+                </ul>
+
+                <h3>User-Related Terms</h3>
+                <ul>
+                    <li><strong>"User," "you," or "your"</strong> refers to any individual or entity using our Service</li>
+                    <li><strong>"Account"</strong> means your personal account to access our Service</li>
+                    <li><strong>"Profile"</strong> includes your personal information, learning preferences, and progress data</li>
+                    <li><strong>"Subscription"</strong> refers to paid access to premium features and content</li>
+                </ul>
+
+                <h3>Legal Terms</h3>
+                <ul>
+                    <li><strong>"Agreement"</strong> means these Terms of Service and our Privacy Policy</li>
+                    <li><strong>"Intellectual Property"</strong> includes copyrights, trademarks, patents, and trade secrets</li>
+                    <li><strong>"Third Party"</strong> refers to any individual or entity other than you or SkillSync AI</li>
+                </ul>
+            </div>
+
+            <!-- Eligibility -->
+            <div class="legal-section" id="eligibility">
+                <h2>Eligibility</h2>
+                
+                <p>To use our Service, you must meet certain eligibility requirements designed to ensure compliance with applicable laws and the effective operation of our platform.</p>
+
+                <h3>Age Requirements</h3>
+                <ul>
+                    <li><strong>Minimum Age:</strong> You must be at least 16 years old to use our Service</li>
+                    <li><strong>Parental Consent:</strong> Users between 16-18 may require parental consent in some jurisdictions</li>
+                    <li><strong>Educational Accounts:</strong> Special terms may apply for educational institution accounts</li>
+                    <li><strong>Corporate Accounts:</strong> Business users must have authority to bind their organization</li>
+                </ul>
+
+                <h3>Legal Capacity</h3>
+                <p>You represent and warrant that you:</p>
+                <ul>
+                    <li>Have the legal capacity to enter into this agreement</li>
+                    <li>Are not prohibited from using our Service under applicable law</li>
+                    <li>Will comply with all local, state, national, and international laws</li>
+                    <li>Have not been previously suspended or banned from our Service</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>Verification Rights</h4>
+                    <p>We reserve the right to verify your eligibility at any time. Providing false information during registration may result in immediate account termination.</p>
+                </div>
+
+                <h3>Geographic Restrictions</h3>
+                <p>Our Service may not be available in all countries or regions. You are responsible for ensuring that your use of the Service complies with local laws and regulations.</p>
+            </div>
+
+            <!-- Account Registration -->
+            <div class="legal-section" id="account">
+                <h2>Account Registration and Security</h2>
+                
+                <p>To access certain features of our Service, you must create an account. This section outlines your responsibilities regarding account registration, maintenance, and security.</p>
+
+                <h3>Account Creation</h3>
+                <p>When creating an account, you agree to:</p>
+                <ul>
+                    <li>Provide accurate, current, and complete information</li>
+                    <li>Maintain and promptly update your account information</li>
+                    <li>Choose a secure password and keep it confidential</li>
+                    <li>Accept responsibility for all activities under your account</li>
+                    <li>Notify us immediately of any unauthorized access</li>
+                </ul>
+
+                <h3>Account Security</h3>
+                <div class="terms-highlight">
+                    <h4>Security Best Practices</h4>
+                    <ul>
+                        <li>Use a strong, unique password for your account</li>
+                        <li>Enable two-factor authentication when available</li>
+                        <li>Log out from shared or public computers</li>
+                        <li>Monitor your account for suspicious activity</li>
+                        <li>Report security incidents immediately</li>
+                    </ul>
+                </div>
+
+                <h3>Account Types</h3>
+                <ul>
+                    <li><strong>Individual Accounts:</strong> For personal learning and skill development</li>
+                    <li><strong>Business Accounts:</strong> For organizations and teams</li>
+                    <li><strong>Educational Accounts:</strong> For schools and educational institutions</li>
+                    <li><strong>Developer Accounts:</strong> For API access and integrations</li>
+                </ul>
+
+                <h3>Account Suspension</h3>
+                <p>We may suspend or terminate your account if you:</p>
+                <ul>
+                    <li>Violate these Terms or our policies</li>
+                    <li>Engage in fraudulent or illegal activities</li>
+                    <li>Compromise the security or integrity of our Service</li>
+                    <li>Fail to pay applicable fees</li>
+                </ul>
+            </div>
+
+            <!-- Platform Use -->
+            <div class="legal-section" id="platform-use">
+                <h2>Acceptable Use of Platform</h2>
+                
+                <p>Our platform is designed to provide AI-powered learning experiences. This section outlines acceptable use guidelines and your responsibilities as a user.</p>
+
+                <h3>Permitted Uses</h3>
+                <p>You may use our Service to:</p>
+                <ul>
+                    <li>Access educational content and learning materials</li>
+                    <li>Participate in AI-guided skill assessments</li>
+                    <li>Create and manage your learning profile</li>
+                    <li>Interact with our AI learning assistant</li>
+                    <li>Track your progress and achievements</li>
+                    <li>Collaborate with other learners (where applicable)</li>
+                    <li>Access API endpoints (with appropriate subscription)</li>
+                </ul>
+
+                <h3>User Responsibilities</h3>
+                <div class="rights-grid">
+                    <div class="right-item">
+                        <div class="right-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h4>Honest Participation</h4>
+                        <p>Provide accurate information in assessments and learning activities to ensure effective AI personalization.</p>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Respectful Conduct</h4>
+                        <p>Interact respectfully with other users and maintain a positive learning environment.</p>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>Data Security</h4>
+                        <p>Protect your account credentials and personal information from unauthorized access.</p>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h4>Legal Compliance</h4>
+                        <p>Ensure your use of the platform complies with all applicable laws and regulations.</p>
+                    </div>
+                </div>
+
+                <h3>AI System Interaction</h3>
+                <p>When interacting with our AI systems:</p>
+                <ul>
+                    <li>Do not attempt to manipulate or exploit AI algorithms</li>
+                    <li>Provide honest feedback to improve AI recommendations</li>
+                    <li>Understand that AI suggestions are educational tools, not professional advice</li>
+                    <li>Report any AI system malfunctions or inappropriate responses</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Platform Features</h4>
+                    <ul>
+                        <li>Personalized learning paths powered by AI</li>
+                        <li>Skill assessments and progress tracking</li>
+                        <li>Interactive learning content and exercises</li>
+                        <li>Collaboration tools and community features</li>
+                        <li>Integration with third-party learning platforms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Prohibited Activities -->
+            <div class="legal-section" id="prohibited-activities">
+                <h2>Prohibited Activities</h2>
+                
+                <p>To maintain a safe, secure, and effective learning environment, certain activities are strictly prohibited on our platform.</p>
+
+                <div class="prohibited-grid">
+                    <div class="prohibited-item">
+                        <h4>System Abuse</h4>
+                        <p>Attempting to hack, exploit, or compromise the security of our platform or interfere with other users' access to the Service.</p>
+                    </div>
+                    <div class="prohibited-item">
+                        <h4>Content Violations</h4>
+                        <p>Uploading, sharing, or creating content that is illegal, harmful, threatening, abusive, defamatory, or infringes on intellectual property rights.</p>
+                    </div>
+                    <div class="prohibited-item">
+                        <h4>Fraud & Deception</h4>
+                        <p>Providing false information, impersonating others, or engaging in any fraudulent activities including payment fraud.</p>
+                    </div>
+                    <div class="prohibited-item">
+                        <h4>Spam & Solicitation</h4>
+                        <p>Sending unsolicited messages, advertisements, or engaging in any form of commercial solicitation without permission.</p>
+                    </div>
+                    <div class="prohibited-item">
+                        <h4>Data Mining</h4>
+                        <p>Attempting to scrape, mine, or systematically extract data from our platform using automated tools or scripts.</p>
+                    </div>
+                    <div class="prohibited-item">
+                        <h4>Account Sharing</h4>
+                        <p>Sharing your account credentials or allowing unauthorized access to your account by other individuals.</p>
+                    </div>
+                </div>
+
+                <h3>Specific Prohibitions</h3>
+                <p>You may not:</p>
+                <ul>
+                    <li>Reverse engineer, decompile, or disassemble our software</li>
+                    <li>Use our Service for any unlawful purpose or illegal activity</li>
+                    <li>Violate any applicable local, state, national, or international law</li>
+                    <li>Infringe upon or violate our intellectual property rights or those of others</li>
+                    <li>Harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
+                    <li>Submit false or misleading information</li>
+                    <li>Upload viruses or malicious code</li>
+                    <li>Collect or track personal information of other users without consent</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>Enforcement Actions</h4>
+                    <p>Violation of these prohibitions may result in immediate account suspension, termination, and potential legal action. We reserve the right to investigate and take appropriate action against any violations.</p>
+                </div>
+            </div>
+
+            <!-- Intellectual Property -->
+            <div class="legal-section" id="intellectual-property">
+                <h2>Intellectual Property Rights</h2>
+                
+                <p>SkillSync AI respects intellectual property rights and expects our users to do the same. This section outlines the ownership and use of intellectual property on our platform.</p>
+
+                <h3>Our Intellectual Property</h3>
+                <p>The Service and its original content, features, and functionality are and will remain the exclusive property of SkillSync AI and its licensors. This includes:</p>
+                <ul>
+                    <li>AI algorithms and machine learning models</li>
+                    <li>Software, applications, and platform technology</li>
+                    <li>Educational content and learning materials</li>
+                    <li>Trademarks, service marks, and logos</li>
+                    <li>User interface design and user experience</li>
+                    <li>Documentation and help materials</li>
+                </ul>
+
+                <h3>User Content Ownership</h3>
+                <p>You retain ownership of any content you submit, post, or display on our Service ("User Content"). However, by submitting User Content, you grant us:</p>
+                <ul>
+                    <li>A worldwide, non-exclusive, royalty-free license to use, modify, and display your content</li>
+                    <li>The right to use your content for platform improvement and AI training</li>
+                    <li>Permission to aggregate and anonymize your data for analytics</li>
+                    <li>The ability to remove content that violates our terms</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Fair Use Guidelines</h4>
+                    <ul>
+                        <li>You may use our content for personal learning purposes</li>
+                        <li>Educational institutions may use content under specific licenses</li>
+                        <li>Commercial use requires explicit written permission</li>
+                        <li>Attribution requirements apply to certain content</li>
+                    </ul>
+                </div>
+
+                <h3>Copyright Protection</h3>
+                <p>We respect the intellectual property rights of others and expect our users to do the same. If you believe content on our platform infringes your copyright:</p>
+                <ul>
+                    <li>Submit a DMCA takedown notice to our designated agent</li>
+                    <li>Include all required information as specified by law</li>
+                    <li>Provide accurate contact information</li>
+                    <li>Swear to the accuracy of your claim under penalty of perjury</li>
+                </ul>
+
+                <h3>Trademark Policy</h3>
+                <p>SkillSync AI, our logo, and related marks are trademarks of SkillSync AI Inc. You may not use our trademarks without prior written consent, except where permitted by law.</p>
+            </div>
+
+            <!-- Payment Terms -->
+            <div class="legal-section" id="payment-terms">
+                <h2>Payment Terms and Billing</h2>
+                
+                <p>Our platform offers both free and paid services. This section outlines the terms governing payments, billing, and subscription management.</p>
+
+                <h3>Subscription Plans</h3>
+                <p>We offer various subscription plans with different features and pricing:</p>
+                <ul>
+                    <li><strong>Free Plan:</strong> Basic access with limited features</li>
+                    <li><strong>Individual Plans:</strong> Enhanced features for personal learning</li>
+                    <li><strong>Team Plans:</strong> Collaboration tools for groups</li>
+                    <li><strong>Enterprise Plans:</strong> Advanced features for organizations</li>
+                    <li><strong>Educational Plans:</strong> Special pricing for schools and institutions</li>
+                </ul>
+
+                <h3>Billing and Payments</h3>
+                <div class="terms-highlight">
+                    <h4>Payment Processing</h4>
+                    <ul>
+                        <li>All payments are processed securely through third-party providers</li>
+                        <li>We accept major credit cards and digital payment methods</li>
+                        <li>Subscription fees are charged automatically unless cancelled</li>
+                        <li>You are responsible for keeping payment information current</li>
+                    </ul>
+                </div>
+
+                <h3>Subscription Management</h3>
+                <ul>
+                    <li><strong>Automatic Renewal:</strong> Subscriptions renew automatically unless cancelled</li>
+                    <li><strong>Cancellation:</strong> You may cancel at any time through your account settings</li>
+                    <li><strong>Effective Date:</strong> Cancellations take effect at the end of the current billing period</li>
+                    <li><strong>No Partial Refunds:</strong> We do not provide refunds for partial billing periods</li>
+                </ul>
+
+                <h3>Price Changes</h3>
+                <p>We reserve the right to modify our pricing with 30 days advance notice. Price changes will:</p>
+                <ul>
+                    <li>Not affect your current billing period</li>
+                    <li>Apply to subsequent renewals</li>
+                    <li>Be communicated via email and platform notifications</li>
+                    <li>Allow you to cancel before the new pricing takes effect</li>
+                </ul>
+
+                <h3>Refund Policy</h3>
+                <p>We offer a 14-day money-back guarantee for new subscriptions. Refunds may be granted in cases of:</p>
+                <ul>
+                    <li>Technical issues preventing platform access</li>
+                    <li>Billing errors or unauthorized charges</li>
+                    <li>Service disruptions exceeding our SLA commitments</li>
+                    <li>Account termination due to our error</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>Payment Failures</h4>
+                    <p>Failed payments may result in service suspension. We will attempt to retry payment and notify you of any issues. Continued payment failure may lead to account termination.</p>
+                </div>
+            </div>
+
+            <!-- Privacy and Data -->
+            <div class="legal-section" id="privacy-data">
+                <h2>Privacy and Data Protection</h2>
+                
+                <p>Your privacy is important to us. This section outlines how these Terms relate to our Privacy Policy and your data protection rights.</p>
+
+                <h3>Privacy Policy Integration</h3>
+                <p>Our Privacy Policy is incorporated into these Terms by reference. By accepting these Terms, you also agree to our Privacy Policy, which details:</p>
+                <ul>
+                    <li>What personal information we collect</li>
+                    <li>How we use and process your data</li>
+                    <li>Your privacy rights and choices</li>
+                    <li>Data security measures we implement</li>
+                    <li>How we share information with third parties</li>
+                </ul>
+
+                <h3>AI and Machine Learning</h3>
+                <p>Our Service uses artificial intelligence and machine learning technologies that may process your data to:</p>
+                <ul>
+                    <li>Personalize your learning experience</li>
+                    <li>Provide skill assessments and recommendations</li>
+                    <li>Improve our algorithms and platform features</li>
+                    <li>Generate insights about learning patterns</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Data Usage for AI Training</h4>
+                    <ul>
+                        <li>We may use aggregated, anonymized data to train AI models</li>
+                        <li>Personal information is never used without appropriate safeguards</li>
+                        <li>You can opt out of certain data processing activities</li>
+                        <li>We comply with applicable privacy laws and regulations</li>
+                    </ul>
+                </div>
+
+                <h3>Data Retention</h3>
+                <p>We retain your data according to our Privacy Policy and as necessary to:</p>
+                <ul>
+                    <li>Provide ongoing service to your account</li>
+                    <li>Comply with legal and regulatory requirements</li>
+                    <li>Resolve disputes and enforce our Terms</li>
+                    <li>Improve our Service and AI capabilities</li>
+                </ul>
+
+                <h3>Your Data Rights</h3>
+                <p>Depending on your location, you may have rights to:</p>
+                <ul>
+                    <li>Access and receive a copy of your personal data</li>
+                    <li>Correct inaccurate or incomplete information</li>
+                    <li>Delete your personal data (right to be forgotten)</li>
+                    <li>Restrict or object to certain processing activities</li>
+                    <li>Data portability to another service provider</li>
+                </ul>
+            </div>
+
+            <!-- Disclaimers -->
+            <div class="legal-section" id="disclaimers">
+                <h2>Disclaimers and Warranties</h2>
+                
+                <p>This section contains important disclaimers about our Service that limit our liability and clarify the nature of the service we provide.</p>
+
+                <div class="important-notice">
+                    <h4>Service Provided "As Is"</h4>
+                    <p>Our Service is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not warrant that the Service will be uninterrupted, error-free, or completely secure.</p>
+                </div>
+
+                <h3>Educational Content Disclaimer</h3>
+                <p>The educational content and AI-generated recommendations provided through our Service are for informational and educational purposes only:</p>
+                <ul>
+                    <li>Content should not be considered professional advice</li>
+                    <li>We do not guarantee learning outcomes or skill acquisition</li>
+                    <li>Individual results may vary based on effort and circumstances</li>
+                    <li>Content may not be suitable for all learning styles or goals</li>
+                </ul>
+
+                <h3>AI System Limitations</h3>
+                <p>Our artificial intelligence systems, while advanced, have inherent limitations:</p>
+                <ul>
+                    <li>AI recommendations are based on available data and algorithms</li>
+                    <li>Results may not always be accurate or appropriate for every user</li>
+                    <li>AI systems are continuously learning and improving</li>
+                    <li>Human judgment should supplement AI-generated advice</li>
+                </ul>
+
+                <h3>Third-Party Content</h3>
+                <p>Our Service may include content from third-party sources:</p>
+                <ul>
+                    <li>We do not control or endorse third-party content</li>
+                    <li>Third-party content is subject to separate terms and conditions</li>
+                    <li>We are not responsible for the accuracy of third-party information</li>
+                    <li>Links to external sites are provided for convenience only</li>
+                </ul>
+
+                <h3>No Warranty Disclaimer</h3>
+                <p>We specifically disclaim all warranties, including but not limited to:</p>
+                <ul>
+                    <li>Merchantability and fitness for a particular purpose</li>
+                    <li>Non-infringement of third-party rights</li>
+                    <li>Accuracy, reliability, or completeness of content</li>
+                    <li>Uninterrupted or error-free operation</li>
+                    <li>Security of data transmission or storage</li>
+                </ul>
+            </div>
+
+            <!-- Limitation of Liability -->
+            <div class="legal-section" id="limitation-liability">
+                <h2>Limitation of Liability</h2>
+                
+                <p>This section limits our liability for damages that may arise from your use of our Service, to the maximum extent permitted by applicable law.</p>
+
+                <div class="important-notice">
+                    <h4>Liability Cap</h4>
+                    <p>In no event shall SkillSync AI's total liability to you for all damages exceed the amount you have paid us in the twelve (12) months immediately preceding the event giving rise to liability, or $100, whichever is greater.</p>
+                </div>
+
+                <h3>Excluded Damages</h3>
+                <p>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+                <ul>
+                    <li>Loss of profits, revenue, or business opportunities</li>
+                    <li>Loss of data or information</li>
+                    <li>Cost of substitute goods or services</li>
+                    <li>Business interruption or downtime</li>
+                    <li>Reputational harm or personal injury</li>
+                    <li>Emotional distress or mental anguish</li>
+                </ul>
+
+                <h3>Force Majeure</h3>
+                <p>We are not liable for any failure or delay in performance due to:</p>
+                <ul>
+                    <li>Acts of God, natural disasters, or extreme weather</li>
+                    <li>War, terrorism, or civil unrest</li>
+                    <li>Government actions or regulatory changes</li>
+                    <li>Internet or telecommunications failures</li>
+                    <li>Third-party service provider outages</li>
+                    <li>Other circumstances beyond our reasonable control</li>
+                </ul>
+
+                <h3>Indemnification</h3>
+                <p>You agree to indemnify and hold harmless SkillSync AI from any claims, damages, or expenses arising from:</p>
+                <ul>
+                    <li>Your violation of these Terms</li>
+                    <li>Your use of the Service in violation of applicable law</li>
+                    <li>Your infringement of third-party rights</li>
+                    <li>Content you submit or share through the Service</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Jurisdictional Variations</h4>
+                    <ul>
+                        <li>Some jurisdictions do not allow limitation of certain damages</li>
+                        <li>These limitations may not apply to you if prohibited by law</li>
+                        <li>Consumer protection laws may provide additional rights</li>
+                        <li>Consult local legal counsel for jurisdiction-specific advice</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Termination -->
+            <div class="legal-section" id="termination">
+                <h2>Termination</h2>
+                
+                <p>Either party may terminate this agreement under certain circumstances. This section outlines the termination process and its effects.</p>
+
+                <h3>Termination by You</h3>
+                <p>You may terminate your account and these Terms at any time by:</p>
+                <ul>
+                    <li>Cancelling your subscription through account settings</li>
+                    <li>Contacting our customer support team</li>
+                    <li>Following the account deletion process</li>
+                    <li>Ceasing all use of our Service</li>
+                </ul>
+
+                <h3>Termination by Us</h3>
+                <p>We may terminate or suspend your account immediately, without prior notice, for:</p>
+                <ul>
+                    <li>Violation of these Terms of Service</li>
+                    <li>Fraudulent or illegal activities</li>
+                    <li>Non-payment of fees</li>
+                    <li>Prolonged inactivity (as defined in our policies)</li>
+                    <li>Abuse of our Service or other users</li>
+                    <li>Security breaches or threats</li>
+                </ul>
+
+                <h3>Effect of Termination</h3>
+                <p>Upon termination:</p>
+                <ul>
+                    <li>Your access to the Service will be immediately revoked</li>
+                    <li>All subscriptions and payments will be subject to our refund policy</li>
+                    <li>We may delete your account data according to our retention policy</li>
+                    <li>You must cease all use of our intellectual property</li>
+                    <li>Certain provisions of these Terms will survive termination</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Data Export</h4>
+                    <ul>
+                        <li>You may export your data before account termination</li>
+                        <li>Data export tools are available in your account settings</li>
+                        <li>We provide a 30-day grace period for data retrieval</li>
+                        <li>After this period, data may be permanently deleted</li>
+                    </ul>
+                </div>
+
+                <h3>Surviving Provisions</h3>
+                <p>The following sections survive termination of these Terms:</p>
+                <ul>
+                    <li>Intellectual Property Rights</li>
+                    <li>Disclaimers and Limitation of Liability</li>
+                    <li>Indemnification obligations</li>
+                    <li>Dispute Resolution procedures</li>
+                    <li>Governing Law provisions</li>
+                </ul>
+            </div>
+
+            <!-- Dispute Resolution -->
+            <div class="legal-section" id="dispute-resolution">
+                <h2>Dispute Resolution</h2>
+                
+                <p>We prefer to resolve disputes amicably. This section outlines the process for addressing disagreements between you and SkillSync AI.</p>
+
+                <h3>Informal Resolution</h3>
+                <p>Before initiating formal proceedings, we encourage you to:</p>
+                <ul>
+                    <li>Contact our customer support team</li>
+                    <li>Provide a detailed description of the issue</li>
+                    <li>Allow us 30 days to investigate and respond</li>
+                    <li>Participate in good faith discussions to resolve the matter</li>
+                </ul>
+
+                <h3>Binding Arbitration</h3>
+                <p>If informal resolution fails, disputes will be resolved through binding arbitration:</p>
+                <ul>
+                    <li>Arbitration will be conducted by the American Arbitration Association (AAA)</li>
+                    <li>Proceedings will follow AAA's Commercial Arbitration Rules</li>
+                    <li>Arbitration will take place in San Francisco, California</li>
+                    <li>The arbitrator's decision will be final and binding</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>Class Action Waiver</h4>
+                    <p>You agree to resolve disputes on an individual basis only. You waive any right to participate in class action lawsuits or class-wide arbitration proceedings.</p>
+                </div>
+
+                <h3>Exceptions to Arbitration</h3>
+                <p>The following disputes are not subject to arbitration:</p>
+                <ul>
+                    <li>Intellectual property infringement claims</li>
+                    <li>Small claims court matters (within jurisdictional limits)</li>
+                    <li>Requests for injunctive relief</li>
+                    <li>Claims of misuse of personal data</li>
+                </ul>
+
+                <h3>Governing Law</h3>
+                <p>These Terms are governed by the laws of the State of California, without regard to conflict of law principles. Any legal proceedings not subject to arbitration will be conducted in the courts of San Francisco County, California.</p>
+            </div>
+
+            <!-- Governing Law -->
+            <div class="legal-section" id="governing-law">
+                <h2>Governing Law and Jurisdiction</h2>
+                
+                <p>This section establishes the legal framework governing these Terms and any disputes that may arise.</p>
+
+                <h3>Applicable Law</h3>
+                <p>These Terms of Service are governed by:</p>
+                <ul>
+                    <li>The laws of the State of California, United States</li>
+                    <li>Federal laws of the United States where applicable</li>
+                    <li>International treaties and conventions where relevant</li>
+                    <li>Local consumer protection laws in your jurisdiction</li>
+                </ul>
+
+                <h3>Jurisdiction</h3>
+                <p>For disputes not subject to arbitration:</p>
+                <ul>
+                    <li>Exclusive jurisdiction lies with courts in San Francisco County, California</li>
+                    <li>You consent to personal jurisdiction in these courts</li>
+                    <li>You waive any objection to venue in these courts</li>
+                    <li>Small claims may be filed in your local jurisdiction</li>
+                </ul>
+
+                <h3>International Users</h3>
+                <p>If you are accessing our Service from outside the United States:</p>
+                <ul>
+                    <li>You are responsible for compliance with local laws</li>
+                    <li>These Terms still govern your use of the Service</li>
+                    <li>Additional terms may apply based on your location</li>
+                    <li>Consumer protection laws may provide additional rights</li>
+                </ul>
+
+                <div class="terms-highlight">
+                    <h4>Legal Compliance</h4>
+                    <ul>
+                        <li>We comply with GDPR for European users</li>
+                        <li>CCPA rights apply to California residents</li>
+                        <li>Educational privacy laws (FERPA, COPPA) where applicable</li>
+                        <li>Industry-specific regulations as required</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Modifications -->
+            <div class="legal-section" id="modifications">
+                <h2>Modifications to Terms</h2>
+                
+                <p>We may need to update these Terms from time to time to reflect changes in our Service, applicable law, or business practices.</p>
+
+                <h3>Notice of Changes</h3>
+                <p>When we modify these Terms, we will:</p>
+                <ul>
+                    <li>Provide at least 30 days advance notice of material changes</li>
+                    <li>Send notification to your registered email address</li>
+                    <li>Display prominent notices on our platform</li>
+                    <li>Update the "Last Updated" date at the top of these Terms</li>
+                    <li>Maintain an archive of previous versions</li>
+                </ul>
+
+                <h3>Your Acceptance</h3>
+                <p>By continuing to use our Service after changes take effect, you agree to the modified Terms. If you do not agree to the changes, you must:</p>
+                <ul>
+                    <li>Stop using our Service</li>
+                    <li>Cancel your subscription</li>
+                    <li>Delete your account</li>
+                    <li>Export any data you wish to retain</li>
+                </ul>
+
+                <h3>Types of Modifications</h3>
+                <div class="terms-highlight">
+                    <h4>We may modify Terms for:</h4>
+                    <ul>
+                        <li>New features or services we offer</li>
+                        <li>Changes in applicable laws or regulations</li>
+                        <li>Security enhancements or policy updates</li>
+                        <li>Clarification of existing provisions</li>
+                        <li>Business model or pricing changes</li>
+                    </ul>
+                </div>
+
+                <h3>Emergency Modifications</h3>
+                <p>In certain circumstances, we may modify Terms with shorter notice:</p>
+                <ul>
+                    <li>Legal or regulatory compliance requirements</li>
+                    <li>Security vulnerabilities or threats</li>
+                    <li>Preventing fraud or abuse</li>
+                    <li>Protecting user safety and privacy</li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="legal-section" id="contact">
+                <h2>Contact Information</h2>
+                
+                <p>For questions, concerns, or legal matters related to these Terms of Service, please contact us using the information below.</p>
+
+                <div class="contact-info">
+                    <h4>Legal Department</h4>
+                    <p><strong>Email:</strong> legal@skillsync.ai</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Address:</strong> 123 Innovation Street, Tech District, CA 94105</p>
+                    <p><strong>Business Hours:</strong> Monday-Friday, 9 AM - 5 PM PST</p>
+                </div>
+
+                <div class="terms-highlight">
+                    <h4>Specific Inquiries</h4>
+                    <ul>
+                        <li><strong>DMCA Notices:</strong> dmca@skillsync.ai</li>
+                        <li><strong>Privacy Questions:</strong> privacy@skillsync.ai</li>
+                        <li><strong>Security Issues:</strong> security@skillsync.ai</li>
+                        <li><strong>Billing Support:</strong> billing@skillsync.ai</li>
+                        <li><strong>General Support:</strong> support@skillsync.ai</li>
+                    </ul>
+                </div>
+
+                <div class="contact-info">
+                    <h4>Regulatory Compliance</h4>
+                    <p><strong>Data Protection Officer:</strong> dpo@skillsync.ai</p>
+                    <p><strong>Compliance Officer:</strong> compliance@skillsync.ai</p>
+                    <p><strong>International:</strong> +44 20 1234 5678 (UK Office)</p>
+                    <p><strong>European Representative:</strong> Available upon request</p>
+                </div>
+
+                <h3>Response Times</h3>
+                <ul>
+                    <li><strong>Legal Inquiries:</strong> 5-7 business days</li>
+                    <li><strong>DMCA Notices:</strong> 24-48 hours</li>
+                    <li><strong>Security Reports:</strong> Immediate acknowledgment</li>
+                    <li><strong>Privacy Requests:</strong> 30 days maximum</li>
+                    <li><strong>General Questions:</strong> 1-2 business days</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>Legal Notice</h4>
+                    <p>This contact information is for legal and compliance matters only. For technical support or account issues, please use our standard support channels through your account dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        SkillSync AI
+                    </div>
+                    <p class="footer-description">
+                        Empowering professionals worldwide with AI-driven skill development and personalized learning experiences that adapt to your unique goals and pace.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="system-status.html">System Status</a></li>
+                        <li><a href="#">Training Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 SkillSync AI. All rights reserved. | Designed with 💜 for lifelong learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Welcome Back!</h3>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-signup full-width">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In to SkillSync AI
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Don't have an account? <a href="#" onclick="switchModal('signupModal')">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Join SkillSync AI</h3>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <form class="auth-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Create Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupRole">Professional Role</label>
+                    <select id="signupRole" required>
+                        <option value="">Select your role</option>
+                        <option value="developer">Software Developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="manager">Project Manager</option>
+                        <option value="analyst">Business Analyst</option>
+                        <option value="marketer">Digital Marketer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-signup full-width">
+                    <i class="fas fa-rocket"></i>
+                    Start Learning with AI
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.875rem;">
+                    By signing up, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a>
+                </p>
+                <p style="text-align: center; margin-top: 0.5rem; color: var(--text-light);">
+                    Already have an account? <a href="#" onclick="switchModal('loginModal')">Sign in here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchModal(targetModalId) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.style.display = 'none');
+            openModal(targetModalId);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Form handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            console.log('Login attempt:', { email, password });
+            alert('Login functionality would be implemented here!');
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('signupName').value,
+                email: document.getElementById('signupEmail').value,
+                password: document.getElementById('signupPassword').value,
+                role: document.getElementById('signupRole').value
+            };
+            
+            console.log('Signup attempt:', formData);
+            alert('Signup functionality would be implemented here!');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const navButtons = document.querySelector('.nav-buttons');
+            
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+                navButtons.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navButtons.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navButtons.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                                navMenu.style.right = '0';
+                navMenu.style.background = 'white';
+                navMenu.style.boxShadow = 'var(--shadow-lg)';
+                navMenu.style.padding = 'var(--space-lg)';
+                navMenu.style.zIndex = '1001';
+            }
+        }
+
+        // Smooth scrolling for table of contents
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 120;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active section highlighting in table of contents
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.legal-section[id]');
+            const navLinks = document.querySelectorAll('.table-of-contents a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add loading animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.legal-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        });
+
+        // Enhanced error handling for forms
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('invalid', function() {
+                this.setCustomValidity('Please fill out this field.');
+            });
+            
+            input.addEventListener('input', function() {
+                this.setCustomValidity('');
+            });
+        });
+
+        // Copy to clipboard functionality for legal references
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showNotification('Copied to clipboard: ' + text);
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Copied to clipboard');
+            });
+        }
+
+        // Show notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success-gradient);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Make contact emails clickable
+        document.querySelectorAll('.contact-info').forEach(info => {
+            info.addEventListener('click', function(e) {
+                if (e.target.tagName === 'STRONG' && e.target.nextSibling && e.target.nextSibling.textContent.includes('@')) {
+                    const email = e.target.nextSibling.textContent.trim();
+                    window.location.href = 'mailto:' + email;
+                }
+            });
+        });
+
+        // Print functionality
+        function printTerms() {
+            window.print();
+        }
+
+        // Add print button to page
+        document.addEventListener('DOMContentLoaded', function() {
+            const printButton = document.createElement('button');
+            printButton.innerHTML = '<i class="fas fa-print"></i> Print Terms';
+            printButton.className = 'btn-signup';
+            printButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                z-index: 1000;
+                padding: 0.75rem 1.5rem;
+            `;
+            printButton.onclick = printTerms;
+            document.body.appendChild(printButton);
+        });
+
+        // Search functionality for terms
+        function searchTerms(query) {
+            const sections = document.querySelectorAll('.legal-section');
+            const searchQuery = query.toLowerCase();
+            
+            sections.forEach(section => {
+                const content = section.textContent.toLowerCase();
+                if (content.includes(searchQuery)) {
+                    section.style.display = 'block';
+                    // Highlight matching text
+                    highlightText(section, query);
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Highlight matching text
+        function highlightText(element, query) {
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                if (parent.tagName !== 'SCRIPT' && parent.tagName !== 'STYLE') {
+                    const text = textNode.textContent;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    const highlightedText = text.replace(regex, '<mark>$1</mark>');
+                    
+                    if (highlightedText !== text) {
+                        const span = document.createElement('span');
+                        span.innerHTML = highlightedText;
+                        parent.replaceChild(span, textNode);
+                    }
+                }
+            });
+        }
+
+        // Clear search highlights
+        function clearHighlights() {
+            const marks = document.querySelectorAll('mark');
+            marks.forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+            
+            const sections = document.querySelectorAll('.legal-section');
+            sections.forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        // Add search functionality to page
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchContainer = document.createElement('div');
+            searchContainer.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: white;
+                padding: 1rem;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-lg);
+                z-index: 999;
+                display: none;
+            `;
+            
+            searchContainer.innerHTML = `
+                <input type="text" id="searchInput" placeholder="Search terms..." style="
+                    padding: 0.5rem;
+                    border: 1px solid var(--border-light);
+                    border-radius: var(--radius-md);
+                    width: 200px;
+                    margin-bottom: 0.5rem;
+                ">
+                <div>
+                    <button onclick="searchTerms(document.getElementById('searchInput').value)" class="btn-signup" style="padding: 0.5rem 1rem; margin-right: 0.5rem;">Search</button>
+                    <button onclick="clearHighlights()" class="btn-login" style="padding: 0.5rem 1rem;">Clear</button>
+                </div>
+            `;
+            
+            document.body.appendChild(searchContainer);
+
+            // Toggle search visibility
+            const searchToggle = document.createElement('button');
+            searchToggle.innerHTML = '<i class="fas fa-search"></i>';
+            searchToggle.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 300px;
+                background: var(--primary-gradient);
+                color: white;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+            `;
+            
+            searchToggle.onclick = function() {
+                const isVisible = searchContainer.style.display === 'block';
+                searchContainer.style.display = isVisible ? 'none' : 'block';
+            };
+            
+            document.body.appendChild(searchToggle);
+        });
+
+        // Accessibility improvements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add ARIA labels to interactive elements
+            const tocLinks = document.querySelectorAll('.toc-item a');
+            tocLinks.forEach(link => {
+                const text = link.textContent;
+                link.setAttribute('aria-label', `Navigate to ${text} section`);
+            });
+
+            // Add keyboard navigation for custom elements
+            document.addEventListener('keydown', function(event) {
+                if (event.altKey && event.key === 's') {
+                    event.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+                
+                if (event.altKey && event.key === 'p') {
+                    event.preventDefault();
+                    printTerms();
+                }
+            });
+
+            // Add skip to content link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#table-of-contents';
+            skipLink.textContent = 'Skip to Table of Contents';
+            skipLink.style.cssText = `
+                position: absolute;
+                top: -40px;
+                left: 6px;
+                background: var(--primary-gradient);
+                color: white;
+                padding: 8px;
+                border-radius: 4px;
+                text-decoration: none;
+                z-index: 10000;
+                transition: top 0.3s;
+            `;
+            
+            skipLink.addEventListener('focus', function() {
+                this.style.top = '6px';
+            });
+            
+            skipLink.addEventListener('blur', function() {
+                this.style.top = '-40px';
+            });
+            
+            document.body.insertBefore(skipLink, document.body.firstChild);
+        });
+    </script>
+</body>
+</html>
+

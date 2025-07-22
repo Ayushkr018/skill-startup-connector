@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Kit - SkillSync AI</title>
+    <meta name="description" content="Official press kit for SkillSync AI - Download logos, brand assets, company information, and media resources for journalists and partners.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ═══════════════ DESIGN SYSTEM ═══════════════ */
+        :root {
+            /* Press Kit Color Palette */
+            --press-primary: #1e40af;
+            --press-secondary: #3b82f6;
+            --press-accent: #0ea5e9;
+            --press-success: #10b981;
+            --press-warning: #f59e0b;
+            --press-purple: #8b5cf6;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #0ea5e9 100%);
+            --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #f0f9ff 100%);
+            --gradient-media: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-brand: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            
+            /* Colors */
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+            --surface-accent: #f1f5f9;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-light: #64748b;
+            
+            /* Spacing & Layout */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ═══════════════ RESET & BASE ═══════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* ═══════════════ HEADER ═══════════════ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--press-primary);
+        }
+
+        /* ═══════════════ HERO SECTION ═══════════════ */
+        .press-hero {
+            background: var(--gradient-hero);
+            padding: 8rem 0 var(--space-3xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .press-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="press-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(30,64,175,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23press-pattern)"/></svg>');
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+        }
+
+        .press-highlight {
+            background: var(--gradient-media);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .download-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* ═══════════════ COMPANY INFO ═══════════════ */
+        .company-overview {
+            padding: var(--space-3xl) 0;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-3xl);
+            align-items: start;
+        }
+
+        .company-story h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-lg);
+        }
+
+        .company-story p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .key-stats {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .key-stats h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            text-align: center;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: var(--press-primary);
+            font-size: 1.1rem;
+        }
+
+        /* ═══════════════ BRAND ASSETS ═══════════════ */
+        .brand-assets {
+            background: var(--surface-accent);
+            padding: var(--space-3xl) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .asset-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .asset-preview {
+            width: 100%;
+            height: 200px;
+            background: var(--surface-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .asset-preview i {
+            font-size: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .asset-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .asset-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ═══════════════ LEADERSHIP TEAM ═══════════════ */
+        .leadership-team {
+            padding: var(--space-3xl) 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .team-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .team-role {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .team-bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════ MEDIA COVERAGE ═══════════════ */
+        .media-coverage {
+            background: var(--surface-accent);
+            padding: var(--space-3xl) 0;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .coverage-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            transition: var(--transition);
+        }
+
+        .coverage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .coverage-source {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .source-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: var(--gradient-media);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .source-info h4 {
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .source-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .coverage-headline {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            line-height: 1.4;
+        }
+
+        .coverage-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .read-more-btn {
+            color: var(--press-primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: var(--transition);
+        }
+
+        .read-more-btn:hover {
+            transform: translateX(5px);
+        }
+
+        /* ═══════════════ CONTACT SECTION ═══════════════ */
+        .press-contact {
+            background: var(--gradient-dark);
+            color: white;
+            padding: var(--space-3xl) 0;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            font-size: 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .contact-info {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        /* ═══════════════ ANIMATIONS ═══════════════ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* ═══════════════ RESPONSIVE ═══════════════ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .assets-grid,
+            .team-grid,
+            .coverage-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SkillSync AI</span>
+                </a>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="press-kit.html" class="nav-link" style="color: var(--press-primary); font-weight: 700;">Press Kit</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="press-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-title">
+                    <span class="press-highlight">Press Kit</span><br>
+                    & Media Resources
+                </h1>
+                <p class="hero-description">
+                    Download official SkillSync AI brand assets, company information, high-resolution logos, 
+                    and media resources for journalists, partners, and content creators.
+                </p>
+                <a href="#download-all" class="download-all-btn">
+                    <i class="fas fa-download"></i>
+                    <span>Download Complete Press Kit</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="company-overview">
+        <div class="container">
+            <div class="overview-grid fade-in-up">
+                <div class="company-story">
+                    <h2>🚀 About SkillSync AI</h2>
+                    <p>
+                        SkillSync AI is revolutionizing talent discovery through artificial intelligence, connecting 
+                        talented students with innovative startups worldwide. Founded in 2024, our platform uses 
+                        advanced machine learning algorithms to create perfect matches based on skills, culture fit, 
+                        and career aspirations.
+                    </p>
+                    <p>
+                        With over 10,000+ students and 500+ partner startups, we've achieved an industry-leading 
+                        85% success rate in talent matching. Our mission is to democratize opportunities and build 
+                        the future workforce through intelligent technology.
+                    </p>
+                    <p>
+                        Based in India with a global vision, SkillSync AI is backed by leading investors and 
+                        has been recognized as a breakthrough innovation in HR technology and AI-powered recruitment.
+                    </p>
+                </div>
+                <div class="key-stats">
+                    <h3>📊 Key Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Founded</span>
+                        <span class="stat-value">2024</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Students Matched</span>
+                        <span class="stat-value">10,000+</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Partner Startups</span>
+                        <span class="stat-value">500+</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Success Rate</span>
+                        <span class="stat-value">85%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Avg Match Time</span>
+                        <span class="stat-value">72 Hours</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Countries</span>
+                        <span class="stat-value">15+</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Team Size</span>
+                        <span class="stat-value">25+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Assets -->
+    <section class="brand-assets">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">🎨 Brand Assets & Logos</h2>
+                <p class="section-subtitle">
+                    Official SkillSync AI brand assets for media use, presentations, and partnerships
+                </p>
+            </div>
+
+            <div class="assets-grid">
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="asset-title">Primary Logo Pack</h3>
+                    <p class="asset-description">
+                        High-resolution logo files in multiple formats (PNG, SVG, EPS) 
+                        with transparent and colored backgrounds.
+                    </p>
+                    <a href="#download-logo" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Logos (2.3 MB)</span>
+                    </a>
+                </div>
+
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="asset-title">Brand Guidelines</h3>
+                    <p class="asset-description">
+                        Complete brand style guide including colors, typography, 
+                        usage guidelines, and visual identity standards.
+                    </p>
+                    <a href="#download-guidelines" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Guidelines (5.1 MB)</span>
+                    </a>
+                </div>
+
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3 class="asset-title">Product Screenshots</h3>
+                    <p class="asset-description">
+                        High-quality screenshots of our platform interface, 
+                        dashboard, and key features for media coverage.
+                    </p>
+                    <a href="#download-screenshots" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Screenshots (8.7 MB)</span>
+                    </a>
+                </div>
+
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="asset-title">Team Photos</h3>
+                    <p class="asset-description">
+                        Professional headshots and team photos of SkillSync AI 
+                        leadership and key team members.
+                    </p>
+                    <a href="#download-photos" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Photos (12.4 MB)</span>
+                    </a>
+                </div>
+
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3 class="asset-title">Presentation Templates</h3>
+                    <p class="asset-description">
+                        PowerPoint and Keynote templates with SkillSync AI branding 
+                        for presentations and pitch decks.
+                    </p>
+                    <a href="#download-templates" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Templates (4.2 MB)</span>
+                    </a>
+                </div>
+
+                <div class="asset-card fade-in-up">
+                    <div class="asset-preview">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="asset-title">Video Assets</h3>
+                    <p class="asset-description">
+                        Product demo videos, company introduction, and animated 
+                        logo files for multimedia content.
+                    </p>
+                    <a href="#download-videos" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Download Videos (45.8 MB)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="leadership-team">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">👥 Leadership Team</h2>
+                <p class="section-subtitle">
+                    Meet the visionaries building the future of AI-powered talent discovery
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card fade-in-up">
+                    <div class="team-avatar">AK</div>
+                    <h3 class="team-name">Arjun Kumar</h3>
+                    <p class="team-role">CEO & Co-Founder</p>
+                    <p class="team-bio">
+                        Former Google engineer with 8+ years in AI/ML. Passionate about democratizing 
+                        opportunities through technology. Featured in Forbes 30 Under 30.
+                    </p>
+                </div>
+
+                <div class="team-card fade-in-up">
+                    <div class="team-avatar">PK</div>
+                    <h3 class="team-name">Priya Kumar</h3>
+                    <p class="team-role">CTO & Co-Founder</p>
+                    <p class="team-bio">
+                        Ex-Microsoft architect specializing in scalable systems and machine learning 
+                        infrastructure. PhD in Computer Science from IIT Delhi.
+                    </p>
+                </div>
+
+                <div class="team-card fade-in-up">
+                    <div class="team-avatar">AG</div>
+                    <h3 class="team-name">Ayush Gupta</h3>
+                    <p class="team-role">Head of AI</p>
+                    <p class="team-bio">
+                        Leading AI researcher with expertise in natural language processing and 
+                        recommendation systems. Published 15+ research papers.
+                    </p>
+                </div>
+
+                <div class="team-card fade-in-up">
+                    <div class="team-avatar">SM</div>
+                    <h3 class="team-name">Sneha Mishra</h3>
+                    <p class="team-role">Head of Product</p>
+                    <p class="team-bio">
+                        Product management veteran with experience at top startups. Focused on 
+                        user experience and growth strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Coverage -->
+    <section class="media-coverage">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">📰 Recent Media Coverage</h2>
+                <p class="section-subtitle">
+                    Latest press coverage and industry recognition of SkillSync AI
+                </p>
+            </div>
+
+            <div class="coverage-grid">
+                <div class="coverage-card fade-in-up">
+                    <div class="coverage-source">
+                        <div class="source-logo">TC</div>
+                        <div class="source-info">
+                            <h4>TechCrunch</h4>
+                            <p class="source-date">January 15, 2025</p>
+                        </div>
+                    </div>
+                    <h3 class="coverage-headline">
+                        "SkillSync AI Raises $2M to Revolutionize Student-Startup Matching"
+                    </h3>
+                    <p class="coverage-excerpt">
+                        The AI-powered platform has achieved remarkable success with 85% matching accuracy, 
+                        connecting over 10,000 students with innovative startups across multiple industries...
+                    </p>
+                    <a href="#" class="read-more-btn">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="coverage-card fade-in-up">
+                    <div class="coverage-source">
+                        <div class="source-logo">ET</div>
+                        <div class="source-info">
+                            <h4>Economic Times</h4>
+                            <p class="source-date">December 22, 2024</p>
+                        </div>
+                    </div>
+                    <h3 class="coverage-headline">
+                        "The Future of Hiring: How AI is Transforming Recruitment"
+                    </h3>
+                    <p class="coverage-excerpt">
+                        SkillSync AI emerges as a leading example of how artificial intelligence can bridge 
+                        the talent gap between students and startups, reducing hiring time by 70%...
+                    </p>
+                    <a href="#" class="read-more-btn">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="coverage-card fade-in-up">
+                    <div class="coverage-source">
+                        <div class="source-logo">YS</div>
+                        <div class="source-info">
+                            <h4>YourStory</h4>
+                            <p class="source-date">November 30, 2024</p>
+                        </div>
+                    </div>
+                    <h3 class="coverage-headline">
+                        "Startup Spotlight: SkillSync AI Wins National Innovation Award"
+                    </h3>
+                    <p class="coverage-excerpt">
+                        Recognized for outstanding innovation in HR technology, SkillSync AI's platform 
+                        has been adopted by over 500 startups across 15 countries...
+                    </p>
+                    <a href="#" class="read-more-btn">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Contact -->
+    <section class="press-contact">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title" style="color: white;">📞 Press & Media Contact</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+                    Get in touch with our media team for interviews, press releases, and collaboration opportunities
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3 class="contact-title">Press Inquiries</h3>
+                    <div class="contact-info">
+                        <p><strong>Media Relations Manager:</strong> Riya Sharma</p>
+                        <p>Email: <a href="mailto:press@skillsync.ai" class="contact-link">press@skillsync.ai</a></p>
+                        <p>Phone: <a href="tel:+919876543210" class="contact-link">+91 98765 43210</a></p>
+                        <p>Response time: Within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="contact-title">Interview Requests</h3>
+                    <div class="contact-info">
+                        <p><strong>Leadership Team:</strong> Available for interviews</p>
+                        <p>Email: <a href="mailto:media@skillsync.ai" class="contact-link">media@skillsync.ai</a></p>
+                        <p>Schedule: <a href="#" class="contact-link">calendly.com/skillsync-media</a></p>
+                        <p>Languages: English, Hindi</p>
+                    </div>
+                </div>
+
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="contact-title">Partnership Inquiries</h3>
+                    <div class="contact-info">
+                        <p><strong>Business Development:</strong> Vikram Singh</p>
+                        <p>Email: <a href="mailto:partnerships@skillsync.ai" class="contact-link">partnerships@skillsync.ai</a></p>
+                        <p>Phone: <a href="tel:+919876543211" class="contact-link">+91 98765 43211</a></p>
+                        <p>Focus: Strategic partnerships & collaborations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll animations
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            
+            handleScrollAnimation();
+        });
+
+        window.addEventListener('scroll', handleScrollAnimation);
+
+        // Download functionality (placeholder)
+        document.querySelectorAll('.download-btn, .download-all-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const fileName = this.querySelector('span').textContent;
+                alert(`📎 Download started: ${fileName}\n\nNote: This is a demo. In production, actual files would be downloaded.`);
+            });
+        });
+
+        // Contact links functionality
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('🔗 This would redirect to the full article on the respective news website.');
+            });
+        });
+
+        console.log('📰 SkillSync AI Press Kit loaded successfully!');
+    </script>
+</body>
+</html>

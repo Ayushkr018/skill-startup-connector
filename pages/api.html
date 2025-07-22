@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - SkillSync AI</title>
+    <meta name="description" content="Complete API documentation for SkillSync AI - integrate our talent matching platform into your applications.">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Primary Colors */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+            --danger-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-white: #ffffff;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-dark: #1a202c;
+            --bg-code: #2d3748;
+            --bg-light-gray: #f8fafc;
+            
+            /* Border Colors */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e0;
+            --border-dark: #4a5568;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Typography */
+            --font-mono: 'JetBrains Mono', 'Monaco', 'Menlo', 'Courier New', monospace;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        h5 { font-size: 1.125rem; }
+        h6 { font-size: 1rem; }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #4c51bf;
+            text-decoration: underline;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            padding: var(--space-sm) 0;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: var(--space-md);
+            margin-left: var(--space-lg);
+        }
+
+        .btn-login,
+        .btn-signup {
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-login:hover {
+            background: var(--bg-light-gray);
+            border-color: var(--border-medium);
+        }
+
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            border: 1px solid transparent;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* API Hero Section */
+        .api-hero {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: 8rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .api-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .api-hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .api-hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .api-hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-2xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg) var(--space-2xl);
+            border: none;
+            border-radius: 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--text-white);
+            color: #667eea;
+            margin-right: var(--space-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-white);
+            color: #667eea;
+        }
+
+        /* API Navigation */
+        .api-nav {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-light);
+            padding: var(--space-md) 0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .api-nav-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .api-nav-link {
+            color: var(--text-light);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .api-nav-link:hover,
+        .api-nav-link.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+            text-decoration: none;
+        }
+
+        /* API Content Layout */
+        .api-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--space-2xl);
+            padding: var(--space-2xl) 0;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .api-sidebar {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            position: sticky;
+            top: 200px;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+        }
+
+        .api-sidebar h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .api-sidebar ul {
+            list-style: none;
+        }
+
+        .api-sidebar li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .api-sidebar a {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            padding: var(--space-sm) var(--space-md);
+            display: block;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .api-sidebar a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: #667eea;
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        .api-main {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .api-main section {
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .api-main section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .api-main h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .api-main h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: var(--space-xl) 0 var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .api-main h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: var(--space-lg) 0 var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .api-main h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: var(--space-lg) 0 var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--bg-code);
+            color: #e2e8f0;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            overflow-x: auto;
+            margin: var(--space-md) 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid #4a5568;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--secondary-gradient);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        /* Endpoint Cards */
+        .endpoint-card {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin: var(--space-xl) 0;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .endpoint-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .endpoint-header h4 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Method Badges */
+        .method-badge {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .method-get {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: var(--text-white);
+        }
+
+        .method-post {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: var(--text-white);
+        }
+
+        .method-put {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            color: var(--text-white);
+        }
+
+        .method-delete {
+            background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            color: var(--text-white);
+        }
+
+        /* Endpoint URL */
+        .endpoint-url {
+            font-family: var(--font-mono);
+            background: var(--bg-code);
+            color: #e2e8f0;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin: var(--space-md) 0;
+            overflow-x: auto;
+            border: 1px solid #4a5568;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Tables */
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-lg) 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .params-table th,
+        .params-table td {
+            text-align: left;
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+
+        .params-table th {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .params-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .params-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        /* Parameter Badges */
+        .required-badge,
+        .optional-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .required-badge {
+            background: var(--danger-gradient);
+            color: var(--text-white);
+        }
+
+        .optional-badge {
+            background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+            color: var(--text-white);
+        }
+
+        /* SDK Grid */
+        .sdk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .sdk-card {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            background: var(--bg-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sdk-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+        }
+
+        .sdk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sdk-card h4 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .sdk-card i {
+            font-size: 1.5rem;
+        }
+
+        /* Lists */
+        ol, ul {
+            margin: var(--space-md) 0;
+            padding-left: var(--space-xl);
+        }
+
+        ol li, ul li {
+            margin-bottom: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: var(--space-lg);
+        }
+
+        ul li::before {
+            content: '•';
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><defs><pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>');
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-2xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            color: var(--text-white);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            margin-right: var(--space-sm);
+            font-size: 1.75rem;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+            text-decoration: none;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-xl);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: var(--space-md);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-primary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 var(--space-lg);
+            }
+
+            .api-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .api-sidebar {
+                position: static;
+                order: 2;
+                max-height: none;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: var(--space-lg);
+                box-shadow: var(--shadow-lg);
+                border-top: 1px solid var(--border-light);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .api-hero {
+                padding: 6rem 0 4rem;
+            }
+
+            .api-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .api-hero p {
+                font-size: 1.1rem;
+            }
+
+            .api-nav-links {
+                gap: var(--space-md);
+            }
+
+            .api-nav-link {
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.9rem;
+            }
+
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .sdk-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .params-table {
+                font-size: 0.85rem;
+            }
+
+            .params-table th,
+            .params-table td {
+                padding: var(--space-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .api-hero h1 {
+                font-size: 2rem;
+            }
+
+            .api-main {
+                padding: var(--space-lg);
+            }
+
+            .endpoint-card {
+                padding: var(--space-lg);
+            }
+
+            .modal-content {
+                padding: var(--space-lg);
+                width: 95%;
+            }
+        }
+
+        /* Scroll Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        .api-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .api-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .api-sidebar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .api-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="api.html" class="nav-link active">API</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <div class="nav-buttons">
+                        <button class="btn-login" onclick="openModal('loginModal')">Login</button>
+                        <button class="btn-signup" onclick="openModal('signupModal')">Get Started</button>
+                    </div>
+                </div>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- API Hero -->
+    <section class="api-hero">
+        <div class="container">
+            <h1>API Documentation</h1>
+            <p>Powerful APIs to integrate SkillSync AI into your applications and workflows with advanced talent matching capabilities.</p>
+            <div>
+                <button class="btn-primary" onclick="openModal('signupModal')">
+                    <i class="fas fa-key"></i>
+                    Get API Access
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('overview')">
+                    <i class="fas fa-rocket"></i>
+                    Quick Start
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Navigation -->
+    <nav class="api-nav">
+        <div class="container">
+            <div class="api-nav-links">
+                <a href="#overview" class="api-nav-link active" data-target="overview">Overview</a>
+                <a href="#authentication" class="api-nav-link" data-target="authentication">Authentication</a>
+                <a href="#endpoints" class="api-nav-link" data-target="endpoints">Endpoints</a>
+                <a href="#webhooks" class="api-nav-link" data-target="webhooks">Webhooks</a>
+                <a href="#sdks" class="api-nav-link" data-target="sdks">SDKs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- API Content -->
+    <div class="container">
+        <div class="api-content">
+            <!-- Sidebar -->
+            <aside class="api-sidebar">
+                <h3><i class="fas fa-list"></i> Quick Navigation</h3>
+                <ul>
+                    <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+                    <li><a href="#authentication"><i class="fas fa-lock"></i> Authentication</a></li>
+                    <li><a href="#rate-limits"><i class="fas fa-tachometer-alt"></i> Rate Limits</a></li>
+                    <li><a href="#endpoints"><i class="fas fa-plug"></i> Endpoints</a></li>
+                    <li><a href="#matches"><i class="fas fa-heart"></i> Matches API</a></li>
+                    <li><a href="#profiles"><i class="fas fa-user"></i> Profiles API</a></li>
+                    <li><a href="#messages"><i class="fas fa-comments"></i> Messages API</a></li>
+                    <li><a href="#analytics"><i class="fas fa-chart-bar"></i> Analytics API</a></li>
+                    <li><a href="#webhooks"><i class="fas fa-webhook"></i> Webhooks</a></li>
+                    <li><a href="#errors"><i class="fas fa-exclamation-triangle"></i> Error Handling</a></li>
+                    <li><a href="#sdks"><i class="fas fa-cube"></i> SDKs & Libraries</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="api-main">
+                <!-- Overview -->
+                <section id="overview" class="fade-in-up">
+                    <h2><i class="fas fa-book-open"></i> API Overview</h2>
+                    <p>The SkillSync AI API is a powerful RESTful API that allows you to integrate our intelligent talent matching platform into your applications. Access our advanced AI algorithms, manage user profiles, facilitate connections, and build amazing experiences.</p>
+                    
+                    <h3>Base URL</h3>
+                    <div class="code-block">https://api.skillsync.ai/v1</div>
+                    
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>AI-Powered Matching:</strong> Access our advanced algorithms for talent discovery</li>
+                        <li><strong>Real-time Communication:</strong> Enable instant messaging between users</li>
+                        <li><strong>Profile Management:</strong> Complete CRUD operations for user profiles</li>
+                        <li><strong>Analytics & Insights:</strong> Detailed metrics and performance data</li>
+                        <li><strong>Webhook Support:</strong> Real-time event notifications</li>
+                        <li><strong>Enterprise Security:</strong> OAuth 2.0 and API key authentication</li>
+                    </ul>
+                    
+                    <h3>Response Format</h3>
+                    <p>All API responses are returned in JSON format with consistent structure:</p>
+                    <div class="code-block">{
+  "success": true,
+  "data": {
+    // Response data here
+  },
+  "message": "Operation completed successfully",
+  "meta": {
+    "timestamp": "2025-01-20T10:42:00Z",
+    "version": "v1.0",
+    "request_id": "req_abc123"
+  }
+}</div>
+                </section>
+
+                <!-- Authentication -->
+                <section id="authentication" class="fade-in-up">
+                    <h2><i class="fas fa-shield-alt"></i> Authentication</h2>
+                    <p>SkillSync AI supports multiple authentication methods to secure your API access:</p>
+                    
+                    <h3>API Key Authentication</h3>
+                    <p>Include your API key in the Authorization header for all requests:</p>
+                    
+                    <div class="code-block">curl -H "Authorization: Bearer sk_live_abc123..." \
+     -H "Content-Type: application/json" \
+     https://api.skillsync.ai/v1/profiles</div>
+     
+                    <h3>OAuth 2.0 (Enterprise)</h3>
+                    <p>For enterprise applications requiring user-specific access:</p>
+                    
+                    <div class="code-block">curl -H "Authorization: Bearer oauth_token_here" \
+     -H "Content-Type: application/json" \
+     https://api.skillsync.ai/v1/matches</div>
+     
+                    <h3>Getting Your API Key</h3>
+                    <ol>
+                        <li>Create your SkillSync AI developer account</li>
+                        <li>Navigate to your dashboard</li>
+                        <li>Go to Settings → API Keys</li>
+                        <li>Generate a new API key with appropriate permissions</li>
+                        <li>Store your key securely and never expose it in client-side code</li>
+                    </ol>
+
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method-badge method-post">POST</span>
+                            <h4>Generate API Key</h4>
+                        </div>
+                        <p>Create a new API key with specific permissions and scopes.</p>
+                        
+                        <div class="endpoint-url">POST /auth/api-keys</div>
+                        
+                        <h5>Request Body</h5>
+                        <div class="code-block">{
+  "name": "Production API Key",
+  "scopes": ["matches:read", "profiles:write", "messages:read"],
+  "expires_at": "2025-12-31T23:59:59Z"
+}</div>
+                    </div>
+                </section>
+
+                <!-- Rate Limits -->
+                <section id="rate-limits" class="fade-in-up">
+                    <h2><i class="fas fa-tachometer-alt"></i> Rate Limits</h2>
+                    <p>To ensure fair usage and optimal performance, our API implements rate limiting based on your subscription plan:</p>
+                    
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Requests/Min</th>
+                                <th>Requests/Day</th>
+                                <th>Burst Limit</th>
+                                <th>Concurrent Requests</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Free</strong></td>
+                                <td>60</td>
+                                <td>1,000</td>
+                                <td>100</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pro</strong></td>
+                                <td>300</td>
+                                <td>10,000</td>
+                                <td>500</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Enterprise</strong></td>
+                                <td>1,000</td>
+                                <td>50,000</td>
+                                <td>2,000</td>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Custom</strong></td>
+                                <td>Unlimited*</td>
+                                <td>Unlimited*</td>
+                                <td>Custom</td>
+                                <td>Custom</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p><em>*Subject to fair usage policy</em></p>
+
+                    <h3>Rate Limit Headers</h3>
+                    <p>Every API response includes rate limit information:</p>
+                    <div class="code-block">X-RateLimit-Limit: 300
+X-RateLimit-Remaining: 299
+X-RateLimit-Reset: 1642780800
+X-RateLimit-Retry-After: 60</div>
+                </section>
+
+                <!-- Endpoints -->
+                <section id="endpoints" class="fade-in-up">
+                    <h2><i class="fas fa-plug"></i> API Endpoints</h2>
+                    
+                    <!-- Matches API -->
+                    <div id="matches">
+                        <h3><i class="fas fa-heart"></i> Matches API</h3>
+                        <p>The Matches API powers our core talent matching functionality using advanced AI algorithms.</p>
+                        
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Matches</h4>
+                            </div>
+                            <p>Retrieve intelligent matches for a specific user based on their profile, preferences, and our AI matching algorithms.</p>
+                            
+                            <div class="endpoint-url">GET /matches/:userId</div>
+                            
+                            <h5>Path Parameters</h5>
+                            <table class="params-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>userId</code></td>
+                                        <td>string</td>
+                                        <td><span class="required-badge">Required</span></td>
+                                        <td>Unique user identifier (UUID format)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h5>Query Parameters</h5>
+                            <table class="params-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>limit</code></td>
+                                        <td>integer</td>
+                                        <td><span class="optional-badge">Optional</span></td>
+                                        <td>Number of matches to return (default: 20, max: 100)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>min_score</code></td>
+                                        <td>integer</td>
+                                        <td><span class="optional-badge">Optional</span></td>
+                                        <td>Minimum match score threshold (default: 60, range: 0-100)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>skills</code></td>
+                                        <td>array</td>
+                                        <td><span class="optional-badge">Optional</span></td>
+                                        <td>Filter matches by specific skills</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>location</code></td>
+                                        <td>string</td>
+                                        <td><span class="optional-badge">Optional</span></td>
+                                        <td>Filter by location (city, country, or "remote")</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>experience_level</code></td>
+                                        <td>string</td>
+                                        <td><span class="optional-badge">Optional</span></td>
+                                        <td>junior, mid, senior, lead</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h5>Example Request</h5>
+                            <div class="code-block">curl -H "Authorization: Bearer sk_live_abc123..." \
+  "https://api.skillsync.ai/v1/matches/user_456?limit=10&min_score=80&skills[]=React&skills[]=Node.js"</div>
+                            
+                            <h5>Example Response</h5>
+                            <div class="code-block">{
+  "success": true,
+  "data": {
+    "matches": [
+      {
+        "id": "match_123",
+        "user_id": "user_789",
+        "profile": {
+          "name": "TechStart Inc.",
+          "type": "startup",
+          "logo": "https://cdn.skillsync.ai/logos/techstart.png",
+          "location": "Remote",
+          "company_size": "11-50",
+          "industry": "Technology"
+        },
+        "match_score": 92,
+        "match_reasons": [
+          "Strong skill alignment in React and Node.js",
+          "Similar project experience",
+          "Compatible work style preferences"
+        ],
+        "skills_matched": [
+          { "skill": "React", "weight": 0.9 },
+          { "skill": "Node.js", "weight": 0.85 },
+          { "skill": "TypeScript", "weight": 0.75 }
+        ],
+        "compatibility_scores": {
+          "technical": 95,
+          "cultural": 88,
+          "experience": 90
+        },
+        "created_at": "2025-01-20T10:42:00Z",
+        "expires_at": "2025-01-27T10:42:00Z"
+      }
+    ],
+    "pagination": {
+      "total": 156,
+      "page": 1,
+      "per_page": 10,
+      "total_pages": 16
+    },
+    "filters_applied": {
+      "min_score": 80,
+      "skills": ["React", "Node.js"]
+    }
+  },
+  "meta": {
+    "timestamp": "2025-01-20T10:42:00Z",
+    "request_id": "req_abc123"
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-post">POST</span>
+                                <h4>Create Match Action</h4>
+                            </div>
+                            <p>Accept, reject, or save a match for later consideration.</p>
+                            
+                            <div class="endpoint-url">POST /matches/:matchId/action</div>
+                            
+                            <h5>Request Body</h5>
+                            <div class="code-block">{
+  "action": "accept", // "accept", "reject", "save"
+  "message": "I'm really excited about this opportunity! When can we schedule a call?",
+  "metadata": {
+    "priority": "high",
+    "notes": "Perfect fit for our React team"
+  }
+}</div>
+
+                            <h5>Response</h5>
+                            <div class="code-block">{
+  "success": true,
+  "data": {
+    "action_id": "action_123",
+    "match_id": "match_456",
+    "status": "accepted",
+    "conversation_id": "conv_789",
+    "next_steps": [
+      "Wait for response from TechStart Inc.",
+      "Check your messages for updates",
+      "Complete your profile for better matches"
+    ]
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Match Details</h4>
+                            </div>
+                            <p>Retrieve detailed information about a specific match including AI insights.</p>
+                            
+                            <div class="endpoint-url">GET /matches/:matchId</div>
+                        </div>
+                    </div>
+
+                    <!-- Profiles API -->
+                    <div id="profiles">
+                        <h3><i class="fas fa-user"></i> Profiles API</h3>
+                        <p>Manage user profiles, skills, preferences, and career information.</p>
+                        
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Profile</h4>
+                            </div>
+                            <p>Retrieve complete profile information for a user.</p>
+                            
+                            <div class="endpoint-url">GET /profiles/:userId</div>
+
+                            <h5>Example Response</h5>
+                            <div class="code-block">{
+  "success": true,
+  "data": {
+    "id": "user_123",
+    "name": "Sarah Johnson",
+    "title": "Full Stack Developer",
+    "avatar": "https://cdn.skillsync.ai/avatars/user_123.jpg",
+    "bio": "Passionate developer with 4+ years building scalable web applications...",
+    "location": "San Francisco, CA",
+    "remote_work": true,
+    "experience_years": 4,
+    "skills": [
+      { "name": "React", "level": "expert", "years": 3 },
+      { "name": "Node.js", "level": "advanced", "years": 2 },
+      { "name": "Python", "level": "intermediate", "years": 1 }
+    ],
+    "preferences": {
+      "role_types": ["full-time", "contract"],
+      "company_sizes": ["startup", "small"],
+      "industries": ["technology", "healthcare"],
+      "salary_range": { "min": 80000, "max": 120000, "currency": "USD" }
+    },
+    "social_links": {
+      "github": "https://github.com/sarahjohnson",
+      "linkedin": "https://linkedin.com/in/sarahjohnson",
+      "portfolio": "https://sarahjohnson.dev"
+    },
+    "verification": {
+      "email": true,
+      "phone": true,
+      "github": true,
+      "linkedin": false
+    },
+    "created_at": "2024-06-15T08:30:00Z",
+    "updated_at": "2025-01-15T14:22:00Z"
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-put">PUT</span>
+                                <h4>Update Profile</h4>
+                            </div>
+                            <p>Update user profile information with validation and AI optimization suggestions.</p>
+                            
+                            <div class="endpoint-url">PUT /profiles/:userId</div>
+                            
+                            <h5>Request Body</h5>
+                            <div class="code-block">{
+  "name": "Sarah Johnson",
+  "title": "Senior Full Stack Developer",
+  "bio": "Experienced full-stack developer specializing in React and Node.js...",
+  "location": "Remote",
+  "skills": [
+    { "name": "React", "level": "expert", "years": 4 },
+    { "name": "TypeScript", "level": "advanced", "years": 2 }
+  ],
+  "preferences": {
+    "role_types": ["full-time"],
+    "salary_range": { "min": 90000, "max": 130000, "currency": "USD" }
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-post">POST</span>
+                                <h4>Upload Profile Photo</h4>
+                            </div>
+                            <p>Upload a profile photo with automatic optimization and moderation.</p>
+                            
+                            <div class="endpoint-url">POST /profiles/:userId/photo</div>
+                        </div>
+                    </div>
+
+                    <!-- Messages API -->
+                    <div id="messages">
+                        <h3><i class="fas fa-comments"></i> Messages API</h3>
+                        <p>Real-time messaging system for communication between matched users.</p>
+                        
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-post">POST</span>
+                                <h4>Send Message</h4>
+                            </div>
+                            <p>Send a message to another user in an existing conversation or start a new one.</p>
+                            
+                            <div class="endpoint-url">POST /messages</div>
+                            
+                            <h5>Request Body</h5>
+                            <div class="code-block">{
+  "recipient_id": "user_456",
+  "message": "Hi! I saw your profile and I'm really interested in discussing the React developer position at your startup.",
+  "type": "text", // "text", "image", "file", "audio"
+  "metadata": {
+    "match_id": "match_123",
+    "thread_id": "thread_789"
+  }
+}</div>
+
+                            <h5>Response</h5>
+                            <div class="code-block">{
+  "success": true,
+  "data": {
+    "message_id": "msg_123",
+    "conversation_id": "conv_456",
+    "status": "sent",
+    "delivered_at": "2025-01-20T10:42:00Z",
+    "read_receipt_enabled": true
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Conversations</h4>
+                            </div>
+                            <p>Retrieve all conversations for a user with pagination and filtering.</p>
+                            
+                            <div class="endpoint-url">GET /messages/conversations</div>
+
+                            <h5>Query Parameters</h5>
+                            <table class="params-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>limit</code></td>
+                                        <td>integer</td>
+                                        <td>Number of conversations (default: 20, max: 100)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>unread_only</code></td>
+                                        <td>boolean</td>
+                                        <td>Filter to show only unread conversations</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>search</code></td>
+                                        <td>string</td>
+                                        <td>Search conversations by participant name or company</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Conversation Messages</h4>
+                            </div>
+                            <p>Retrieve messages from a specific conversation with real-time updates.</p>
+                            
+                            <div class="endpoint-url">GET /messages/conversations/:conversationId</div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics API -->
+                    <div id="analytics">
+                        <h3><i class="fas fa-chart-bar"></i> Analytics API</h3>
+                        <p>Access detailed analytics and insights about user engagement, match success rates, and platform performance.</p>
+                        
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get User Analytics</h4>
+                            </div>
+                            <p>Comprehensive analytics for user performance and engagement metrics.</p>
+                            
+                            <div class="endpoint-url">GET /analytics/users/:userId</div>
+
+                            <h5>Example Response</h5>
+                            <div class="code-block">{
+  "success": true,
+  "data": {
+    "profile_views": {
+      "total": 1247,
+      "this_week": 89,
+      "growth": "+12%"
+    },
+    "matches": {
+      "total_received": 156,
+      "accepted": 23,
+      "acceptance_rate": "14.7%",
+      "avg_match_score": 78
+    },
+    "messages": {
+      "sent": 45,
+      "received": 67,
+      "response_rate": "85%",
+      "avg_response_time": "2h 15m"
+    },
+    "skills_trending": [
+      { "skill": "React", "demand_score": 95 },
+      { "skill": "TypeScript", "demand_score": 87 }
+    ]
+  }
+}</div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <span class="method-badge method-get">GET</span>
+                                <h4>Get Platform Analytics</h4>
+                            </div>
+                            <p>Platform-wide analytics and market insights (Enterprise only).</p>
+                            
+                            <div class="endpoint-url">GET /analytics/platform</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Webhooks -->
+                <section id="webhooks" class="fade-in-up">
+                    <h2><i class="fas fa-webhook"></i> Webhooks</h2>
+                    <p>SkillSync AI can send real-time webhooks to notify your application of important events. Webhooks are HTTP POST requests sent to your specified endpoint.</p>
+                    
+                    <h3>Setting Up Webhooks</h3>
+                    <ol>
+                        <li>Navigate to your dashboard → Webhooks</li>
+                        <li>Add your webhook endpoint URL</li>
+                        <li>Select the events you want to receive</li>
+                        <li>Configure your secret key for security</li>
+                        <li>Test your webhook endpoint</li>
+                    </ol>
+
+                    <h3>Supported Events</h3>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Description</th>
+                                <th>Payload</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>match.created</code></td>
+                                <td>New match found for user</td>
+                                <td>Match object with details</td>
+                            </tr>
+                            <tr>
+                                <td><code>match.accepted</code></td>
+                                <td>Match accepted by user</td>
+                                <td>Match and action details</td>
+                            </tr>
+                            <tr>
+                                <td><code>match.rejected</code></td>
+                                <td>Match rejected by user</td>
+                                <td>Match and rejection reason</td>
+                            </tr>
+                            <tr>
+                                <td><code>message.received</code></td>
+                                <td>New message received</td>
+                                <td>Message content and metadata</td>
+                            </tr>
+                            <tr>
+                                <td><code>profile.updated</code></td>
+                                <td>Profile information updated</td>
+                                <td>Updated profile fields</td>
+                            </tr>
+                            <tr>
+                                <td><code>conversation.started</code></td>
+                                <td>New conversation initiated</td>
+                                <td>Conversation participants and metadata</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Webhook Payload Structure</h3>
+                    <div class="code-block">{
+  "id": "evt_1234567890",
+  "event": "match.created",
+  "data": {
+    "match_id": "match_123",
+    "user_id": "user_456",
+    "matched_user_id": "user_789",
+    "match_score": 92,
+    "skills_matched": ["React", "Node.js", "TypeScript"],
+    "timestamp": "2025-01-20T10:42:00Z",
+    "expires_at": "2025-01-27T10:42:00Z"
+  },
+  "webhook_id": "wh_abcdef123456",
+  "created_at": "2025-01-20T10:42:00Z",
+  "signature": "sha256=abc123def456..."
+}</div>
+
+                    <h3>Webhook Security</h3>
+                    <p>Verify webhook authenticity using HMAC signature:</p>
+                    <div class="code-block">// Node.js example
+const crypto = require('crypto');
+
+function verifyWebhookSignature(payload, signature, secret) {
+  const hmac = crypto.createHmac('sha256', secret);
+  const digest = hmac.update(payload).digest('hex');
+  const expected = `sha256=${digest}`;
+  
+  return crypto.timingSafeEqual(
+    Buffer.from(signature, 'utf8'),
+    Buffer.from(expected, 'utf8')
+  );
+}</div>
+
+                    <h3>Webhook Retry Policy</h3>
+                    <ul>
+                        <li>Webhooks are retried up to 5 times with exponential backoff</li>
+                        <li>Initial retry after 1 second, then 2s, 4s, 8s, 16s</li>
+                        <li>Webhooks are considered failed after 5 unsuccessful attempts</li>
+                        <li>You can view failed webhooks in your dashboard</li>
+                    </ul>
+                </section>
+
+                <!-- SDKs -->
+                <section id="sdks" class="fade-in-up">
+                    <h2><i class="fas fa-cube"></i> SDKs & Libraries</h2>
+                    <p>Official SDKs and community libraries to integrate SkillSync AI into your applications with ease.</p>
+                    
+                    <div class="sdk-grid">
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-js-square" style="color: #F7DF1E;"></i> JavaScript / Node.js</h4>
+                            <p>Official JavaScript SDK for web and Node.js applications with TypeScript support.</p>
+                            <div class="code-block">npm install @skillsync/api-client</div>
+                            <div class="code-block">// Usage example
+import SkillSync from '@skillsync/api-client';
+
+const client = new SkillSync({
+  apiKey: 'sk_live_abc123...'
+});
+
+const matches = await client.matches.get('user_123');</div>
+                        </div>
+                        
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-python" style="color: #3776AB;"></i> Python</h4>
+                            <p>Python SDK perfect for backend integrations, data analysis, and machine learning workflows.</p>
+                            <div class="code-block">pip install skillsync-python</div>
+                            <div class="code-block"># Usage example
+from skillsync import SkillSyncClient
+
+client = SkillSyncClient(api_key='sk_live_abc123...')
+matches = client.matches.get(user_id='user_123')</div>
+                        </div>
+                        
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-react" style="color: #61DAFB;"></i> React</h4>
+                            <p>React components and hooks for seamless frontend integration with built-in state management.</p>
+                            <div class="code-block">npm install @skillsync/react</div>
+                            <div class="code-block">// Usage example
+import { SkillSyncProvider, useMatches } from '@skillsync/react';
+
+function MatchesList() {
+  const { matches, loading } = useMatches();
+  return <div>{/* Your UI here */}</div>;
+}</div>
+                        </div>
+
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-php" style="color: #777BB4;"></i> PHP</h4>
+                            <p>PHP library for server-side integrations with Laravel and Symfony support.</p>
+                            <div class="code-block">composer require skillsync/php-sdk</div>
+                            <div class="code-block">// Usage example
+$client = new SkillSync\Client(['api_key' => 'sk_live_abc123...']);
+$matches = $client->matches->get('user_123');</div>
+                        </div>
+
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-android" style="color: #A4C639;"></i> Android</h4>
+                            <p>Android SDK for native mobile applications with offline support and caching.</p>
+                            <div class="code-block">implementation 'ai.skillsync:android-sdk:1.0.0'</div>
+                            <div class="code-block">// Usage example
+SkillSyncClient client = new SkillSyncClient("sk_live_abc123...");
+client.getMatches("user_123", new MatchesCallback() { ... });</div>
+                        </div>
+
+                        <div class="sdk-card">
+                            <h4><i class="fab fa-swift" style="color: #FA7343;"></i> iOS</h4>
+                            <p>Swift SDK for iOS applications with SwiftUI support and reactive programming patterns.</p>
+                            <div class="code-block">pod 'SkillSyncSDK'</div>
+                            <div class="code-block">// Usage example
+let client = SkillSyncClient(apiKey: "sk_live_abc123...")
+client.getMatches(userId: "user_123") { matches in ... }</div>
+                        </div>
+                    </div>
+
+                    <h3>Community SDKs</h3>
+                    <p>Community-maintained libraries for additional programming languages:</p>
+                    <ul>
+                        <li><strong>Ruby:</strong> <code>gem install skillsync-ruby</code></li>
+                        <li><strong>Go:</strong> <code>go get github.com/skillsync/go-sdk</code></li>
+                        <li><strong>.NET:</strong> <code>dotnet add package SkillSync.SDK</code></li>
+                        <li><strong>Java:</strong> Available via Maven Central</li>
+                    </ul>
+                </section>
+
+                <!-- Error Handling -->
+                <section id="errors" class="fade-in-up">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Error Handling</h2>
+                    <p>SkillSync AI uses standard HTTP status codes and provides detailed error messages to help you debug issues quickly.</p>
+                    
+                    <h3>HTTP Status Codes</h3>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Status Code</th>
+                                <th>Meaning</th>
+                                <th>Description</th>
+                                <th>Action Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>200</strong></td>
+                                <td>Success</td>
+                                <td>Request completed successfully</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td><strong>201</strong></td>
+                                <td>Created</td>
+                                <td>Resource created successfully</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td><strong>400</strong></td>
+                                <td>Bad Request</td>
+                                <td>Invalid request parameters or body</td>
+                                <td>Check request format</td>
+                            </tr>
+                            <tr>
+                                <td><strong>401</strong></td>
+                                <td>Unauthorized</td>
+                                <td>Invalid or missing API key</td>
+                                <td>Verify API key</td>
+                            </tr>
+                            <tr>
+                                <td><strong>403</strong></td>
+                                <td>Forbidden</td>
+                                <td>Access denied to resource</td>
+                                <td>Check permissions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>404</strong></td>
+                                <td>Not Found</td>
+                                <td>Resource does not exist</td>
+                                <td>Verify resource ID</td>
+                            </tr>
+                            <tr>
+                                <td><strong>422</strong></td>
+                                <td>Unprocessable Entity</td>
+                                <td>Validation errors in request data</td>
+                                <td>Fix validation errors</td>
+                            </tr>
+                            <tr>
+                                <td><strong>429</strong></td>
+                                <td>Too Many Requests</td>
+                                <td>Rate limit exceeded</td>
+                                <td>Implement rate limiting</td>
+                            </tr>
+                            <tr>
+                                <td><strong>500</strong></td>
+                                <td>Internal Server Error</td>
+                                <td>Server error occurred</td>
+                                <td>Contact support</td>
+                            </tr>
+                            <tr>
+                                <td><strong>503</strong></td>
+                                <td>Service Unavailable</td>
+                                <td>Temporary service disruption</td>
+                                <td>Retry with backoff</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Error Response Format</h3>
+                    <div class="code-block">{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "The request contains invalid parameters",
+    "details": {
+      "field": "email",
+      "issue": "invalid_email_format",
+      "provided": "invalid-email",
+      "expected": "Valid email address"
+    },
+    "suggestion": "Please provide a valid email address in the format: user@example.com"
+  },
+  "meta": {
+    "timestamp": "2025-01-20T10:42:00Z",
+    "request_id": "req_abc123",
+    "documentation": "https://docs.skillsync.ai/errors#validation_error"
+  }
+}</div>
+
+                    <h3>Common Error Codes</h3>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Error Code</th>
+                                <th>Description</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>INVALID_API_KEY</code></td>
+                                <td>API key is invalid or expired</td>
+                                <td>Generate a new API key</td>
+                            </tr>
+                            <tr>
+                                <td><code>RATE_LIMIT_EXCEEDED</code></td>
+                                <td>Too many requests sent</td>
+                                <td>Implement exponential backoff</td>
+                            </tr>
+                            <tr>
+                                <td><code>VALIDATION_ERROR</code></td>
+                                <td>Request data validation failed</td>
+                                <td>Fix the specified validation errors</td>
+                            </tr>
+                            <tr>
+                                <td><code>RESOURCE_NOT_FOUND</code></td>
+                                <td>Requested resource doesn't exist</td>
+                                <td>Verify the resource ID</td>
+                            </tr>
+                            <tr>
+                                <td><code>INSUFFICIENT_PERMISSIONS</code></td>
+                                <td>API key lacks required permissions</td>
+                                <td>Request additional scopes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Best Practices for Error Handling</h3>
+                    <ul>
+                        <li><strong>Always check the HTTP status code</strong> before processing the response</li>
+                        <li><strong>Implement exponential backoff</strong> for 429 and 5xx errors</li>
+                        <li><strong>Log error details</strong> including the request_id for support inquiries</li>
+                        <li><strong>Handle network timeouts</strong> gracefully with appropriate retry logic</li>
+                        <li><strong>Validate input data</strong> before sending requests to minimize 400 errors</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Build Something Amazing?</h2>
+                <p>Join thousands of developers already building with SkillSync AI. Start integrating our powerful talent matching platform into your applications today.</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="openModal('signupModal')">
+                        <i class="fas fa-code"></i>
+                        Get API Access
+                    </button>
+                    <button class="btn-secondary" onclick="window.open('https://github.com/skillsync/examples', '_blank')">
+                        <i class="fab fa-github"></i>
+                        View Examples
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered platform connecting talented developers with innovative startups through intelligent matching algorithms.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="api.html">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Developers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#sdks">SDKs & Libraries</a></li>
+                        <li><a href="#examples">Code Examples</a></li>
+                        <li><a href="#webhooks">Webhooks</a></li>
+                        <li><a href="#status">API Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#feedback">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #4a5568; color: #a0aec0;">
+                <p>&copy; 2025 SkillSync AI. All rights reserved. | Built with ❤️ for developers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Developer Login</h3>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Access Dashboard</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal');">Get API access</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Get API Access</h3>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label for="companyName"><i class="fas fa-building"></i> Company/Project Name</label>
+                    <input type="text" id="companyName" name="company" required placeholder="Acme Corp">
+                </div>
+                <div class="form-group">
+                    <label for="developerEmail"><i class="fas fa-envelope"></i> Developer Email</label>
+                    <input type="email" id="developerEmail" name="email" required placeholder="developer@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="useCase"><i class="fas fa-rocket"></i> Primary Use Case</label>
+                    <select id="useCase" name="useCase" required>
+                        <option value="">Select your use case</option>
+                        <option value="platform_integration">Platform Integration</option>
+                        <option value="mobile_app">Mobile Application</option>
+                        <option value="data_analytics">Data Analytics & Insights</option>
+                        <option value="workflow_automation">Workflow Automation</option>
+                        <option value="ai_enhancement">AI Enhancement Features</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expectedVolume"><i class="fas fa-chart-line"></i> Expected API Volume</label>
+                    <select id="expectedVolume" name="volume" required>
+                        <option value="">Select expected volume</option>
+                        <option value="low">< 1,000 requests/month</option>
+                        <option value="medium">1,000 - 10,000 requests/month</option>
+                        <option value="high">10,000+ requests/month</option>
+                        <option value="enterprise">Enterprise volume</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-code"></i>
+                    <span>Request API Access</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.85rem;">
+                    Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal');">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let isModalOpen = false;
+        let isMobileMenuOpen = false;
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            isModalOpen = true;
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+            isModalOpen = false;
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            isMobileMenuOpen = !isMobileMenuOpen;
+            
+            if (isMobileMenuOpen) {
+                navMenu.classList.add('active');
+                hamburger.classList.add('active');
+            } else {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const apiNavHeight = document.querySelector('.api-nav').offsetHeight;
+                const yOffset = -(headerHeight + apiNavHeight + 20);
+                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }
+
+        // API navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const apiNavLinks = document.querySelectorAll('.api-nav-link');
+            const sidebarLinks = document.querySelectorAll('.api-sidebar a');
+            
+            // Handle API nav clicks
+            apiNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target') || this.getAttribute('href').substring(1);
+                    
+                    // Update active link
+                    apiNavLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    scrollToSection(targetId);
+                });
+            });
+
+            // Handle sidebar clicks
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+
+            // Update active nav on scroll
+            const sections = document.querySelectorAll('section[id], div[id]');
+            let currentSection = '';
+
+            function updateActiveNavOnScroll() {
+                const scrollY = window.pageYOffset;
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const apiNavHeight = document.querySelector('.api-nav').offsetHeight;
+                const offset = headerHeight + apiNavHeight + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top + scrollY - offset;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                // Update active nav link
+                apiNavLinks.forEach(link => {
+                    const target = link.getAttribute('data-target') || link.getAttribute('href').substring(1);
+                    if (target === currentSection) {
+                        apiNavLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNavOnScroll);
+
+            // Form submissions
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate loading
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Demo: Login successful! Redirecting to developer dashboard...');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    closeModal('loginModal');
+                }, 2000);
+            });
+
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate loading
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Demo: API access request submitted successfully!\n\nYou will receive:\n• API key via email within 24 hours\n• Developer documentation access\n• Welcome email with next steps');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    closeModal('signupModal');
+                }, 2000);
+            });
+
+            // Close modal on outside click
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        const modalId = this.getAttribute('id');
+                        closeModal(modalId);
+                    }
+                });
+            });
+
+            // Close modal on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isModalOpen) {
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        if (modal.style.display === 'flex') {
+                            closeModal(modal.id);
+                        }
+                    });
+                }
+            });
+
+            // Header background change on scroll
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.borderBottom = '1px solid rgba(226, 232, 240, 0.8)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.borderBottom = '1px solid var(--border-light)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, { passive: true });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe sections for animation
+            document.querySelectorAll('section:not(.fade-in-up)').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const navMenu = document.querySelector('.nav-menu');
+                const hamburger = document.querySelector('.hamburger');
+                
+                if (isMobileMenuOpen && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    toggleMobileMenu();
+                }
+            });
+
+            // Code block copy functionality
+            document.querySelectorAll('.code-block').forEach((block, index) => {
+                const copyButton = document.createElement('button');
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+                copyButton.className = 'copy-btn';
+                copyButton.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: #e2e8f0;
+                    padding: 5px 8px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all 0.2s ease;
+                `;
+                
+                block.style.position = 'relative';
+                block.appendChild(copyButton);
+                
+                copyButton.addEventListener('click', function() {
+                    navigator.clipboard.writeText(block.textContent.replace(copyButton.textContent, '').trim())
+                        .then(() => {
+                            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+                            copyButton.style.background = 'rgba(16, 185, 129, 0.2)';
+                            copyButton.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                            setTimeout(() => {
+                                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+                                copyButton.style.background = 'rgba(255, 255, 255, 0.1)';
+                                copyButton.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                            }, 2000);
+                        });
+                });
+            });
+        });
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply debouncing to scroll events
+        window.addEventListener('scroll', debounce(function() {
+            // Scroll-based animations and effects go here
+        }, 16)); // ~60fps
+    </script>
+</body>
+</html>

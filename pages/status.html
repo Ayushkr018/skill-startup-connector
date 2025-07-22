@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status - SkillSync AI | Real-time Platform Health & Performance</title>
+    <meta name="description" content="Real-time system status and performance metrics for SkillSync AI platform. Check service uptime, incidents, and maintenance schedules.">
+    <meta name="keywords" content="system status, uptime, performance, incidents, maintenance, service health, SkillSync AI">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Enhanced Color System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+            --info-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --danger-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            
+            /* Status Colors */
+            --status-operational: #10b981;
+            --status-degraded: #f59e0b;
+            --status-partial: #f97316;
+            --status-outage: #ef4444;
+            --status-maintenance: #6366f1;
+            
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-lighter: #a0aec0;
+            --text-white: #ffffff;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-tertiary: #edf2f7;
+            --bg-dark: #1a202c;
+            --bg-overlay: rgba(26, 32, 44, 0.9);
+            
+            /* Border Colors */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e0;
+            --border-dark: #a0aec0;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.15s ease-out;
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+            --space-5xl: 8rem;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.875rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        a:hover {
+            color: #4c51bf;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition-normal);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header.scrolled::before {
+            opacity: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: var(--transition-normal);
+        }
+
+        .logo a:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(2deg); }
+            50% { transform: translateY(-1px) rotate(0deg); }
+            75% { transform: translateY(-3px) rotate(-2deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            list-style: none;
+            background: rgba(255, 255, 255, 0.8);
+            padding: var(--space-sm);
+            border-radius: var(--radius-2xl);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.925rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .btn-login,
+        .btn-signup {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-login:hover {
+            color: #667eea;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-sm) var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        /* Status Hero Section */
+        .status-hero {
+            background: var(--success-gradient);
+            color: var(--text-white);
+            padding: 10rem 0 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-hero.degraded {
+            background: var(--warning-gradient);
+        }
+
+        .status-hero.outage {
+            background: var(--danger-gradient);
+        }
+
+        .status-hero.maintenance {
+            background: var(--info-gradient);
+        }
+
+        .status-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            animation: statusBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes statusBackground {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-10px) translateY(-5px) rotate(1deg); }
+            50% { transform: translateX(5px) translateY(-8px) rotate(-1deg); }
+            75% { transform: translateX(-5px) translateY(3px) rotate(1deg); }
+        }
+
+        .status-hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .status-hero h1::before {
+            content: '✅';
+            font-size: 0.8em;
+            animation: pulse 2s infinite;
+        }
+
+        .status-hero.degraded h1::before {
+            content: '⚠️';
+        }
+
+        .status-hero.outage h1::before {
+            content: '❌';
+        }
+
+        .status-hero.maintenance h1::before {
+            content: '🔧';
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .status-hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 0;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-white);
+            line-height: 1.8;
+        }
+
+        /* Status Content */
+        .status-content {
+            padding: var(--space-5xl) 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-lg) var(--space-2xl);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(102, 126, 234, 0.05) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: var(--radius-xl);
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        /* Quick Status Overview */
+        .quick-status {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-xl) var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .quick-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--success-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .quick-status h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .quick-status h3::before {
+            content: '🚀';
+            font-size: 1rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .service-status {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: var(--transition-normal);
+        }
+
+        .service-status.operational::before {
+            background: var(--status-operational);
+        }
+
+        .service-status.degraded::before {
+            background: var(--status-degraded);
+        }
+
+        .service-status.partial::before {
+            background: var(--status-partial);
+        }
+
+        .service-status.outage::before {
+            background: var(--status-outage);
+        }
+
+        .service-status.maintenance::before {
+            background: var(--status-maintenance);
+        }
+
+        .service-status:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            font-size: 1.5rem;
+            color: var(--text-white);
+            transition: var(--transition-normal);
+        }
+
+        .service-status.operational .service-icon {
+            background: var(--status-operational);
+        }
+
+        .service-status.degraded .service-icon {
+            background: var(--status-degraded);
+        }
+
+        .service-status.partial .service-icon {
+            background: var(--status-partial);
+        }
+
+        .service-status.outage .service-icon {
+            background: var(--status-outage);
+        }
+
+        .service-status.maintenance .service-icon {
+            background: var(--status-maintenance);
+        }
+
+        .service-status h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .service-status .status-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-status.operational .status-text {
+            color: var(--status-operational);
+        }
+
+        .service-status.degraded .status-text {
+            color: var(--status-degraded);
+        }
+
+        .service-status.partial .status-text {
+            color: var(--status-partial);
+        }
+
+        .service-status.outage .status-text {
+            color: var(--status-outage);
+        }
+
+        .service-status.maintenance .status-text {
+            color: var(--status-maintenance);
+        }
+
+        /* System Metrics */
+        .metrics-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .metrics-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .metrics-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .metrics-section h2::before {
+            content: '📊';
+            font-size: 1.5rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-value.good {
+            color: var(--status-operational);
+        }
+
+        .metric-value.warning {
+            color: var(--status-degraded);
+        }
+
+        .metric-value.critical {
+            color: var(--status-outage);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Incidents Section */
+        .incidents-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .incidents-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--warning-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .incidents-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .incidents-section h2::before {
+            content: '🚨';
+            font-size: 1.5rem;
+        }
+
+        .incident-item {
+            background: var(--bg-secondary);
+            border-left: 4px solid;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            transition: var(--transition-normal);
+        }
+
+        .incident-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .incident-item.resolved {
+            border-left-color: var(--status-operational);
+        }
+
+        .incident-item.investigating {
+            border-left-color: var(--status-degraded);
+        }
+
+        .incident-item.monitoring {
+            border-left-color: var(--status-partial);
+        }
+
+        .incident-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .incident-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .incident-status {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .incident-status.resolved {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--status-operational);
+        }
+
+        .incident-status.investigating {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--status-degraded);
+        }
+
+        .incident-status.monitoring {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--status-partial);
+        }
+
+        .incident-meta {
+            display: flex;
+            gap: var(--space-lg);
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: var(--space-md);
+        }
+
+        .incident-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .no-incidents {
+            text-align: center;
+            padding: var(--space-3xl);
+            color: var(--text-light);
+        }
+
+        .no-incidents i {
+            font-size: 4rem;
+            color: var(--status-operational);
+            margin-bottom: var(--space-lg);
+            display: block;
+        }
+
+        /* Maintenance Section */
+        .maintenance-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .maintenance-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--info-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .maintenance-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .maintenance-section h2::before {
+            content: '🔧';
+            font-size: 1.5rem;
+        }
+
+        .maintenance-item {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        .maintenance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .maintenance-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .maintenance-date {
+            background: var(--status-maintenance);
+            color: var(--text-white);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .maintenance-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .maintenance-impact {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--status-maintenance);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        /* Uptime Chart */
+        .uptime-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .uptime-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .uptime-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .uptime-section h2::before {
+            content: '📈';
+            font-size: 1.5rem;
+        }
+
+        .uptime-chart {
+            display: grid;
+            grid-template-columns: repeat(30, 1fr);
+            gap: 2px;
+            margin: var(--space-xl) 0;
+        }
+
+        .uptime-day {
+            height: 30px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-normal);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .uptime-day.excellent {
+            background: var(--status-operational);
+        }
+
+        .uptime-day.good {
+            background: #34d399;
+        }
+
+        .uptime-day.fair {
+            background: var(--status-degraded);
+        }
+
+        .uptime-day.poor {
+            background: var(--status-partial);
+        }
+
+        .uptime-day.outage {
+            background: var(--status-outage);
+        }
+
+        .uptime-day:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .uptime-legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Subscribe Section */
+        .subscribe-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            position: relative;
+            text-align: center;
+        }
+
+        .subscribe-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .subscribe-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: var(--space-md);
+            max-width: 500px;
+            margin: var(--space-xl) auto 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .subscribe-input {
+            flex: 1;
+            min-width: 250px;
+            padding: var(--space-lg);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+        }
+
+        .subscribe-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .subscribe-btn {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            border: none;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            padding: var(--space-5xl) 0 var(--space-xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin-bottom: var(--space-xl);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            transition: var(--transition-normal);
+            font-size: 1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: var(--space-lg);
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-3xl);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-2xl);
+            animation: modalSlideIn 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition-normal);
+            background: var(--bg-secondary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            transform: scale(1.1);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: var(--space-lg);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--bg-primary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 var(--space-lg);
+            }
+
+            .status-content {
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: var(--space-xs);
+            }
+
+            .nav-link {
+                padding: var(--space-xs) var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .uptime-chart {
+                grid-template-columns: repeat(15, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .nav-menu,
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .status-hero {
+                padding: 8rem 0 6rem;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uptime-chart {
+                grid-template-columns: repeat(10, 1fr);
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+            }
+
+            .subscribe-input {
+                min-width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .incident-header,
+            .maintenance-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .uptime-chart {
+                grid-template-columns: repeat(7, 1fr);
+            }
+
+            .uptime-legend {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header,
+            .status-hero,
+            .footer,
+            .subscribe-section {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="features.html" class="nav-link">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="how-it-works.html" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>How It Works</span>
+                    </a>
+                    <a href="pricing.html" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <span>Pricing</span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="btn-signup" onclick="openModal('signupModal')">
+                        <i class="fas fa-rocket"></i>
+                        <span>Get Started</span>
+                    </button>
+                </div>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Status Hero Section -->
+    <section class="status-hero" id="status-hero">
+        <div class="container">
+            <h1>All Systems Operational</h1>
+            <p>Our AI-powered learning platform is running smoothly. Check real-time status updates, performance metrics, and maintenance schedules below.</p>
+        </div>
+    </section>
+
+    <!-- Status Content -->
+    <section class="status-content">
+        <div class="container">
+            <div class="last-updated">
+                <strong>Last Updated:</strong> <span id="last-update-time">Just now</span> • Auto-refreshes every 60 seconds
+            </div>
+
+            <!-- Quick Status Overview -->
+            <div class="quick-status">
+                <h3>Service Status Overview</h3>
+                <div class="status-grid">
+                    <div class="service-status operational">
+                        <div class="service-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI Learning Engine</h4>
+                        <div class="status-text">Operational</div>
+                    </div>
+                    <div class="service-status operational">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>User Authentication</h4>
+                        <div class="status-text">Operational</div>
+                    </div>
+                    <div class="service-status operational">
+                        <div class="service-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Database Services</h4>
+                        <div class="status-text">Operational</div>
+                    </div>
+                    <div class="service-status degraded">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Analytics Dashboard</h4>
+                        <div class="status-text">Degraded</div>
+                    </div>
+                    <div class="service-status operational">
+                        <div class="service-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email Notifications</h4>
+                        <div class="status-text">Operational</div>
+                    </div>
+                    <div class="service-status operational">
+                        <div class="service-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile App</h4>
+                        <div class="status-text">Operational</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Metrics -->
+            <div class="metrics-section">
+                <h2>System Performance Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value good">99.97%</div>
+                        <div class="metric-label">Uptime (30 days)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value good">248ms</div>
+                        <div class="metric-label">Average Response Time</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value good">99.2%</div>
+                        <div class="metric-label">Success Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value warning">1,247</div>
+                        <div class="metric-label">Active Users</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value good">15.3GB</div>
+                        <div class="metric-label">Data Processed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value good">0</div>
+                        <div class="metric-label">Critical Errors</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Incidents -->
+            <div class="incidents-section">
+                <h2>Recent Incidents</h2>
+                
+                <div class="incident-item resolved">
+                    <div class="incident-header">
+                        <h3 class="incident-title">Analytics Dashboard Slow Loading</h3>
+                        <span class="incident-status resolved">Resolved</span>
+                    </div>
+                    <div class="incident-meta">
+                        <span><i class="fas fa-clock"></i> Dec 20, 2024 - 14:30 UTC</span>
+                        <span><i class="fas fa-stopwatch"></i> Duration: 2h 15m</span>
+                        <span><i class="fas fa-users"></i> Affected: 234 users</span>
+                    </div>
+                    <p class="incident-description">
+                        Users experienced slower than normal loading times when accessing the analytics dashboard. 
+                        The issue was caused by a database query optimization problem which has been resolved. 
+                        Performance has returned to normal levels.
+                    </p>
+                </div>
+
+                <div class="incident-item monitoring">
+                    <div class="incident-header">
+                        <h3 class="incident-title">AI Recommendation Engine Performance</h3>
+                        <span class="incident-status monitoring">Monitoring</span>
+                    </div>
+                    <div class="incident-meta">
+                        <span><i class="fas fa-clock"></i> Dec 18, 2024 - 09:15 UTC</span>
+                        <span><i class="fas fa-stopwatch"></i> Duration: Ongoing</span>
+                        <span><i class="fas fa-users"></i> Affected: All users</span>
+                    </div>
+                    <p class="incident-description">
+                        We've implemented optimizations to improve AI recommendation response times. 
+                        We're monitoring the performance improvements and user feedback. 
+                        Initial results show 35% faster recommendation generation.
+                    </p>
+                </div>
+
+                <div class="incident-item resolved">
+                    <div class="incident-header">
+                        <h3 class="incident-title">Mobile App Login Issues</h3>
+                        <span class="incident-status resolved">Resolved</span>
+                    </div>
+                    <div class="incident-meta">
+                        <span><i class="fas fa-clock"></i> Dec 15, 2024 - 16:45 UTC</span>
+                        <span><i class="fas fa-stopwatch"></i> Duration: 45m</span>
+                        <span><i class="fas fa-users"></i> Affected: Mobile users</span>
+                    </div>
+                    <p class="incident-description">
+                        Some mobile app users were unable to log in due to an authentication service issue. 
+                        The problem was quickly identified and resolved. All affected users can now log in normally.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scheduled Maintenance -->
+            <div class="maintenance-section">
+                <h2>Scheduled Maintenance</h2>
+                
+                <div class="maintenance-item">
+                    <div class="maintenance-header">
+                        <h3 class="maintenance-title">Database Performance Optimization</h3>
+                        <span class="maintenance-date">Dec 25, 2024 - 02:00 UTC</span>
+                    </div>
+                    <p class="maintenance-description">
+                        We will be performing routine database maintenance to optimize query performance and update system indexes. 
+                        This maintenance is part of our ongoing effort to improve platform responsiveness.
+                    </p>
+                    <div class="maintenance-impact">
+                        <strong>Expected Impact:</strong> Minimal service disruption. Some analytics features may be temporarily unavailable for 15-20 minutes.
+                    </div>
+                </div>
+
+                <div class="maintenance-item">
+                    <div class="maintenance-header">
+                        <h3 class="maintenance-title">AI Model Updates</h3>
+                        <span class="maintenance-date">Jan 2, 2025 - 01:00 UTC</span>
+                    </div>
+                    <p class="maintenance-description">
+                        We're deploying updated AI models with improved accuracy and new features for skill assessment and learning path recommendations. 
+                        This update will enhance the personalization of your learning experience.
+                    </p>
+                    <div class="maintenance-impact">
+                        <strong>Expected Impact:</strong> No service interruption. AI recommendations may be temporarily slower during deployment.
+                    </div>
+                </div>
+
+                <div class="maintenance-item">
+                    <div class="maintenance-header">
+                        <h3 class="maintenance-title">Security Infrastructure Update</h3>
+                        <span class="maintenance-date">Jan 8, 2025 - 03:00 UTC</span>
+                    </div>
+                    <p class="maintenance-description">
+                        Routine security infrastructure updates including SSL certificate renewals, firewall rule optimizations, 
+                        and security patch installations to maintain the highest level of platform security.
+                    </p>
+                    <div class="maintenance-impact">
+                        <strong>Expected Impact:</strong> Brief connection interruptions possible (less than 30 seconds). Users may need to refresh their browser.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 30-Day Uptime Chart -->
+            <div class="uptime-section">
+                <h2>30-Day Uptime History</h2>
+                <div class="uptime-chart" id="uptime-chart">
+                    <!-- Uptime days will be generated by JavaScript -->
+                </div>
+                <div class="uptime-legend">
+                    <div class="legend-item">
+                        <div class="legend-color excellent"></div>
+                        <span>100% Uptime</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color good"></div>
+                        <span>99.9%+ Uptime</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color fair"></div>
+                        <span>99%+ Uptime</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color poor"></div>
+                        <span>95%+ Uptime</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color outage"></div>
+                        <span>&lt;95% Uptime</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscribe to Updates -->
+            <div class="subscribe-section">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to receive email notifications about system status updates, maintenance schedules, and incident reports.</p>
+                <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+                    <input type="email" class="subscribe-input" placeholder="your.email@company.com" required>
+                    <button type="submit" class="subscribe-btn">
+                        <i class="fas fa-bell"></i>
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        SkillSync AI
+                    </div>
+                    <p class="footer-description">
+                        Empowering professionals worldwide with AI-driven skill development and personalized learning experiences that adapt to your unique goals and pace.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="system-status.html">System Status</a></li>
+                        <li><a href="#">Training Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 SkillSync AI. All rights reserved. | Designed with 💜 for lifelong learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Welcome Back!</h3>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-signup full-width">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In to SkillSync AI
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Don't have an account? <a href="#" onclick="switchModal('signupModal')">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Join SkillSync AI</h3>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <form class="auth-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Create Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupRole">Professional Role</label>
+                    <select id="signupRole" required>
+                        <option value="">Select your role</option>
+                        <option value="developer">Software Developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="manager">Project Manager</option>
+                        <option value="analyst">Business Analyst</option>
+                        <option value="marketer">Digital Marketer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-signup full-width">
+                    <i class="fas fa-rocket"></i>
+                    Start Learning with AI
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.875rem;">
+                    By signing up, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a>
+                </p>
+                <p style="text-align: center; margin-top: 0.5rem; color: var(--text-light);">
+                    Already have an account? <a href="#" onclick="switchModal('loginModal')">Sign in here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchModal(targetModalId) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.style.display = 'none');
+            openModal(targetModalId);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Form handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            console.log('Login attempt:', { email, password });
+            alert('Login functionality would be implemented here!');
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('signupName').value,
+                email: document.getElementById('signupEmail').value,
+                password: document.getElementById('signupPassword').value,
+                role: document.getElementById('signupRole').value
+            };
+            
+            console.log('Signup attempt:', formData);
+            alert('Signup functionality would be implemented here!');
+        }
+
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.subscribe-input').value;
+            
+            console.log('Subscribe attempt:', email);
+            alert(`Successfully subscribed ${email} to status updates!`);
+            event.target.reset();
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const navButtons = document.querySelector('.nav-buttons');
+            
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+                navButtons.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navButtons.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navButtons.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'white';
+                navMenu.style.boxShadow = 'var(--shadow-lg)';
+                navMenu.style.padding = 'var(--space-lg)';
+            }
+        }
+
+        // Generate uptime chart
+        function generateUptimeChart() {
+            const uptimeChart = document.getElementById('uptime-chart');
+            const statuses = ['excellent', 'excellent', 'good', 'excellent', 'excellent', 'fair', 'excellent'];
+            
+            for (let i = 0; i < 30; i++) {
+                const day = document.createElement('div');
+                day.className = 'uptime-day';
+                
+                // Simulate uptime data
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                day.classList.add(randomStatus);
+                
+                // Add tooltip
+                const date = new Date();
+                date.setDate(date.getDate() - (29 - i));
+                const uptimePercentage = randomStatus === 'excellent' ? 100 : 
+                                       randomStatus === 'good' ? 99.9 : 
+                                       randomStatus === 'fair' ? 99.2 : 
+                                       randomStatus === 'poor' ? 96.5 : 89.2;
+                
+                day.title = `${date.toDateString()}: ${uptimePercentage}% uptime`;
+                uptimeChart.appendChild(day);
+            }
+        }
+
+        // Update last updated time
+        function updateLastUpdatedTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('last-update-time').textContent = timeString + ' UTC';
+        }
+
+        // Auto-refresh functionality
+        function autoRefresh() {
+            updateLastUpdatedTime();
+            
+            // Simulate random status changes (in real implementation, this would fetch from API)
+            const services = document.querySelectorAll('.service-status');
+            services.forEach(service => {
+                // Small chance of status change for demo purposes
+                if (Math.random() < 0.05) { // 5% chance
+                    const statuses = ['operational', 'degraded', 'partial', 'outage', 'maintenance'];
+                    const currentStatus = Array.from(service.classList).find(cls => statuses.includes(cls));
+                    const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                    
+                    if (currentStatus) {
+                        service.classList.remove(currentStatus);
+                    }
+                    service.classList.add(newStatus);
+                    
+                    const statusText = service.querySelector('.status-text');
+                    statusText.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+                }
+            });
+            
+            // Update hero section based on overall status
+            updateHeroStatus();
+        }
+
+        // Update hero status
+        function updateHeroStatus() {
+            const services = document.querySelectorAll('.service-status');
+            const statusHero = document.getElementById('status-hero');
+            const heroTitle = statusHero.querySelector('h1');
+            const heroDescription = statusHero.querySelector('p');
+            
+            let hasOutage = false;
+            let hasDegraded = false;
+            let hasPartial = false;
+            let hasMaintenance = false;
+            
+            services.forEach(service => {
+                if (service.classList.contains('outage')) hasOutage = true;
+                else if (service.classList.contains('degraded')) hasDegraded = true;
+                else if (service.classList.contains('partial')) hasPartial = true;
+                else if (service.classList.contains('maintenance')) hasMaintenance = true;
+            });
+            
+            // Reset classes
+            statusHero.className = 'status-hero';
+            
+            if (hasOutage) {
+                statusHero.classList.add('outage');
+                heroTitle.textContent = 'Service Disruption';
+                heroDescription.textContent = 'We are experiencing issues with some services. Our team is working to resolve them as quickly as possible.';
+            } else if (hasPartial) {
+                statusHero.classList.add('degraded');
+                heroTitle.textContent = 'Partial Service Disruption';
+                heroDescription.textContent = 'Some services are experiencing issues. We are monitoring the situation and working on fixes.';
+            } else if (hasDegraded) {
+                statusHero.classList.add('degraded');
+                heroTitle.textContent = 'Performance Issues';
+                heroDescription.textContent = 'Some services are experiencing slower than normal performance. We are investigating and optimizing.';
+            } else if (hasMaintenance) {
+                statusHero.classList.add('maintenance');
+                heroTitle.textContent = 'Maintenance in Progress';
+                heroDescription.textContent = 'Scheduled maintenance is currently underway. Some features may be temporarily unavailable.';
+            } else {
+                heroTitle.textContent = 'All Systems Operational';
+                heroDescription.textContent = 'Our AI-powered learning platform is running smoothly. Check real-time status updates, performance metrics, and maintenance schedules below.';
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateUptimeChart();
+            updateLastUpdatedTime();
+            
+            // Set up auto-refresh every 60 seconds
+            setInterval(autoRefresh, 60000);
+            
+            // Add loading animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.metrics-section, .incidents-section, .maintenance-section, .uptime-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        });
+
+        // Enhanced error handling for forms
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('invalid', function() {
+                this.setCustomValidity('Please fill out this field.');
+            });
+            
+            input.addEventListener('input', function() {
+                this.setCustomValidity('');
+            });
+        });
+
+        // Performance monitoring simulation
+        function simulateMetrics() {
+            const metricValues = document.querySelectorAll('.metric-value');
+            
+            metricValues.forEach((metric, index) => {
+                if (Math.random() < 0.1) { // 10% chance to update
+                    let newValue;
+                    switch(index) {
+                        case 0: // Uptime
+                            newValue = (99.95 + Math.random() * 0.05).toFixed(2) + '%';
+                            break;
+                        case 1: // Response time
+                            newValue = Math.floor(200 + Math.random() * 100) + 'ms';
+                            break;
+                        case 2: // Success rate
+                            newValue = (99.0 + Math.random() * 0.5).toFixed(1) + '%';
+                            break;
+                        case 3: // Active users
+                            newValue = Math.floor(1200 + Math.random() * 200).toLocaleString();
+                            break;
+                        case 4: // Data processed
+                            newValue = (15 + Math.random() * 5).toFixed(1) + 'GB';
+                            break;
+                        case 5: // Critical errors
+                            newValue = Math.floor(Math.random() * 3);
+                            break;
+                    }
+                    if (newValue) {
+                        metric.textContent = newValue;
+                    }
+                }
+            });
+        }
+
+        // Update metrics periodically
+        setInterval(simulateMetrics, 30000); // Every 30 seconds
+    </script>
+</body>
+</html>

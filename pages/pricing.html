@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Pricing Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --premium-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .pricing-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--dashboard-text-light);
+            font-weight: 500;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .billing-option {
+            font-weight: 600;
+            color: var(--dashboard-text-light);
+            transition: all 0.3s ease;
+        }
+
+        .billing-option.active {
+            color: var(--primary-color);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dashboard-border);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--primary-gradient);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .discount-badge {
+            background: var(--warning-gradient);
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-card {
+            background: var(--dashboard-card-bg);
+            border: 2px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -1px;
+            right: 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0 0 15px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .plan-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-icon.free {
+            background: var(--success-gradient);
+        }
+
+        .plan-icon.premium {
+            background: var(--premium-gradient);
+            color: var(--dashboard-text);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dashboard-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-description {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .plan-price {
+            margin-bottom: 2rem;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .price-period {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .price-note {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--dashboard-border);
+            font-size: 0.95rem;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--success-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .feature-icon.unavailable {
+            background: var(--dashboard-text-light);
+        }
+
+        .feature-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .feature-text.unavailable {
+            color: var(--dashboard-text-light);
+            text-decoration: line-through;
+        }
+
+        /* CTA Buttons */
+        .cta-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-premium {
+            background: var(--premium-gradient);
+            color: var(--dashboard-text);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .faq-subtitle {
+            color: var(--dashboard-text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .faq-question::before {
+            content: '?';
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            color: var(--dashboard-text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Support */
+        .contact-support {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .support-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .support-description {
+            color: var(--dashboard-text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .support-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 12px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .support-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .pricing-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .price-amount {
+                font-size: 2.5rem;
+            }
+
+            .billing-toggle {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .support-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .dashboard-header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: var(--secondary-gradient);
+        }
+
+        .notification.info {
+            background: var(--primary-gradient);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="../index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="login.html" style="color: var(--dashboard-text); text-decoration: none; font-weight: 600;">Login</a>
+                <a href="register.html" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="pricing-container">
+        <!-- Page Header -->
+        <div class="page-header fade-in">
+            <h1 class="page-title">💰 Choose Your Plan</h1>
+            <p class="page-subtitle">
+                Select the perfect plan to accelerate your career growth. All plans include our core matching 
+                technology and dedicated support to help you succeed.
+            </p>
+            
+            <!-- Billing Toggle -->
+            <div class="billing-toggle">
+                <span class="billing-option active" id="monthlyOption">Monthly</span>
+                <div class="toggle-switch" onclick="toggleBilling()">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="billing-option" id="yearlyOption">Yearly</span>
+                <span class="discount-badge">Save 20%</span>
+            </div>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="pricing-grid fade-in">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <div class="plan-icon free">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2 class="plan-name">Starter</h2>
+                <p class="plan-description">Perfect for students just starting their career journey</p>
+                
+                <div class="plan-price">
+                    <span class="price-amount">₹0</span>
+                    <span class="price-period">/ month</span>
+                    <div class="price-note">Always free</div>
+                </div>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">5 Job applications per month</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Basic profile creation</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Standard matching algorithm</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Email support</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon unavailable">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <span class="feature-text unavailable">Priority matching</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon unavailable">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <span class="feature-text unavailable">Advanced analytics</span>
+                    </li>
+                </ul>
+
+                <a href="register.html" class="cta-button btn-secondary">Get Started Free</a>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="plan-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2 class="plan-name">Professional</h2>
+                <p class="plan-description">Ideal for active job seekers and career changers</p>
+                
+                <div class="plan-price">
+                    <span class="original-price" id="proOriginalPrice">₹999</span>
+                    <span class="price-amount" id="proPrice">₹799</span>
+                    <span class="price-period" id="proPeriod">/ month</span>
+                    <div class="price-note">Billed monthly, cancel anytime</div>
+                </div>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Unlimited job applications</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Enhanced profile with portfolio</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">AI-powered priority matching</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Advanced skill assessments</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Interview preparation tools</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Priority customer support</span>
+                    </li>
+                </ul>
+
+                <a href="register.html?plan=pro" class="cta-button btn-primary">Start Pro Trial</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="plan-icon premium">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h2 class="plan-name">Enterprise</h2>
+                <p class="plan-description">For organizations and educational institutions</p>
+                
+                <div class="plan-price">
+                    <span class="price-amount" id="enterprisePrice">₹2999</span>
+                    <span class="price-period" id="enterprisePeriod">/ month</span>
+                    <div class="price-note">Custom pricing available</div>
+                </div>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Everything in Professional</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Bulk student/employee management</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Custom integration APIs</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Advanced analytics dashboard</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">Dedicated account manager</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="feature-text">24/7 premium support</span>
+                    </li>
+                </ul>
+
+                <a href="contact.html" class="cta-button btn-premium">Contact Sales</a>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section fade-in">
+            <div class="faq-header">
+                <h2 class="faq-title">❓ Frequently Asked Questions</h2>
+                <p class="faq-subtitle">Got questions? We've got answers to help you choose the right plan.</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I change my plan anytime?</h3>
+                    <p class="faq-answer">
+                        Yes, you can upgrade or downgrade your plan at any time. Changes will be prorated 
+                        and reflected in your next billing cycle.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Is there a free trial for paid plans?</h3>
+                    <p class="faq-answer">
+                        We offer a 14-day free trial for our Professional plan. No credit card required 
+                        to start your trial.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p class="faq-answer">
+                        We accept all major credit cards, debit cards, UPI, net banking, and digital 
+                        wallets for seamless payments.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How does the matching algorithm work?</h3>
+                    <p class="faq-answer">
+                        Our AI analyzes your skills, experience, preferences, and career goals to match 
+                        you with the most relevant opportunities and companies.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I cancel my subscription?</h3>
+                    <p class="faq-answer">
+                        Yes, you can cancel your subscription at any time. You'll continue to have access 
+                        to paid features until the end of your billing period.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you offer student discounts?</h3>
+                    <p class="faq-answer">
+                        Yes! We offer a 50% discount for verified students and recent graduates. 
+                        Contact our support team for more details.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="contact-support fade-in">
+            <h2 class="support-title">🤝 Need Help Choosing?</h2>
+            <p class="support-description">
+                Our team is here to help you find the perfect plan for your needs. 
+                Get in touch and we'll guide you through the options.
+            </p>
+
+            <div class="support-actions">
+                <a href="mailto:support@skillsync.ai" class="support-btn">
+                    <i class="fas fa-envelope"></i>
+                    Email Support
+                </a>
+                <a href="tel:+918888888888" class="support-btn">
+                    <i class="fas fa-phone"></i>
+                    Call Us
+                </a>
+                <a href="chat.html" class="support-btn">
+                    <i class="fas fa-comments"></i>
+                    Live Chat
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Global variables
+        let isYearlyBilling = false;
+
+        // Pricing data
+        const pricingData = {
+            monthly: {
+                pro: { price: 799, original: 999 },
+                enterprise: { price: 2999, original: 3999 }
+            },
+            yearly: {
+                pro: { price: 639, original: 799 }, // 20% discount
+                enterprise: { price: 2399, original: 2999 } // 20% discount
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('💰 Pricing Page Loaded');
+            
+            // Setup scroll animations
+            setupScrollAnimations();
+            
+            // Update pricing display
+            updatePricing();
+        });
+
+        // Toggle billing period
+        function toggleBilling() {
+            isYearlyBilling = !isYearlyBilling;
+            
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const monthlyOption = document.getElementById('monthlyOption');
+            const yearlyOption = document.getElementById('yearlyOption');
+            
+            if (isYearlyBilling) {
+                toggleSwitch.classList.add('active');
+                monthlyOption.classList.remove('active');
+                yearlyOption.classList.add('active');
+            } else {
+                toggleSwitch.classList.remove('active');
+                monthlyOption.classList.add('active');
+                yearlyOption.classList.remove('active');
+            }
+            
+            updatePricing();
+        }
+
+        // Update pricing based on billing period
+        function updatePricing() {
+            const period = isYearlyBilling ? 'yearly' : 'monthly';
+            const periodText = isYearlyBilling ? '/ year' : '/ month';
+            
+            // Update Pro plan
+            const proPrice = document.getElementById('proPrice');
+            const proOriginalPrice = document.getElementById('proOriginalPrice');
+            const proPeriod = document.getElementById('proPeriod');
+            
+            if (proPrice) {
+                proPrice.textContent = `₹${pricingData[period].pro.price}`;
+                proOriginalPrice.textContent = `₹${pricingData[period].pro.original}`;
+                proPeriod.textContent = periodText;
+            }
+            
+            // Update Enterprise plan
+            const enterprisePrice = document.getElementById('enterprisePrice');
+            const enterprisePeriod = document.getElementById('enterprisePeriod');
+            
+            if (enterprisePrice) {
+                enterprisePrice.textContent = `₹${pricingData[period].enterprise.price}`;
+                enterprisePeriod.textContent = periodText;
+            }
+            
+            // Show savings animation
+            if (isYearlyBilling) {
+                showNotification('🎉 20% savings with yearly billing!', 'success');
+            }
+        }
+
+        // Setup scroll animations
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Handle CTA button clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
+                showNotification(`🚀 Redirecting to ${planName} plan signup...`, 'info');
+            });
+        });
+
+        // Handle support button clicks
+        document.querySelectorAll('.support-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href.includes('mailto:') || this.href.includes('tel:')) {
+                    showNotification('📞 Opening contact method...', 'info');
+                } else {
+                    e.preventDefault();
+                    showNotification('💬 Opening support chat...', 'info');
+                }
+            });
+        });
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} show`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add plan tracking for analytics
+        function trackPlanSelection(planName, billingPeriod) {
+            console.log(`Plan selected: ${planName} (${billingPeriod})`);
+            // In real implementation, this would send analytics data
+        }
+
+        // Handle plan card hover effects
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('popular') ? 'scale(1.08) translateY(-10px)' : 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = this.classList.contains('popular') ? 'scale(1.05)' : '';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        console.log('🎉 Pricing page with full functionality loaded!');
+    </script>
+</body>
+</html>

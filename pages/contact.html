@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SkillSync AI</title>
+    <meta name="description" content="Get in touch with SkillSync AI team. We're here to help with questions, support, and partnerships.">
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-white: #fff;
+            --bg-primary: #fff;
+            --bg-secondary: #f7fafc;
+            --border-light: #e2e8f0;
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+            --radius-lg: 1.25rem;
+            --radius-full: 999px;
+            --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 10;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+        .logo a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1.2rem;
+            transition: var(--transition);
+        }
+        .nav-link.active, .nav-link:hover {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .btn-login,
+        .btn-signup {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .btn-login {
+            background: #fff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: #fff;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* Hero */
+        .contact-hero {
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        .contact-hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+        }
+        .contact-hero p {
+            max-width: 540px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        /* Content */
+        .contact-content {
+            padding: 6rem 0;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .contact-info, .contact-form {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2.8rem 2.2rem;
+        }
+        .contact-info h2, .contact-form h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            background: var(--secondary-gradient);
+            color: #fff;
+        }
+        .contact-details h3 {
+            margin: 0 0 0.3rem 0;
+            color: #25253f;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .contact-details p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.1rem;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #354259;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 0.6rem;
+            background: #f7fafc;
+            font-size: 1rem;
+            resize: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+        }
+        .form-group textarea {
+            height: 110px;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 1.1rem 0;
+            background: var(--primary-gradient);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            font-size: 1.1rem;
+            border-radius: var(--radius-full);
+            box-shadow: 0 2px 16px rgba(102,126,234,0.12);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(102,126,234,0.20);
+        }
+
+        /* Locations */
+        .office-locations {
+            background: var(--bg-secondary);
+            padding: 6rem 0;
+        }
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px,1fr));
+            gap: 2rem;
+        }
+        .location-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            padding: 2.5rem 1.7rem;
+        }
+        .location-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #2d3a4e;
+            margin-bottom: 0.7rem;
+        }
+        .location-card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .container { padding: 0 1rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-info, .contact-form { padding: 2rem 1.0rem; }
+            .footer-content { flex-direction: column; gap: 3rem; }
+        }
+        @media (max-width: 599px) {
+            .contact-hero h1 { font-size: 2.3rem; }
+            .contact-form h2,
+            .contact-info h2 { font-size: 1.35rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .location-card { padding: 1.25rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <div class="nav-buttons">
+                        <button class="btn-login">Login</button>
+                        <button class="btn-signup">Get Started</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Contact SkillSync AI</h1>
+            <p>Our support and partnership teams are here to help you. Reach out to us for assistance, collaboration, or anything else.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2>How to Reach Us</h2>
+                    <p style="margin-bottom: 2rem;">Connect with the right team or send us a direct message below.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>support@skillsync.ai</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-details">
+                            <h3>Office</h3>
+                            <p>Bangalore, Karnataka, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p>Mon - Fri: 9:00 AM - 6:00 PM IST</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-headset"></i></div>
+                        <div class="contact-details">
+                            <h3>Support</h3>
+                            <p>24/7 Online Support Available</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>Send us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="press">Press Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Locations -->
+    <section class="office-locations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Locations</h2>
+                <p>Find us in major tech hubs across India</p>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>🏢 Bangalore (HQ)</h3>
+                    <p>Koramangala, Bangalore</p>
+                    <p>Karnataka, India 560034</p>
+                    <p>📞 +91 98765 43210</p>
+                </div>
+                <div class="location-card">
+                    <h3>🏙️ Mumbai</h3>
+                    <p>Bandra Kurla Complex</p>
+                    <p>Mumbai, Maharashtra 400051</p>
+                    <p>📞 +91 98765 43211</p>
+                </div>
+                <div class="location-card">
+                    <h3>🌆 Delhi</h3>
+                    <p>Connaught Place</p>
+                    <p>New Delhi, Delhi 110001</p>
+                    <p>📞 +91 98765 43212</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Same footer structure as your other pages -->
+    </footer>
+
+    <script>
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            setTimeout(() => {
+                alert('Message sent successfully! We\'ll get back to you soon.');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1850);
+        });
+        // Field validation UI
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e53e3e';
+                } else {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

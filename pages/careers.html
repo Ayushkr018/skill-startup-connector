@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - SkillSync AI | Join the Future of AI-Powered Talent Matching</title>
+    <meta name="description" content="Join SkillSync AI and build the future of talent discovery with cutting-edge AI technology. Explore exciting career opportunities and professional growth.">
+    <meta name="keywords" content="careers, AI jobs, machine learning careers, startup jobs, remote work, tech careers">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Enhanced Color System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --blue-gradient: linear-gradient(135deg, #2196F3 0%, #21CBF3 100%);
+            --green-gradient: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            --orange-gradient: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+            --pink-gradient: linear-gradient(135deg, #E91E63 0%, #F06292 100%);
+            
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-lighter: #a0aec0;
+            --text-white: #ffffff;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-tertiary: #edf2f7;
+            --bg-dark: #1a202c;
+            --bg-overlay: rgba(26, 32, 44, 0.9);
+            
+            /* Border Colors */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e0;
+            --border-dark: #a0aec0;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.15s ease-out;
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 2rem; }
+        h4 { font-size: 1.5rem; }
+        h5 { font-size: 1.25rem; }
+        h6 { font-size: 1.125rem; }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        a:hover {
+            color: #4c51bf;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition-normal);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header.scrolled::before {
+            opacity: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: var(--transition-normal);
+        }
+
+        .logo a:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(2deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            list-style: none;
+            background: rgba(255, 255, 255, 0.8);
+            padding: var(--space-sm);
+            border-radius: var(--radius-2xl);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.925rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .btn-login,
+        .btn-signup {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-login:hover {
+            color: #667eea;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-sm) var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        /* Careers Hero */
+        .careers-hero {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .careers-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><defs><pattern id="career-pattern" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23career-pattern)"/></svg>');
+        }
+
+        .careers-hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .careers-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .careers-hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-2xl);
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-white);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-2xl);
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg) var(--space-2xl);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--text-white);
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-white);
+            color: #667eea;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--bg-primary);
+            padding: var(--space-4xl) 0;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-container {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: var(--space-lg);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Culture Section */
+        .culture-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-secondary);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-2xl);
+        }
+
+        .culture-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .culture-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .culture-card:hover::before {
+            opacity: 1;
+        }
+
+        .culture-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--text-white);
+            margin: 0 auto var(--space-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card:nth-child(1) .culture-icon {
+            background: var(--success-gradient);
+        }
+
+        .culture-card:nth-child(2) .culture-icon {
+            background: var(--blue-gradient);
+        }
+
+        .culture-card:nth-child(3) .culture-icon {
+            background: var(--orange-gradient);
+        }
+
+        .culture-card:nth-child(4) .culture-icon {
+            background: var(--pink-gradient);
+        }
+
+        .culture-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .culture-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Jobs Section */
+        .jobs-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .job-filters {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-3xl);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-md) var(--space-xl);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-full);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .jobs-grid {
+            display: grid;
+            gap: var(--space-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .job-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .job-card:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+        }
+
+        .job-card:hover::before {
+            opacity: 1;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+            gap: var(--space-lg);
+        }
+
+        .job-info h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .job-department {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .job-badges {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .job-badge {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-remote {
+            background: rgba(17, 153, 142, 0.1);
+            color: #0f766e;
+        }
+
+        .badge-full-time {
+            background: rgba(33, 150, 243, 0.1);
+            color: #1565c0;
+        }
+
+        .badge-senior {
+            background: rgba(255, 152, 0, 0.1);
+            color: #e65100;
+        }
+
+        .badge-junior {
+            background: rgba(156, 39, 176, 0.1);
+            color: #7b1fa2;
+        }
+
+        .badge-mid-level {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+        }
+
+        .job-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .job-requirements {
+            list-style: none;
+            margin-bottom: var(--space-xl);
+        }
+
+        .job-requirements li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-sm);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .job-requirements i {
+            color: #4caf50;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-light);
+            gap: var(--space-lg);
+        }
+
+        .job-location {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .apply-btn {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-secondary);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-lg);
+            background: var(--bg-primary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border-light);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .benefit-content h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .benefit-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Portfolio Building Section */
+        .portfolio-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .portfolio-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+        }
+
+        .portfolio-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .portfolio-features {
+            list-style: none;
+            margin-top: var(--space-xl);
+        }
+
+        .portfolio-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .portfolio-features i {
+            color: #4caf50;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-visual {
+            background: linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-preview {
+            background: var(--accent-gradient);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--text-white);
+        }
+
+        /* Application CTA */
+        .application-cta {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-4xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><defs><pattern id="cta-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23cta-pattern)"/></svg>');
+        }
+
+        .application-cta > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .application-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .application-cta p {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-2xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            color: var(--text-white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            margin-right: var(--space-sm);
+            font-size: 1.75rem;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            transition: var(--transition-normal);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-2xl);
+            animation: modalSlideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition-normal);
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: var(--space-md);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--bg-primary);
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+            padding: var(--space-md) var(--space-xl);
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 var(--space-lg);
+            }
+
+            .portfolio-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: var(--space-xs);
+            }
+
+            .nav-link {
+                padding: var(--space-xs) var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
+
+            .job-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .nav-menu,
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .careers-hero {
+                padding: 6rem 0 4rem;
+            }
+
+            .careers-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .careers-hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .culture-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .job-filters {
+                gap: var(--space-sm);
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--space-sm);
+            }
+
+            .filter-btn {
+                white-space: nowrap;
+                padding: var(--space-sm) var(--space-lg);
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 95%;
+                padding: var(--space-lg);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-card {
+                padding: var(--space-lg);
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header,
+            .careers-hero,
+            .application-cta,
+            .footer {
+                display: none !important;
+            }
+
+            .job-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="features.html" class="nav-link">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="how-it-works.html" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>How It Works</span>
+                    </a>
+                    <a href="pricing.html" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <span>Pricing</span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="careers.html" class="nav-link active">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Careers</span>
+                    </a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="btn-signup" onclick="openModal('signupModal')">
+                        <i class="fas fa-rocket"></i>
+                        <span>Get Started</span>
+                    </button>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Careers Hero -->
+    <section class="careers-hero">
+        <div class="container">
+            <h1>Shape the Future of AI</h1>
+            <p>Join our mission to revolutionize talent discovery through cutting-edge artificial intelligence. Build innovative solutions that connect talented individuals with meaningful opportunities worldwide.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToJobs()">
+                    <i class="fas fa-search"></i>
+                    Explore Open Roles
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('culture')">
+                    <i class="fas fa-heart"></i>
+                    Our Culture
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Team Members</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Remote-First</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Employee Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section class="culture-section" id="culture">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose SkillSync AI?</h2>
+                <p>Discover a workplace culture that empowers innovation, celebrates diversity, and drives meaningful impact in the future of work</p>
+            </div>
+            
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation at Core</h3>
+                    <p>Work with cutting-edge AI technology, contribute to groundbreaking research, and pioneer the next generation of talent discovery solutions that impact millions.</p>
+                </div>
+
+                <div class="culture-card">
+                    <div class="culture-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Diverse & Inclusive</h3>
+                    <p>Join a global team that values diverse perspectives, promotes inclusive practices, and ensures every voice is heard and respected in our collaborative environment.</p>
+                </div>
+
+                <div class="culture-card">
+                    <div class="culture-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Growth-Oriented</h3>
+                    <p>Benefit from continuous learning opportunities, mentorship programs, conference attendance, and clear career progression paths with leadership support.</p>
+                </div>
+
+                <div class="culture-card">
+                    <div class="culture-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Purpose-Driven</h3>
+                    <p>Make a tangible impact by connecting talented individuals with life-changing opportunities while helping startups find their perfect team members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Building Section -->
+    <section class="portfolio-section">
+        <div class="container">
+            <div class="portfolio-content">
+                <div class="portfolio-info">
+                    <h2>Build Your Professional Portfolio</h2>
+                    <p>At SkillSync AI, we believe in empowering our team members' career growth. We provide comprehensive support for building impressive professional portfolios that showcase your expertise and achievements.</p>
+                    
+                    <ul class="portfolio-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Personal branding workshops and guidance sessions</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Portfolio website development support</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional photography and content creation</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>LinkedIn optimization and networking strategies</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Skill certification and endorsement programs</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="portfolio-visual">
+                    <div class="portfolio-preview">
+                        <h3>📈 Career Growth Focus</h3>
+                        <p>We invest in your professional development with dedicated time for portfolio building, skill enhancement, and career planning sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="jobs-section" id="jobs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Open Positions</h2>
+                <p>Find your perfect role and join our mission to transform the future of talent discovery</p>
+            </div>
+            
+            <div class="job-filters">
+                <button class="filter-btn active" data-filter="all">All Positions</button>
+                <button class="filter-btn" data-filter="engineering">Engineering</button>
+                <button class="filter-btn" data-filter="design">Design & UX</button>
+                <button class="filter-btn" data-filter="product">Product</button>
+                <button class="filter-btn" data-filter="marketing">Marketing</button>
+                <button class="filter-btn" data-filter="data">Data Science</button>
+            </div>
+            
+            <div class="jobs-grid">
+                <div class="job-card" data-department="engineering">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>Senior Full Stack Engineer</h3>
+                            <div class="job-department">Engineering</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-senior">Senior</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Lead the development of our core platform architecture, working with React, Node.js, Python, and AI/ML technologies. Collaborate with cross-functional teams to build scalable solutions that serve millions of users globally.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> 5+ years of full-stack development experience</li>
+                        <li><i class="fas fa-check"></i> Expert proficiency in React, Node.js, TypeScript, Python</li>
+                        <li><i class="fas fa-check"></i> Experience with AI/ML integration and microservices architecture</li>
+                        <li><i class="fas fa-check"></i> AWS/Azure cloud platform expertise with DevOps knowledge</li>
+                        <li><i class="fas fa-check"></i> Strong system design skills and performance optimization experience</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Bangalore Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('Senior Full Stack Engineer')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-department="design">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>Senior Product Designer</h3>
+                            <div class="job-department">Design & UX</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-senior">Senior</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Design innovative and intuitive user experiences for our AI-powered talent matching platform. Lead design thinking workshops, create comprehensive design systems, and mentor junior designers.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> 4+ years of product design experience in tech companies</li>
+                        <li><i class="fas fa-check"></i> Expert proficiency in Figma, Sketch, Adobe Creative Suite</li>
+                        <li><i class="fas fa-check"></i> Strong portfolio showcasing web and mobile app designs</li>
+                        <li><i class="fas fa-check"></i> Experience with design systems, user research, and A/B testing</li>
+                        <li><i class="fas fa-check"></i> Understanding of AI/ML interfaces and data visualization</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Mumbai Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('Senior Product Designer')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-department="data">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>AI/ML Research Engineer</h3>
+                            <div class="job-department">Data Science</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-senior">Senior</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Build and optimize our proprietary AI matching algorithms using advanced machine learning, NLP, and deep learning techniques. Conduct research to improve recommendation accuracy and reduce bias in talent matching.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> PhD/MS in Computer Science, AI/ML, or related field</li>
+                        <li><i class="fas fa-check"></i> Expert knowledge in Python, TensorFlow, PyTorch, scikit-learn</li>
+                        <li><i class="fas fa-check"></i> Experience with NLP, recommendation systems, and computer vision</li>
+                        <li><i class="fas fa-check"></i> Strong mathematical background in statistics and linear algebra</li>
+                        <li><i class="fas fa-check"></i> Publications in top-tier AI/ML conferences preferred</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Hyderabad Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('AI/ML Research Engineer')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-department="product">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>Senior Product Manager</h3>
+                            <div class="job-department">Product</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-senior">Senior</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Drive product strategy and execution for our core matching platform. Lead cross-functional teams, define product roadmaps, and deliver features that create exceptional user experiences for both students and startups.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> 5+ years of product management experience in B2B/B2C products</li>
+                        <li><i class="fas fa-check"></i> Strong analytical mindset with experience in data-driven decision making</li>
+                        <li><i class="fas fa-check"></i> Experience with AI/ML products and recommendation systems</li>
+                        <li><i class="fas fa-check"></i> Proven track record of launching successful products at scale</li>
+                        <li><i class="fas fa-check"></i> Excellent communication and stakeholder management skills</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Delhi Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('Senior Product Manager')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-department="marketing">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>Growth Marketing Manager</h3>
+                            <div class="job-department">Marketing</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-mid-level">Mid-level</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Drive user acquisition and engagement through innovative digital marketing strategies. Manage performance marketing campaigns, content strategy, and growth experiments to scale our platform globally.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> 3+ years of growth marketing experience in tech startups</li>
+                        <li><i class="fas fa-check"></i> Expertise in digital marketing channels and attribution modeling</li>
+                        <li><i class="fas fa-check"></i> Strong analytical skills with proficiency in A/B testing and metrics</li>
+                        <li><i class="fas fa-check"></i> Experience with marketing automation and CRM platforms</li>
+                        <li><i class="fas fa-check"></i> Content creation and social media marketing experience</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Pune Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('Growth Marketing Manager')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-department="engineering">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3>Frontend Engineer</h3>
+                            <div class="job-department">Engineering</div>
+                        </div>
+                        <div class="job-badges">
+                            <span class="job-badge badge-remote">Remote</span>
+                            <span class="job-badge badge-full-time">Full-time</span>
+                            <span class="job-badge badge-mid-level">Mid-level</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Build beautiful, responsive, and performant user interfaces for our web and mobile applications. Collaborate with designers and backend engineers to create seamless user experiences using modern frontend technologies.
+                    </div>
+                    <ul class="job-requirements">
+                        <li><i class="fas fa-check"></i> 3+ years of React development experience with modern JavaScript</li>
+                        <li><i class="fas fa-check"></i> Proficiency in HTML5, CSS3, TypeScript, and responsive design</li>
+                        <li><i class="fas fa-check"></i> Experience with state management (Redux/Zustand) and testing frameworks</li>
+                        <li><i class="fas fa-check"></i> Knowledge of web performance optimization and accessibility standards</li>
+                        <li><i class="fas fa-check"></i> Familiarity with React Native for mobile development is a plus</li>
+                    </ul>
+                    <div class="job-footer">
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote • Global • Chennai Hub</span>
+                        </div>
+                        <button class="apply-btn" onclick="applyForJob('Frontend Engineer')">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comprehensive Benefits Package</h2>
+                <p>We believe in taking exceptional care of our team with industry-leading benefits and perks that support your personal and professional growth</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Health & Wellness</h4>
+                        <p>Comprehensive health insurance, mental health support, fitness reimbursements, and wellness programs for you and your family.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Remote-First Culture</h4>
+                        <p>Work from anywhere with flexible hours, home office setup allowance, and co-working space reimbursements.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Learning & Development</h4>
+                        <p>Annual learning budget, conference attendance, online course subscriptions, and internal mentorship programs.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Equity & Growth</h4>
+                        <p>Competitive stock options, performance bonuses, and the opportunity to grow with our rapidly expanding company.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Unlimited Time Off</h4>
+                        <p>Flexible PTO policy, sabbatical opportunities, and encouraged time off to recharge and pursue personal interests.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Team Connection</h4>
+                        <p>Annual company retreats, quarterly team events, virtual social activities, and team building experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application CTA -->
+    <section class="application-cta">
+        <div class="container">
+            <h2>Don't See Your Perfect Role?</h2>
+            <p>We're always on the lookout for exceptional talent who share our vision. Send us your resume and tell us how you'd like to contribute to revolutionizing talent discovery.</p>
+            <button class="btn-secondary" onclick="openModal('generalApplicationModal')">
+                <i class="fas fa-paper-plane"></i>
+                Send General Application
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered platform connecting talented individuals with innovative startups through intelligent matching and personalized career development.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="api.html">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blog & Insights</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="#webinars">Career Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="#press">Press Kit</a></li>
+                        <li><a href="#investors">Investor Relations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #4a5568; color: #a0aec0;">
+                <p>&copy; 2025 SkillSync AI. All rights reserved. | Built with ❤️ for the future of work</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Welcome Back</h3>
+                <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In to Account</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal');">Create one here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Join SkillSync AI</h3>
+                <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="signupEmail" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="userType"><i class="fas fa-user-tag"></i> I am a</label>
+                    <select id="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="student">🎓 Student seeking opportunities</option>
+                        <option value="startup">🚀 Startup looking for talent</option>
+                        <option value="professional">💼 Professional exploring careers</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-rocket"></i>
+                    <span>Create My Account</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal');">Sign in here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- General Application Modal -->
+    <div id="generalApplicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-paper-plane"></i> General Application</h3>
+                <button class="close" onclick="closeModal('generalApplicationModal')">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="handleGeneralApplication(event)">
+                <div class="form-group">
+                    <label for="applicantName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="applicantName" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="applicantEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="interestedRole"><i class="fas fa-briefcase"></i> Interested Role/Department</label>
+                    <input type="text" id="interestedRole" placeholder="e.g., Frontend Development, Data Science, Product Management" required>
+                </div>
+                <div class="form-group">
+                    <label for="experience"><i class="fas fa-chart-line"></i> Years of Experience</label>
+                    <select id="experience" required>
+                        <option value="">Select experience level</option>
+                        <option value="0-1">0-1 years (Entry Level)</option>
+                        <option value="2-3">2-3 years (Junior)</option>
+                        <option value="4-6">4-6 years (Mid Level)</option>
+                        <option value="7+">7+ years (Senior)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="coverLetter"><i class="fas fa-heart"></i> Why SkillSync AI?</label>
+                    <textarea id="coverLetter" rows="5" placeholder="Tell us about your background, skills, and why you're excited about joining SkillSync AI. What unique value would you bring to our team?" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Submit Application</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
+                    We'll review your application and get back to you within 5 business days.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Career Page Manager
+        class CareerPageManager {
+            constructor() {
+                this.header = document.getElementById('header');
+                this.currentFilter = 'all';
+                this.jobCards = document.querySelectorAll('.job-card');
+                this.filterButtons = document.querySelectorAll('.filter-btn');
+                
+                this.init();
+            }
+
+            init() {
+                this.setupScrollEffects();
+                this.setupJobFiltering();
+                this.setupAnimations();
+                this.setupKeyboardNavigation();
+            }
+
+            setupScrollEffects() {
+                let ticking = false;
+                
+                const updateScrollEffects = () => {
+                    const scrolled = window.scrollY > 50;
+                    this.header.classList.toggle('scrolled', scrolled);
+                    ticking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateScrollEffects);
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+
+            setupJobFiltering() {
+                this.filterButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.filterJobs(button.dataset.filter);
+                        this.setActiveFilter(button);
+                    });
+                });
+            }
+
+            filterJobs(filter) {
+                this.currentFilter = filter;
+                
+                this.jobCards.forEach((card, index) => {
+                    const shouldShow = filter === 'all' || card.dataset.department === filter;
+                    
+                    if (shouldShow) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.classList.add('fade-in-up');
+                        }, index * 100);
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('fade-in-up');
+                    }
+                });
+            }
+
+            setActiveFilter(activeButton) {
+                this.filterButtons.forEach(btn => btn.classList.remove('active'));
+                activeButton.classList.add('active');
+            }
+
+            setupAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in-up');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.culture-card, .benefit-item, .job-card').forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.altKey) {
+                        switch(e.key) {
+                            case '1':
+                                e.preventDefault();
+                                this.filterJobs('all');
+                                this.setActiveFilter(document.querySelector('[data-filter="all"]'));
+                                break;
+                            case '2':
+                                e.preventDefault();
+                                this.filterJobs('engineering');
+                                this.setActiveFilter(document.querySelector('[data-filter="engineering"]'));
+                                break;
+                            case '3':
+                                e.preventDefault();
+                                this.filterJobs('design');
+                                this.setActiveFilter(document.querySelector('[data-filter="design"]'));
+                                break;
+                        }
+                    }
+                });
+            }
+        }
+
+        // Modal Management
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus first input
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input, select, textarea');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigation Functions
+        function scrollToJobs() {
+            document.getElementById('jobs').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Application Functions
+        function applyForJob(jobTitle) {
+            // Store job title for potential use
+            sessionStorage.setItem('appliedJobTitle', jobTitle);
+            
+            // Show application confirmation
+            const message = `🚀 Thank you for your interest in the ${jobTitle} position!\n\n✨ In our full application system:\n• You'd be redirected to a detailed application form\n• Upload your resume and portfolio\n• Complete skill assessments\n• Schedule interviews\n\nWe're excited about your interest in joining SkillSync AI!`;
+            
+            alert(message);
+        }
+
+        // Enhanced Form Handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing you in...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('🎉 Welcome back to SkillSync AI!\n\nLogin successful. Redirecting to your personalized dashboard where you can:\n• View job recommendations\n• Track application status\n• Access career resources\n• Build your portfolio');
+                
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeModal('loginModal');
+                event.target.reset();
+            }, 2000);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            const userType = document.getElementById('userType').value;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating your account...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                let message = '🎉 Welcome to SkillSync AI family!\n\nYour account has been created successfully.\n\n';
+                
+                switch(userType) {
+                    case 'student':
+                        message += '🎓 As a student, you now have access to:\n• AI-powered job matching\n• Skill development resources\n• Portfolio building tools\n• Career guidance';
+                        break;
+                    case 'startup':
+                        message += '🚀 As a startup, you can now:\n• Find top talent instantly\n• Post job opportunities\n• Access candidate analytics\n• Build your team efficiently';
+                        break;
+                    case 'professional':
+                        message += '💼 As a professional, explore:\n• Career advancement opportunities\n• Skill-based job matching\n• Professional networking\n• Career development resources';
+                        break;
+                }
+                
+                alert(message);
+                
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeModal('signupModal');
+                event.target.reset();
+            }, 2000);
+        }
+
+        function handleGeneralApplication(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            const applicantName = document.getElementById('applicantName').value;
+            const interestedRole = document.getElementById('interestedRole').value;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting application...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                const message = `🙏 Thank you ${applicantName}!\n\nYour general application for ${interestedRole} has been submitted successfully.\n\n📧 What happens next:\n• Our HR team will review your application\n• We'll reach out within 5 business days\n• If there's a good fit, we'll schedule an interview\n• You'll receive updates via email\n\n✨ We appreciate your interest in joining our mission to revolutionize talent discovery!`;
+                
+                alert(message);
+                
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeModal('generalApplicationModal');
+                event.target.reset();
+            }, 2500);
+        }
+
+        // Close modals on outside click
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Close modals on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal[style*="flex"]');
+                if (openModal) {
+                    closeModal(openModal.id);
+                }
+            }
+        });
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CareerPageManager();
+            
+            // Initial animations
+            setTimeout(() => {
+                document.querySelectorAll('.culture-card, .job-card, .benefit-item').forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('fade-in-up');
+                    }, index * 150);
+                });
+            }, 300);
+        });
+
+        // Performance optimization
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            document.documentElement.style.setProperty('--transition-fast', 'none');
+            document.documentElement.style.setProperty('--transition-normal', 'none');
+            document.documentElement.style.setProperty('--transition-slow', 'none');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - SkillSync AI | AI-Powered Talent Matching Insights</title>
+    <meta name="description" content="Latest insights, updates, and stories from SkillSync AI - AI-powered talent matching platform. Read about AI, startups, career advice, and technology trends.">
+    <meta name="keywords" content="AI blog, talent matching, startup stories, career advice, machine learning, recruitment technology">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Color System */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --blue-gradient: linear-gradient(135deg, #2196F3 0%, #21CBF3 100%);
+            --green-gradient: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            --orange-gradient: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+            
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-lighter: #a0aec0;
+            --text-white: #ffffff;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-tertiary: #edf2f7;
+            --bg-dark: #1a202c;
+            --bg-overlay: rgba(26, 32, 44, 0.9);
+            
+            /* Border Colors */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e0;
+            --border-dark: #a0aec0;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.15s ease-out;
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        h5 { font-size: 1.125rem; }
+        h6 { font-size: 1rem; }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        a:hover {
+            color: #4c51bf;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition-normal);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header.scrolled::before {
+            opacity: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: var(--transition-normal);
+        }
+
+        .logo a:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            margin-right: var(--space-sm);
+            font-size: 2rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(2deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            list-style: none;
+            background: rgba(255, 255, 255, 0.8);
+            padding: var(--space-sm);
+            border-radius: var(--radius-2xl);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.925rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: var(--text-white);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .btn-login,
+        .btn-signup {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-login:hover {
+            color: #667eea;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-sm) var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        /* Blog Hero */
+        .blog-hero {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: 8rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><defs><pattern id="blog-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23blog-pattern)"/></svg>');
+        }
+
+        .blog-hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 0;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-white);
+        }
+
+        /* Blog Filters */
+        .blog-filters {
+            background: var(--bg-primary);
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
+            transition: var(--transition-normal);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .filter-tab:hover::before {
+            left: 100%;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .filter-tab.active {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Blog Content */
+        .blog-content {
+            padding: var(--space-3xl) 0;
+        }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: var(--space-3xl);
+            align-items: start;
+        }
+
+        .blog-main {
+            display: grid;
+            gap: var(--space-2xl);
+        }
+
+        /* Featured Post */
+        .featured-post {
+            background: var(--bg-primary);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: var(--space-2xl);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+        }
+
+        .featured-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .featured-post:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .featured-post:hover::before {
+            opacity: 1;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 350px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .featured-image i {
+            position: relative;
+            z-index: 1;
+            animation: featuredIconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes featuredIconFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        .featured-content {
+            padding: var(--space-2xl);
+        }
+
+        .featured-badge {
+            background: var(--warning-gradient);
+            color: var(--text-white);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .featured-content h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .featured-content p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+            color: var(--text-secondary);
+        }
+
+        /* Blog Posts Grid */
+        .blog-posts-grid {
+            display: grid;
+            gap: var(--space-xl);
+        }
+
+        .blog-post-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .blog-post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .blog-post-card:hover::before {
+            opacity: 1;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 220px;
+            background: var(--purple-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            font-size: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+        }
+
+        .post-image i {
+            position: relative;
+            z-index: 1;
+            transition: var(--transition-normal);
+        }
+
+        .blog-post-card:hover .post-image i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Post Categories Colors */
+        .blog-post-card[data-category="startup"] .post-image {
+            background: var(--warning-gradient);
+        }
+
+        .blog-post-card[data-category="career"] .post-image {
+            background: var(--success-gradient);
+        }
+
+        .blog-post-card[data-category="ai-ml"] .post-image {
+            background: var(--accent-gradient);
+        }
+
+        .blog-post-card[data-category="product"] .post-image {
+            background: var(--blue-gradient);
+        }
+
+        .blog-post-card[data-category="tech"] .post-image {
+            background: var(--purple-gradient);
+        }
+
+        .post-content {
+            padding: var(--space-xl);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .post-category {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            line-height: 1.4;
+            transition: var(--transition-normal);
+        }
+
+        .blog-post-card:hover .post-title {
+            color: #667eea;
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-lg);
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            height: fit-content;
+            position: sticky;
+            top: 160px;
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            padding-bottom: var(--space-sm);
+        }
+
+        .sidebar-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Newsletter Signup */
+        .newsletter-signup {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="newsletter-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23newsletter-pattern)"/></svg>');
+        }
+
+        .newsletter-signup > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-signup h3 {
+            color: var(--text-white);
+            margin-bottom: var(--space-sm);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .newsletter-signup p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-lg);
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: var(--space-md);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            background: var(--text-white);
+            color: #667eea;
+            border: none;
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Popular Posts */
+        .popular-posts {
+            list-style: none;
+        }
+
+        .popular-post {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .popular-post:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .popular-post:hover {
+            transform: translateX(4px);
+        }
+
+        .popular-post-image {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-lg);
+            background: var(--secondary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .popular-post-content {
+            flex: 1;
+        }
+
+        .popular-post-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: var(--space-xs);
+            transition: var(--transition-normal);
+        }
+
+        .popular-post:hover .popular-post-title {
+            color: #667eea;
+        }
+
+        .popular-post-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Tags Cloud */
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition-normal);
+            border: 1px solid transparent;
+        }
+
+        .tag:hover {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><defs><pattern id="cta-dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23cta-dots)"/></svg>');
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-2xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            color: var(--text-white);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg) var(--space-2xl);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--text-white);
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-white);
+            color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo i {
+            margin-right: var(--space-sm);
+            font-size: 1.75rem;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            transition: var(--transition-normal);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-2xl);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition-normal);
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: var(--space-md);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--bg-primary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+            padding: var(--space-md) var(--space-xl);
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 var(--space-lg);
+            }
+
+            .blog-layout {
+                grid-template-columns: 1fr 320px;
+                gap: var(--space-2xl);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .blog-sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .nav-menu {
+                gap: var(--space-xs);
+            }
+
+            .nav-link {
+                padding: var(--space-xs) var(--space-md);
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--space-md);
+            }
+
+            .nav-menu,
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .blog-hero {
+                padding: 6rem 0 4rem;
+            }
+
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+
+            .filter-tabs {
+                gap: var(--space-sm);
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--space-sm);
+            }
+
+            .filter-tab {
+                padding: var(--space-sm) var(--space-md);
+                white-space: nowrap;
+            }
+
+            .featured-content {
+                padding: var(--space-lg);
+            }
+
+            .featured-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .post-content {
+                padding: var(--space-lg);
+            }
+
+            .blog-sidebar {
+                padding: var(--space-lg);
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 95%;
+                padding: var(--space-lg);
+            }
+
+            .featured-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .post-image {
+                height: 180px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --shadow-sm: none;
+                --shadow-md: none;
+                --shadow-lg: none;
+                --shadow-xl: none;
+                --shadow-2xl: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header,
+            .blog-filters,
+            .blog-sidebar,
+            .cta,
+            .footer {
+                display: none !important;
+            }
+
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-post-card,
+            .featured-post {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="features.html" class="nav-link">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="how-it-works.html" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>How It Works</span>
+                    </a>
+                    <a href="pricing.html" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <span>Pricing</span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="blog.html" class="nav-link active">
+                        <i class="fas fa-blog"></i>
+                        <span>Blog</span>
+                    </a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="btn-signup" onclick="openModal('signupModal')">
+                        <i class="fas fa-rocket"></i>
+                        <span>Get Started</span>
+                    </button>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>SkillSync AI Insights</h1>
+            <p>Discover the latest trends, expert insights, and success stories from the world of AI-powered talent matching and recruitment innovation.</p>
+        </div>
+    </section>
+
+    <!-- Blog Filters -->
+    <section class="blog-filters">
+        <div class="container">
+            <div class="filter-tabs">
+                <a href="#" class="filter-tab active" data-category="all">
+                    <i class="fas fa-globe"></i>
+                    All Posts
+                </a>
+                <a href="#" class="filter-tab" data-category="ai-ml">
+                    <i class="fas fa-brain"></i>
+                    AI & Machine Learning
+                </a>
+                <a href="#" class="filter-tab" data-category="startup">
+                    <i class="fas fa-rocket"></i>
+                    Startup Stories
+                </a>
+                <a href="#" class="filter-tab" data-category="career">
+                    <i class="fas fa-graduation-cap"></i>
+                    Career Advice
+                </a>
+                <a href="#" class="filter-tab" data-category="tech">
+                    <i class="fas fa-code"></i>
+                    Technology
+                </a>
+                <a href="#" class="filter-tab" data-category="product">
+                    <i class="fas fa-cogs"></i>
+                    Product Updates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="blog-layout">
+                <!-- Main Content -->
+                <main class="blog-main">
+                    <!-- Featured Post -->
+                    <article class="featured-post" onclick="openPost('featured')">
+                        <div class="featured-image">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="featured-content">
+                            <span class="featured-badge">
+                                <i class="fas fa-star"></i>
+                                Featured Story
+                            </span>
+                            <h2>The Future of AI in Talent Matching: How Machine Learning is Revolutionizing Recruitment</h2>
+                            <p>Explore how artificial intelligence and machine learning algorithms are transforming the way startups find talent and students discover opportunities. From predictive analytics to bias-free matching, discover the cutting-edge technologies shaping the future of recruitment and career development.</p>
+                            <div class="post-author">
+                                <div class="author-avatar">AK</div>
+                                <div class="author-info">
+                                    <div class="author-name">Arjun Kumar</div>
+                                    <div class="post-date">January 15, 2025 • 8 min read • AI & ML</div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Posts Grid -->
+                    <div class="blog-posts-grid">
+                        <article class="blog-post-card" data-category="startup" onclick="openPost('startup-story')">
+                            <div class="post-image">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">Startup Stories</span>
+                                    <span>January 12, 2025</span>
+                                    <span>5 min read</span>
+                                </div>
+                                <h3 class="post-title">How TechStart Inc. Found Their Dream Developer in 48 Hours</h3>
+                                <p class="post-excerpt">A detailed case study of how our AI-powered matching algorithm helped a Bangalore-based fintech startup find the perfect full-stack developer within just two days, transforming their hiring process and accelerating their product development.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">PS</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Priya Singh</div>
+                                        <div class="post-date">Product Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card" data-category="career" onclick="openPost('skills-2025')">
+                            <div class="post-image">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">Career Advice</span>
+                                    <span>January 10, 2025</span>
+                                    <span>7 min read</span>
+                                </div>
+                                <h3 class="post-title">10 Essential Skills Every Computer Science Student Needs in 2025</h3>
+                                <p class="post-excerpt">From AI/ML fundamentals to cloud computing and blockchain development, discover the in-demand skills that will make you stand out in today's competitive tech job market and land your dream role.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">RG</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Rahul Gupta</div>
+                                        <div class="post-date">Head of Engineering</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card" data-category="ai-ml" onclick="openPost('bias-free-ai')">
+                            <div class="post-image">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">AI & ML</span>
+                                    <span>January 8, 2025</span>
+                                    <span>6 min read</span>
+                                </div>
+                                <h3 class="post-title">Building Bias-Free AI: Our Approach to Ethical Talent Matching</h3>
+                                <p class="post-excerpt">Learn how we're tackling algorithmic bias in our AI models to ensure fair and inclusive talent matching for all users, regardless of background, gender, or demographic factors.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">SM</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Sneha Mishra</div>
+                                        <div class="post-date">AI Research Lead</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card" data-category="product" onclick="openPost('real-time-chat')">
+                            <div class="post-image">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">Product Updates</span>
+                                    <span>January 5, 2025</span>
+                                    <span>4 min read</span>
+                                </div>
+                                <h3 class="post-title">Introducing Real-Time Chat: Connect with Matches Instantly</h3>
+                                <p class="post-excerpt">We're excited to announce our new real-time messaging feature that allows students and startups to connect instantly when a match is made, complete with file sharing and video calling capabilities.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">AK</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Arjun Kumar</div>
+                                        <div class="post-date">CEO & Co-Founder</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card" data-category="tech" onclick="openPost('scaling-infrastructure')">
+                            <div class="post-image">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">Technology</span>
+                                    <span>January 3, 2025</span>
+                                    <span>9 min read</span>
+                                </div>
+                                <h3 class="post-title">Scaling to 10,000+ Users: Our Infrastructure Journey</h3>
+                                <p class="post-excerpt">A deep dive into how we built a scalable architecture using microservices, Kubernetes, and cloud-native technologies to handle rapid growth while maintaining 99.9% uptime.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">PK</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Priya Kumar</div>
+                                        <div class="post-date">CTO & Co-Founder</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card" data-category="startup" onclick="openPost('first-year-journey')">
+                            <div class="post-image">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">Startup Stories</span>
+                                    <span>December 30, 2024</span>
+                                    <span>6 min read</span>
+                                </div>
+                                <h3 class="post-title">From Idea to 10,000 Users: Our First Year Journey</h3>
+                                <p class="post-excerpt">Reflecting on the challenges, learnings, and major milestones from our first year of building SkillSync AI from a simple idea to a platform serving thousands of users worldwide.</p>
+                                <div class="post-author">
+                                    <div class="author-avatar">AK</div>
+                                    <div class="author-info">
+                                        <div class="author-name">Arjun Kumar</div>
+                                        <div class="post-date">CEO & Co-Founder</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </main>
+
+                <!-- Sidebar -->
+                <aside class="blog-sidebar">
+                    <!-- Newsletter Signup -->
+                    <div class="sidebar-section">
+                        <div class="newsletter-signup">
+                            <h3><i class="fas fa-envelope"></i> Stay Updated</h3>
+                            <p>Get the latest insights, success stories, and product updates delivered straight to your inbox.</p>
+                            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                                <input type="email" placeholder="Enter your email address" required>
+                                <button type="submit">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Subscribe Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Popular Posts -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-fire"></i>
+                            Popular Posts
+                        </h3>
+                        <ul class="popular-posts">
+                            <li class="popular-post" onclick="openPost('hiring-metrics')">
+                                <div class="popular-post-image">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="popular-post-content">
+                                    <div class="popular-post-title">5 Metrics Every Startup Should Track When Hiring</div>
+                                    <div class="popular-post-date">Dec 28, 2024</div>
+                                </div>
+                            </li>
+                            <li class="popular-post" onclick="openPost('remote-teams')">
+                                <div class="popular-post-image">
+                                    <i class="fas fa-laptop-house"></i>
+                                </div>
+                                <div class="popular-post-content">
+                                    <div class="popular-post-title">Building Remote-First Teams: A Complete Guide</div>
+                                    <div class="popular-post-date">Dec 25, 2024</div>
+                                </div>
+                            </li>
+                            <li class="popular-post" onclick="openPost('skill-based-hiring')">
+                                <div class="popular-post-image">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="popular-post-content">
+                                    <div class="popular-post-title">Why Skill-Based Hiring is the Future</div>
+                                    <div class="popular-post-date">Dec 22, 2024</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-tags"></i>
+                            Popular Tags
+                        </h3>
+                        <div class="tags-cloud">
+                            <a href="#" class="tag" onclick="filterByTag('AI')">AI</a>
+                            <a href="#" class="tag" onclick="filterByTag('Machine Learning')">Machine Learning</a>
+                            <a href="#" class="tag" onclick="filterByTag('Startups')">Startups</a>
+                            <a href="#" class="tag" onclick="filterByTag('Career')">Career</a>
+                            <a href="#" class="tag" onclick="filterByTag('Technology')">Technology</a>
+                            <a href="#" class="tag" onclick="filterByTag('Remote Work')">Remote Work</a>
+                            <a href="#" class="tag" onclick="filterByTag('Hiring')">Hiring</a>
+                            <a href="#" class="tag" onclick="filterByTag('Students')">Students</a>
+                            <a href="#" class="tag" onclick="filterByTag('Innovation')">Innovation</a>
+                            <a href="#" class="tag" onclick="filterByTag('React')">React</a>
+                            <a href="#" class="tag" onclick="filterByTag('Node.js')">Node.js</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Career Journey?</h2>
+                <p>Join thousands of students and startups using SkillSync AI to find perfect matches and accelerate their success stories.</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="openModal('signupModal')">
+                        <i class="fas fa-rocket"></i>
+                        Get Started Today
+                    </button>
+                    <button class="btn-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <i class="fas fa-arrow-up"></i>
+                        Back to Top
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered platform connecting talented students with innovative startups through intelligent matching algorithms and personalized career guidance.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="api.html">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="#webinars">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="#press">Press Kit</a></li>
+                        <li><a href="#investors">Investors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #4a5568; color: #a0aec0;">
+                <p>&copy; 2025 SkillSync AI. All rights reserved. | Made with ❤️ for the future of work</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Welcome Back</h3>
+                <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal');">Create one</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Join SkillSync AI</h3>
+                <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="signupEmail" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="userType"><i class="fas fa-user-tag"></i> I am a</label>
+                    <select id="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="student">🎓 Student looking for opportunities</option>
+                        <option value="startup">🚀 Startup looking for talent</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary full-width">
+                    <i class="fas fa-rocket"></i>
+                    <span>Create Account</span>
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+                    Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal');">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced JavaScript functionality
+        class BlogManager {
+            constructor() {
+                this.header = document.getElementById('header');
+                this.currentCategory = 'all';
+                this.posts = document.querySelectorAll('.blog-post-card');
+                this.filterTabs = document.querySelectorAll('.filter-tab');
+                
+                this.init();
+            }
+
+            init() {
+                this.setupScrollEffects();
+                this.setupBlogFiltering();
+                this.setupPostAnimations();
+                this.setupKeyboardNavigation();
+            }
+
+            setupScrollEffects() {
+                let ticking = false;
+                
+                const updateScrollEffects = () => {
+                    const scrolled = window.scrollY > 50;
+                    this.header.classList.toggle('scrolled', scrolled);
+                    ticking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateScrollEffects);
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+
+            setupBlogFiltering() {
+                this.filterTabs.forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.filterPosts(tab.dataset.category);
+                        this.setActiveTab(tab);
+                    });
+                });
+            }
+
+            filterPosts(category) {
+                this.currentCategory = category;
+                
+                this.posts.forEach((post, index) => {
+                    const shouldShow = category === 'all' || post.dataset.category === category;
+                    
+                    if (shouldShow) {
+                        post.style.display = 'block';
+                        setTimeout(() => {
+                            post.classList.add('fade-in-up');
+                        }, index * 100);
+                    } else {
+                        post.style.display = 'none';
+                        post.classList.remove('fade-in-up');
+                    }
+                });
+            }
+
+            setActiveTab(activeTab) {
+                this.filterTabs.forEach(tab => tab.classList.remove('active'));
+                activeTab.classList.add('active');
+            }
+
+            setupPostAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -100px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in-up');
+                        }
+                    });
+                }, observerOptions);
+
+                this.posts.forEach(post => {
+                    observer.observe(post);
+                });
+            }
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey || e.metaKey) {
+                        switch(e.key) {
+                            case '1':
+                                e.preventDefault();
+                                this.filterPosts('all');
+                                this.setActiveTab(document.querySelector('[data-category="all"]'));
+                                break;
+                            case '2':
+                                e.preventDefault();
+                                this.filterPosts('ai-ml');
+                                this.setActiveTab(document.querySelector('[data-category="ai-ml"]'));
+                                break;
+                            case '3':
+                                e.preventDefault();
+                                this.filterPosts('startup');
+                                this.setActiveTab(document.querySelector('[data-category="startup"]'));
+                                break;
+                        }
+                    }
+                });
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus first input
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Enhanced form handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('🎉 Welcome back! Login successful.\n\nRedirecting to your personalized dashboard...');
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeModal('loginModal');
+                event.target.reset();
+            }, 2000);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            const userType = document.getElementById('userType').value;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                const message = userType === 'student' 
+                    ? '🎓 Welcome to SkillSync AI!\n\nYour student account has been created successfully.\nYou can now start discovering amazing opportunities!'
+                    : '🚀 Welcome to SkillSync AI!\n\nYour startup account has been created successfully.\nYou can now start finding top talent!';
+                    
+                alert(message);
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeModal('signupModal');
+                event.target.reset();
+            }, 2000);
+        }
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('📧 Thank you for subscribing!\n\nYou\'ll receive our weekly newsletter with:\n• Latest AI insights\n• Success stories\n• Career tips\n• Product updates');
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                event.target.reset();
+            }, 1500);
+        }
+
+        // Post interaction functions
+        function openPost(postSlug) {
+            const postTitles = {
+                'featured': 'The Future of AI in Talent Matching: How Machine Learning is Revolutionizing Recruitment',
+                'startup-story': 'How TechStart Inc. Found Their Dream Developer in 48 Hours',
+                'skills-2025': '10 Essential Skills Every Computer Science Student Needs in 2025',
+                'bias-free-ai': 'Building Bias-Free AI: Our Approach to Ethical Talent Matching',
+                'real-time-chat': 'Introducing Real-Time Chat: Connect with Matches Instantly',
+                'scaling-infrastructure': 'Scaling to 10,000+ Users: Our Infrastructure Journey',
+                'first-year-journey': 'From Idea to 10,000 Users: Our First Year Journey',
+                'hiring-metrics': '5 Metrics Every Startup Should Track When Hiring',
+                'remote-teams': 'Building Remote-First Teams: A Complete Guide',
+                'skill-based-hiring': 'Why Skill-Based Hiring is the Future'
+            };
+            
+            const title = postTitles[postSlug] || 'Blog Post';
+            alert(`📖 Opening: "${title}"\n\n✨ In a full application, this would navigate to the complete article with:\n• Full content\n• Comments section\n• Related posts\n• Social sharing\n• Reading progress`);
+        }
+
+        function filterByTag(tag) {
+            alert(`🏷️ Filtering posts by tag: "${tag}"\n\nIn a full application, this would show all posts related to this tag across all categories.`);
+        }
+
+        // Close modals on outside click
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Close modals on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal[style*="flex"]');
+                if (openModal) {
+                    closeModal(openModal.id);
+                }
+            }
+        });
+
+        // Initialize blog manager when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new BlogManager();
+            
+            // Initial page load animation
+            setTimeout(() => {
+                document.querySelectorAll('.blog-post-card, .featured-post').forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('fade-in-up');
+                    }, index * 150);
+                });
+            }, 300);
+        });
+
+        // Performance optimization
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            document.documentElement.style.setProperty('--transition-fast', 'none');
+            document.documentElement.style.setProperty('--transition-normal', 'none');
+            document.documentElement.style.setProperty('--transition-slow', 'none');
+        }
+
+        // Service Worker for offline functionality (if needed)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {
+                    // Service worker registration failed
+                });
+            });
+        }
+    </script>
+</body>
+</html>

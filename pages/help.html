@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - SkillSync AI</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Enhanced Help Variables */
+        :root {
+            --dashboard-header-height: 70px;
+            
+            /* Professional Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --help-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            
+            --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --dashboard-card-bg: #ffffff;
+            --dashboard-border: #e2e8f0;
+            --dashboard-text: #2d3748;
+            --dashboard-text-light: #718096;
+            
+            /* Enhanced Colors */
+            --primary-color: #667eea;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #f56565;
+            --info-color: #4299e1;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dashboard-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dashboard-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--dashboard-header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dashboard-border);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .dashboard-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .dashboard-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--dashboard-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Container */
+        .help-container {
+            padding-top: var(--dashboard-header-height);
+            min-height: calc(100vh - var(--dashboard-header-height));
+            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--help-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Box */
+        .help-search {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dashboard-text-light);
+            font-size: 1.2rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .action-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--help-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .action-description {
+            color: var(--dashboard-text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--help-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--dashboard-border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--help-gradient);
+            color: white;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            color: var(--dashboard-text);
+            line-height: 1.6;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--help-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dashboard-text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            color: var(--dashboard-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--help-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--help-gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--help-gradient);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--dashboard-border);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--dashboard-border);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .help-container {
+                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-window {
+                width: calc(100vw - 2rem);
+                height: 400px;
+                bottom: 80px;
+                right: -1rem;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="student-dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Dashboard</span>
+                </a>
+                <div class="dashboard-logo">
+                    <a href="index.html">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--help-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <span style="font-weight: 600; color: var(--dashboard-text);">Rahul Sharma</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="help-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>📚 Help & Support</h1>
+            <p>Find answers to your questions and get the help you need to succeed on SkillSync AI</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="help-search">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search for help articles, FAQs, or topics..." id="helpSearch">
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="#getting-started" class="action-card" onclick="scrollToSection('getting-started')">
+                <div class="action-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="action-title">Getting Started</div>
+                <div class="action-description">Learn the basics of using SkillSync AI to find your perfect job match</div>
+            </a>
+
+            <a href="#profile-tips" class="action-card" onclick="scrollToSection('profile-tips')">
+                <div class="action-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="action-title">Profile Optimization</div>
+                <div class="action-description">Tips to make your profile stand out to recruiters and companies</div>
+            </a>
+
+            <a href="#job-matching" class="action-card" onclick="scrollToSection('job-matching')">
+                <div class="action-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="action-title">Job Matching</div>
+                <div class="action-description">Understand how our AI matching algorithm works and improve your matches</div>
+            </a>
+
+            <a href="#troubleshooting" class="action-card" onclick="scrollToSection('troubleshooting')">
+                <div class="action-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="action-title">Troubleshooting</div>
+                <div class="action-description">Common issues and solutions to help you resolve problems quickly</div>
+            </a>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section" id="getting-started">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I create a strong profile on SkillSync AI?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>To create a strong profile: 1) Add a professional photo 2) Write a compelling summary highlighting your skills and experience 3) List all relevant skills and technologies 4) Include your work experience with specific achievements 5) Add your education and certifications 6) Keep your profile updated regularly.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How does the job matching algorithm work?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our AI algorithm analyzes your skills, experience, location preferences, and career goals to match you with relevant job opportunities. The match percentage is calculated based on how well your profile aligns with job requirements. Higher match percentages indicate better fit.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What should I do if I'm not getting good matches?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you're not getting good matches: 1) Update your skills section with in-demand technologies 2) Optimize your job preferences and location settings 3) Add more detail to your experience section 4) Take skill assessments to validate your abilities 5) Make sure your profile is 100% complete.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I communicate with recruiters?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You can communicate with recruiters through our messaging system. When a recruiter shows interest in your profile, you'll receive a notification. Be professional, respond promptly, and ask relevant questions about the role and company.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Are there any fees for using SkillSync AI?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>SkillSync AI is completely free for job seekers. You can create a profile, receive job matches, communicate with recruiters, and access all our tools without any cost. We make money by helping companies find the right talent.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I prepare for interviews?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Use our Interview Prep tool to practice common questions, take mock interviews with our AI, research the company thoroughly, prepare specific examples using the STAR method, and practice both technical and behavioral questions relevant to your field.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-title">Email Support</div>
+                <div class="contact-info">
+                    Get help via email. We typically respond within 24 hours during business days.
+                </div>
+                <a href="mailto:support@skillsync.ai" class="contact-btn">Send Email</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="contact-title">Live Chat</div>
+                <div class="contact-info">
+                    Chat with our support team in real-time. Available Monday to Friday, 9 AM to 6 PM IST.
+                </div>
+                <button class="contact-btn" onclick="openLiveChat()">Start Chat</button>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="contact-title">Knowledge Base</div>
+                <div class="contact-info">
+                    Browse our comprehensive guides, tutorials, and documentation for detailed help.
+                </div>
+                <a href="#" class="contact-btn">Browse Articles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+        </button>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h4>💬 Live Support</h4>
+                <p style="opacity: 0.9; font-size: 0.9rem;">How can we help you today?</p>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div style="background: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                    <strong>Support Team</strong>
+                    <p style="margin: 0.5rem 0 0 0; color: var(--dashboard-text-light);">
+                        Hi! Welcome to SkillSync AI support. How can I assist you today?
+                    </p>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Type your message..." id="chatInput" onkeypress="handleChatEnter(event)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize help page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📚 Help & Support Page Loaded');
+        });
+
+        // FAQ toggle functionality
+        function toggleFAQ(questionElement) {
+            const faqItem = questionElement.parentElement;
+            const answer = questionElement.nextElementSibling;
+            const icon = questionElement.querySelector('.faq-icon');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ
+            faqItem.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        // Search functionality
+        document.getElementById('helpSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            
+            // Search through FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+                
+                if (question.includes(query) || answer.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = query ? 'none' : 'block';
+                }
+            });
+            
+            if (query) {
+                showNotification(`Searching for: "${query}"`, 'info');
+            }
+        });
+
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Live chat functionality
+        let chatOpen = false;
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatOpen = !chatOpen;
+            
+            if (chatOpen) {
+                chatWindow.classList.add('active');
+                showNotification('Live chat opened! 💬', 'info');
+            } else {
+                chatWindow.classList.remove('active');
+            }
+        }
+
+        function openLiveChat() {
+            if (!chatOpen) {
+                toggleChat();
+            }
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            // Simulate support response
+            setTimeout(() => {
+                const responses = [
+                    "Thanks for your message! Let me help you with that.",
+                    "I understand your concern. Let me look into this for you.",
+                    "Great question! Here's what I can tell you...",
+                    "I'm here to help! Let me get you the right information."
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addChatMessage(randomResponse, 'support');
+            }, 1000);
+        }
+
+        function addChatMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.style.cssText = `
+                    background: var(--primary-gradient);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    margin-bottom: 1rem;
+                    margin-left: 20%;
+                `;
+                messageDiv.innerHTML = `<strong>You</strong><p style="margin: 0.5rem 0 0 0;">${message}</p>`;
+            } else {
+                messageDiv.style.cssText = `
+                    background: white;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    margin-bottom: 1rem;
+                    border-left: 4px solid var(--primary-color);
+                `;
+                messageDiv.innerHTML = `<strong>Support Team</strong><p style="margin: 0.5rem 0 0 0; color: var(--dashboard-text-light);">${message}</p>`;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification show`;
+            notification.style.background = type === 'info' ? 'var(--help-gradient)' : 'var(--success-gradient)';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Close chat when clicking outside
+        document.addEventListener('click', function(event) {
+            const chatWidget = document.querySelector('.chat-widget');
+            if (!chatWidget.contains(event.target) && chatOpen) {
+                toggleChat();
+            }
+        });
+    </script>
+</body>
+</html>
