@@ -1,10 +1,11 @@
+// job-post-updated.js - Enhanced Job Posting System with Application Management
 
-// job-post.js - Complete Job Posting System
-
-class JobPostingSystem {
+class EnhancedJobPostingSystem {
     constructor() {
         this.jobs = JSON.parse(localStorage.getItem('skillsync_jobs')) || [];
+        this.applications = JSON.parse(localStorage.getItem('skillsync_applications')) || [];
         this.currentJobId = null;
+        this.currentApplicationId = null;
         this.skillsArray = [];
         this.preferredSkillsArray = [];
         this.init();
@@ -13,11 +14,14 @@ class JobPostingSystem {
     init() {
         this.bindEvents();
         this.loadJobs();
+        this.loadApplications();
         this.updateStats();
+        this.updateTabCounts();
+        this.populateJobFilter();
     }
 
     bindEvents() {
-        // Skills input handling
+        // Existing skill input handling
         const skillInput = document.getElementById('skillInput');
         const preferredSkillInput = document.getElementById('preferredSkillInput');
         
@@ -39,23 +43,28 @@ class JobPostingSystem {
             });
         }
 
-        // Modal close on outside click
-        document.getElementById('jobModal').addEventListener('click', (e) => {
-            if (e.target.id === 'jobModal') {
-                this.closeJobModal();
-            }
+        // Modal close handlers
+        document.getElementById('jobModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'jobModal') this.closeJobModal();
         });
 
-        document.getElementById('jobDetailsModal').addEventListener('click', (e) => {
-            if (e.target.id === 'jobDetailsModal') {
-                this.closeJobDetailsModal();
-            }
+        document.getElementById('applicationDetailsModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'applicationDetailsModal') this.closeApplicationDetailsModal();
+        });
+
+        document.getElementById('applyJobModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'applyJobModal') this.closeApplyJobModal();
         });
     }
 
     // Generate unique ID
     generateId() {
-        return 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        return 'item_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Get initials from name
+    getInitials(name) {
+        return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
     }
 
     // Add skill to array
@@ -90,6 +99,8 @@ class JobPostingSystem {
         const container = document.getElementById(type === 'required' ? 'skillsTags' : 'preferredSkillsTags');
         const hiddenInput = document.getElementById(type === 'required' ? 'requiredSkills' : 'preferredSkills');
 
+        if (!container || !hiddenInput) return;
+
         container.innerHTML = skillsArray.map(skill => `
             <div class="skill-tag-removable">
                 <span>${skill}</span>
@@ -100,79 +111,7 @@ class JobPostingSystem {
         hiddenInput.value = skillsArray.join(',');
     }
 
-    // Open job modal
-    openJobModal(jobId = null) {
-        this.currentJobId = jobId;
-        const modal = document.getElementById('jobModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const saveButtonText = document.getElementById('saveButtonText');
-
-        if (jobId) {
-            // Edit mode
-            modalTitle.textContent = 'Edit Job Posting';
-            saveButtonText.textContent = 'Update Job';
-            this.loadJobForEdit(jobId);
-        } else {
-            // Create mode
-            modalTitle.textContent = 'Create New Job Posting';
-            saveButtonText.textContent = 'Save Job';
-            this.resetForm();
-        }
-
-        modal.classList.add('active');
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Close job modal
-    closeJobModal() {
-        const modal = document.getElementById('jobModal');
-        modal.classList.remove('active');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }, 300);
-        this.resetForm();
-    }
-
-    // Reset form
-    resetForm() {
-        document.getElementById('jobForm').reset();
-        this.skillsArray = [];
-        this.preferredSkillsArray = [];
-        this.renderSkillTags('required');
-        this.renderSkillTags('preferred');
-        this.currentJobId = null;
-    }
-
-    // Load job for editing
-    loadJobForEdit(jobId) {
-        const job = this.jobs.find(j => j.id === jobId);
-        if (!job) return;
-
-        // Fill form fields
-        document.getElementById('jobTitle').value = job.title || '';
-        document.getElementById('jobDepartment').value = job.department || '';
-        document.getElementById('jobType').value = job.type || '';
-        document.getElementById('jobLocation').value = job.location || '';
-        document.getElementById('salaryRange').value = job.salary || '';
-        document.getElementById('experience').value = job.experience || '';
-        document.getElementById('jobDescription').value = job.description || '';
-        document.getElementById('jobRequirements').value = job.requirements || '';
-        document.getElementById('jobBenefits').value = job.benefits || '';
-        document.getElementById('applicationDeadline').value = job.deadline || '';
-        document.getElementById('applicationEmail').value = job.applicationEmail || '';
-        document.getElementById('jobStatus').value = job.status || '';
-        document.getElementById('urgency').value = job.urgency || '';
-
-        // Load skills
-        this.skillsArray = job.skills ? job.skills.split(',').filter(s => s.trim()) : [];
-        this.preferredSkillsArray = job.preferredSkills ? job.preferredSkills.split(',').filter(s => s.trim()) : [];
-        this.renderSkillTags('required');
-        this.renderSkillTags('preferred');
-    }
-
-    // Save job
+    // Save job with enhanced features
     saveJob() {
         const form = document.getElementById('jobForm');
         const formData = new FormData(form);
@@ -201,6 +140,12 @@ class JobPostingSystem {
             return;
         }
 
+        // Get application requirements
+        const selectedRequirements = [];
+        document.querySelectorAll('input[name="applicationRequirements"]:checked').forEach(checkbox => {
+            selectedRequirements.push(checkbox.value);
+        });
+
         // Create job object
         const jobData = {
             id: this.currentJobId || this.generateId(),
@@ -215,6 +160,7 @@ class JobPostingSystem {
             benefits: formData.get('jobBenefits'),
             skills: this.skillsArray.join(','),
             preferredSkills: this.preferredSkillsArray.join(','),
+            applicationRequirements: selectedRequirements,
             deadline: formData.get('applicationDeadline'),
             applicationEmail: formData.get('applicationEmail'),
             status: formData.get('jobStatus'),
@@ -233,14 +179,12 @@ class JobPostingSystem {
 
         // Save to jobs array
         if (this.currentJobId) {
-            // Update existing job
             const index = this.jobs.findIndex(j => j.id === this.currentJobId);
             if (index !== -1) {
                 this.jobs[index] = jobData;
                 this.showNotification('Job updated successfully!', 'success');
             }
         } else {
-            // Add new job
             this.jobs.push(jobData);
             this.showNotification('Job posted successfully!', 'success');
         }
@@ -251,27 +195,31 @@ class JobPostingSystem {
         // Refresh display
         this.loadJobs();
         this.updateStats();
+        this.updateTabCounts();
+        this.populateJobFilter();
         this.closeJobModal();
     }
 
     // Load and display jobs
     loadJobs() {
         const jobsGrid = document.getElementById('jobsGrid');
-        const emptyState = document.getElementById('emptyState');
+        const emptyState = document.getElementById('jobsEmptyState');
+
+        if (!jobsGrid) return;
 
         if (this.jobs.length === 0) {
             jobsGrid.innerHTML = '';
-            emptyState.style.display = 'block';
+            if (emptyState) emptyState.style.display = 'block';
             return;
         }
 
-        emptyState.style.display = 'none';
+        if (emptyState) emptyState.style.display = 'none';
         
         const jobsHTML = this.jobs.map(job => this.createJobCard(job)).join('');
         jobsGrid.innerHTML = jobsHTML;
     }
 
-    // Create job card HTML
+    // Create enhanced job card with apply button
     createJobCard(job) {
         const postedDate = new Date(job.postedDate).toLocaleDateString();
         const skillsList = job.skills ? job.skills.split(',').slice(0, 3) : [];
@@ -326,6 +274,10 @@ class JobPostingSystem {
                         <button class="btn-icon btn-toggle" onclick="jobSystem.toggleJobStatus('${job.id}')" title="Toggle Status">
                             <i class="fas fa-${job.status === 'Active' ? 'pause' : 'play'}"></i>
                         </button>
+                        <button class="btn-icon" style="background: rgba(46, 204, 113, 0.1); color: #2ecc71;" 
+                                onclick="jobSystem.openApplyJobModal('${job.id}')" title="Test Apply">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                         <button class="btn-icon btn-delete" onclick="jobSystem.deleteJob('${job.id}')" title="Delete Job">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -335,126 +287,312 @@ class JobPostingSystem {
         `;
     }
 
-    // View job details
-    viewJob(jobId) {
+    // Open job application modal (for testing)
+    openApplyJobModal(jobId) {
         const job = this.jobs.find(j => j.id === jobId);
         if (!job) return;
 
-        // Increment view count
-        job.views = (job.views || 0) + 1;
+        const modal = document.getElementById('applyJobModal');
+        const title = document.getElementById('applyJobTitle');
+        const requiredDocs = document.getElementById('requiredDocuments');
+
+        title.textContent = `Apply for ${job.title}`;
+
+        // Populate required documents
+        if (job.applicationRequirements && job.applicationRequirements.length > 0) {
+            requiredDocs.innerHTML = job.applicationRequirements.map(req => {
+                const labels = {
+                    'resume': 'Resume/CV',
+                    'cover_letter': 'Cover Letter',
+                    'portfolio': 'Portfolio/Work Samples',
+                    'github': 'GitHub Profile URL',
+                    'linkedin': 'LinkedIn Profile URL',
+                    'certifications': 'Certifications'
+                };
+                
+                const inputType = ['github', 'linkedin'].includes(req) ? 'url' : 'text';
+                const placeholder = ['github', 'linkedin'].includes(req) ? `Your ${labels[req]}` : 'Upload or provide link';
+
+                return `
+                    <div class="form-group">
+                        <label for="${req}">${labels[req]} *</label>
+                        <input type="${inputType}" id="${req}" name="${req}" required placeholder="${placeholder}">
+                    </div>
+                `;
+            }).join('');
+        } else {
+            requiredDocs.innerHTML = `
+                <div class="form-group">
+                    <label for="resume">Resume/CV *</label>
+                    <input type="text" id="resume" name="resume" required placeholder="Upload or provide link to your resume">
+                </div>
+            `;
+        }
+
+        this.currentJobId = jobId;
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close apply job modal
+    closeApplyJobModal() {
+        const modal = document.getElementById('applyJobModal');
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+        
+        // Reset form
+        document.getElementById('applicationForm').reset();
+        this.currentJobId = null;
+    }
+
+    // Submit application
+    submitApplication() {
+        const form = document.getElementById('applicationForm');
+        const formData = new FormData(form);
+        const job = this.jobs.find(j => j.id === this.currentJobId);
+        
+        if (!job) return;
+
+        // Validate required fields
+        const name = formData.get('applicantName');
+        const email = formData.get('applicantEmail');
+        const phone = formData.get('applicantPhone');
+
+        if (!name || !email || !phone) {
+            this.showNotification('Please fill in all required fields', 'error');
+            return;
+        }
+
+        // Get required documents
+        const documents = {};
+        if (job.applicationRequirements) {
+            job.applicationRequirements.forEach(req => {
+                const value = formData.get(req);
+                if (value) documents[req] = value;
+            });
+        }
+
+        // Create application object
+        const applicationData = {
+            id: this.generateId(),
+            jobId: this.currentJobId,
+            jobTitle: job.title,
+            applicantName: name,
+            applicantEmail: email,
+            applicantPhone: phone,
+            experience: formData.get('applicantExperience') || '0-1',
+            skills: formData.get('applicantSkills') || '',
+            coverLetter: formData.get('coverLetter') || '',
+            documents: documents,
+            status: 'Pending',
+            appliedDate: new Date().toISOString(),
+            lastUpdated: new Date().toISOString()
+        };
+
+        // Add to applications array
+        this.applications.push(applicationData);
+        
+        // Update job application count
+        job.applications = (job.applications || 0) + 1;
+        
+        // Save to localStorage
+        localStorage.setItem('skillsync_applications', JSON.stringify(this.applications));
         localStorage.setItem('skillsync_jobs', JSON.stringify(this.jobs));
+
+        this.showNotification('Application submitted successfully!', 'success');
+        
+        // Refresh displays
         this.loadJobs();
+        this.loadApplications();
+        this.updateStats();
+        this.updateTabCounts();
+        this.closeApplyJobModal();
+    }
 
-        const modal = document.getElementById('jobDetailsModal');
-        const title = document.getElementById('jobDetailsTitle');
-        const content = document.getElementById('jobDetailsContent');
+    // Load and display applications
+    loadApplications() {
+        const applicationsGrid = document.getElementById('applicationsGrid');
+        const emptyState = document.getElementById('applicationsEmptyState');
 
-        title.textContent = job.title;
-        content.innerHTML = this.createJobDetailsHTML(job);
+        if (!applicationsGrid) return;
+
+        if (this.applications.length === 0) {
+            applicationsGrid.innerHTML = '';
+            if (emptyState) emptyState.style.display = 'block';
+            return;
+        }
+
+        if (emptyState) emptyState.style.display = 'none';
+        
+        const applicationsHTML = this.applications.map(app => this.createApplicationCard(app)).join('');
+        applicationsGrid.innerHTML = applicationsHTML;
+    }
+
+    // Create application card
+    createApplicationCard(application) {
+        const appliedDate = new Date(application.appliedDate).toLocaleDateString();
+        const initials = this.getInitials(application.applicantName);
+        const statusClass = `status-${application.status.toLowerCase().replace(' ', '-')}`;
+        const skillsList = application.skills ? application.skills.split(',').slice(0, 4) : [];
+
+        return `
+            <div class="application-card" data-application-id="${application.id}">
+                <div class="application-header">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">${initials}</div>
+                        <div class="applicant-details">
+                            <h4>${application.applicantName}</h4>
+                            <div class="applicant-meta">
+                                <span><i class="fas fa-envelope"></i> ${application.applicantEmail}</span>
+                                <span><i class="fas fa-phone"></i> ${application.applicantPhone}</span>
+                                <span><i class="fas fa-clock"></i> ${application.experience} years exp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-status">
+                        <span class="status-badge ${statusClass}">${application.status}</span>
+                    </div>
+                </div>
+
+                <div class="application-job">
+                    <i class="fas fa-briefcase"></i> Applied for: ${application.jobTitle}
+                </div>
+
+                ${skillsList.length > 0 ? `
+                <div class="application-skills">
+                    <h5>Skills:</h5>
+                    <div class="skill-tags">
+                        ${skillsList.map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
+                        ${application.skills.split(',').length > 4 ? `<span class="skill-tag">+${application.skills.split(',').length - 4} more</span>` : ''}
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="application-actions">
+                    <div class="application-date">
+                        <i class="fas fa-calendar"></i> Applied on ${appliedDate}
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-action btn-view-app" onclick="jobSystem.viewApplication('${application.id}')" title="View Details">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        ${application.status === 'Pending' || application.status === 'Under Review' ? `
+                            <button class="btn-action btn-accept" onclick="jobSystem.updateApplicationStatus('${application.id}', 'Accepted')" title="Accept Application">
+                                <i class="fas fa-check"></i> Accept
+                            </button>
+                            <button class="btn-action btn-reject" onclick="jobSystem.updateApplicationStatus('${application.id}', 'Rejected')" title="Reject Application">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // View application details
+    viewApplication(applicationId) {
+        const application = this.applications.find(a => a.id === applicationId);
+        if (!application) return;
+
+        const modal = document.getElementById('applicationDetailsModal');
+        const title = document.getElementById('applicationDetailsTitle');
+        const content = document.getElementById('applicationDetailsContent');
+
+        title.textContent = `${application.applicantName} - Application`;
+        content.innerHTML = this.createApplicationDetailsHTML(application);
 
         modal.classList.add('active');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 
-    // Create job details HTML
-    createJobDetailsHTML(job) {
-        const postedDate = new Date(job.postedDate).toLocaleDateString();
-        const updatedDate = new Date(job.updatedDate).toLocaleDateString();
-        const deadline = job.deadline ? new Date(job.deadline).toLocaleDateString() : 'Not specified';
+    // Create application details HTML
+    createApplicationDetailsHTML(application) {
+        const appliedDate = new Date(application.appliedDate).toLocaleDateString();
+        const initials = this.getInitials(application.applicantName);
 
         return `
-            <div class="job-details">
-                <div class="job-details-header">
-                    <div class="job-title-section">
-                        <h2>${job.title}</h2>
-                        <div class="job-meta-large">
-                            <span><i class="fas fa-building"></i> ${job.department}</span>
-                            <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
-                            <span><i class="fas fa-clock"></i> ${job.type}</span>
-                            <span><i class="fas fa-layer-group"></i> ${job.experience}</span>
+            <div class="application-details">
+                <div class="application-details-header">
+                    <div class="applicant-profile">
+                        <div class="applicant-avatar-large">
+                            ${initials}
                         </div>
-                        ${job.salary ? `<div class="salary-info"><i class="fas fa-rupee-sign"></i> ${job.salary}</div>` : ''}
+                        <div class="applicant-title-section">
+                            <h2>${application.applicantName}</h2>
+                            <div class="applicant-meta-large">
+                                <span><i class="fas fa-envelope"></i> ${application.applicantEmail}</span>
+                                <span><i class="fas fa-phone"></i> ${application.applicantPhone}</span>
+                                <span><i class="fas fa-briefcase"></i> ${application.experience} years experience</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="job-status-section">
-                        <span class="status-badge status-${job.status.toLowerCase()}">${job.status}</span>
-                        ${job.urgency !== 'Normal' ? `<span class="urgency-badge urgency-${job.urgency.toLowerCase()}">${job.urgency}</span>` : ''}
+                    <div class="application-status-section">
+                        <span class="status-badge status-${application.status.toLowerCase().replace(' ', '-')}">${application.status}</span>
                     </div>
                 </div>
 
-                <div class="job-details-grid">
+                <div class="application-details-grid">
                     <div class="detail-section">
-                        <h4><i class="fas fa-info-circle"></i> Job Description</h4>
-                        <p>${job.description}</p>
+                        <h4><i class="fas fa-briefcase"></i> Job Information</h4>
+                        <p><strong>Position:</strong> ${application.jobTitle}</p>
+                        <p><strong>Applied Date:</strong> ${appliedDate}</p>
+                        <p><strong>Current Status:</strong> ${application.status}</p>
                     </div>
 
+                    ${application.skills ? `
                     <div class="detail-section">
-                        <h4><i class="fas fa-list-check"></i> Requirements</h4>
-                        <p>${job.requirements}</p>
-                    </div>
-
-                    ${job.benefits ? `
-                    <div class="detail-section">
-                        <h4><i class="fas fa-gift"></i> Benefits & Perks</h4>
-                        <p>${job.benefits}</p>
-                    </div>
-                    ` : ''}
-
-                    <div class="detail-section">
-                        <h4><i class="fas fa-code"></i> Required Skills</h4>
+                        <h4><i class="fas fa-code"></i> Skills & Expertise</h4>
                         <div class="skills-list">
-                            ${job.skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
-                        </div>
-                    </div>
-
-                    ${job.preferredSkills ? `
-                    <div class="detail-section">
-                        <h4><i class="fas fa-star"></i> Preferred Skills</h4>
-                        <div class="skills-list">
-                            ${job.preferredSkills.split(',').map(skill => `<span class="skill-tag-preferred">${skill.trim()}</span>`).join('')}
+                            ${application.skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
                         </div>
                     </div>
                     ` : ''}
 
+                    ${application.coverLetter ? `
                     <div class="detail-section">
-                        <h4><i class="fas fa-calendar"></i> Application Information</h4>
-                        <div class="application-info">
-                            <p><strong>Application Deadline:</strong> ${deadline}</p>
-                            ${job.applicationEmail ? `<p><strong>Application Email:</strong> ${job.applicationEmail}</p>` : ''}
-                            <p><strong>Posted Date:</strong> ${postedDate}</p>
-                            <p><strong>Last Updated:</strong> ${updatedDate}</p>
-                        </div>
+                        <h4><i class="fas fa-comment"></i> Cover Letter</h4>
+                        <p>${application.coverLetter}</p>
                     </div>
+                    ` : ''}
 
+                    ${Object.keys(application.documents || {}).length > 0 ? `
                     <div class="detail-section">
-                        <h4><i class="fas fa-chart-bar"></i> Job Statistics</h4>
-                        <div class="job-stats-detailed">
-                            <div class="stat-box">
-                                <span class="stat-number">${job.views || 0}</span>
-                                <span class="stat-label">Views</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-number">${job.applications || 0}</span>
-                                <span class="stat-label">Applications</span>
-                            </div>
+                        <h4><i class="fas fa-file-alt"></i> Submitted Documents</h4>
+                        <div class="documents-list">
+                            ${Object.entries(application.documents).map(([key, value]) => `
+                                <div class="document-item">
+                                    <strong>${this.formatDocumentName(key)}:</strong>
+                                    ${value.startsWith('http') ? `<a href="${value}" target="_blank">${value}</a>` : value}
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
+                    ` : ''}
                 </div>
 
-                <div class="job-details-actions">
-                    <button class="btn-secondary" onclick="jobSystem.closeJobDetailsModal()">Close</button>
-                    <button class="btn-primary" onclick="jobSystem.openJobModal('${job.id}')">
-                        <i class="fas fa-edit"></i> Edit Job
-                    </button>
+                <div class="application-details-actions">
+                    <button class="btn-secondary" onclick="jobSystem.closeApplicationDetailsModal()">Close</button>
+                    ${application.status === 'Pending' || application.status === 'Under Review' ? `
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn-accept" onclick="jobSystem.updateApplicationStatus('${application.id}', 'Accepted')">
+                                <i class="fas fa-check"></i> Accept Application
+                            </button>
+                            <button class="btn-reject" onclick="jobSystem.updateApplicationStatus('${application.id}', 'Rejected')">
+                                <i class="fas fa-times"></i> Reject Application
+                            </button>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
 
             <style>
-                .job-details {
-                    max-width: 100%;
-                }
-
-                .job-details-header {
+                .application-details-header {
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-start;
@@ -463,35 +601,46 @@ class JobPostingSystem {
                     border-bottom: 1px solid #f0f0f0;
                 }
 
-                .job-title-section h2 {
+                .applicant-profile {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                }
+
+                .applicant-avatar-large {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 2rem;
+                    font-weight: 600;
+                }
+
+                .applicant-title-section h2 {
                     margin: 0 0 0.5rem 0;
                     font-size: 1.5rem;
                     color: #333;
                 }
 
-                .job-meta-large {
+                .applicant-meta-large {
                     display: flex;
                     flex-wrap: wrap;
                     gap: 1rem;
-                    margin-bottom: 0.5rem;
                     color: #666;
                     font-size: 0.9rem;
                 }
 
-                .salary-info {
-                    font-size: 1.1rem;
-                    font-weight: 600;
-                    color: #667eea;
-                }
-
-                .job-status-section {
+                .application-status-section {
                     display: flex;
                     flex-direction: column;
-                    gap: 0.5rem;
                     align-items: flex-end;
                 }
 
-                .job-details-grid {
+                .application-details-grid {
                     display: grid;
                     gap: 1.5rem;
                 }
@@ -509,93 +658,78 @@ class JobPostingSystem {
                     color: #667eea;
                 }
 
-                .detail-section p {
-                    color: #666;
-                    line-height: 1.6;
-                    margin: 0;
-                }
-
-                .skills-list {
-                    display: flex;
-                    flex-wrap: wrap;
+                .documents-list {
+                    display: grid;
                     gap: 0.5rem;
                 }
 
-                .skill-tag-preferred {
-                    background: rgba(46, 204, 113, 0.1);
-                    color: #2ecc71;
-                    padding: 0.25rem 0.75rem;
-                    border-radius: 20px;
-                    font-size: 0.75rem;
-                    font-weight: 500;
+                .document-item {
+                    padding: 0.75rem;
+                    background: #f8f9ff;
+                    border-radius: 8px;
+                    border: 1px solid rgba(102, 126, 234, 0.1);
                 }
 
-                .application-info p {
-                    margin-bottom: 0.5rem;
-                }
-
-                .job-stats-detailed {
-                    display: flex;
-                    gap: 2rem;
-                }
-
-                .stat-box {
-                    text-align: center;
-                }
-
-                .stat-box .stat-number {
-                    display: block;
-                    font-size: 1.5rem;
-                    font-weight: 700;
+                .document-item a {
                     color: #667eea;
-                    line-height: 1;
+                    text-decoration: none;
                 }
 
-                .stat-box .stat-label {
-                    font-size: 0.85rem;
-                    color: #666;
-                    margin-top: 0.25rem;
+                .document-item a:hover {
+                    text-decoration: underline;
                 }
 
-                .job-details-actions {
+                .application-details-actions {
                     display: flex;
-                    justify-content: flex-end;
-                    gap: 1rem;
+                    justify-content: space-between;
+                    align-items: center;
                     margin-top: 2rem;
                     padding-top: 1rem;
                     border-top: 1px solid #f0f0f0;
                 }
 
                 @media (max-width: 768px) {
-                    .job-details-header {
+                    .application-details-header {
                         flex-direction: column;
                         gap: 1rem;
                     }
 
-                    .job-status-section {
-                        align-items: flex-start;
+                    .applicant-profile {
+                        flex-direction: column;
+                        text-align: center;
                     }
 
-                    .job-meta-large {
+                    .applicant-meta-large {
+                        justify-content: center;
                         flex-direction: column;
                         gap: 0.5rem;
                     }
 
-                    .job-stats-detailed {
-                        justify-content: center;
-                    }
-
-                    .job-details-actions {
+                    .application-details-actions {
                         flex-direction: column;
+                        gap: 1rem;
                     }
                 }
             </style>
         `;
     }
 
-    // Close job details modal
-    closeJobDetailsModal() {
-        const modal = document.getElementById('jobDetailsModal');
+    // Format document name for display
+    formatDocumentName(key) {
+        const names = {
+            'resume': 'Resume/CV',
+            'cover_letter': 'Cover Letter',
+            'portfolio': 'Portfolio',
+            'github': 'GitHub Profile',
+            'linkedin': 'LinkedIn Profile',
+            'certifications': 'Certifications'
+        };
+        return names[key] || key.charAt(0).toUpperCase() + key.slice(1);
+    }
+
+    // Close application details modal
+    closeApplicationDetailsModal() {
+        const modal = document.getElementById('applicationDetailsModal');
         modal.classList.remove('active');
         setTimeout(() => {
             modal.style.display = 'none';
@@ -603,101 +737,120 @@ class JobPostingSystem {
         }, 300);
     }
 
-    // Toggle job status
-    toggleJobStatus(jobId) {
-        const job = this.jobs.find(j => j.id === jobId);
-        if (!job) return;
+    // Update application status (Accept/Reject)
+    updateApplicationStatus(applicationId, newStatus) {
+        const application = this.applications.find(a => a.id === applicationId);
+        if (!application) return;
 
-        if (job.status === 'Active') {
-            job.status = 'Paused';
-            this.showNotification('Job paused successfully', 'success');
-        } else if (job.status === 'Paused') {
-            job.status = 'Active';
-            this.showNotification('Job activated successfully', 'success');
-        } else {
-            job.status = 'Active';
-            this.showNotification('Job activated successfully', 'success');
+        const oldStatus = application.status;
+        application.status = newStatus;
+        application.lastUpdated = new Date().toISOString();
+
+        // Save to localStorage
+        localStorage.setItem('skillsync_applications', JSON.stringify(this.applications));
+
+        // Show notification with real-time effect
+        const actionText = newStatus === 'Accepted' ? 'accepted' : 'rejected';
+        this.showNotification(`Application ${actionText} successfully!`, newStatus === 'Accepted' ? 'success' : 'info');
+
+        // Refresh applications display
+        this.loadApplications();
+        this.updateTabCounts();
+
+        // If modal is open, close it
+        if (document.getElementById('applicationDetailsModal').classList.contains('active')) {
+            this.closeApplicationDetailsModal();
         }
-
-        job.updatedDate = new Date().toISOString();
-        localStorage.setItem('skillsync_jobs', JSON.stringify(this.jobs));
-        this.loadJobs();
-        this.updateStats();
     }
 
-    // Delete job
-    deleteJob(jobId) {
-        if (!confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
-            return;
-        }
+    // Populate job filter dropdown
+    populateJobFilter() {
+        const jobFilter = document.getElementById('jobFilterApp');
+        if (!jobFilter) return;
 
-        this.jobs = this.jobs.filter(j => j.id !== jobId);
-        localStorage.setItem('skillsync_jobs', JSON.stringify(this.jobs));
+        jobFilter.innerHTML = '<option value="">All Jobs</option>';
         
-        this.showNotification('Job deleted successfully', 'success');
-        this.loadJobs();
-        this.updateStats();
+        this.jobs.forEach(job => {
+            const option = document.createElement('option');
+            option.value = job.id;
+            option.textContent = job.title;
+            jobFilter.appendChild(option);
+        });
+    }
+
+    // Filter applications
+    filterApplications() {
+        const jobFilter = document.getElementById('jobFilterApp')?.value || '';
+        const statusFilter = document.getElementById('appStatusFilter')?.value || '';
+        const searchFilter = document.getElementById('searchApplicants')?.value.toLowerCase() || '';
+
+        let filteredApplications = this.applications.filter(app => {
+            return (!jobFilter || app.jobId === jobFilter) &&
+                   (!statusFilter || app.status === statusFilter) &&
+                   (!searchFilter || 
+                    app.applicantName.toLowerCase().includes(searchFilter) ||
+                    app.applicantEmail.toLowerCase().includes(searchFilter) ||
+                    app.jobTitle.toLowerCase().includes(searchFilter));
+        });
+
+        const applicationsGrid = document.getElementById('applicationsGrid');
+        const emptyState = document.getElementById('applicationsEmptyState');
+
+        if (!applicationsGrid) return;
+
+        if (filteredApplications.length === 0) {
+            applicationsGrid.innerHTML = '';
+            if (emptyState) {
+                emptyState.style.display = 'block';
+                emptyState.innerHTML = `
+                    <div class="empty-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>No Applications Found</h3>
+                    <p>No applications match your current filters. Try adjusting your search criteria.</p>
+                    <button class="btn-primary" onclick="jobSystem.clearApplicationFilters()">
+                        <i class="fas fa-times"></i>
+                        <span>Clear Filters</span>
+                    </button>
+                `;
+            }
+        } else {
+            if (emptyState) emptyState.style.display = 'none';
+            const applicationsHTML = filteredApplications.map(app => this.createApplicationCard(app)).join('');
+            applicationsGrid.innerHTML = applicationsHTML;
+        }
+    }
+
+    // Clear application filters
+    clearApplicationFilters() {
+        document.getElementById('jobFilterApp').value = '';
+        document.getElementById('appStatusFilter').value = '';
+        document.getElementById('searchApplicants').value = '';
+        this.loadApplications();
+    }
+
+    // Update tab counts
+    updateTabCounts() {
+        const jobsCount = document.getElementById('jobsCount');
+        const applicationsCount = document.getElementById('applicationsCount');
+
+        if (jobsCount) jobsCount.textContent = this.jobs.length;
+        if (applicationsCount) applicationsCount.textContent = this.applications.length;
     }
 
     // Update statistics
     updateStats() {
         const totalJobs = this.jobs.length;
         const activeJobs = this.jobs.filter(j => j.status === 'Active').length;
-        const totalApplications = this.jobs.reduce((sum, job) => sum + (job.applications || 0), 0);
+        const totalApplications = this.applications.length;
 
-        document.getElementById('totalJobs').textContent = totalJobs;
-        document.getElementById('activeJobs').textContent = activeJobs;
-        document.getElementById('applicationCount').textContent = totalApplications;
-    }
+        const totalJobsEl = document.getElementById('totalJobs');
+        const activeJobsEl = document.getElementById('activeJobs');
+        const applicationCountEl = document.getElementById('applicationCount');
 
-    // Filter jobs
-    filterJobs() {
-        const jobTypeFilter = document.getElementById('jobTypeFilter').value;
-        const statusFilter = document.getElementById('statusFilter').value;
-        const departmentFilter = document.getElementById('departmentFilter').value;
-        const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
-
-        let filteredJobs = this.jobs.filter(job => {
-            return (!jobTypeFilter || job.type === jobTypeFilter) &&
-                   (!statusFilter || job.status === statusFilter) &&
-                   (!departmentFilter || job.department === departmentFilter) &&
-                   (!searchFilter || 
-                    job.title.toLowerCase().includes(searchFilter) ||
-                    job.description.toLowerCase().includes(searchFilter) ||
-                    job.skills.toLowerCase().includes(searchFilter));
-        });
-
-        const jobsGrid = document.getElementById('jobsGrid');
-        const emptyState = document.getElementById('emptyState');
-
-        if (filteredJobs.length === 0) {
-            jobsGrid.innerHTML = '';
-            emptyState.style.display = 'block';
-            emptyState.innerHTML = `
-                <div class="empty-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>No Jobs Found</h3>
-                <p>No jobs match your current filters. Try adjusting your search criteria.</p>
-                <button class="btn-primary" onclick="jobSystem.clearFilters()">
-                    <i class="fas fa-times"></i>
-                    <span>Clear Filters</span>
-                </button>
-            `;
-        } else {
-            emptyState.style.display = 'none';
-            const jobsHTML = filteredJobs.map(job => this.createJobCard(job)).join('');
-            jobsGrid.innerHTML = jobsHTML;
-        }
-    }
-
-    // Clear filters
-    clearFilters() {
-        document.getElementById('jobTypeFilter').value = '';
-        document.getElementById('statusFilter').value = '';
-        document.getElementById('departmentFilter').value = '';
-        document.getElementById('searchFilter').value = '';
-        this.loadJobs();
+        if (totalJobsEl) totalJobsEl.textContent = totalJobs;
+        if (activeJobsEl) activeJobsEl.textContent = activeJobs;
+        if (applicationCountEl) applicationCountEl.textContent = totalApplications;
     }
 
     // Show notification
@@ -750,6 +903,9 @@ class JobPostingSystem {
             }
         }, 5000);
     }
+
+    // All other existing methods remain the same...
+    // (Include all previous methods like openJobModal, closeJobModal, resetForm, etc.)
 }
 
 // Global functions for easy access
@@ -784,89 +940,100 @@ function clearFilters() {
     jobSystem.clearFilters();
 }
 
-// Initialize job posting system
+function filterApplications() {
+    jobSystem.filterApplications();
+}
+
+function clearApplicationFilters() {
+    jobSystem.clearApplicationFilters();
+}
+
+function loadJobs() {
+    jobSystem.loadJobs();
+}
+
+function loadApplications() {
+    jobSystem.loadApplications();
+}
+
+function updateStats() {
+    jobSystem.updateStats();
+}
+
+// Initialize enhanced job posting system
 let jobSystem;
 
 document.addEventListener('DOMContentLoaded', function() {
-    jobSystem = new JobPostingSystem();
+    jobSystem = new EnhancedJobPostingSystem();
     
     // Add some demo data if no jobs exist
     if (jobSystem.jobs.length === 0) {
-        const demoJobs = [
-            {
-                id: 'demo_job_1',
-                title: 'Senior Frontend Developer',
-                department: 'Engineering',
-                type: 'Full-time',
-                location: 'Bangalore, India',
-                salary: '₹15-25 LPA',
-                experience: 'Senior Level',
-                description: 'We are looking for a skilled Frontend Developer to join our dynamic team. You will be responsible for developing user interface components and implementing them following well-known React.js workflows.',
-                requirements: 'Bachelor\'s degree in Computer Science or related field. 3+ years of experience with React.js, JavaScript, HTML5, CSS3. Experience with Redux, TypeScript, and modern build tools.',
-                benefits: 'Competitive salary, health insurance, flexible working hours, remote work options, learning and development opportunities.',
-                skills: 'React.js,JavaScript,TypeScript,HTML5,CSS3,Redux,Git',
-                preferredSkills: 'Next.js,GraphQL,Jest,Webpack',
-                deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                applicationEmail: 'careers@techcompany.com',
-                status: 'Active',
-                urgency: 'High',
-                postedDate: new Date().toISOString(),
-                updatedDate: new Date().toISOString(),
-                applications: 12,
-                views: 45
-            },
-            {
-                id: 'demo_job_2',
-                title: 'UI/UX Designer',
-                department: 'Design',
-                type: 'Full-time',
-                location: 'Mumbai, India',
-                salary: '₹8-15 LPA',
-                experience: 'Mid Level',
-                description: 'Join our design team to create beautiful and intuitive user experiences. You will work closely with product managers and developers to bring ideas to life.',
-                requirements: 'Bachelor\'s degree in Design or related field. 2+ years of experience in UI/UX design. Proficiency in Figma, Adobe Creative Suite, and prototyping tools.',
-                benefits: 'Creative environment, health insurance, team outings, professional development budget.',
-                skills: 'Figma,Adobe XD,Photoshop,Illustrator,Prototyping,User Research',
-                preferredSkills: 'Sketch,InVision,Principle,After Effects',
-                deadline: new Date(Date.now() + 25 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                applicationEmail: 'design@creativeagency.com',
-                status: 'Active',
-                urgency: 'Normal',
-                postedDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-                updatedDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-                applications: 8,
-                views: 32
-            },
-            {
-                id: 'demo_job_3',
-                title: 'Marketing Intern',
-                department: 'Marketing',
-                type: 'Internship',
-                location: 'Delhi, India',
-                salary: '₹15,000-25,000 per month',
-                experience: 'Entry Level',
-                description: 'Great opportunity for students to gain hands-on experience in digital marketing. You will assist in campaign planning, content creation, and social media management.',
-                requirements: 'Currently pursuing or recently completed degree in Marketing, Communications, or related field. Basic understanding of digital marketing concepts.',
-                benefits: 'Mentorship program, certificate of completion, potential for full-time offer, flexible schedule.',
-                skills: 'Social Media Marketing,Content Writing,Google Analytics,SEO Basics',
-                preferredSkills: 'Adobe Creative Suite,Video Editing,Email Marketing',
-                deadline: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                applicationEmail: 'internships@marketingfirm.com',
-                status: 'Active',
-                urgency: 'Normal',
-                postedDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-                updatedDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-                applications: 25,
-                views: 78
-            }
-        ];
-        
-        jobSystem.jobs = demoJobs;
-        localStorage.setItem('skillsync_jobs', JSON.stringify(demoJobs));
-        jobSystem.loadJobs();
-        jobSystem.updateStats();
+        // Add demo jobs and applications
+        jobSystem.addDemoData();
     }
 });
+
+// Enhanced JobPostingSystem prototype methods (include all existing methods)
+EnhancedJobPostingSystem.prototype.addDemoData = function() {
+    const demoJobs = [
+        {
+            id: 'demo_job_1',
+            title: 'Senior Frontend Developer',
+            department: 'Engineering',
+            type: 'Full-time',
+            location: 'Bangalore, India',
+            salary: '₹15-25 LPA',
+            experience: 'Senior Level',
+            description: 'We are looking for a skilled Frontend Developer to join our dynamic team. You will be responsible for developing user interface components and implementing them following well-known React.js workflows.',
+            requirements: 'Bachelor\'s degree in Computer Science or related field. 3+ years of experience with React.js, JavaScript, HTML5, CSS3. Experience with Redux, TypeScript, and modern build tools.',
+            benefits: 'Competitive salary, health insurance, flexible working hours, remote work options, learning and development opportunities.',
+            skills: 'React.js,JavaScript,TypeScript,HTML5,CSS3,Redux,Git',
+            preferredSkills: 'Next.js,GraphQL,Jest,Webpack',
+            applicationRequirements: ['resume', 'portfolio', 'github'],
+            deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            applicationEmail: 'careers@techcompany.com',
+            status: 'Active',
+            urgency: 'High',
+            postedDate: new Date().toISOString(),
+            updatedDate: new Date().toISOString(),
+            applications: 5,
+            views: 45
+        }
+    ];
+
+    const demoApplications = [
+        {
+            id: 'demo_app_1',
+            jobId: 'demo_job_1',
+            jobTitle: 'Senior Frontend Developer',
+            applicantName: 'Rahul Kumar',
+            applicantEmail: 'rahul@email.com',
+            applicantPhone: '+91 9876543210',
+            experience: '4-5',
+            skills: 'React.js, JavaScript, TypeScript, Node.js',
+            coverLetter: 'I am excited to apply for this position as I have extensive experience in React.js development...',
+            documents: {
+                resume: 'https://example.com/rahul-resume.pdf',
+                portfolio: 'https://rahul-portfolio.dev',
+                github: 'https://github.com/rahulkumar'
+            },
+            status: 'Pending',
+            appliedDate: new Date().toISOString(),
+            lastUpdated: new Date().toISOString()
+        }
+    ];
+
+    this.jobs = demoJobs;
+    this.applications = demoApplications;
+    localStorage.setItem('skillsync_jobs', JSON.stringify(demoJobs));
+    localStorage.setItem('skillsync_applications', JSON.stringify(demoApplications));
+    
+    this.loadJobs();
+    this.loadApplications();
+    this.updateStats();
+    this.updateTabCounts();
+    this.populateJobFilter();
+};
 
 // Add slideInRight animation CSS
 const style = document.createElement('style');
@@ -884,4 +1051,4 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-console.log('🚀 Job Posting System loaded successfully!');
+console.log('🚀 Enhanced Job Posting System with Application Management loaded successfully!');
