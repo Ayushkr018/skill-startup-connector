@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Professional CSS Architecture -->
+    <!-- Enhanced CSS Architecture - FIXED WHITESPACE & ALIGNMENT -->
     <style>
         :root {
             /* Enhanced Brand System */
@@ -75,15 +75,22 @@
             --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Layout Constants */
-            --container-max-width: 1200px;
+            /* Layout Constants - FIXED FOR LAPTOP */
+            --container-max-width: 1400px;
             --sidebar-width: 280px;
         }
 
+        /* Enhanced Base Reset - LAPTOP WHITESPACE FIX */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -93,6 +100,10 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         /* Settings Background */
@@ -120,15 +131,17 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Enhanced Header */
+        /* Enhanced Header - Better Width Control */
         .settings-header {
             background: var(--settings-gradient);
             color: var(--gray-800);
-            padding: var(--space-3xl) var(--space-xl);
+            padding: var(--space-2xl) 0;
             position: relative;
             overflow: hidden;
             border-radius: 0 0 3rem 3rem;
             box-shadow: var(--shadow-xl);
+            width: 100%;
+            margin-bottom: var(--space-xl);
         }
 
         .header-container {
@@ -139,6 +152,8 @@
             align-items: center;
             position: relative;
             z-index: 2;
+            padding: 0 var(--space-xl);
+            width: 100%;
         }
 
         .back-btn {
@@ -155,6 +170,7 @@
             transition: all var(--transition-base);
             backdrop-filter: blur(15px);
             box-shadow: var(--shadow-md);
+            white-space: nowrap;
         }
 
         .back-btn:hover {
@@ -167,10 +183,11 @@
             text-align: center;
             flex: 1;
             margin: 0 var(--space-xl);
+            max-width: 800px;
         }
 
         .header-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: var(--space-lg);
             font-family: var(--font-secondary);
@@ -181,13 +198,13 @@
         }
 
         .header-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--gray-700);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Main Layout */
+        /* Enhanced Main Layout - Perfect Width Control */
         .settings-container {
             max-width: var(--container-max-width);
             margin: -var(--space-2xl) auto 0;
@@ -196,9 +213,10 @@
             z-index: 3;
             display: flex;
             gap: var(--space-2xl);
+            width: 100%;
         }
 
-        /* Settings Sidebar */
+        /* Enhanced Settings Sidebar */
         .settings-sidebar {
             width: var(--sidebar-width);
             background: rgba(255, 255, 255, 0.95);
@@ -210,6 +228,7 @@
             height: fit-content;
             position: sticky;
             top: var(--space-xl);
+            flex-shrink: 0;
         }
 
         .sidebar-nav {
@@ -243,6 +262,7 @@
             font-weight: 500;
             transition: all var(--transition-base);
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -256,9 +276,11 @@
             text-align: center;
         }
 
-        /* Settings Content */
+        /* Enhanced Settings Content */
         .settings-content {
             flex: 1;
+            width: 100%;
+            max-width: calc(100% - var(--sidebar-width) - var(--space-2xl));
         }
 
         .settings-section {
@@ -270,6 +292,7 @@
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 255, 255, 0.2);
             display: none;
+            width: 100%;
         }
 
         .settings-section.active {
@@ -295,6 +318,8 @@
             margin-bottom: var(--space-2xl);
             padding-bottom: var(--space-lg);
             border-bottom: 2px solid var(--gray-100);
+            flex-wrap: wrap;
+            gap: var(--space-md);
         }
 
         .section-title {
@@ -307,11 +332,12 @@
             font-family: var(--font-secondary);
         }
 
-        /* Settings Cards */
+        /* Enhanced Settings Cards */
         .settings-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: var(--space-xl);
+            width: 100%;
         }
 
         .settings-card {
@@ -321,6 +347,7 @@
             box-shadow: var(--shadow-md);
             border: 2px solid transparent;
             transition: all var(--transition-base);
+            width: 100%;
         }
 
         .settings-card:hover {
@@ -346,6 +373,7 @@
             justify-content: center;
             color: white;
             font-size: 1.25rem;
+            flex-shrink: 0;
         }
 
         .card-content {
@@ -364,9 +392,10 @@
             font-size: 0.875rem;
         }
 
-        /* Form Elements */
+        /* Enhanced Form Elements */
         .form-group {
             margin-bottom: var(--space-lg);
+            width: 100%;
         }
 
         .form-label {
@@ -385,6 +414,7 @@
             font-size: 1rem;
             transition: all var(--transition-fast);
             background: white;
+            box-sizing: border-box;
         }
 
         .form-input:focus {
@@ -393,7 +423,7 @@
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
         }
 
-        /* Toggle Switch */
+        /* Enhanced Toggle Switch */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -439,7 +469,7 @@
             transform: translateX(26px);
         }
 
-        /* Buttons */
+        /* Enhanced Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -454,6 +484,7 @@
             transition: all var(--transition-base);
             min-width: 120px;
             justify-content: center;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -488,7 +519,7 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Toast Notifications */
+        /* Enhanced Toast Notifications */
         .toast {
             position: fixed;
             top: 20px;
@@ -513,10 +544,54 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
+        /* LAPTOP SPECIFIC FIXES - Prevent Right Side Whitespace */
+        @media (min-width: 1025px) and (max-width: 1920px) {
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .settings-header {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .settings-container {
+                width: 100%;
+                max-width: var(--container-max-width);
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: var(--space-xl);
+                padding-right: var(--space-xl);
+            }
+            
+            .settings-content {
+                width: 100%;
+                max-width: calc(100% - var(--sidebar-width) - var(--space-2xl));
+            }
+            
+            .settings-cards {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 100%;
+            }
+            
+            /* Ensure no element extends beyond viewport */
+            * {
+                max-width: 100%;
+            }
+            
+            /* Force proper box-sizing */
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+        }
+
+        /* Tablet View (769px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
             .settings-container {
                 flex-direction: column;
+                gap: var(--space-xl);
             }
 
             .settings-sidebar {
@@ -532,28 +607,218 @@
                 padding-bottom: var(--space-sm);
             }
 
+            .nav-section {
+                display: flex;
+                gap: var(--space-md);
+                margin-bottom: 0;
+            }
+
+            .nav-section-title {
+                display: none;
+            }
+
             .nav-item {
                 white-space: nowrap;
                 min-width: fit-content;
             }
-        }
 
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2.5rem;
+            .settings-content {
+                max-width: 100%;
             }
 
+            .settings-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile View - FIXED BACK BUTTON ALIGNMENT */
+        @media (max-width: 768px) {
+            /* Header Mobile Layout - FIXED */
+            .settings-header {
+                padding: var(--space-lg) 0;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-lg);
+                padding: 0 var(--space-md);
+            }
+            
+            .back-btn {
+                align-self: flex-start;
+                margin-bottom: var(--space-md);
+                width: fit-content;
+                z-index: 10;
+                order: 1;
+            }
+            
+            .header-content {
+                margin: 0;
+                text-align: center;
+                order: 2;
+            }
+            
+            .header-title {
+                font-size: 2.5rem;
+                margin-bottom: var(--space-sm);
+            }
+            
+            .header-subtitle {
+                font-size: 1rem;
+            }
+
+            /* Container Mobile Layout */
             .settings-container {
+                flex-direction: column;
                 padding: 0 var(--space-md) var(--space-2xl);
                 margin-top: -var(--space-lg);
+                gap: var(--space-lg);
+            }
+
+            .settings-sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                padding: var(--space-lg);
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: var(--space-md);
+                padding-bottom: var(--space-sm);
+            }
+
+            .nav-section {
+                display: flex;
+                gap: var(--space-md);
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .nav-section-title {
+                display: none;
+            }
+
+            .nav-item {
+                white-space: nowrap;
+                min-width: fit-content;
+                padding: var(--space-sm) var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .nav-item:hover, .nav-item.active {
+                transform: translateY(-2px);
+            }
+
+            .settings-content {
+                max-width: 100%;
+            }
+
+            .settings-section {
+                padding: var(--space-lg);
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-md);
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                justify-content: center;
             }
 
             .settings-cards {
                 grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-md);
+            }
+
+            .btn {
+                width: 100%;
+                max-width: none;
+            }
+
+            .form-group[style*="display: flex"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: var(--space-md);
+            }
+
+            .form-group[style*="display: flex"] > div:first-child {
+                margin-bottom: var(--space-sm);
+            }
+
+            .toggle-switch {
+                align-self: center;
             }
         }
+
+        /* Small Mobile (480px and below) */
+        @media (max-width: 480px) {
+            .settings-container {
+                padding: 0 var(--space-sm) var(--space-xl);
+            }
+            
+            .settings-section {
+                padding: var(--space-md);
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .sidebar-nav {
+                gap: var(--space-sm);
+            }
+            
+            .nav-item {
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.8rem;
+            }
+
+            .settings-card {
+                padding: var(--space-lg);
+            }
+
+            .card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center !important; }
+        .font-bold { font-weight: 700 !important; }
+        .text-primary { color: var(--primary-color) !important; }
+        .mb-0 { margin-bottom: 0 !important; }
+        .mt-lg { margin-top: var(--space-lg) !important; }
     </style>
 </head>
+
 <body>
     <!-- Settings Background -->
     <div class="settings-background" id="settingsBackground"></div>
@@ -1071,7 +1336,7 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Enhanced JavaScript -->
     <script>
         // Professional Settings Controller
         class SettingsController {
@@ -1082,7 +1347,7 @@
             }
 
             init() {
-                console.log('⚙️ Settings Dashboard Initialized');
+                console.log('⚙️ Settings Dashboard v2.0 Initialized');
                 this.createSettingsBackground();
                 this.setupEventListeners();
             }
@@ -1108,8 +1373,46 @@
                 document.querySelectorAll('input, select, textarea').forEach(element => {
                     element.addEventListener('change', () => {
                         this.unsavedChanges = true;
+                        this.highlightUnsavedChanges(element);
                     });
                 });
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                        e.preventDefault();
+                        this.saveCurrentSection();
+                    }
+                });
+            }
+
+            highlightUnsavedChanges(element) {
+                element.style.borderColor = 'var(--warning-color)';
+                element.style.background = 'rgba(245, 158, 11, 0.05)';
+                
+                setTimeout(() => {
+                    element.style.borderColor = '';
+                    element.style.background = '';
+                }, 2000);
+            }
+
+            saveCurrentSection() {
+                const activeSection = document.querySelector('.settings-section.active');
+                const sectionId = activeSection.id;
+                
+                switch(sectionId) {
+                    case 'profile':
+                        saveProfile();
+                        break;
+                    case 'preferences':
+                        savePreferences();
+                        break;
+                    case 'notifications':
+                        saveNotifications();
+                        break;
+                    default:
+                        this.showToast('Settings saved successfully!', 'success');
+                }
             }
 
             showToast(message, type = 'success', duration = 4000) {
@@ -1119,16 +1422,19 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <i class="fas fa-${this.getToastIcon(type)}"></i>
                         <span>${message}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; margin-left: auto; opacity: 0.8;">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 `;
                 
                 document.body.appendChild(toast);
                 
                 setTimeout(() => {
-                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
-                    setTimeout(() => {
-                        if (toast.parentElement) toast.remove();
-                    }, 300);
+                    if (toast.parentElement) {
+                        toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                        setTimeout(() => toast.remove(), 300);
+                    }
                 }, duration);
             }
 
@@ -1157,6 +1463,7 @@
             document.getElementById(sectionId).classList.add('active');
 
             console.log('📄 Switched to section:', sectionId);
+            settingsController.currentSection = sectionId;
         }
 
         // Save functions
@@ -1178,16 +1485,28 @@
         // Action functions
         function changePassword() {
             settingsController.showToast('Password change form opening...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Password updated successfully!', 'success');
+            }, 2000);
         }
 
         function viewLoginHistory() {
             settingsController.showToast('Loading login history...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Login history loaded successfully!', 'success');
+            }, 1500);
         }
 
         function exportData() {
             settingsController.showToast('Preparing data export...', 'info');
             setTimeout(() => {
-                settingsController.showToast('Data export completed!', 'success');
+                settingsController.showToast('Data export completed! Check your downloads.', 'success');
+                
+                // Simulate download
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;charset=utf-8,Your SkillSync AI Data Export';
+                link.download = 'skillsync-data-export.txt';
+                link.click();
             }, 3000);
         }
 
@@ -1195,29 +1514,107 @@
             settingsController.showToast('Connecting to Slack...', 'info');
             setTimeout(() => {
                 settingsController.showToast('Slack connected successfully!', 'success');
+                
+                // Update button text
+                const button = event.target;
+                button.innerHTML = '<i class="fas fa-unlink"></i> Connected';
+                button.className = 'btn btn-primary';
+                button.onclick = () => disconnectSlack();
             }, 2000);
         }
 
         function disconnectGoogle() {
-            settingsController.showToast('Google Calendar disconnected', 'warning');
+            if (confirm('Are you sure you want to disconnect Google Calendar?')) {
+                settingsController.showToast('Google Calendar disconnected', 'warning');
+                
+                // Update button text
+                const button = event.target;
+                button.innerHTML = '<i class="fas fa-link"></i> Connect';
+                button.className = 'btn btn-outline';
+                button.onclick = () => connectGoogle();
+            }
+        }
+
+        function disconnectSlack() {
+            if (confirm('Are you sure you want to disconnect Slack?')) {
+                settingsController.showToast('Slack disconnected', 'warning');
+                
+                // Update button text
+                const button = event.target;
+                button.innerHTML = '<i class="fas fa-link"></i> Connect Slack';
+                button.className = 'btn btn-outline';
+                button.onclick = () => connectSlack();
+            }
+        }
+
+        function connectGoogle() {
+            settingsController.showToast('Connecting to Google Calendar...', 'info');
+            setTimeout(() => {
+                settingsController.showToast('Google Calendar connected successfully!', 'success');
+                
+                // Update button text
+                const button = event.target;
+                button.innerHTML = '<i class="fas fa-unlink"></i> Connected';
+                button.className = 'btn btn-primary';
+                button.onclick = () => disconnectGoogle();
+            }, 2000);
         }
 
         function createBackup() {
             settingsController.showToast('Creating backup...', 'info');
             setTimeout(() => {
                 settingsController.showToast('Backup created successfully!', 'success');
+                
+                // Simulate download
+                const link = document.createElement('a');
+                link.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({
+                    backup: 'SkillSync AI Data Backup',
+                    date: new Date().toISOString(),
+                    version: '2.0'
+                }));
+                link.download = 'skillsync-backup.json';
+                link.click();
             }, 4000);
         }
 
         function deleteAccount() {
             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                settingsController.showToast('Account deletion process initiated...', 'error');
+                const confirmText = prompt('Type "DELETE" to confirm account deletion:');
+                if (confirmText === 'DELETE') {
+                    settingsController.showToast('Account deletion process initiated...', 'error');
+                    setTimeout(() => {
+                        settingsController.showToast('Account deletion completed. You will be redirected to login.', 'error');
+                    }, 3000);
+                } else {
+                    settingsController.showToast('Account deletion cancelled', 'info');
+                }
             }
         }
 
-        // Initialize controller
+        // Initialize controller when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             settingsController = new SettingsController();
+            console.log('✅ Settings Platform Ready');
+        });
+
+        // Add smooth scrolling and intersection observer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            // Observe all settings cards
+            document.querySelectorAll('.settings-card').forEach(card => {
+                observer.observe(card);
+            });
         });
     </script>
 </body>
