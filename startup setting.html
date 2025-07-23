@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Enhanced CSS Architecture - FIXED WHITESPACE & ALIGNMENT -->
     <style>
         :root {
             /* Enhanced Brand System */
@@ -75,12 +74,12 @@
             --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Layout Constants - FIXED FOR LAPTOP */
+            /* Layout Constants */
             --container-max-width: 1400px;
             --sidebar-width: 280px;
         }
 
-        /* Enhanced Base Reset - LAPTOP WHITESPACE FIX */
+        /* Enhanced Base Reset */
         * {
             margin: 0;
             padding: 0;
@@ -102,8 +101,6 @@
             min-height: 100vh;
             width: 100%;
             overflow-x: hidden;
-            margin: 0;
-            padding: 0;
         }
 
         /* Settings Background */
@@ -131,7 +128,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Enhanced Header - Better Width Control */
+        /* Enhanced Header */
         .settings-header {
             background: var(--settings-gradient);
             color: var(--gray-800);
@@ -204,7 +201,7 @@
             margin: 0 auto;
         }
 
-        /* Enhanced Main Layout - Perfect Width Control */
+        /* Main Layout */
         .settings-container {
             max-width: var(--container-max-width);
             margin: -var(--space-2xl) auto 0;
@@ -216,7 +213,7 @@
             width: 100%;
         }
 
-        /* Enhanced Settings Sidebar */
+        /* Settings Sidebar */
         .settings-sidebar {
             width: var(--sidebar-width);
             background: rgba(255, 255, 255, 0.95);
@@ -276,10 +273,9 @@
             text-align: center;
         }
 
-        /* Enhanced Settings Content */
+        /* Settings Content */
         .settings-content {
             flex: 1;
-            width: 100%;
             max-width: calc(100% - var(--sidebar-width) - var(--space-2xl));
         }
 
@@ -332,7 +328,7 @@
             font-family: var(--font-secondary);
         }
 
-        /* Enhanced Settings Cards */
+        /* Settings Cards */
         .settings-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -392,7 +388,7 @@
             font-size: 0.875rem;
         }
 
-        /* Enhanced Form Elements */
+        /* Form Elements */
         .form-group {
             margin-bottom: var(--space-lg);
             width: 100%;
@@ -423,7 +419,7 @@
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
         }
 
-        /* Enhanced Toggle Switch */
+        /* Toggle Switch */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -469,7 +465,7 @@
             transform: translateX(26px);
         }
 
-        /* Enhanced Buttons */
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -519,7 +515,7 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Enhanced Toast Notifications */
+        /* Toast Notifications */
         .toast {
             position: fixed;
             top: 20px;
@@ -544,50 +540,20 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* LAPTOP SPECIFIC FIXES - Prevent Right Side Whitespace */
+        /* LAPTOP SPECIFIC FIXES */
         @media (min-width: 1025px) and (max-width: 1920px) {
-            html, body {
-                width: 100%;
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-            
-            .settings-header {
-                width: 100%;
-                max-width: 100%;
-            }
-            
             .settings-container {
-                width: 100%;
                 max-width: var(--container-max-width);
                 margin-left: auto;
                 margin-right: auto;
-                padding-left: var(--space-xl);
-                padding-right: var(--space-xl);
-            }
-            
-            .settings-content {
-                width: 100%;
-                max-width: calc(100% - var(--sidebar-width) - var(--space-2xl));
             }
             
             .settings-cards {
                 grid-template-columns: repeat(2, 1fr);
-                max-width: 100%;
-            }
-            
-            /* Ensure no element extends beyond viewport */
-            * {
-                max-width: 100%;
-            }
-            
-            /* Force proper box-sizing */
-            *, *::before, *::after {
-                box-sizing: border-box;
             }
         }
 
-        /* Tablet View (769px - 1024px) */
+        /* Tablet Responsive */
         @media (max-width: 1024px) and (min-width: 769px) {
             .settings-container {
                 flex-direction: column;
@@ -611,6 +577,7 @@
                 display: flex;
                 gap: var(--space-md);
                 margin-bottom: 0;
+                flex-shrink: 0;
             }
 
             .nav-section-title {
@@ -631,7 +598,7 @@
             }
         }
 
-        /* Mobile View - FIXED BACK BUTTON ALIGNMENT */
+        /* MOBILE RESPONSIVE - FIXED LAYOUT */
         @media (max-width: 768px) {
             /* Header Mobile Layout - FIXED */
             .settings-header {
@@ -646,14 +613,16 @@
                 padding: 0 var(--space-md);
             }
             
+            /* Back Button - FIXED POSITIONING */
             .back-btn {
                 align-self: flex-start;
-                margin-bottom: var(--space-md);
                 width: fit-content;
-                z-index: 10;
                 order: 1;
+                margin-bottom: var(--space-md);
+                z-index: 10;
             }
             
+            /* Header Content - COMES AFTER BACK BUTTON */
             .header-content {
                 margin: 0;
                 text-align: center;
@@ -677,6 +646,7 @@
                 gap: var(--space-lg);
             }
 
+            /* Sidebar Mobile Layout */
             .settings-sidebar {
                 width: 100%;
                 position: relative;
@@ -713,6 +683,7 @@
                 transform: translateY(-2px);
             }
 
+            /* Settings Content Mobile */
             .settings-content {
                 max-width: 100%;
             }
@@ -749,10 +720,12 @@
                 max-width: none;
             }
 
+            /* Form Groups - Mobile Fix for Toggle Switches */
             .form-group[style*="display: flex"] {
                 flex-direction: column !important;
                 align-items: stretch !important;
                 gap: var(--space-md);
+                text-align: center;
             }
 
             .form-group[style*="display: flex"] > div:first-child {
@@ -764,7 +737,7 @@
             }
         }
 
-        /* Small Mobile (480px and below) */
+        /* Small Mobile */
         @media (max-width: 480px) {
             .settings-container {
                 padding: 0 var(--space-sm) var(--space-xl);
@@ -797,25 +770,6 @@
                 font-size: 1rem;
             }
         }
-
-        /* Loading Animation */
-        .loading-shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* Utility Classes */
-        .text-center { text-align: center !important; }
-        .font-bold { font-weight: 700 !important; }
-        .text-primary { color: var(--primary-color) !important; }
-        .mb-0 { margin-bottom: 0 !important; }
-        .mt-lg { margin-top: var(--space-lg) !important; }
     </style>
 </head>
 
@@ -1336,7 +1290,7 @@
         </div>
     </div>
 
-    <!-- Enhanced JavaScript -->
+    <!-- JavaScript -->
     <script>
         // Professional Settings Controller
         class SettingsController {
@@ -1595,26 +1549,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             settingsController = new SettingsController();
             console.log('✅ Settings Platform Ready');
-        });
-
-        // Add smooth scrolling and intersection observer
-        document.addEventListener('DOMContentLoaded', function() {
-            // Intersection Observer for cards
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '50px'
-            });
-
-            // Observe all settings cards
-            document.querySelectorAll('.settings-card').forEach(card => {
-                observer.observe(card);
-            });
         });
     </script>
 </body>
