@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Professional CSS Architecture -->
+    <!-- Enhanced CSS Architecture - FIXED WHITESPACE & ALIGNMENT -->
     <style>
         :root {
             /* Enhanced Brand System */
@@ -75,14 +75,21 @@
             --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Layout Constants */
-            --container-max-width: 1200px;
+            /* Layout Constants - FIXED FOR LAPTOP */
+            --container-max-width: 1400px;
         }
 
+        /* Enhanced Base Reset - LAPTOP WHITESPACE FIX */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -92,6 +99,10 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         /* Activity Background Animation */
@@ -120,15 +131,17 @@
             50% { transform: scale(1.3); opacity: 0.3; }
         }
 
-        /* Enhanced Header */
+        /* Enhanced Header - Better Width Control */
         .activity-header {
             background: var(--activity-gradient);
             color: var(--gray-800);
-            padding: var(--space-3xl) var(--space-xl);
+            padding: var(--space-2xl) 0;
             position: relative;
             overflow: hidden;
             border-radius: 0 0 3rem 3rem;
             box-shadow: var(--shadow-xl);
+            width: 100%;
+            margin-bottom: var(--space-xl);
         }
 
         .activity-header::before {
@@ -155,6 +168,8 @@
             align-items: center;
             position: relative;
             z-index: 2;
+            padding: 0 var(--space-xl);
+            width: 100%;
         }
 
         .back-btn {
@@ -171,6 +186,7 @@
             transition: all var(--transition-base);
             backdrop-filter: blur(15px);
             box-shadow: var(--shadow-md);
+            white-space: nowrap;
         }
 
         .back-btn:hover {
@@ -183,10 +199,11 @@
             text-align: center;
             flex: 1;
             margin: 0 var(--space-xl);
+            max-width: 800px;
         }
 
         .header-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: var(--space-lg);
             font-family: var(--font-secondary);
@@ -197,7 +214,7 @@
         }
 
         .header-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--gray-700);
             max-width: 600px;
             margin: 0 auto;
@@ -231,16 +248,17 @@
             51%, 100% { opacity: 0.3; }
         }
 
-        /* Main Container */
+        /* Enhanced Main Container - Perfect Width Control */
         .activity-container {
             max-width: var(--container-max-width);
             margin: -var(--space-2xl) auto 0;
             padding: 0 var(--space-xl) var(--space-3xl);
             position: relative;
             z-index: 3;
+            width: 100%;
         }
 
-        /* Activity Filters */
+        /* Enhanced Activity Filters */
         .activity-filters {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -249,19 +267,23 @@
             margin-bottom: var(--space-2xl);
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
         }
 
         .filters-row {
             display: flex;
             gap: var(--space-lg);
-            align-items: center;
+            align-items: flex-end;
             flex-wrap: wrap;
+            width: 100%;
         }
 
         .filter-group {
             display: flex;
             flex-direction: column;
             gap: var(--space-sm);
+            flex: 1;
+            min-width: 200px;
         }
 
         .filter-label {
@@ -277,6 +299,8 @@
             background: white;
             font-weight: 500;
             transition: all var(--transition-fast);
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .filter-select:focus {
@@ -285,7 +309,7 @@
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
         }
 
-        /* Activity Timeline */
+        /* Enhanced Activity Timeline */
         .activity-timeline {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -293,6 +317,7 @@
             padding: var(--space-2xl);
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
         }
 
         .timeline-header {
@@ -302,6 +327,8 @@
             margin-bottom: var(--space-2xl);
             padding-bottom: var(--space-lg);
             border-bottom: 2px solid var(--gray-100);
+            flex-wrap: wrap;
+            gap: var(--space-md);
         }
 
         .timeline-title {
@@ -315,6 +342,7 @@
             display: flex;
             flex-direction: column;
             gap: var(--space-lg);
+            width: 100%;
         }
 
         .activity-item {
@@ -327,6 +355,7 @@
             border: 2px solid transparent;
             transition: all var(--transition-base);
             position: relative;
+            width: 100%;
         }
 
         .activity-item:hover {
@@ -350,6 +379,7 @@
 
         .activity-content {
             flex: 1;
+            width: 100%;
         }
 
         .activity-title {
@@ -371,6 +401,7 @@
             gap: var(--space-lg);
             font-size: 0.75rem;
             color: var(--gray-500);
+            flex-wrap: wrap;
         }
 
         .activity-time {
@@ -379,6 +410,7 @@
             align-items: flex-end;
             gap: var(--space-sm);
             text-align: right;
+            flex-shrink: 0;
         }
 
         .time-stamp {
@@ -393,6 +425,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .badge-new {
@@ -415,7 +448,7 @@
             color: white;
         }
 
-        /* Buttons */
+        /* Enhanced Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -430,6 +463,7 @@
             transition: all var(--transition-base);
             min-width: 120px;
             justify-content: center;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -454,7 +488,7 @@
             color: white;
         }
 
-        /* Toast Notifications */
+        /* Enhanced Toast Notifications */
         .toast {
             position: fixed;
             top: 20px;
@@ -479,33 +513,235 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Responsive Design */
+        /* LAPTOP SPECIFIC FIXES - Prevent Right Side Whitespace */
+        @media (min-width: 1025px) and (max-width: 1920px) {
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .activity-header {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .activity-container {
+                width: 100%;
+                max-width: var(--container-max-width);
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: var(--space-xl);
+                padding-right: var(--space-xl);
+            }
+            
+            .activity-filters,
+            .activity-timeline {
+                max-width: 100%;
+            }
+            
+            .filters-row {
+                max-width: 100%;
+            }
+            
+            .timeline-list {
+                max-width: 100%;
+            }
+            
+            /* Ensure no element extends beyond viewport */
+            * {
+                max-width: 100%;
+            }
+            
+            /* Force proper box-sizing */
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+        }
+
+        /* Tablet View (769px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-lg);
+            }
+            
+            .header-content {
+                margin: 0;
+            }
+            
+            .filters-row {
+                justify-content: space-between;
+            }
+            
+            .filter-group {
+                min-width: 180px;
+            }
+        }
+
+        /* Mobile View - FIXED BACK BUTTON ALIGNMENT */
         @media (max-width: 768px) {
+            /* Header Mobile Layout - FIXED */
+            .activity-header {
+                padding: var(--space-lg) 0;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-lg);
+                padding: 0 var(--space-md);
+            }
+            
+            .back-btn {
+                align-self: flex-start;
+                margin-bottom: var(--space-md);
+                width: fit-content;
+                z-index: 10;
+                order: 1;
+            }
+            
+            .header-content {
+                margin: 0;
+                text-align: center;
+                order: 2;
+            }
+            
             .header-title {
                 font-size: 2.5rem;
+                margin-bottom: var(--space-sm);
+            }
+            
+            .header-subtitle {
+                font-size: 1rem;
             }
 
+            /* Container Mobile Layout */
             .activity-container {
                 padding: 0 var(--space-md) var(--space-2xl);
                 margin-top: -var(--space-lg);
             }
 
+            /* Filters Mobile Layout */
+            .activity-filters {
+                padding: var(--space-lg);
+            }
+
             .filters-row {
                 flex-direction: column;
                 align-items: stretch;
+                gap: var(--space-md);
             }
 
+            .filter-group {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            /* Timeline Mobile Layout */
+            .activity-timeline {
+                padding: var(--space-lg);
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: var(--space-md);
+            }
+
+            /* Activity Item Mobile Layout */
             .activity-item {
                 flex-direction: column;
                 text-align: center;
+                gap: var(--space-md);
+            }
+
+            .activity-item:hover {
+                transform: translateY(-4px);
             }
 
             .activity-time {
                 align-items: center;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .activity-meta {
+                justify-content: center;
+                gap: var(--space-md);
+            }
+
+            .btn {
+                width: 100%;
+                max-width: none;
             }
         }
+
+        /* Small Mobile (480px and below) */
+        @media (max-width: 480px) {
+            .activity-container {
+                padding: 0 var(--space-sm) var(--space-xl);
+            }
+            
+            .activity-filters,
+            .activity-timeline {
+                padding: var(--space-md);
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .activity-item {
+                padding: var(--space-md);
+            }
+            
+            .activity-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .activity-meta {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: center;
+            }
+            
+            .activity-time {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+
+        /* Loading Animation */
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center !important; }
+        .font-bold { font-weight: 700 !important; }
+        .text-primary { color: var(--primary-color) !important; }
+        .mb-0 { margin-bottom: 0 !important; }
+        .mt-lg { margin-top: var(--space-lg) !important; }
     </style>
 </head>
+
 <body>
     <!-- Activity Background -->
     <div class="activity-background" id="activityBackground"></div>
@@ -730,7 +966,7 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Enhanced JavaScript -->
     <script>
         // Professional Activity Controller
         class ActivityController {
@@ -745,7 +981,7 @@
             }
 
             init() {
-                console.log('📊 Recent Activity Dashboard Initialized');
+                console.log('📊 Recent Activity Dashboard v2.0 Initialized');
                 this.createActivityBackground();
                 this.setupEventListeners();
                 this.startRealTimeUpdates();
@@ -759,6 +995,7 @@
                     pulse.style.left = Math.random() * 100 + '%';
                     pulse.style.top = Math.random() * 100 + '%';
                     pulse.style.animationDelay = Math.random() * 6 + 's';
+                    pulse.style.animationDuration = (Math.random() * 4 + 4) + 's';
                     container.appendChild(pulse);
                 }
             }
@@ -767,9 +1004,17 @@
                 // Auto-refresh activities every 30 seconds
                 setInterval(() => {
                     if (document.visibilityState === 'visible') {
-                        this.refreshActivities();
+                        this.refreshActivities(true); // Silent refresh
                     }
                 }, 30000);
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+                        e.preventDefault();
+                        this.refreshActivities();
+                    }
+                });
             }
 
             startRealTimeUpdates() {
@@ -781,46 +1026,152 @@
 
             simulateNewActivity() {
                 const activities = [
-                    'New candidate application received',
-                    'Interview feedback submitted',
-                    'Job posting updated',
-                    'Team member added to project'
+                    '🔔 New candidate application received',
+                    '💬 Interview feedback submitted',
+                    '📝 Job posting updated',
+                    '👥 Team member added to project',
+                    '📊 Weekly report generated',
+                    '🎯 Skills assessment completed'
                 ];
                 
                 const randomActivity = activities[Math.floor(Math.random() * activities.length)];
-                this.showToast(`🔔 ${randomActivity}`, 'info');
+                this.showToast(randomActivity, 'info', 5000);
             }
 
             filterActivities(filterType, value) {
                 this.filters[filterType] = value;
                 console.log(`🔍 Filtering ${filterType}:`, value);
-                this.showToast(`Filter applied: ${filterType} = ${value}`, 'success');
+                
+                const filterNames = {
+                    type: {
+                        all: 'All Activities',
+                        user: 'User Actions',
+                        system: 'System Updates',
+                        hiring: 'Hiring Process',
+                        notifications: 'Notifications'
+                    },
+                    time: {
+                        today: 'Today',
+                        week: 'This Week',
+                        month: 'This Month',
+                        all: 'All Time'
+                    },
+                    priority: {
+                        all: 'All Priorities',
+                        high: 'High Priority',
+                        medium: 'Medium Priority',
+                        low: 'Low Priority'
+                    }
+                };
+                
+                const displayName = filterNames[filterType][value] || value;
+                this.showToast(`📊 Filter applied: ${displayName}`, 'success', 3000);
             }
 
-            refreshActivities() {
-                this.showToast('🔄 Refreshing activities...', 'info');
+            refreshActivities(silent = false) {
+                if (!silent) {
+                    this.showToast('🔄 Refreshing activities...', 'info');
+                }
                 
                 // Simulate API call
                 setTimeout(() => {
-                    this.showToast('✅ Activities refreshed successfully!', 'success');
+                    if (!silent) {
+                        this.showToast('✅ Activities refreshed successfully!', 'success');
+                    }
+                    
+                    // Update timestamps
+                    this.updateActivityTimestamps();
                 }, 1500);
+            }
+
+            updateActivityTimestamps() {
+                // Update relative timestamps in activity items
+                const timestamps = document.querySelectorAll('.time-stamp');
+                timestamps.forEach((stamp, index) => {
+                    const times = ['Just now', '2 minutes ago', '15 minutes ago', '1 hour ago', '3 hours ago', '5 hours ago', '1 day ago'];
+                    if (times[index + 1]) {
+                        stamp.textContent = times[index + 1];
+                    }
+                });
             }
 
             markAllAsRead() {
                 this.showToast('📖 All activities marked as read', 'success');
                 
-                // Remove all badges
+                // Fade out all badges
                 document.querySelectorAll('.activity-badge').forEach(badge => {
+                    badge.style.transition = 'opacity 0.5s ease';
                     badge.style.opacity = '0.5';
                 });
+                
+                // Update button text
+                const markButton = document.querySelector('button[onclick="markAllAsRead()"]');
+                if (markButton) {
+                    markButton.innerHTML = '<i class="fas fa-check"></i> All Read';
+                    markButton.disabled = true;
+                    markButton.style.opacity = '0.7';
+                }
             }
 
             loadMoreActivities() {
                 this.showToast('📥 Loading more activities...', 'info');
                 
                 setTimeout(() => {
-                    this.showToast('✅ More activities loaded!', 'success');
+                    const additionalActivities = [
+                        {
+                            icon: 'fas fa-user-edit',
+                            iconBg: 'var(--info-gradient)',
+                            title: 'Profile Updated',
+                            description: 'Sarah Wilson updated her profile with new skills and certifications.',
+                            meta: ['Sarah Wilson', 'UI/UX Designer', 'Portfolio Added'],
+                            time: '2 days ago',
+                            badge: 'Update'
+                        },
+                        {
+                            icon: 'fas fa-comment-dots',
+                            iconBg: 'var(--warning-gradient)',
+                            title: 'Interview Feedback',
+                            description: 'Technical interview feedback received for React Developer position.',
+                            meta: ['Technical Round', 'Rating: 4.5/5', 'Next Round: HR'],
+                            time: '3 days ago',
+                            badge: 'Feedback'
+                        }
+                    ];
+                    
+                    // Add new activities to DOM
+                    const timeline = document.querySelector('.timeline-list');
+                    additionalActivities.forEach(activity => {
+                        const activityElement = this.createActivityElement(activity);
+                        timeline.appendChild(activityElement);
+                    });
+                    
+                    this.showToast('✅ More activities loaded successfully!', 'success');
                 }, 2000);
+            }
+
+            createActivityElement(activity) {
+                const element = document.createElement('div');
+                element.className = 'activity-item';
+                element.style.animation = 'fadeInUp 0.5s ease-out';
+                
+                element.innerHTML = `
+                    <div class="activity-icon" style="background: ${activity.iconBg};">
+                        <i class="${activity.icon}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.title}</div>
+                        <div class="activity-description">${activity.description}</div>
+                        <div class="activity-meta">
+                            ${activity.meta.map(meta => `<span><i class="fas fa-circle" style="font-size: 0.4rem;"></i> ${meta}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="activity-time">
+                        <span class="time-stamp">${activity.time}</span>
+                        <span class="activity-badge badge-update">${activity.badge}</span>
+                    </div>
+                `;
+                
+                return element;
             }
 
             showToast(message, type = 'info', duration = 4000) {
@@ -830,16 +1181,19 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <i class="fas fa-${this.getToastIcon(type)}"></i>
                         <span>${message}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; margin-left: auto; opacity: 0.8;">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 `;
                 
                 document.body.appendChild(toast);
                 
                 setTimeout(() => {
-                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
-                    setTimeout(() => {
-                        if (toast.parentElement) toast.remove();
-                    }, 300);
+                    if (toast.parentElement) {
+                        toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+                        setTimeout(() => toast.remove(), 300);
+                    }
                 }, duration);
             }
 
@@ -874,9 +1228,30 @@
             activityController.loadMoreActivities();
         }
 
-        // Initialize controller
+        // Initialize controller when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             activityController = new ActivityController();
+            console.log('✅ Recent Activity Platform Ready');
+        });
+
+        // Add smooth scrolling and intersection observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for activity items
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            // Observe all activity items
+            document.querySelectorAll('.activity-item').forEach(item => {
+                observer.observe(item);
+            });
         });
     </script>
 </body>
