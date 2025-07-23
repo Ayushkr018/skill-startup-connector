@@ -40,13 +40,10 @@
                     <a href="pages/features.html" class="nav-link">Features</a>
                     <a href="pages/how-it-works.html" class="nav-link">How It Works</a>
                     <a href="pages/pricing.html" class="nav-link">Pricing</a>
-                    <a href="pages/chat.html" class="nav-link">
-                        <i class="fas fa-comments"></i> Chat
-                    </a>
                     <a href="pages/about.html" class="nav-link">About</a>
                     <div class="nav-buttons">
-                        <button class="btn-login">Login</button>
-                        <button class="btn-signup">Get Started</button>
+                        <button class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</button>
+                        <button class="btn-signup"><i class="fas fa-rocket"></i> Get Started</button>
                     </div>
                 </div>
                 <div class="hamburger">
@@ -57,6 +54,14 @@
             </nav>
         </div>
     </header>
+
+    <!-- Floating Chat Button -->
+    <div id="floatingChatBtn" class="floating-chat-btn">
+        <button title="Chat with AI Assistant">
+            <i class="fas fa-robot"></i>
+            <span class="chat-pulse"></span>
+        </button>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -87,7 +92,7 @@
                         <div class="card-header">
                             <div class="avatar">👨‍💻</div>
                             <div>
-                                <h4>Ayush Kumar</h4>
+                                <h4>Lucky</h4>
                                 <p>Full Stack Developer</p>
                             </div>
                         </div>
@@ -567,7 +572,7 @@
         </div>
     </footer>
 
-    <!-- Login Modal with Google -->
+    <!-- Updated Login Modal with Forgot Password -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -587,7 +592,7 @@
                 </button>
 
                 <div class="divider">
-                    <span>Or</span>
+                    <span>OR</span>
                 </div>
 
                 <div class="form-group">
@@ -605,6 +610,15 @@
                         <option value="startup">Startup</option>
                     </select>
                 </div>
+
+                <!-- Forgot Password Link -->
+                <div class="forgot-password-container">
+                    <a href="#" class="forgot-password-link" onclick="openForgotPasswordModal(event)">
+                        <i class="fas fa-key"></i>
+                        Forgot your password?
+                    </a>
+                </div>
+
                 <button type="submit" class="btn-primary full-width">
                     <i class="fas fa-sign-in-alt"></i>
                     <span>Sign In</span>
@@ -616,7 +630,7 @@
         </div>
     </div>
 
-    <!-- Signup Modal with Google -->
+    <!-- Updated Signup Modal -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -637,7 +651,7 @@
                 </button>
 
                 <div class="divider">
-                    <span>Or</span>
+                    <span>OR</span>
                 </div>
             </div>
 
@@ -704,6 +718,77 @@
         </div>
     </div>
 
+    <!-- NEW: Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Your Password</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="forgot-password-info">
+                    <div class="forgot-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <p>Enter your email address and we'll send you a link to reset your password.</p>
+                </div>
+                <form class="auth-form" id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email Address</label>
+                        <input type="email" id="forgotEmail" name="email" placeholder="Enter your registered email" required>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Send Reset Link</span>
+                    </button>
+                </form>
+                <div class="back-to-login">
+                    <a href="#" onclick="backToLogin(event)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Success Modal -->
+    <div id="resetSuccessModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Link Sent!</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="success-info">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>Check Your Email</h4>
+                    <p>We've sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.</p>
+                    <div class="reset-instructions">
+                        <div class="instruction-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Check your email inbox</span>
+                        </div>
+                        <div class="instruction-item">
+                            <i class="fas fa-link"></i>
+                            <span>Click the reset link</span>
+                        </div>
+                        <div class="instruction-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Create a new password</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary full-width" onclick="closeModal('resetSuccessModal')">
+                    <i class="fas fa-check"></i>
+                    <span>Got It</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Role Selection Modal for Google Users -->
     <div id="roleSelectionModal" class="modal">
         <div class="modal-content">
@@ -753,7 +838,10 @@
     <script src="js/matching.js"></script>               <!-- Matching algorithm -->
     <script src="js/app.js"></script>                    <!-- Main application logic -->
 
-    <!-- Google Authentication & Main Script -->
+    <!-- Chat Bot JavaScript - Load after other scripts -->
+    <script src="chat-bot.js"></script>
+
+    <!-- Updated Google Authentication & Main Script -->
     <script>
         // Google Sign-In Configuration
         const GOOGLE_CLIENT_ID = 'your-google-client-id.apps.googleusercontent.com';
@@ -916,6 +1004,52 @@
                 email: 'user@gmail.com',
                 picture: 'https://via.placeholder.com/100'
             };
+        }
+
+        // NEW: Forgot Password Functions
+        function openForgotPasswordModal(event) {
+            event.preventDefault();
+            closeModal('loginModal');
+            openModal('forgotPasswordModal');
+        }
+
+        function backToLogin(event) {
+            event.preventDefault();
+            closeModal('forgotPasswordModal');
+            openModal('loginModal');
+        }
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+            
+            if (!email) {
+                showNotification('Please enter your email address.', 'error');
+                return;
+            }
+
+            // Show loading
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
+            submitBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Close forgot password modal and show success
+                closeModal('forgotPasswordModal');
+                openModal('resetSuccessModal');
+                
+                // Show notification
+                showNotification('Password reset link sent to your email!', 'success');
+                
+                // Clear form
+                document.getElementById('forgotEmail').value = '';
+            }, 2000);
         }
 
         // Demo Authentication Handler
@@ -1125,6 +1259,9 @@
                 const activeTab = document.querySelector('.tab-btn.active').dataset.signupTab;
                 handleAuth(activeTab, false);
             });
+
+            // NEW: Forgot Password Form
+            document.getElementById('forgotPasswordForm')?.addEventListener('submit', handleForgotPassword);
             
             // Mobile hamburger menu
             const hamburger = document.querySelector('.hamburger');
@@ -1211,8 +1348,9 @@
         });
     </script>
 
-    <!-- Google Button & Modal Styles -->
+    <!-- Updated Styles with Forgot Password -->
     <style>
+        /* Existing Google Button Styles */
         .btn-google {
             width: 100%;
             padding: 12px 16px;
@@ -1242,9 +1380,10 @@
             transform: translateY(0);
         }
 
+        /* Enhanced Divider Styles */
         .divider {
             text-align: center;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             position: relative;
         }
 
@@ -1255,18 +1394,264 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: #DADCE0;
+            background: linear-gradient(90deg, transparent, #DADCE0, transparent);
         }
 
         .divider span {
             background: white;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
             color: #5f6368;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* NEW: Forgot Password Styles */
+        .forgot-password-container {
+            text-align: right;
+            margin: 0.75rem 0 1.5rem 0;
+        }
+
+        .forgot-password-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .forgot-password-link i {
+            font-size: 12px;
+        }
+
+        /* Forgot Password Modal Styles */
+        .forgot-password-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .forgot-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .forgot-password-info p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .back-to-login {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-to-login a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-to-login a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Success Modal Styles */
+        .success-info {
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .success-info h4 {
+            color: #333;
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+        }
+
+        .success-info > p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .reset-instructions {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .instruction-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .instruction-item i {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .instruction-item span {
+            color: #333;
+            font-weight: 500;
             font-size: 14px;
         }
 
         #roleSelectionModal .modal-content {
             max-width: 400px;
+        }
+
+        /* Updated Floating Chat Button Styles */
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .floating-chat-btn button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-chat-btn button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .floating-chat-btn button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .floating-chat-btn button:hover::before {
+            opacity: 1;
+        }
+
+        .floating-chat-btn button.chat-open {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            transform: rotate(45deg);
+        }
+
+        .floating-chat-btn button.chat-open .fa-robot {
+            transform: rotate(-45deg);
+        }
+
+        .floating-chat-btn i {
+            font-size: 24px;
+            z-index: 1;
+            position: relative;
+            animation: robotBounce 2s infinite ease-in-out;
+        }
+
+        .chat-pulse {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            background: #ff4757;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes robotBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-3px);
+            }
+            60% {
+                transform: translateY(-1px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(255, 71, 87, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+            }
         }
 
         @keyframes slideInRight {
@@ -1277,6 +1662,35 @@
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        /* Mobile responsive for forgot password */
+        @media (max-width: 768px) {
+            .floating-chat-btn {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .floating-chat-btn button {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .floating-chat-btn i {
+                font-size: 20px;
+            }
+
+            .forgot-password-container {
+                text-align: center;
+            }
+
+            .reset-instructions {
+                padding: 1rem;
+            }
+
+            .instruction-item {
+                padding: 0.5rem;
             }
         }
     </style>
