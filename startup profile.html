@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile – SkillSync AI</title>
+    <meta name="description" content="Startup-oriented company profile for SkillSync AI dashboard">
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Design Tokens -->
+    <style>
+        :root{
+            /* Brand & Accent */
+            --primary: #7C3AED;
+            --primary-light:#A78BFA;
+            --primary-dark:#6D28D9;
+            --gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+
+            /* Neutral */
+            --white:#FFFFFF;
+            --gray-50:#F9FAFB;
+            --gray-100:#F3F4F6;
+            --gray-200:#E5E7EB;
+            --gray-300:#D1D5DB;
+            --gray-400:#9CA3AF;
+            --gray-500:#6B7280;
+            --gray-600:#4B5563;
+            --gray-700:#374151;
+            --gray-800:#1F2937;
+            --gray-900:#111827;
+
+            /* Shapes */
+            --r-sm:.375rem;
+            --r-md:.5rem;
+            --r-lg:.75rem;
+            --r-xl:1rem;
+            --r-2xl:1.5rem;
+            --r-full:9999px;
+
+            /* Shadows */
+            --sh-sm:0 1px 2px rgba(0,0,0,.05);
+            --sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+            --sh-xl:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
+
+            /* Layout */
+            --max-w:1200px;
+            --header-h:88px;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Inter',sans-serif;
+            background:var(--gray-50);
+            color:var(--gray-800);
+            line-height:1.6;
+            -webkit-font-smoothing:antialiased;
+            min-height:100vh;
+        }
+
+        /* ==== Header ==== */
+        .profile-header{
+            background:var(--gradient);
+            color:var(--white);
+            padding:3.5rem 1.5rem 5.5rem;
+            border-radius:0 0 3rem 3rem;
+            position:relative;
+            overflow:hidden;
+            box-shadow:var(--sh-xl);
+        }
+        .profile-header::after{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox=\"0 0 1000 100\"><circle cx=\"100\" cy=\"40\" r=\"30\" fill=\"white\" opacity=\"0.05\"/><circle cx=\"300\" cy=\"20\" r=\"18\" fill=\"white\" opacity=\"0.05\"/><circle cx=\"500\" cy=\"60\" r=\"26\" fill=\"white\" opacity=\"0.05\"/><circle cx=\"700\" cy=\"30\" r=\"20\" fill=\"white\" opacity=\"0.05\"/><circle cx=\"900\" cy=\"50\" r=\"24\" fill=\"white\" opacity=\"0.05\"/></svg>') repeat-x;
+            background-size:contain;
+            animation:scroll-bg 60s linear infinite;
+            pointer-events:none;
+        }
+        @keyframes scroll-bg{to{transform:translateX(-1000px)}}
+
+        .header-inner{
+            max-width:var(--max-w);
+            margin:0 auto;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            position:relative;
+            z-index:2;
+            text-align:center;
+        }
+        .company-logo{
+            width:110px;
+            height:110px;
+            border-radius:var(--r-xl);
+            background:var(--white);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-family:'Poppins',sans-serif;
+            font-size:2.25rem;
+            font-weight:700;
+            color:var(--primary);
+            box-shadow:var(--sh-lg);
+            margin-bottom:1.25rem;
+        }
+        .company-name{
+            font-family:'Poppins',sans-serif;
+            font-size:2.5rem;
+            font-weight:700;
+            margin-bottom:.5rem;
+        }
+        .tagline{
+            font-size:1.075rem;
+            opacity:.9;
+            max-width:620px;
+        }
+
+        /* ==== Stats Bar ==== */
+        .stats-bar{
+            display:flex;
+            gap:2rem;
+            margin-top:3rem;
+            flex-wrap:wrap;
+            justify-content:center;
+        }
+        .stat{
+            background:rgba(255,255,255,.15);
+            padding:1rem 1.75rem;
+            border-radius:var(--r-full);
+            font-size:.9rem;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            min-width:120px;
+            backdrop-filter:blur(10px);
+        }
+        .stat-value{
+            font-size:1.55rem;
+            font-weight:700;
+            line-height:1.2;
+        }
+
+        /* ==== Main Container ==== */
+        .container{
+            max-width:var(--max-w);
+            margin:-4rem auto 4rem;
+            padding:0 1.5rem;
+            position:relative;
+            z-index:3;
+        }
+
+        /* ==== Card ==== */
+        .card{
+            background:var(--white);
+            border-radius:var(--r-2xl);
+            padding:2.5rem 2rem;
+            box-shadow:var(--sh-lg);
+            margin-bottom:2.5rem;
+        }
+        .card h2{
+            font-size:1.5rem;
+            margin-bottom:1.25rem;
+            font-family:'Poppins',sans-serif;
+            color:var(--gray-900);
+            display:flex;
+            align-items:center;
+            gap:.6rem;
+        }
+        .card h2 i{color:var(--primary);font-size:1.25rem}
+
+        /* ==== About Section ==== */
+        .about p{color:var(--gray-600);margin-bottom:1rem;text-align:justify}
+
+        /* ==== Team Grid ==== */
+        .team-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:1.5rem;
+        }
+        .member{
+            background:var(--gray-50);
+            border-radius:var(--r-xl);
+            padding:1.25rem;
+            display:flex;
+            gap:1rem;
+            align-items:center;
+            transition:.25s;
+        }
+        .member:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+        .avatar{
+            width:56px;height:56px;border-radius:var(--r-lg);
+            background:var(--gradient);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--white);font-weight:600;font-size:1.1rem;flex-shrink:0
+        }
+        .member-info h4{font-weight:600;color:var(--gray-800)}
+        .member-info span{font-size:.85rem;color:var(--gray-500)}
+
+        /* ==== Social Links ==== */
+        .social-links{
+            display:flex;gap:1rem;flex-wrap:wrap
+        }
+        .social-links a{
+            display:inline-flex;align-items:center;justify-content:center;
+            width:46px;height:46px;border-radius:var(--r-lg);
+            background:var(--gray-100);color:var(--gray-600);
+            font-size:1.15rem;transition:.2s
+        }
+        .social-links a:hover{background:var(--primary);color:var(--white);transform:translateY(-3px)}
+
+        /* ==== Responsive ==== */
+        @media(max-width:768px){
+            .company-name{font-size:2rem}
+            .stats-bar{gap:1rem}
+            .stat{min-width:100px;padding:.8rem 1.25rem}
+            .stat-value{font-size:1.3rem}
+            .card{padding:2rem 1.25rem}
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="profile-header">
+        <div class="header-inner">
+            <!-- Company Logo / Initials -->
+            <div class="company-logo">TS</div>
+
+            <!-- Name & Tagline -->
+            <div class="company-name">TechStart Inc.</div>
+            <p class="tagline">Building AI-powered hiring tools that help startups discover and onboard top talent faster.</p>
+
+            <!-- Key Metrics -->
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-value">24</span>
+                    <span>Employees</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">$1.1M</span>
+                    <span>Seed Funding</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">68%</span>
+                    <span>Hire Success</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">2019</span>
+                    <span>Founded</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+        <!-- About -->
+        <section class="card about">
+            <h2><i class="fas fa-circle-info"></i>About Us</h2>
+            <p>
+                TechStart Inc. is an innovative HR-tech startup headquartered in Bengaluru, India. Our mission is to
+                democratize access to intelligent hiring by providing AI-driven candidate matching, assessment, and 
+                pipeline analytics for early-stage and growth-stage companies alike.
+            </p>
+            <p>
+                Within three years, we’ve partnered with 120+ startups worldwide, reduced their average time-to-hire by
+                42 %, and secured a <strong>4.8★</strong> customer satisfaction rating. Backed by leading VCs, we are now
+                scaling our platform and expanding into new markets across Southeast Asia and the US.
+            </p>
+        </section>
+
+        <!-- Team -->
+        <section class="card">
+            <h2><i class="fas fa-people-group"></i>Leadership Team</h2>
+            <div class="team-grid">
+                <div class="member">
+                    <div class="avatar">AK</div>
+                    <div class="member-info">
+                        <h4>Ayush Kumar</h4>
+                        <span>Co-Founder • CEO</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="avatar">PP</div>
+                    <div class="member-info">
+                        <h4>Priya Patel</h4>
+                        <span>Co-Founder • CPO</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="avatar">AS</div>
+                    <div class="member-info">
+                        <h4>Amit Singh</h4>
+                        <span>CTO</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="avatar">SS</div>
+                    <div class="member-info">
+                        <h4>Sneha Sharma</h4>
+                        <span>VP Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social / Contact -->
+        <section class="card">
+            <h2><i class="fas fa-link"></i>Connect With Us</h2>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-globe"></i></a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
