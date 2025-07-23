@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Jobs - SkillSync AI</title>
-    <meta name="description" content="Post job opportunities and find talented students for your startup">
+    <title>Job & Application Management - SkillSync AI</title>
+    <meta name="description" content="Post job opportunities, manage applications, and hire talented students">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.ico">
@@ -33,10 +32,10 @@
                         <i class="fas fa-network-wired"></i>
                         <span>SkillSync AI</span>
                     </div>
-                    <p class="brand-tagline">Job Management Hub</p>
+                    <p class="brand-tagline">Job & Application Management Hub</p>
                 </div>
-                <h1 class="page-title">Manage Your Job Postings</h1>
-                <p class="page-subtitle">Create, manage, and track your job postings to attract top talent</p>
+                <h1 class="page-title">Manage Jobs & Applications</h1>
+                <p class="page-subtitle">Create job postings, review applications, and hire talent in real-time</p>
                 
                 <!-- Home Button -->
                 <div class="home-button-container">
@@ -47,99 +46,163 @@
                 </div>
             </div>
 
-            <!-- Action Bar -->
-            <div class="action-bar" data-aos="fade-up" data-aos-delay="100">
-                <div class="action-left">
-                    <div class="stats-summary">
-                        <div class="stat-item">
-                            <span class="stat-number" id="totalJobs">0</span>
-                            <span class="stat-label">Total Jobs</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="activeJobs">0</span>
-                            <span class="stat-label">Active</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="applicationCount">0</span>
-                            <span class="stat-label">Applications</span>
+            <!-- Tab Navigation -->
+            <div class="tab-navigation" data-aos="fade-up" data-aos-delay="50">
+                <button class="tab-btn active" data-tab="jobs" onclick="switchTab('jobs')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Job Postings</span>
+                    <span class="tab-count" id="jobsCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="applications" onclick="switchTab('applications')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                    <span class="tab-count" id="applicationsCount">0</span>
+                </button>
+            </div>
+
+            <!-- Jobs Tab Content -->
+            <div id="jobsTab" class="tab-content active">
+                <!-- Action Bar -->
+                <div class="action-bar" data-aos="fade-up" data-aos-delay="100">
+                    <div class="action-left">
+                        <div class="stats-summary">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalJobs">0</span>
+                                <span class="stat-label">Total Jobs</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="activeJobs">0</span>
+                                <span class="stat-label">Active</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="applicationCount">0</span>
+                                <span class="stat-label">Applications</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="action-right">
+                        <button class="btn-filter" onclick="toggleFilters()">
+                            <i class="fas fa-filter"></i>
+                            <span>Filters</span>
+                        </button>
+                        <button class="btn-primary" onclick="openJobModal()">
+                            <i class="fas fa-plus"></i>
+                            <span>Post New Job</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="action-right">
-                    <button class="btn-filter" onclick="toggleFilters()">
-                        <i class="fas fa-filter"></i>
-                        <span>Filters</span>
-                    </button>
+
+                <!-- Filters Panel -->
+                <div class="filters-panel" id="filtersPanel" data-aos="fade-up" data-aos-delay="200">
+                    <div class="filters-content">
+                        <div class="filter-group">
+                            <label>Job Type</label>
+                            <select id="jobTypeFilter" onchange="filterJobs()">
+                                <option value="">All Types</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Remote">Remote</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Status</label>
+                            <select id="statusFilter" onchange="filterJobs()">
+                                <option value="">All Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Paused">Paused</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Draft">Draft</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Department</label>
+                            <select id="departmentFilter" onchange="filterJobs()">
+                                <option value="">All Departments</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Design">Design</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sales">Sales</option>
+                                <option value="HR">HR</option>
+                                <option value="Operations">Operations</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Search</label>
+                            <input type="text" id="searchFilter" placeholder="Search jobs..." onkeyup="filterJobs()">
+                        </div>
+                        <button class="btn-clear-filters" onclick="clearFilters()">
+                            <i class="fas fa-times"></i>
+                            Clear Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Jobs Grid -->
+                <div class="jobs-grid" id="jobsGrid" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Jobs will be dynamically loaded here -->
+                </div>
+
+                <!-- Empty State for Jobs -->
+                <div class="empty-state" id="jobsEmptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>No Jobs Posted Yet</h3>
+                    <p>Start by creating your first job posting to attract talented candidates</p>
                     <button class="btn-primary" onclick="openJobModal()">
                         <i class="fas fa-plus"></i>
-                        <span>Post New Job</span>
+                        <span>Post Your First Job</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Filters Panel -->
-            <div class="filters-panel" id="filtersPanel" data-aos="fade-up" data-aos-delay="200">
-                <div class="filters-content">
-                    <div class="filter-group">
-                        <label>Job Type</label>
-                        <select id="jobTypeFilter" onchange="filterJobs()">
-                            <option value="">All Types</option>
-                            <option value="Full-time">Full-time</option>
-                            <option value="Part-time">Part-time</option>
-                            <option value="Internship">Internship</option>
-                            <option value="Contract">Contract</option>
-                            <option value="Remote">Remote</option>
-                        </select>
+            <!-- Applications Tab Content -->
+            <div id="applicationsTab" class="tab-content">
+                <!-- Application Filters -->
+                <div class="application-filters" data-aos="fade-up" data-aos-delay="100">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label>Filter by Job</label>
+                            <select id="jobFilterApp" onchange="filterApplications()">
+                                <option value="">All Jobs</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Application Status</label>
+                            <select id="appStatusFilter" onchange="filterApplications()">
+                                <option value="">All Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Accepted">Accepted</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Search Applicants</label>
+                            <input type="text" id="searchApplicants" placeholder="Search by name or email..." onkeyup="filterApplications()">
+                        </div>
+                        <button class="btn-clear-filters" onclick="clearApplicationFilters()">
+                            <i class="fas fa-times"></i>
+                            Clear
+                        </button>
                     </div>
-                    <div class="filter-group">
-                        <label>Status</label>
-                        <select id="statusFilter" onchange="filterJobs()">
-                            <option value="">All Status</option>
-                            <option value="Active">Active</option>
-                            <option value="Paused">Paused</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Draft">Draft</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Department</label>
-                        <select id="departmentFilter" onchange="filterJobs()">
-                            <option value="">All Departments</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Design">Design</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Sales">Sales</option>
-                            <option value="HR">HR</option>
-                            <option value="Operations">Operations</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Search</label>
-                        <input type="text" id="searchFilter" placeholder="Search jobs..." onkeyup="filterJobs()">
-                    </div>
-                    <button class="btn-clear-filters" onclick="clearFilters()">
-                        <i class="fas fa-times"></i>
-                        Clear Filters
-                    </button>
                 </div>
-            </div>
 
-            <!-- Jobs Grid -->
-            <div class="jobs-grid" id="jobsGrid" data-aos="fade-up" data-aos-delay="300">
-                <!-- Jobs will be dynamically loaded here -->
-            </div>
-
-            <!-- Empty State -->
-            <div class="empty-state" id="emptyState" style="display: none;">
-                <div class="empty-icon">
-                    <i class="fas fa-briefcase"></i>
+                <!-- Applications Grid -->
+                <div class="applications-grid" id="applicationsGrid" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Applications will be dynamically loaded here -->
                 </div>
-                <h3>No Jobs Posted Yet</h3>
-                <p>Start by creating your first job posting to attract talented candidates</p>
-                <button class="btn-primary" onclick="openJobModal()">
-                    <i class="fas fa-plus"></i>
-                    <span>Post Your First Job</span>
-                </button>
+
+                <!-- Empty State for Applications -->
+                <div class="empty-state" id="applicationsEmptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>No Applications Received</h3>
+                    <p>Applications will appear here when candidates apply for your job postings</p>
+                </div>
             </div>
         </div>
     </section>
@@ -257,6 +320,46 @@
                         </div>
                     </div>
 
+                    <!-- Application Requirements -->
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-clipboard-check"></i>
+                            Application Requirements
+                        </h4>
+                        <div class="requirements-grid">
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="resume" checked>
+                                <span class="checkmark"></span>
+                                Resume/CV Required
+                            </label>
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="cover_letter">
+                                <span class="checkmark"></span>
+                                Cover Letter
+                            </label>
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="portfolio">
+                                <span class="checkmark"></span>
+                                Portfolio/Work Samples
+                            </label>
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="github">
+                                <span class="checkmark"></span>
+                                GitHub Profile
+                            </label>
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="linkedin">
+                                <span class="checkmark"></span>
+                                LinkedIn Profile
+                            </label>
+                            <label class="requirement-item">
+                                <input type="checkbox" name="applicationRequirements" value="certifications">
+                                <span class="checkmark"></span>
+                                Certifications
+                            </label>
+                        </div>
+                    </div>
+
                     <!-- Application Details -->
                     <div class="form-section">
                         <h4 class="section-title">
@@ -302,31 +405,104 @@
         </div>
     </div>
 
-    <!-- Job Details Modal -->
-    <div id="jobDetailsModal" class="modal">
+    <!-- Application Details Modal -->
+    <div id="applicationDetailsModal" class="modal">
         <div class="modal-content large-modal">
             <div class="modal-header">
-                <h3 id="jobDetailsTitle">Job Details</h3>
-                <span class="close" onclick="closeJobDetailsModal()">&times;</span>
+                <h3 id="applicationDetailsTitle">Application Details</h3>
+                <span class="close" onclick="closeApplicationDetailsModal()">&times;</span>
             </div>
             <div class="modal-body">
-                <div id="jobDetailsContent">
-                    <!-- Job details will be loaded here -->
+                <div id="applicationDetailsContent">
+                    <!-- Application details will be loaded here -->
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Job Application Form Modal (For Testing) -->
+    <div id="applyJobModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3 id="applyJobTitle">Apply for Position</h3>
+                <span class="close" onclick="closeApplyJobModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="applicationForm" class="application-form">
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="applicantName">Full Name *</label>
+                                <input type="text" id="applicantName" name="applicantName" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="applicantEmail">Email Address *</label>
+                                <input type="email" id="applicantEmail" name="applicantEmail" required placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="applicantPhone">Phone Number *</label>
+                                <input type="tel" id="applicantPhone" name="applicantPhone" required placeholder="+91 9876543210">
+                            </div>
+                            <div class="form-group">
+                                <label for="applicantExperience">Years of Experience</label>
+                                <select id="applicantExperience" name="applicantExperience">
+                                    <option value="0-1">0-1 years</option>
+                                    <option value="2-3">2-3 years</option>
+                                    <option value="4-5">4-5 years</option>
+                                    <option value="5+">5+ years</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-file-upload"></i>
+                            Required Documents
+                        </h4>
+                        <div id="requiredDocuments">
+                            <!-- Required documents will be dynamically added -->
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-code"></i>
+                            Your Skills
+                        </h4>
+                        <div class="form-group">
+                            <label for="applicantSkills">Skills (comma separated)</label>
+                            <input type="text" id="applicantSkills" name="applicantSkills" placeholder="e.g. React, JavaScript, Node.js">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-comment"></i>
+                            Additional Information
+                        </h4>
+                        <div class="form-group">
+                            <label for="coverLetter">Why are you interested in this position?</label>
+                            <textarea id="coverLetter" name="coverLetter" rows="5" 
+                                placeholder="Tell us why you're the perfect fit for this role..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
     <!-- External JavaScript Libraries -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- Job Posting JavaScript -->
+    <!-- Updated Job Posting JavaScript -->
     <script src="job-post.js"></script>
 
-    <!-- Job Posting Styles -->
+    <!-- Enhanced Styles -->
     <style>
-        /* Job Posting Page Styles */
-        .job-posting-section {
+       .job-posting-section {
             min-height: 100vh;
             background: linear-gradient(135deg, #f8f9ff 0%, #f1f4ff 100%);
             padding: 40px 0 60px;
@@ -1131,6 +1307,491 @@
                 font-size: 0.85rem;
             }
         }
+        
+        /* Job Posting Page Styles */
+        .job-posting-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f1f4ff 100%);
+            padding: 40px 0 60px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .brand-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo i {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+        }
+
+        .brand-tagline {
+            color: #667eea;
+            font-weight: 500;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Home Button Styles */
+        .home-button-container {
+            margin-top: 1.5rem;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-home:hover {
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-home:hover::before {
+            left: 0;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 16px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #666;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-btn:not(.active):hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .tab-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .tab-btn.active .tab-count {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn:not(.active) .tab-count {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Application Management Styles */
+        .application-filters {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            align-items: end;
+        }
+
+        .applications-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .application-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .applicant-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .applicant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .applicant-details h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .applicant-meta {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .application-status {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-under-review {
+            background: #cce7ff;
+            color: #0056b3;
+        }
+
+        .status-accepted {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .application-job {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .application-skills {
+            margin-bottom: 1rem;
+        }
+
+        .application-skills h5 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .application-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .application-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .btn-view-app {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .btn-view-app:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-accept {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .btn-accept:hover {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-reject {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+        }
+
+        .btn-reject:hover {
+            background: #f44336;
+            color: white;
+        }
+
+        /* Requirements Grid */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .requirement-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .requirement-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .requirement-item input[type="checkbox"]:checked + .checkmark {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .requirement-item input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 3px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* All other existing styles remain the same... */
+        /* (Include all the previous CSS for job cards, modals, forms, etc.) */
+
+        /* Mobile Responsive Updates */
+        @media (max-width: 768px) {
+            .tab-navigation {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                justify-content: center;
+                padding: 0.75rem 1rem;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .applicant-info {
+                width: 100%;
+            }
+
+            .application-actions {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .action-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        /* Include all other existing styles from previous code... */
+        /* Action Bar, Jobs Grid, Modal Styles, Form Styles, etc. */
     </style>
 
     <!-- Initialize Page -->
@@ -1145,18 +1806,39 @@
         // Initialize job posting system when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadJobs();
+            loadApplications();
             updateStats();
+            updateTabCounts();
             
             // Show empty state if no jobs
             setTimeout(() => {
                 const jobsGrid = document.getElementById('jobsGrid');
-                const emptyState = document.getElementById('emptyState');
+                const jobsEmptyState = document.getElementById('jobsEmptyState');
                 
                 if (jobsGrid.children.length === 0) {
-                    emptyState.style.display = 'block';
+                    jobsEmptyState.style.display = 'block';
                 }
             }, 100);
         });
+
+        // Tab switching function
+        function switchTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+            
+            // Load data based on tab
+            if (tabName === 'applications') {
+                loadApplications();
+                populateJobFilter();
+            } else {
+                loadJobs();
+            }
+        }
     </script>
 </body>
 </html>
