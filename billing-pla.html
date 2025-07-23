@@ -4,31 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billing & Plans - SkillSync AI</title>
-    <meta name="description" content="Professional billing and subscription plans for SkillSync AI - Choose the perfect plan for your hiring needs">
+    <meta name="description" content="Manage your billing, subscription plans, and payment history for SkillSync AI platform">
     
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Professional CSS Architecture -->
     <style>
         :root {
-            /* Enhanced Brand System */
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --warning-gradient: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
-            --info-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            --error-gradient: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
-            --premium-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            
-            /* Professional Color Palette */
+            /* Enhanced Color Palette */
             --primary-color: #7C3AED;
             --primary-dark: #6D28D9;
             --primary-light: #A78BFA;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
             --success-color: #10B981;
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --warning-color: #F59E0B;
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             --error-color: #EF4444;
-            --info-color: #3B82F6;
+            --error-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --info-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             
             /* Neutral Colors */
             --white: #FFFFFF;
@@ -43,7 +39,7 @@
             --gray-800: #1F2937;
             --gray-900: #111827;
             
-            /* Typography System */
+            /* Typography */
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-secondary: 'Poppins', sans-serif;
             
@@ -56,7 +52,7 @@
             --space-2xl: 3rem;
             --space-3xl: 4rem;
             
-            /* Border Radius Scale */
+            /* Border Radius */
             --radius-sm: 0.375rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
@@ -64,72 +60,59 @@
             --radius-2xl: 1.5rem;
             --radius-full: 9999px;
             
-            /* Shadow System */
+            /* Shadows */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             
-            /* Animation System */
+            /* Transitions */
             --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Layout Constants */
+            /* Layout */
             --container-max-width: 1200px;
+            --header-height: 80px;
         }
 
+        /* Enhanced Base Reset - LAPTOP WHITESPACE FIX */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-primary);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--gray-800);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
-        }
-
-        /* Floating Elements Background */
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.1;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
-        .floating-coin {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--warning-color);
-            border-radius: var(--radius-full);
-            animation: float 10s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(20px) rotate(240deg); }
-        }
-
-        /* Enhanced Header */
+        /* Enhanced Header - Better Width Control */
         .billing-header {
-            background: var(--premium-gradient);
-            color: var(--gray-800);
-            padding: var(--space-3xl) var(--space-xl);
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-2xl) 0;
             position: relative;
             overflow: hidden;
-            border-radius: 0 0 3rem 3rem;
+            border-radius: 0 0 2rem 2rem;
             box-shadow: var(--shadow-xl);
+            width: 100%;
+            margin-bottom: var(--space-xl);
         }
 
         .billing-header::before {
@@ -139,13 +122,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.3)"><circle cx="100" cy="20" r="15"/><circle cx="200" cy="40" r="10"/><circle cx="300" cy="10" r="20"/><circle cx="400" cy="30" r="12"/><circle cx="500" cy="50" r="8"/><circle cx="600" cy="15" r="18"/><circle cx="700" cy="35" r="14"/><circle cx="800" cy="25" r="16"/><circle cx="900" cy="45" r="11"/></svg>') repeat-x;
-            animation: coins-flow 20s infinite linear;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="20" r="20"/><circle cx="300" cy="40" r="15"/><circle cx="500" cy="10" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="15" r="22"/></svg>') repeat-x;
+            animation: float 20s infinite linear;
         }
 
-        @keyframes coins-flow {
+        @keyframes float {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-200px); }
+            100% { transform: translateX(-100px); }
         }
 
         .header-container {
@@ -153,9 +136,11 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             position: relative;
             z-index: 2;
+            padding: 0 var(--space-xl);
+            width: 100%;
         }
 
         .back-btn {
@@ -163,19 +148,21 @@
             align-items: center;
             gap: var(--space-sm);
             padding: var(--space-md) var(--space-lg);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: var(--radius-xl);
-            color: var(--gray-800);
+            color: white;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
             transition: all var(--transition-base);
             backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
         }
 
         .back-btn:hover {
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
             transform: translateX(-4px);
             box-shadow: var(--shadow-lg);
         }
@@ -184,301 +171,229 @@
             text-align: center;
             flex: 1;
             margin: 0 var(--space-xl);
+            max-width: 800px;
         }
 
         .header-title {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 800;
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
             font-family: var(--font-secondary);
-            background: linear-gradient(45deg, var(--gray-800), var(--gray-600));
+            background: linear-gradient(45deg, #fff, #e2e8f0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .header-subtitle {
-            font-size: 1.25rem;
-            color: var(--gray-700);
+            font-size: 1.125rem;
+            opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 400;
         }
 
-        /* Billing Toggle */
-        .billing-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
-            margin: var(--space-2xl) auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: var(--space-md);
-            border-radius: var(--radius-xl);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-lg);
-            width: fit-content;
-        }
-
-        .toggle-option {
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-lg);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            position: relative;
-        }
-
-        .toggle-option.active {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .toggle-option:not(.active) {
-            color: var(--gray-600);
-        }
-
-        .toggle-option:not(.active):hover {
-            color: var(--gray-800);
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .savings-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--success-gradient);
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-        }
-
-        /* Main Container */
+        /* Enhanced Main Container - Perfect Width Control */
         .billing-container {
             max-width: var(--container-max-width);
-            margin: -var(--space-2xl) auto 0;
+            margin: 0 auto;
             padding: 0 var(--space-xl) var(--space-3xl);
             position: relative;
-            z-index: 3;
+            width: 100%;
         }
 
-        /* Plans Grid */
-        .plans-grid {
+        /* Enhanced Billing Content */
+        .billing-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: var(--space-2xl);
-            margin-bottom: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+            width: 100%;
         }
 
-        .plan-card {
+        .billing-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: var(--radius-2xl);
             padding: var(--space-2xl);
             box-shadow: var(--shadow-xl);
-            border: 2px solid transparent;
-            transition: all var(--transition-base);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.6s ease-out;
+            width: 100%;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .section-icon {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        /* Current Plan Card */
+        .current-plan {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-lg);
             position: relative;
             overflow: hidden;
         }
 
-        .plan-card::before {
+        .current-plan::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transition: transform var(--transition-base);
-        }
-
-        .plan-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .plan-card:hover {
-            transform: translateY(-12px);
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .plan-card.featured {
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(255, 255, 255, 0.95));
-        }
-
-        .plan-card.featured::before {
-            transform: scaleX(1);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            right: var(--space-xl);
-            background: var(--primary-gradient);
-            color: white;
-            padding: var(--space-sm) var(--space-lg);
+            top: -50%;
+            right: -20%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 700;
-            box-shadow: var(--shadow-md);
+            animation: pulse 3s infinite;
         }
 
-        .plan-header {
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
-
-        .plan-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius-2xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            margin: 0 auto var(--space-lg);
-            box-shadow: var(--shadow-lg);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.1; }
         }
 
         .plan-name {
-            font-size: 1.75rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--gray-900);
             margin-bottom: var(--space-sm);
-            font-family: var(--font-secondary);
-        }
-
-        .plan-description {
-            color: var(--gray-600);
-            font-size: 0.875rem;
-            margin-bottom: var(--space-lg);
         }
 
         .plan-price {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 800;
-            color: var(--primary-color);
-            font-family: var(--font-secondary);
-            position: relative;
+            margin-bottom: var(--space-sm);
         }
 
-        .plan-price .currency {
-            font-size: 1.5rem;
-            position: absolute;
-            top: 0.5rem;
-            left: -1rem;
-        }
-
-        .plan-price .period {
-            font-size: 1rem;
-            color: var(--gray-500);
-            font-weight: 500;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: var(--gray-400);
-            font-size: 1.25rem;
-            margin-left: var(--space-sm);
-        }
-
-        .plan-features {
-            margin: var(--space-2xl) 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md) 0;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-icon {
-            width: 20px;
-            height: 20px;
-            background: var(--success-gradient);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-        }
-
-        .feature-icon.unavailable {
-            background: var(--gray-300);
-        }
-
-        .feature-text {
-            color: var(--gray-700);
-            font-weight: 500;
-        }
-
-        .feature-text.unavailable {
-            color: var(--gray-400);
-            text-decoration: line-through;
-        }
-
-        .plan-cta {
-            width: 100%;
-            padding: var(--space-lg) var(--space-xl);
-            border: none;
-            border-radius: var(--radius-xl);
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .plan-cta.primary {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .plan-cta.primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .plan-cta.outline {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .plan-cta.outline:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Current Plan Badge */
-        .current-plan {
-            background: var(--success-gradient);
-            color: white;
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 600;
+        .plan-billing {
+            opacity: 0.8;
             margin-bottom: var(--space-lg);
         }
 
-        /* Billing History */
+        .plan-features {
+            list-style: none;
+            margin-bottom: var(--space-lg);
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            font-size: 0.875rem;
+        }
+
+        .plan-features li i {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Plan Options */
+        .plan-options {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .plan-option {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+        }
+
+        .plan-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-option.popular {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+        }
+
+        .plan-option.popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -10px;
+            right: var(--space-lg);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+        }
+
+        .plan-info h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: var(--space-xs);
+        }
+
+        .plan-info p {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .plan-pricing {
+            text-align: right;
+        }
+
+        .plan-pricing .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .plan-pricing .period {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        /* Enhanced Billing History - Fixed Mobile Overlap */
         .billing-history {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -486,6 +401,8 @@
             padding: var(--space-2xl);
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            margin-bottom: var(--space-2xl);
         }
 
         .history-header {
@@ -493,64 +410,22 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-lg);
-            border-bottom: 2px solid var(--gray-100);
+            flex-wrap: wrap;
+            gap: var(--space-md);
         }
 
-        .history-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            font-family: var(--font-secondary);
+        .download-section {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
         }
 
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .history-table th,
-        .history-table td {
-            padding: var(--space-lg);
-            text-align: left;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .history-table th {
-            background: var(--gray-50);
-            font-weight: 600;
-            color: var(--gray-700);
-        }
-
-        .status-badge {
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-paid {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .status-pending {
-            background: var(--warning-color);
-            color: white;
-        }
-
-        .status-failed {
-            background: var(--error-color);
-            color: white;
-        }
-
-        /* Buttons */
+        /* Enhanced Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
-            padding: var(--space-md) var(--space-xl);
+            padding: var(--space-md) var(--space-lg);
             border: none;
             border-radius: var(--radius-lg);
             font-size: 0.875rem;
@@ -558,8 +433,25 @@
             text-decoration: none;
             cursor: pointer;
             transition: all var(--transition-base);
-            min-width: 120px;
-            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
@@ -582,6 +474,354 @@
         .btn-outline:hover {
             background: var(--primary-color);
             color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Enhanced History Table */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .history-table th {
+            background: var(--gray-50);
+            padding: var(--space-lg);
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .history-table td {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.875rem;
+        }
+
+        .history-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .status-badge {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-paid {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-failed {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg);
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-base);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-method.default {
+            border-color: var(--success-color);
+            background: linear-gradient(135deg, #fff 0%, #f0fdf4 100%);
+        }
+
+        .method-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .method-icon {
+            width: 50px;
+            height: 32px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .method-details h4 {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-xs);
+        }
+
+        .method-details p {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .method-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.75rem;
+        }
+
+        /* RESPONSIVE DESIGN - Mobile Fixes */
+
+        /* Laptop Specific Fixes (1025px - 1920px) */
+        @media (min-width: 1025px) and (max-width: 1920px) {
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .billing-container {
+                width: 100%;
+                max-width: var(--container-max-width);
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: var(--space-xl);
+                padding-right: var(--space-xl);
+            }
+            
+            .billing-content {
+                max-width: 100%;
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .billing-history {
+                max-width: 100%;
+            }
+            
+            .history-table {
+                width: 100%;
+                table-layout: fixed;
+            }
+            
+            /* Force proper box-sizing */
+            *, *::before, *::after {
+                box-sizing: border-box;
+                max-width: 100%;
+            }
+        }
+
+        /* Tablet View (769px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .billing-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-lg);
+            }
+            
+            .header-content {
+                margin: 0;
+            }
+        }
+
+        /* Mobile View - FIXED OVERLAP ISSUES */
+        @media (max-width: 768px) {
+            /* Header Mobile Layout - FIXED */
+            .billing-header {
+                padding: var(--space-lg) 0;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-lg);
+                padding: 0 var(--space-md);
+            }
+            
+            .back-btn {
+                align-self: flex-start;
+                margin-bottom: var(--space-md);
+                width: fit-content;
+                z-index: 10;
+            }
+            
+            .header-content {
+                margin: 0;
+                text-align: center;
+                order: 2;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+                margin-bottom: var(--space-sm);
+            }
+            
+            .header-subtitle {
+                font-size: 1rem;
+            }
+            
+            /* Container Mobile Layout */
+            .billing-container {
+                padding: 0 var(--space-md) var(--space-2xl);
+            }
+            
+            /* Content Mobile Layout */
+            .billing-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .billing-section {
+                padding: var(--space-lg);
+            }
+            
+            /* History Header Mobile - FIXED OVERLAP */
+            .history-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-lg);
+                margin-bottom: var(--space-lg);
+            }
+            
+            .section-title {
+                font-size: 1.25rem;
+                justify-content: center;
+            }
+            
+            .download-section {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space-sm);
+            }
+            
+            /* Button Mobile Fixes */
+            .btn {
+                flex: 1;
+                min-width: 120px;
+                max-width: 200px;
+                justify-content: center;
+                padding: var(--space-md) var(--space-lg);
+                font-size: 0.875rem;
+            }
+            
+            /* Table Mobile Responsive */
+            .history-table {
+                font-size: 0.75rem;
+            }
+            
+            .history-table th,
+            .history-table td {
+                padding: var(--space-md);
+            }
+            
+            .history-table th:nth-child(n+4),
+            .history-table td:nth-child(n+4) {
+                display: none;
+            }
+            
+            /* Payment Methods Mobile */
+            .payment-method {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .method-info {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .method-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* Plan Options Mobile */
+            .plan-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .plan-pricing {
+                text-align: center;
+            }
+        }
+
+        /* Small Mobile (480px and below) */
+        @media (max-width: 480px) {
+            .billing-container {
+                padding: 0 var(--space-sm) var(--space-xl);
+            }
+            
+            .billing-section {
+                padding: var(--space-md);
+            }
+            
+            .header-title {
+                font-size: 1.75rem;
+            }
+            
+            .btn {
+                min-width: 100px;
+                padding: var(--space-sm) var(--space-md);
+                font-size: 0.8rem;
+            }
+            
+            .download-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .download-section .btn {
+                max-width: none;
+                width: 100%;
+            }
         }
 
         /* Toast Notifications */
@@ -596,60 +836,43 @@
             z-index: 10000;
             animation: slideInRight 0.3s ease-out;
             box-shadow: var(--shadow-xl);
-            min-width: 300px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
         }
 
         .toast.success { background: var(--success-gradient); }
-        .toast.error { background: var(--error-gradient); }
         .toast.warning { background: var(--warning-gradient); }
-        .toast.info { background: var(--info-gradient); }
+        .toast.info { background: var(--info-gradient); color: var(--gray-800); }
+        .toast.error { background: var(--error-gradient); }
 
         @keyframes slideInRight {
             from { transform: translateX(400px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .plans-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
+        /* Loading Animation */
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
         }
 
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2.5rem;
-            }
-
-            .billing-container {
-                padding: 0 var(--space-md) var(--space-2xl);
-                margin-top: -var(--space-lg);
-            }
-
-            .plans-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .billing-toggle {
-                flex-direction: column;
-                gap: var(--space-md);
-            }
-
-            .history-table {
-                font-size: 0.875rem;
-            }
-
-            .history-table th,
-            .history-table td {
-                padding: var(--space-md);
-            }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
+
+        /* Utility Classes */
+        .text-center { text-align: center !important; }
+        .font-bold { font-weight: var(--font-weight-bold) !important; }
+        .text-primary { color: var(--primary-color) !important; }
+        .mb-0 { margin-bottom: 0 !important; }
+        .mt-lg { margin-top: var(--space-lg) !important; }
     </style>
 </head>
-<body>
-    <!-- Floating Background Elements -->
-    <div class="floating-elements" id="floatingElements"></div>
 
+<body>
     <!-- Enhanced Header -->
     <header class="billing-header">
         <div class="header-container">
@@ -661,381 +884,390 @@
             <div class="header-content">
                 <h1 class="header-title">Billing & Plans</h1>
                 <p class="header-subtitle">
-                    Choose the perfect plan for your hiring needs. Upgrade or downgrade anytime with no hidden fees.
+                    Manage your subscription, billing history, and payment methods
                 </p>
-            </div>
-        </div>
-
-        <!-- Billing Toggle -->
-        <div class="billing-toggle">
-            <div class="toggle-option active" onclick="toggleBilling('monthly')">
-                Monthly Billing
-            </div>
-            <div class="toggle-option" onclick="toggleBilling('annual')">
-                Annual Billing
-                <span class="savings-badge">Save 25%</span>
             </div>
         </div>
     </header>
 
     <!-- Main Container -->
     <div class="billing-container">
-        <!-- Plans Grid -->
-        <div class="plans-grid">
-            <!-- Starter Plan -->
-            <div class="plan-card">
-                <div class="plan-header">
-                    <div class="plan-icon" style="background: var(--info-gradient);">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="plan-name">Starter</h3>
-                    <p class="plan-description">Perfect for small teams getting started with AI-powered hiring</p>
-                    <div class="plan-price">
-                        <span class="currency">₹</span>
-                        <span id="starterPrice">2,999</span>
-                        <span class="period">/month</span>
-                        <span class="original-price" id="starterOriginal" style="display: none;">₹3,999</span>
-                    </div>
+        <!-- Billing Content Grid -->
+        <div class="billing-content">
+            <!-- Current Plan Section -->
+            <div class="billing-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-crown section-icon"></i>
+                        Current Plan
+                    </h2>
                 </div>
-
-                <div class="plan-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Up to 50 candidate profiles</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">5 job postings</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Basic AI matching</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Email support</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon unavailable"><i class="fas fa-times"></i></div>
-                        <div class="feature-text unavailable">Advanced analytics</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon unavailable"><i class="fas fa-times"></i></div>
-                        <div class="feature-text unavailable">Custom integrations</div>
-                    </div>
-                </div>
-
-                <button class="plan-cta outline" onclick="selectPlan('starter')">
-                    Get Started
-                </button>
-            </div>
-
-            <!-- Professional Plan -->
-            <div class="plan-card featured">
-                <div class="popular-badge">Most Popular</div>
-                <div class="current-plan">Current Plan</div>
                 
-                <div class="plan-header">
-                    <div class="plan-icon" style="background: var(--primary-gradient);">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3 class="plan-name">Professional</h3>
-                    <p class="plan-description">Advanced features for growing companies and HR teams</p>
-                    <div class="plan-price">
-                        <span class="currency">₹</span>
-                        <span id="professionalPrice">7,999</span>
-                        <span class="period">/month</span>
-                        <span class="original-price" id="professionalOriginal" style="display: none;">₹10,665</span>
-                    </div>
+                <div class="current-plan">
+                    <div class="plan-name">Professional Plan</div>
+                    <div class="plan-price">₹2,999 <span style="font-size: 1rem; opacity: 0.8;">/ month</span></div>
+                    <div class="plan-billing">Billed monthly • Next billing: March 15, 2024</div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Unlimited candidate assessments</li>
+                        <li><i class="fas fa-check"></i> Advanced AI insights</li>
+                        <li><i class="fas fa-check"></i> Custom skill tests</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Team collaboration tools</li>
+                    </ul>
+                    
+                    <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: white;" onclick="openUpgradeModal()">
+                        <i class="fas fa-arrow-up"></i>
+                        Upgrade Plan
+                    </button>
                 </div>
-
-                <div class="plan-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Up to 500 candidate profiles</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">25 job postings</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Advanced AI matching</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Priority support</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Advanced analytics</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Basic integrations</div>
-                    </div>
-                </div>
-
-                <button class="plan-cta primary" onclick="selectPlan('professional')">
-                    Current Plan
-                </button>
             </div>
 
-            <!-- Enterprise Plan -->
-            <div class="plan-card">
-                <div class="plan-header">
-                    <div class="plan-icon" style="background: var(--premium-gradient);">
-                        <i class="fas fa-building"></i>
+            <!-- Available Plans Section -->
+            <div class="billing-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-list-alt section-icon"></i>
+                        Available Plans
+                    </h2>
+                </div>
+                
+                <div class="plan-options">
+                    <div class="plan-option">
+                        <div class="plan-header">
+                            <div class="plan-info">
+                                <h3>Starter Plan</h3>
+                                <p>Perfect for small teams</p>
+                            </div>
+                            <div class="plan-pricing">
+                                <div class="price">₹999</div>
+                                <div class="period">per month</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="selectPlan('starter')">
+                            <i class="fas fa-check"></i>
+                            Select Plan
+                        </button>
                     </div>
-                    <h3 class="plan-name">Enterprise</h3>
-                    <p class="plan-description">Complete solution for large organizations with custom needs</p>
-                    <div class="plan-price">
-                        <span class="currency">₹</span>
-                        <span id="enterprisePrice">19,999</span>
-                        <span class="period">/month</span>
-                        <span class="original-price" id="enterpriseOriginal" style="display: none;">₹26,665</span>
+
+                    <div class="plan-option popular">
+                        <div class="plan-header">
+                            <div class="plan-info">
+                                <h3>Professional Plan</h3>
+                                <p>Most popular choice</p>
+                            </div>
+                            <div class="plan-pricing">
+                                <div class="price">₹2,999</div>
+                                <div class="period">per month</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectPlan('professional')">
+                            <i class="fas fa-crown"></i>
+                            Current Plan
+                        </button>
+                    </div>
+
+                    <div class="plan-option">
+                        <div class="plan-header">
+                            <div class="plan-info">
+                                <h3>Enterprise Plan</h3>
+                                <p>For large organizations</p>
+                            </div>
+                            <div class="plan-pricing">
+                                <div class="price">₹9,999</div>
+                                <div class="period">per month</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" onclick="selectPlan('enterprise')">
+                            <i class="fas fa-arrow-up"></i>
+                            Upgrade
+                        </button>
                     </div>
                 </div>
-
-                <div class="plan-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Unlimited candidate profiles</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Unlimited job postings</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">AI + Machine Learning</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">24/7 dedicated support</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Custom analytics</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-check"></i></div>
-                        <div class="feature-text">Full API access</div>
-                    </div>
-                </div>
-
-                <button class="plan-cta outline" onclick="selectPlan('enterprise')">
-                    Upgrade Now
-                </button>
             </div>
         </div>
 
-        <!-- Billing History -->
+        <!-- Billing History Section - FIXED MOBILE OVERLAP -->
         <div class="billing-history">
             <div class="history-header">
-                <h2 class="history-title">Billing History</h2>
-                <button class="btn btn-outline" onclick="downloadInvoices()">
-                    <i class="fas fa-download"></i>
-                    Download All
-                </button>
+                <h2 class="section-title">
+                    <i class="fas fa-history section-icon"></i>
+                    Billing History
+                </h2>
+                <div class="download-section">
+                    <button class="btn btn-outline" onclick="downloadHistory('pdf')">
+                        <i class="fas fa-file-pdf"></i>
+                        PDF
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadHistory('excel')">
+                        <i class="fas fa-file-excel"></i>
+                        Excel
+                    </button>
+                    <button class="btn btn-primary" onclick="downloadHistory('csv')">
+                        <i class="fas fa-download"></i>
+                        CSV
+                    </button>
+                </div>
             </div>
 
             <table class="history-table">
                 <thead>
                     <tr>
+                        <th>Invoice</th>
                         <th>Date</th>
-                        <th>Plan</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Invoice</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Dec 1, 2024</td>
-                        <td>Professional Plan</td>
-                        <td>₹7,999</td>
-                        <td><span class="status-badge status-paid">Paid</span></td>
-                        <td><button class="btn btn-outline" onclick="downloadInvoice('INV-001')">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td>Nov 1, 2024</td>
-                        <td>Professional Plan</td>
-                        <td>₹7,999</td>
-                        <td><span class="status-badge status-paid">Paid</span></td>
-                        <td><button class="btn btn-outline" onclick="downloadInvoice('INV-002')">Download</button></td>
-                    </tr>
-                    <tr>
-                        <td>Oct 1, 2024</td>
-                        <td>Starter Plan</td>
+                        <td>#INV-2024-001</td>
+                        <td>Feb 15, 2024</td>
                         <td>₹2,999</td>
                         <td><span class="status-badge status-paid">Paid</span></td>
-                        <td><button class="btn btn-outline" onclick="downloadInvoice('INV-003')">Download</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline" onclick="viewInvoice('INV-2024-001')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Sep 1, 2024</td>
-                        <td>Starter Plan</td>
+                        <td>#INV-2024-002</td>
+                        <td>Jan 15, 2024</td>
                         <td>₹2,999</td>
                         <td><span class="status-badge status-paid">Paid</span></td>
-                        <td><button class="btn btn-outline" onclick="downloadInvoice('INV-004')">Download</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline" onclick="viewInvoice('INV-2024-002')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#INV-2023-012</td>
+                        <td>Dec 15, 2023</td>
+                        <td>₹2,999</td>
+                        <td><span class="status-badge status-paid">Paid</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline" onclick="viewInvoice('INV-2023-012')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#INV-2023-011</td>
+                        <td>Nov 15, 2023</td>
+                        <td>₹999</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline" onclick="viewInvoice('INV-2023-011')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- Payment Methods Section -->
+        <div class="billing-section" style="grid-column: 1 / -1;">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card section-icon"></i>
+                    Payment Methods
+                </h2>
+                <button class="btn btn-primary" onclick="addPaymentMethod()">
+                    <i class="fas fa-plus"></i>
+                    Add Method
+                </button>
+            </div>
+            
+            <div class="payment-methods">
+                <div class="payment-method default">
+                    <div class="method-info">
+                        <div class="method-icon">VISA</div>
+                        <div class="method-details">
+                            <h4>•••• •••• •••• 4242</h4>
+                            <p>Expires 12/2025 • Default</p>
+                        </div>
+                    </div>
+                    <div class="method-actions">
+                        <button class="btn btn-sm btn-outline" onclick="editPaymentMethod('visa-4242')">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="deletePaymentMethod('visa-4242')" style="color: var(--error-color); border-color: var(--error-color);">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <div class="method-info">
+                        <div class="method-icon" style="background: var(--warning-gradient);">MC</div>
+                        <div class="method-details">
+                            <h4>•••• •••• •••• 8888</h4>
+                            <p>Expires 08/2026</p>
+                        </div>
+                    </div>
+                    <div class="method-actions">
+                        <button class="btn btn-sm btn-outline" onclick="setDefault('mc-8888')">
+                            <i class="fas fa-check"></i>
+                            Set Default
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="editPaymentMethod('mc-8888')">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Enhanced JavaScript -->
     <script>
-        // Professional Billing Controller
-        class BillingController {
+        // Professional Billing Platform Controller
+        class BillingPlatform {
             constructor() {
-                this.currentBilling = 'monthly';
                 this.currentPlan = 'professional';
-                this.prices = {
-                    monthly: {
-                        starter: 2999,
-                        professional: 7999,
-                        enterprise: 19999
-                    },
-                    annual: {
-                        starter: 2249, // 25% off
-                        professional: 5999, // 25% off
-                        enterprise: 14999 // 25% off
-                    }
-                };
+                this.billingHistory = [];
+                this.paymentMethods = [];
                 this.init();
             }
 
             init() {
-                console.log('💳 Billing Controller Initialized');
-                this.createFloatingElements();
-                this.updatePricing();
+                console.log('💳 SkillSync Billing Platform v2.0 Initialized');
+                this.loadBillingData();
+                this.setupEventListeners();
             }
 
-            createFloatingElements() {
-                const container = document.getElementById('floatingElements');
-                for (let i = 0; i < 15; i++) {
-                    const coin = document.createElement('div');
-                    coin.className = 'floating-coin';
-                    coin.style.left = Math.random() * 100 + '%';
-                    coin.style.top = Math.random() * 100 + '%';
-                    coin.style.animationDelay = Math.random() * 10 + 's';
-                    coin.style.animationDuration = (Math.random() * 5 + 8) + 's';
-                    container.appendChild(coin);
-                }
-            }
+            setupEventListeners() {
+                // Global click handlers
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.toast')) {
+                        e.target.closest('.toast').remove();
+                    }
+                });
 
-            updatePricing() {
-                const prices = this.prices[this.currentBilling];
-                
-                // Update prices
-                document.getElementById('starterPrice').textContent = prices.starter.toLocaleString();
-                document.getElementById('professionalPrice').textContent = prices.professional.toLocaleString();
-                document.getElementById('enterprisePrice').textContent = prices.enterprise.toLocaleString();
-
-                // Show/hide original prices
-                const originalElements = ['starterOriginal', 'professionalOriginal', 'enterpriseOriginal'];
-                const originalPrices = this.prices.monthly;
-                
-                originalElements.forEach((elementId, index) => {
-                    const element = document.getElementById(elementId);
-                    const planNames = ['starter', 'professional', 'enterprise'];
-                    const planName = planNames[index];
-                    
-                    if (this.currentBilling === 'annual') {
-                        element.style.display = 'inline';
-                        element.textContent = '₹' + originalPrices[planName].toLocaleString();
-                    } else {
-                        element.style.display = 'none';
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeAllModals();
                     }
                 });
             }
 
-            toggleBilling(type) {
-                this.currentBilling = type;
-                
-                // Update toggle UI
-                document.querySelectorAll('.toggle-option').forEach(option => {
-                    option.classList.remove('active');
-                });
-                
-                event.target.classList.add('active');
-                
-                // Update pricing
-                this.updatePricing();
-                
-                this.showToast(`Switched to ${type} billing`, 'success');
+            loadBillingData() {
+                // Simulate loading billing data
+                setTimeout(() => {
+                    this.billingHistory = [
+                        {
+                            id: 'INV-2024-001',
+                            date: 'Feb 15, 2024',
+                            amount: '₹2,999',
+                            status: 'paid'
+                        }
+                    ];
+                    console.log('📊 Billing data loaded');
+                }, 500);
             }
 
-            selectPlan(planName) {
-                if (planName === this.currentPlan) {
+            selectPlan(planType) {
+                console.log('📋 Selected plan:', planType);
+                
+                const planNames = {
+                    'starter': 'Starter Plan (₹999/month)',
+                    'professional': 'Professional Plan (₹2,999/month)', 
+                    'enterprise': 'Enterprise Plan (₹9,999/month)'
+                };
+
+                if (planType === this.currentPlan) {
                     this.showToast('This is your current plan', 'info');
                     return;
                 }
 
-                this.showToast(`Processing ${planName} plan selection...`, 'info');
+                this.showToast(`Upgrading to ${planNames[planType]}...`, 'info');
                 
                 setTimeout(() => {
-                    if (planName === 'starter') {
-                        this.showToast('Plan downgrade scheduled for next billing cycle', 'warning');
-                    } else {
-                        this.showToast(`Successfully upgraded to ${planName} plan!`, 'success');
-                        this.currentPlan = planName;
-                        this.updateCurrentPlanUI();
-                    }
+                    this.showToast(`Successfully upgraded to ${planNames[planType]}!`, 'success');
+                    this.currentPlan = planType;
                 }, 2000);
             }
 
-            updateCurrentPlanUI() {
-                // Remove all current plan badges
-                document.querySelectorAll('.current-plan').forEach(badge => badge.remove());
-                document.querySelectorAll('.plan-cta').forEach(btn => {
-                    btn.textContent = btn.classList.contains('primary') ? 'Get Started' : 'Upgrade Now';
-                    btn.classList.remove('primary');
-                    btn.classList.add('outline');
-                });
+            downloadHistory(format) {
+                console.log('📥 Downloading history as:', format);
+                
+                const formatNames = {
+                    'pdf': 'PDF Report',
+                    'excel': 'Excel Spreadsheet',
+                    'csv': 'CSV File'
+                };
 
-                // Add current plan badge to selected plan
-                const currentPlanCard = document.querySelector(`.plan-card:nth-child(${this.getPlanIndex()})`);
-                if (currentPlanCard) {
-                    const badge = document.createElement('div');
-                    badge.className = 'current-plan';
-                    badge.textContent = 'Current Plan';
-                    currentPlanCard.querySelector('.plan-header').insertBefore(badge, currentPlanCard.querySelector('.plan-icon'));
-                    
-                    const button = currentPlanCard.querySelector('.plan-cta');
-                    button.textContent = 'Current Plan';
-                    button.classList.remove('outline');
-                    button.classList.add('primary');
-                }
-            }
-
-            getPlanIndex() {
-                const planIndices = { starter: 1, professional: 2, enterprise: 3 };
-                return planIndices[this.currentPlan] || 2;
-            }
-
-            downloadInvoice(invoiceId) {
-                this.showToast(`Downloading invoice ${invoiceId}...`, 'info');
+                this.showToast(`Preparing ${formatNames[format]}...`, 'info');
                 
                 setTimeout(() => {
-                    this.showToast(`Invoice ${invoiceId} downloaded successfully!`, 'success');
+                    this.showToast(`${formatNames[format]} downloaded successfully!`, 'success');
+                    // Simulate file download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = `billing-history.${format}`;
+                    link.click();
                 }, 1500);
             }
 
-            downloadInvoices() {
-                this.showToast('Preparing all invoices for download...', 'info');
+            viewInvoice(invoiceId) {
+                console.log('👁️ Viewing invoice:', invoiceId);
+                this.showToast(`Opening invoice ${invoiceId}...`, 'info');
                 
                 setTimeout(() => {
-                    this.showToast('All invoices downloaded successfully!', 'success');
-                }, 2500);
+                    this.showToast('Invoice opened successfully', 'success');
+                }, 1000);
             }
 
-            showToast(message, type = 'success', duration = 4000) {
+            addPaymentMethod() {
+                console.log('💳 Adding payment method');
+                this.showToast('Payment method form opening...', 'info');
+            }
+
+            editPaymentMethod(methodId) {
+                console.log('✏️ Editing payment method:', methodId);
+                this.showToast('Payment method editor opening...', 'info');
+            }
+
+            deletePaymentMethod(methodId) {
+                console.log('🗑️ Deleting payment method:', methodId);
+                
+                if (confirm('Are you sure you want to delete this payment method?')) {
+                    this.showToast('Payment method deleted successfully', 'success');
+                }
+            }
+
+            setDefault(methodId) {
+                console.log('⭐ Setting default payment method:', methodId);
+                this.showToast('Default payment method updated', 'success');
+            }
+
+            openUpgradeModal() {
+                console.log('🚀 Opening upgrade modal');
+                this.showToast('Upgrade options loading...', 'info');
+            }
+
+            closeAllModals() {
+                // Close any open modals
+                console.log('❌ Closing all modals');
+            }
+
+            showToast(message, type = 'info', duration = 4000) {
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
                 toast.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-${this.getToastIcon(type)}"></i>
                         <span>${message}</span>
                     </div>
@@ -1062,29 +1294,44 @@
             }
         }
 
-        // Global variables
-        let billingController;
+        // Global function wrappers for onclick events
+        let billing;
 
-        // Global functions
-        function toggleBilling(type) {
-            billingController.toggleBilling(type);
+        function selectPlan(planType) {
+            billing.selectPlan(planType);
         }
 
-        function selectPlan(planName) {
-            billingController.selectPlan(planName);
+        function downloadHistory(format) {
+            billing.downloadHistory(format);
         }
 
-        function downloadInvoice(invoiceId) {
-            billingController.downloadInvoice(invoiceId);
+        function viewInvoice(invoiceId) {
+            billing.viewInvoice(invoiceId);
         }
 
-        function downloadInvoices() {
-            billingController.downloadInvoices();
+        function addPaymentMethod() {
+            billing.addPaymentMethod();
         }
 
-        // Initialize controller
+        function editPaymentMethod(methodId) {
+            billing.editPaymentMethod(methodId);
+        }
+
+        function deletePaymentMethod(methodId) {
+            billing.deletePaymentMethod(methodId);
+        }
+
+        function setDefault(methodId) {
+            billing.setDefault(methodId);
+        }
+
+        function openUpgradeModal() {
+            billing.openUpgradeModal();
+        }
+
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            billingController = new BillingController();
+            billing = new BillingPlatform();
         });
     </script>
 </body>
