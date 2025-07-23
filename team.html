@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Management - SkillSync AI</title>
+    <meta name="description" content="Manage your startup team and collaborate on hiring decisions">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Team Management Main Section -->
+    <section class="team-management-section">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header" data-aos="fade-up">
+                <div class="brand-header">
+                    <div class="logo">
+                        <i class="fas fa-network-wired"></i>
+                        <span>SkillSync AI</span>
+                    </div>
+                    <p class="brand-tagline">Team Management Hub</p>
+                </div>
+                <h1 class="page-title">Manage Your Startup Team</h1>
+                <p class="page-subtitle">Add team members, assign roles, and collaborate on hiring decisions</p>
+                
+                <!-- Home Button -->
+                <div class="home-button-container">
+                    <a href="../index.html" class="btn-home">
+                        <i class="fas fa-home"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar" data-aos="fade-up" data-aos-delay="100">
+                <div class="action-left">
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-number" id="totalMembers">0</span>
+                            <span class="stat-label">Team Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="activeMembers">0</span>
+                            <span class="stat-label">Active</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="departmentCount">0</span>
+                            <span class="stat-label">Departments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-right">
+                    <button class="btn-filter" onclick="toggleFilters()">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </button>
+                    <button class="btn-primary" onclick="openMemberModal()">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Team Member</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters Panel -->
+            <div class="filters-panel" id="filtersPanel" data-aos="fade-up" data-aos-delay="200">
+                <div class="filters-content">
+                    <div class="filter-group">
+                        <label>Department</label>
+                        <select id="departmentFilter" onchange="filterMembers()">
+                            <option value="">All Departments</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Design">Design</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Sales">Sales</option>
+                            <option value="HR">HR</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Product">Product</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Role</label>
+                        <select id="roleFilter" onchange="filterMembers()">
+                            <option value="">All Roles</option>
+                            <option value="Founder">Founder</option>
+                            <option value="Co-Founder">Co-Founder</option>
+                            <option value="CTO">CTO</option>
+                            <option value="Lead">Lead</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Intern">Intern</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="statusFilter" onchange="filterMembers()">
+                            <option value="">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="On Leave">On Leave</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="searchFilter" placeholder="Search members..." onkeyup="filterMembers()">
+                    </div>
+                    <button class="btn-clear-filters" onclick="clearFilters()">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="team-grid" id="teamGrid" data-aos="fade-up" data-aos-delay="300">
+                <!-- Team members will be dynamically loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>No Team Members Yet</h3>
+                <p>Start building your dream team by adding your first team member</p>
+                <button class="btn-primary" onclick="openMemberModal()">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Add Your First Member</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add/Edit Member Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Team Member</h3>
+                <span class="close" onclick="closeMemberModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="memberForm" class="member-form">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="memberName">Full Name *</label>
+                                <input type="text" id="memberName" name="memberName" required placeholder="e.g. John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="memberEmail">Email Address *</label>
+                                <input type="email" id="memberEmail" name="memberEmail" required placeholder="john@company.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="memberPhone">Phone Number</label>
+                                <input type="tel" id="memberPhone" name="memberPhone" placeholder="+91 9876543210">
+                            </div>
+                            <div class="form-group">
+                                <label for="memberLinkedIn">LinkedIn Profile</label>
+                                <input type="url" id="memberLinkedIn" name="memberLinkedIn" placeholder="https://linkedin.com/in/username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Information -->
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-briefcase"></i>
+                            Professional Information
+                        </h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="memberRole">Role *</label>
+                                <select id="memberRole" name="memberRole" required>
+                                    <option value="">Select Role</option>
+                                    <option value="Founder">Founder</option>
+                                    <option value="Co-Founder">Co-Founder</option>
+                                    <option value="CTO">Chief Technology Officer</option>
+                                    <option value="Lead">Team Lead</option>
+                                    <option value="Senior">Senior Developer</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="Developer">Developer</option>
+                                    <option value="Designer">Designer</option>
+                                    <option value="Intern">Intern</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="memberDepartment">Department *</label>
+                                <select id="memberDepartment" name="memberDepartment" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="HR">Human Resources</option>
+                                    <option value="Operations">Operations</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Product">Product</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="joinDate">Join Date *</label>
+                                <input type="date" id="joinDate" name="joinDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="memberStatus">Status *</label>
+                                <select id="memberStatus" name="memberStatus" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                    <option value="On Leave">On Leave</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Permissions -->
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            Skills & Permissions
+                        </h4>
+                        <div class="form-group">
+                            <label for="memberSkills">Skills & Expertise</label>
+                            <div class="skills-input">
+                                <input type="text" id="skillInput" placeholder="Type a skill and press Enter">
+                                <div class="skills-tags" id="skillsTags"></div>
+                            </div>
+                            <input type="hidden" id="memberSkills" name="memberSkills">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringPermissions">Hiring Permissions</label>
+                            <div class="permissions-grid">
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="view_candidates">
+                                    <span class="checkmark"></span>
+                                    View Candidates
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="review_applications">
+                                    <span class="checkmark"></span>
+                                    Review Applications
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="schedule_interviews">
+                                    <span class="checkmark"></span>
+                                    Schedule Interviews
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="make_decisions">
+                                    <span class="checkmark"></span>
+                                    Make Final Decisions
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="post_jobs">
+                                    <span class="checkmark"></span>
+                                    Post New Jobs
+                                </label>
+                                <label class="permission-item">
+                                    <input type="checkbox" name="permissions" value="manage_team">
+                                    <span class="checkmark"></span>
+                                    Manage Team
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h4 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Additional Information
+                        </h4>
+                        <div class="form-group">
+                            <label for="memberBio">Bio/Description</label>
+                            <textarea id="memberBio" name="memberBio" rows="4" 
+                                placeholder="Brief description about the team member, their background, and expertise..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeMemberModal()">Cancel</button>
+                <button type="button" class="btn-primary" onclick="saveMember()">
+                    <i class="fas fa-save"></i>
+                    <span id="saveButtonText">Add Member</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Details Modal -->
+    <div id="memberDetailsModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3 id="memberDetailsTitle">Member Details</h3>
+                <span class="close" onclick="closeMemberDetailsModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="memberDetailsContent">
+                    <!-- Member details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Team Management JavaScript -->
+    <script src="team.js"></script>
+
+    <!-- Team Management Styles -->
+    <style>
+        /* Team Management Page Styles */
+        .team-management-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f1f4ff 100%);
+            padding: 40px 0 60px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .brand-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo i {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+        }
+
+        .brand-tagline {
+            color: #667eea;
+            font-weight: 500;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Home Button Styles */
+        .home-button-container {
+            margin-top: 1.5rem;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-home:hover {
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-home:hover::before {
+            left: 0;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .stats-summary {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .action-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-filter {
+            background: #f8f9ff;
+            border: 2px solid #e9ecef;
+            color: #667eea;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-filter:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Filters Panel */
+        .filters-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+
+        .filters-panel.active {
+            display: block;
+        }
+
+        .filters-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-clear-filters {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: fit-content;
+        }
+
+        .btn-clear-filters:hover {
+            background: #e74c3c;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .member-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .member-role {
+            color: #667eea;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .member-department {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .member-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-on-leave {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .member-permissions {
+            margin-bottom: 1rem;
+        }
+
+        .permission-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .permission-tag {
+            background: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .member-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .member-contact {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .member-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-view {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .btn-view:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-edit {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+
+        .btn-edit:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-delete {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+
+        .btn-delete:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .large-modal {
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close {
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+
+        .close:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Form Styles */
+        .member-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-section {
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            background: #fafbfc;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Skills Input */
+        .skills-input {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0.5rem;
+            min-height: 80px;
+            background: white;
+        }
+
+        .skills-input input {
+            border: none;
+            padding: 0.5rem;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .skills-input input:focus {
+            outline: none;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-tag-removable {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag-removable button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .skill-tag-removable button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Permissions Grid */
+        .permissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .permission-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .permission-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .permission-item input[type="checkbox"]:checked + .checkmark {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .permission-item input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 3px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        /* Animations */
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .team-management-section {
+                padding: 20px 0 40px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .action-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .stats-summary {
+                justify-content: center;
+            }
+
+            .action-right {
+                justify-content: center;
+            }
+
+            .filters-content {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .member-card {
+                margin: 0 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .permissions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .modal-header,
+            .modal-footer {
+                padding: 1rem;
+            }
+        }
+    </style>
+
+    <!-- Initialize Page -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize team management system when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTeamMembers();
+            updateStats();
+            
+            // Show empty state if no members
+            setTimeout(() => {
+                const teamGrid = document.getElementById('teamGrid');
+                const emptyState = document.getElementById('emptyState');
+                
+                if (teamGrid.children.length === 0) {
+                    emptyState.style.display = 'block';
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
