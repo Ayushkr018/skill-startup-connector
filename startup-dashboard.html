@@ -167,7 +167,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Mobile Overlay */
+        /* Mobile Overlay - Fixed */
         .mobile-overlay {
             display: none;
             position: fixed;
@@ -176,13 +176,15 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: var(--z-overlay);
+            z-index: calc(var(--z-overlay) - 1);
             opacity: 0;
             transition: opacity var(--transition-base);
+            pointer-events: none;
         }
 
         .mobile-overlay.active {
             opacity: 1;
+            pointer-events: all;
         }
 
         /* Dashboard Layout */
@@ -225,27 +227,37 @@
             gap: var(--space-4);
         }
 
+        /* Sidebar Toggle Button - Fixed */
         .sidebar-toggle {
             display: none;
             background: none;
-            border: none;
-            padding: var(--space-2);
+            border: 2px solid var(--gray-300);
+            padding: var(--space-3);
             border-radius: var(--radius-base);
             cursor: pointer;
             color: var(--gray-600);
             transition: all var(--transition-fast);
-            min-width: 40px;
-            min-height: 40px;
+            min-width: 44px;
+            min-height: 44px;
             touch-action: manipulation;
+            position: relative;
+            z-index: 999;
         }
 
         .sidebar-toggle:hover {
             background: var(--gray-100);
             color: var(--gray-800);
+            border-color: var(--gray-400);
         }
 
         .sidebar-toggle:active {
             transform: scale(0.95);
+            background: var(--gray-200);
+        }
+
+        .sidebar-toggle:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
         }
 
         .dashboard-logo a {
@@ -323,8 +335,8 @@
         }
 
         .quick-action-item {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: var(--gray-100);
             border-radius: var(--radius-lg);
             display: flex;
@@ -347,7 +359,7 @@
             transform: translateY(0);
         }
 
-        /* Enhanced User Menu */
+        /* Enhanced User Menu - Fixed */
         .user-menu-container {
             position: relative;
         }
@@ -357,16 +369,18 @@
             align-items: center;
             gap: var(--space-3);
             background: none;
-            border: none;
+            border: 2px solid transparent;
             padding: var(--space-2);
             border-radius: var(--radius-lg);
             cursor: pointer;
             transition: all var(--transition-fast);
             touch-action: manipulation;
+            min-height: 44px;
         }
 
         .user-menu-toggle:hover {
             background: var(--gray-100);
+            border-color: var(--gray-300);
         }
 
         .user-menu-toggle:active {
@@ -406,7 +420,7 @@
             line-height: 1.2;
         }
 
-        /* Enhanced User Dropdown Menu */
+        /* Enhanced User Dropdown Menu - Fixed */
         .user-menu {
             position: absolute;
             top: calc(100% + var(--space-2));
@@ -422,12 +436,14 @@
             transition: all var(--transition-base);
             z-index: var(--z-dropdown);
             overflow: hidden;
+            pointer-events: none;
         }
 
         .user-menu-container.active .user-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+            pointer-events: all;
         }
 
         .user-menu-header {
@@ -511,6 +527,7 @@
             width: 100%;
             text-align: left;
             touch-action: manipulation;
+            min-height: 44px;
         }
 
         .menu-item:hover {
@@ -545,7 +562,7 @@
             color: var(--error-color) !important;
         }
 
-        /* Sidebar Styles */
+        /* Sidebar Styles - Fixed */
         .dashboard-sidebar {
             width: var(--sidebar-width);
             background: var(--white);
@@ -598,6 +615,7 @@
             transition: all var(--transition-fast);
             position: relative;
             touch-action: manipulation;
+            min-height: 44px;
         }
 
         .sidebar-menu-link:hover {
@@ -756,7 +774,7 @@
             transform: translateY(-1px);
         }
 
-        /* Stats Grid */
+        /* Stats Grid - Fixed */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1126,8 +1144,8 @@
         }
 
         .btn-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border: none;
             border-radius: var(--radius-base);
             background: var(--white);
@@ -1324,8 +1342,8 @@
         }
 
         .modal-close {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border: none;
             border-radius: var(--radius-base);
             background: var(--gray-100);
@@ -1397,7 +1415,7 @@
         
         .notification-close:hover { opacity: 1; }
 
-        /* Responsive Design */
+        /* RESPONSIVE DESIGN - Fixed Mobile Issues */
         @media (max-width: 1024px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -1413,48 +1431,66 @@
         }
 
         @media (max-width: 768px) {
+            /* Show mobile toggle button */
             .sidebar-toggle {
-                display: flex;
+                display: flex !important;
             }
             
+            /* Hide sidebar by default on mobile */
             .dashboard-sidebar {
                 transform: translateX(-100%);
                 z-index: var(--z-overlay);
+                border-right: none;
+                box-shadow: var(--shadow-xl);
             }
             
+            /* Show sidebar when open */
             .dashboard-sidebar.open {
                 transform: translateX(0);
             }
             
+            /* Remove left margin on mobile */
             .dashboard-main {
                 margin-left: 0;
             }
             
+            /* Mobile overlay */
+            .mobile-overlay {
+                display: block;
+            }
+            
+            /* Header adjustments */
             .dashboard-header-content {
                 padding: 0 var(--space-4);
             }
             
+            /* Search bar adjustments */
             .header-search {
                 margin: 0 var(--space-4);
                 max-width: none;
             }
             
+            /* Dashboard content padding */
             .dashboard-content {
                 padding: var(--space-4);
             }
             
+            /* Welcome section mobile */
             .welcome-section {
                 flex-direction: column;
                 text-align: center;
                 gap: var(--space-6);
+                padding: var(--space-6);
             }
             
+            /* Section header mobile */
             .section-header {
                 flex-direction: column;
                 gap: var(--space-4);
                 align-items: stretch;
             }
             
+            /* Section actions mobile */
             .section-actions {
                 justify-content: stretch;
                 flex-wrap: wrap;
@@ -1465,14 +1501,23 @@
                 min-width: 140px;
             }
             
+            /* Hide user info text on mobile */
             .user-info {
                 display: none;
             }
             
+            /* Single column for candidates */
             .candidates-grid {
                 grid-template-columns: 1fr;
             }
 
+            /* Stats grid mobile */
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: var(--space-4);
+            }
+
+            /* Pipeline stages mobile */
             .pipeline-stages {
                 flex-direction: column;
             }
@@ -1481,13 +1526,10 @@
                 padding: var(--space-3);
             }
 
+            /* User menu positioning */
             .user-menu {
                 width: 300px;
                 right: -var(--space-4);
-            }
-
-            .mobile-overlay {
-                display: block;
             }
 
             /* Touch-friendly improvements */
@@ -1505,35 +1547,46 @@
                 padding: var(--space-4) var(--space-6);
                 font-size: var(--text-base);
             }
-        }
 
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .quick-actions-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .welcome-section {
-                padding: var(--space-6);
-            }
-            
-            .welcome-content h1 {
-                font-size: var(--text-2xl);
-            }
-
-            .dashboard-content {
-                padding: var(--space-3);
-            }
-
+            /* Card header mobile */
             .card-header {
                 flex-direction: column;
                 gap: var(--space-3);
                 align-items: stretch;
             }
 
+            .card-header .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Single column stats */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+            
+            /* Quick actions 2 columns */
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Welcome section small */
+            .welcome-section {
+                padding: var(--space-4);
+            }
+            
+            .welcome-content h1 {
+                font-size: var(--text-2xl);
+            }
+
+            /* Dashboard content small */
+            .dashboard-content {
+                padding: var(--space-3);
+            }
+
+            /* Candidate card mobile */
             .candidate-header {
                 flex-direction: column;
                 align-items: center;
@@ -1544,17 +1597,26 @@
                 flex-direction: column;
             }
 
+            /* Modal mobile */
             .modal {
                 width: 95%;
-                padding: var(--space-6);
+                padding: var(--space-4);
+                margin: var(--space-4);
             }
 
+            /* Header actions spacing */
             .header-actions {
                 gap: var(--space-2);
             }
 
+            /* User menu width */
             .user-menu {
                 width: 280px;
+            }
+
+            /* Search input mobile */
+            .search-input {
+                font-size: 16px; /* Prevent zoom on iOS */
             }
         }
 
@@ -1702,30 +1764,29 @@
                                 <span>My Profile</span>
                             </button>
                             <button class="menu-item" onclick="window.location.href='company-setting.html'">
-    <i class="fas fa-building"></i>
-    <span>Company Settings</span>
-</button>
+                            <i class="fas fa-building"></i>
+                            <span>Company Settings</span>
+                            </button>
 
 <!-- Billing & Plans Button -->
-<button class="menu-item" onclick="window.location.href='billing-pla.html'">
-    <i class="fas fa-credit-card"></i>
-    <span>Billing & Plans</span>
-    <span class="menu-item-badge">Pro</span>
-</button>
+                             <button class="menu-item" onclick="window.location.href='billing-pla.html'">
+                              <i class="fas fa-credit-card"></i>
+                              <span>Billing & Plans</span>
+                              <span class="menu-item-badge">Pro</span>
+                               </button>
                         </div>
 
                         <!-- Activity Section -->
                         <div class="user-menu-section">
                            <a href="danalytics.html" class="menu-item">
-  <i class="fas fa-chart-bar"></i>
-  <span>Analytics</span>
-</a>
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics</span>
+                            </a>
 
                              <button class="menu-item" onclick="window.location.href='recent.html'">
-    <i class="fas fa-calendar-alt"></i>
-    <span>Recent Activity</span>
-</button>
-                            
+                             <i class="fas fa-calendar-alt"></i>
+                              <span>Recent Activity</span>
+                             </button>                            
                         </div>
 
                         <!-- Settings & Help Section -->
@@ -1737,10 +1798,6 @@
                             <button class="menu-item" onclick="window.location.href='help&support.html'">
                                 <i class="fas fa-question-circle"></i>
                                 <span>Help & Support</span>
-                            </button>
-                            <button class="menu-item" onclick="showKeyboardShortcuts()">
-                                <i class="fas fa-keyboard"></i>
-                                <span>Keyboard Shortcuts</span>
                             </button>
                         </div>
 
@@ -2169,7 +2226,7 @@
         </div>
     </div>
 
-    <!-- EMBEDDED JAVASCRIPT -->
+    <!-- EMBEDDED JAVASCRIPT - FIXED -->
     <script>
         // Global Application State
         const AppState = {
@@ -2291,7 +2348,29 @@
             },
 
             setupEventListeners() {
-                document.addEventListener('click', this.handleGlobalClick.bind(this));
+                // Global click handler - Fixed
+                document.addEventListener('click', (event) => {
+                    // Close user menu when clicking outside
+                    if (!event.target.closest('.user-menu-container')) {
+                        closeUserMenu();
+                    }
+                    
+                    // Close sidebar when clicking outside on mobile
+                    if (!event.target.closest('.dashboard-sidebar') && 
+                        !event.target.closest('.sidebar-toggle') && 
+                        window.innerWidth <= 768 && 
+                        AppState.sidebarOpen) {
+                        closeSidebar();
+                    }
+                });
+
+                // Prevent menu close when clicking inside user menu
+                const userMenu = document.getElementById('userMenu');
+                if (userMenu) {
+                    userMenu.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
+                }
                 
                 const searchInput = document.getElementById('headerSearch');
                 if (searchInput) {
@@ -2317,11 +2396,40 @@
                     }
                 });
 
+                // Window resize handler - Fixed
                 window.addEventListener('resize', () => {
-                    if (window.innerWidth > 768 && AppState.sidebarOpen) {
+                    if (window.innerWidth > 768) {
                         closeSidebar();
+                        // Reset sidebar transform on desktop
+                        const sidebar = document.getElementById('dashboardSidebar');
+                        if (sidebar) {
+                            sidebar.style.transform = '';
+                        }
                     }
                 });
+
+                // Touch event handlers for better mobile experience
+                let touchStartX = 0;
+                let touchStartY = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+
+                document.addEventListener('touchmove', (e) => {
+                    if (!AppState.sidebarOpen) return;
+                    
+                    const touchX = e.touches[0].clientX;
+                    const touchY = e.touches[0].clientY;
+                    const deltaX = touchX - touchStartX;
+                    const deltaY = touchY - touchStartY;
+                    
+                    // Swipe left to close sidebar
+                    if (deltaX < -50 && Math.abs(deltaY) < 100) {
+                        closeSidebar();
+                    }
+                }, { passive: true });
             },
 
             async loadDashboardData() {
@@ -2365,18 +2473,6 @@
                     setTimeout(() => {
                         loader.classList.add('hidden');
                     }, 800);
-                }
-            },
-
-            handleGlobalClick(event) {
-                if (!event.target.closest('.user-menu-container')) {
-                    closeUserMenu();
-                }
-                
-                if (!event.target.closest('.dashboard-sidebar') && 
-                    !event.target.closest('.sidebar-toggle') && 
-                    window.innerWidth <= 768) {
-                    closeSidebar();
                 }
             },
 
@@ -2700,7 +2796,7 @@
             }
         };
 
-        // Enhanced Global Functions
+        // Enhanced Global Functions - Fixed
         function showSection(sectionId) {
             console.log(`📍 Navigating to: ${sectionId}`);
             
@@ -2727,7 +2823,7 @@
         function updateActiveLink(sectionId) {
             document.querySelectorAll('.sidebar-menu-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('onclick')?.includes(sectionId)) {
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(sectionId)) {
                     link.classList.add('active');
                 }
             });
@@ -2746,21 +2842,27 @@
             document.title = `${titles[sectionId] || 'Dashboard'} - SkillSync AI`;
         }
 
-        // Enhanced Sidebar Functions
+        // Enhanced Sidebar Functions - Fixed
         function toggleSidebar() {
+            console.log('📱 Toggle sidebar clicked');
+            
             const sidebar = document.getElementById('dashboardSidebar');
             const overlay = document.getElementById('mobileOverlay');
+            
+            if (!sidebar || !overlay) {
+                console.error('Sidebar or overlay element not found');
+                return;
+            }
             
             AppState.sidebarOpen = !AppState.sidebarOpen;
             
             if (AppState.sidebarOpen) {
                 sidebar.classList.add('open');
                 overlay.classList.add('active');
-                sidebar.style.animation = 'slideIn 0.3s ease-out';
+                document.body.style.overflow = 'hidden';
                 
-                if (window.innerWidth <= 768) {
-                    document.body.style.overflow = 'hidden';
-                }
+                console.log('📱 Sidebar opened');
+                Utils.showNotification('Sidebar opened', 'info', 1000);
             } else {
                 closeSidebar();
             }
@@ -2770,21 +2872,31 @@
             const sidebar = document.getElementById('dashboardSidebar');
             const overlay = document.getElementById('mobileOverlay');
             
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            AppState.sidebarOpen = false;
+            if (sidebar) sidebar.classList.remove('open');
+            if (overlay) overlay.classList.remove('active');
             
+            AppState.sidebarOpen = false;
             document.body.style.overflow = '';
+            
+            console.log('📱 Sidebar closed');
         }
 
-        // Enhanced User Menu Functions
+        // Enhanced User Menu Functions - Fixed
         function toggleUserMenu() {
+            console.log('👤 Toggle user menu clicked');
+            
             const container = document.getElementById('userMenuContainer');
+            if (!container) {
+                console.error('User menu container not found');
+                return;
+            }
+            
             AppState.userMenuOpen = !AppState.userMenuOpen;
             
             if (AppState.userMenuOpen) {
                 container.classList.add('active');
                 closeSidebar();
+                console.log('👤 User menu opened');
             } else {
                 closeUserMenu();
             }
@@ -2792,8 +2904,11 @@
 
         function closeUserMenu() {
             const container = document.getElementById('userMenuContainer');
-            container.classList.remove('active');
+            if (container) {
+                container.classList.remove('active');
+            }
             AppState.userMenuOpen = false;
+            console.log('👤 User menu closed');
         }
 
         // User Profile & Settings Functions
@@ -2843,12 +2958,16 @@
         function confirmLogout() {
             closeUserMenu();
             const modal = document.getElementById('logoutModal');
-            modal.classList.add('active');
+            if (modal) {
+                modal.classList.add('active');
+            }
         }
 
         function closeLogoutModal() {
             const modal = document.getElementById('logoutModal');
-            modal.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+            }
         }
 
         function performLogout() {
@@ -2856,11 +2975,10 @@
             
             Utils.showNotification('Signing out...', 'info');
 
-             setTimeout(() => {
+            setTimeout(() => {
                 window.location.href = 'index.html';
             }, 1000);
         
-            
             // Clear session data
             Utils.storage.remove('skillsync_token');
             Utils.storage.remove('skillsync_user_data');
@@ -2881,10 +2999,6 @@
             setTimeout(() => {
                 Utils.showNotification('Successfully signed out. Redirecting...', 'success');
             }, 500);
-            
-            setTimeout(() => {
-                window.location.reload();
-            }, 1500);
         }
 
         // Other Functions
@@ -2946,8 +3060,501 @@
         // Initialize Dashboard when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             console.log('🚀 SkillSync Dashboard v2.1.0 Initializing...');
-            DashboardController.init();
+            
+            // Add loading delay to ensure all elements are rendered
+            setTimeout(() => {
+                DashboardController.init();
+                
+                // Test sidebar toggle after initialization
+                console.log('🧪 Testing sidebar toggle functionality...');
+                const sidebarToggle = document.querySelector('.sidebar-toggle');
+                const sidebar = document.getElementById('dashboardSidebar');
+                const overlay = document.getElementById('mobileOverlay');
+                
+                if (sidebarToggle && sidebar && overlay) {
+                    console.log('✅ All sidebar elements found and ready');
+                } else {
+                    console.error('❌ Missing sidebar elements:', {
+                        toggle: !!sidebarToggle,
+                        sidebar: !!sidebar,
+                        overlay: !!overlay
+                                     });
+                }
+            }, 100);
         });
+
+        // Session Management
+        const SessionManager = {
+            init() {
+                this.checkSession();
+                this.startHeartbeat();
+                this.setupVisibilityChange();
+            },
+
+            checkSession() {
+                const lastActivity = Utils.storage.get('skillsync_last_activity');
+                const sessionTimeout = 24 * 60 * 60 * 1000; // 24 hours
+                
+                if (lastActivity && (Date.now() - new Date(lastActivity).getTime() > sessionTimeout)) {
+                    this.expireSession();
+                    return false;
+                }
+                
+                this.updateActivity();
+                return true;
+            },
+
+            updateActivity() {
+                AppState.currentUser.lastActivity = new Date();
+                Utils.storage.set('skillsync_last_activity', new Date().toISOString());
+            },
+
+            startHeartbeat() {
+                setInterval(() => {
+                    if (AppState.sessionActive) {
+                        this.updateActivity();
+                    }
+                }, 5 * 60 * 1000); // Every 5 minutes
+            },
+
+            setupVisibilityChange() {
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden && AppState.sessionActive) {
+                        this.updateActivity();
+                    }
+                });
+            },
+
+            expireSession() {
+                AppState.sessionActive = false;
+                Utils.showNotification('Your session has expired. Please sign in again.', 'warning', 8000);
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+            }
+        };
+
+        // Enhanced Navigation System
+        const NavigationManager = {
+            history: ['dashboard'],
+            maxHistory: 10,
+
+            navigate(sectionId, addToHistory = true) {
+                if (addToHistory && this.history[this.history.length - 1] !== sectionId) {
+                    this.history.push(sectionId);
+                    if (this.history.length > this.maxHistory) {
+                        this.history.shift();
+                    }
+                }
+
+                showSection(sectionId);
+                this.updateBreadcrumb();
+            },
+
+            goBack() {
+                if (this.history.length > 1) {
+                    this.history.pop(); // Remove current
+                    const previousSection = this.history[this.history.length - 1];
+                    this.navigate(previousSection, false);
+                }
+            },
+
+            updateBreadcrumb() {
+                const breadcrumbContainer = document.getElementById('breadcrumb');
+                if (!breadcrumbContainer) return;
+
+                const sectionNames = {
+                    dashboard: 'Dashboard',
+                    candidates: 'Candidates',
+                    jobs: 'Jobs',
+                    interviews: 'Interviews',
+                    team: 'Team',
+                    analytics: 'Analytics'
+                };
+
+                const breadcrumbHTML = this.history.map((section, index) => {
+                    const isLast = index === this.history.length - 1;
+                    const name = sectionNames[section] || section;
+                    
+                    if (isLast) {
+                        return `<span class="breadcrumb-current">${name}</span>`;
+                    } else {
+                        return `<a href="#" onclick="NavigationManager.navigate('${section}')" class="breadcrumb-link">${name}</a>`;
+                    }
+                }).join(' <i class="fas fa-chevron-right breadcrumb-separator"></i> ');
+
+                breadcrumbContainer.innerHTML = breadcrumbHTML;
+            }
+        };
+
+        // Performance Monitoring
+        const PerformanceMonitor = {
+            metrics: {
+                loadTime: 0,
+                renderTime: 0,
+                apiCalls: 0,
+                errors: 0
+            },
+
+            init() {
+                this.measureLoadTime();
+                this.setupErrorTracking();
+                this.monitorMemory();
+            },
+
+            measureLoadTime() {
+                window.addEventListener('load', () => {
+                    const navigation = performance.getEntriesByType('navigation')[0];
+                    this.metrics.loadTime = navigation.loadEventEnd - navigation.fetchStart;
+                    console.log(`📊 Page load time: ${this.metrics.loadTime}ms`);
+                });
+            },
+
+            setupErrorTracking() {
+                window.addEventListener('error', (event) => {
+                    this.metrics.errors++;
+                    console.error('🚨 JavaScript Error:', {
+                        message: event.message,
+                        filename: event.filename,
+                        lineno: event.lineno,
+                        colno: event.colno,
+                        error: event.error
+                    });
+                });
+
+                window.addEventListener('unhandledrejection', (event) => {
+                    this.metrics.errors++;
+                    console.error('🚨 Unhandled Promise Rejection:', event.reason);
+                });
+            },
+
+            monitorMemory() {
+                if ('memory' in performance) {
+                    setInterval(() => {
+                        const memInfo = performance.memory;
+                        if (memInfo.usedJSHeapSize > memInfo.jsHeapSizeLimit * 0.8) {
+                            console.warn('⚠️ High memory usage detected');
+                        }
+                    }, 30000); // Check every 30 seconds
+                }
+            },
+
+            logMetrics() {
+                console.table(this.metrics);
+            }
+        };
+
+        // Accessibility Manager
+        const AccessibilityManager = {
+            init() {
+                this.setupKeyboardNavigation();
+                this.setupFocusManagement();
+                this.setupAnnouncements();
+                this.addSkipLinks();
+            },
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (event) => {
+                    // Tab navigation for sidebar
+                    if (event.key === 'Tab' && AppState.sidebarOpen) {
+                        this.trapFocusInSidebar(event);
+                    }
+
+                    // Arrow key navigation for menu items
+                    if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
+                        this.handleArrowNavigation(event);
+                    }
+
+                    // Enter/Space activation
+                    if (['Enter', ' '].includes(event.key)) {
+                        this.handleActivation(event);
+                    }
+                });
+            },
+
+            trapFocusInSidebar(event) {
+                const sidebar = document.getElementById('dashboardSidebar');
+                if (!sidebar || !sidebar.classList.contains('open')) return;
+
+                const focusableElements = sidebar.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (event.shiftKey && document.activeElement === firstElement) {
+                    event.preventDefault();
+                    lastElement.focus();
+                } else if (!event.shiftKey && document.activeElement === lastElement) {
+                    event.preventDefault();
+                    firstElement.focus();
+                }
+            },
+
+            handleArrowNavigation(event) {
+                const currentElement = document.activeElement;
+                const menuItems = Array.from(document.querySelectorAll('.sidebar-menu-link, .menu-item'));
+                const currentIndex = menuItems.indexOf(currentElement);
+
+                if (currentIndex === -1) return;
+
+                event.preventDefault();
+                let nextIndex;
+
+                if (event.key === 'ArrowDown') {
+                    nextIndex = (currentIndex + 1) % menuItems.length;
+                } else {
+                    nextIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
+                }
+
+                menuItems[nextIndex].focus();
+            },
+
+            handleActivation(event) {
+                const element = event.target;
+                if (element.tagName === 'BUTTON' || element.tagName === 'A') {
+                    if (event.key === ' ') {
+                        event.preventDefault();
+                        element.click();
+                    }
+                }
+            },
+
+            setupFocusManagement() {
+                const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                
+                document.addEventListener('click', (event) => {
+                    if (event.target.matches(focusableSelectors)) {
+                        this.updateFocusRing(event.target);
+                    }
+                });
+            },
+
+            updateFocusRing(element) {
+                // Remove previous focus indicators
+                document.querySelectorAll('.focus-visible').forEach(el => {
+                    el.classList.remove('focus-visible');
+                });
+
+                // Add focus indicator
+                element.classList.add('focus-visible');
+            },
+
+            setupAnnouncements() {
+                // Create live region for screen reader announcements
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.className = 'sr-only';
+                liveRegion.id = 'live-region';
+                document.body.appendChild(liveRegion);
+
+                // Announce section changes
+                const originalShowSection = window.showSection;
+                window.showSection = function(sectionId) {
+                    originalShowSection(sectionId);
+                    
+                    const sectionNames = {
+                        dashboard: 'Dashboard',
+                        candidates: 'Candidates page',
+                        jobs: 'Jobs page',
+                        interviews: 'Interviews page',
+                        team: 'Team page',
+                        analytics: 'Analytics page'
+                    };
+
+                    const announcement = `Navigated to ${sectionNames[sectionId] || sectionId}`;
+                    AccessibilityManager.announce(announcement);
+                };
+            },
+
+            announce(message) {
+                const liveRegion = document.getElementById('live-region');
+                if (liveRegion) {
+                    liveRegion.textContent = message;
+                }
+            },
+
+            addSkipLinks() {
+                const skipLink = document.createElement('a');
+                skipLink.href = '#main-content';
+                skipLink.textContent = 'Skip to main content';
+                skipLink.className = 'skip-link';
+                skipLink.style.cssText = `
+                    position: absolute;
+                    top: -40px;
+                    left: 6px;
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 8px;
+                    text-decoration: none;
+                    z-index: 10000;
+                    border-radius: 4px;
+                    transition: top 0.3s;
+                `;
+
+                skipLink.addEventListener('focus', () => {
+                    skipLink.style.top = '6px';
+                });
+
+                skipLink.addEventListener('blur', () => {
+                    skipLink.style.top = '-40px';
+                });
+
+                document.body.insertBefore(skipLink, document.body.firstChild);
+
+                // Add main content landmark
+                const mainContent = document.querySelector('.dashboard-main');
+                if (mainContent) {
+                    mainContent.id = 'main-content';
+                    mainContent.setAttribute('role', 'main');
+                    mainContent.setAttribute('aria-label', 'Main dashboard content');
+                }
+            }
+        };
+
+        // Theme Manager
+        const ThemeManager = {
+            currentTheme: 'light',
+            themes: {
+                light: {
+                    name: 'Light Theme',
+                    class: 'theme-light'
+                },
+                dark: {
+                    name: 'Dark Theme',
+                    class: 'theme-dark'
+                },
+                auto: {
+                    name: 'Auto (System)',
+                    class: 'theme-auto'
+                }
+            },
+
+            init() {
+                this.loadTheme();
+                this.setupMediaQuery();
+                this.addThemeToggle();
+            },
+
+            loadTheme() {
+                const savedTheme = Utils.storage.get('skillsync_theme', 'auto');
+                this.applyTheme(savedTheme);
+            },
+
+            applyTheme(themeName) {
+                this.currentTheme = themeName;
+                document.body.className = document.body.className.replace(/theme-\w+/g, '');
+                
+                if (themeName === 'auto') {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    document.body.classList.add(prefersDark ? 'theme-dark' : 'theme-light');
+                } else {
+                    document.body.classList.add(this.themes[themeName].class);
+                }
+
+                Utils.storage.set('skillsync_theme', themeName);
+                this.updateThemeToggle();
+            },
+
+            setupMediaQuery() {
+                const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                mediaQuery.addListener(() => {
+                    if (this.currentTheme === 'auto') {
+                        this.applyTheme('auto');
+                    }
+                });
+            },
+
+            addThemeToggle() {
+                const themeToggle = document.createElement('button');
+                themeToggle.className = 'theme-toggle quick-action-item';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                themeToggle.setAttribute('title', 'Toggle theme');
+                themeToggle.addEventListener('click', () => this.cycleTheme());
+
+                const headerActions = document.querySelector('.header-actions');
+                if (headerActions) {
+                    headerActions.insertBefore(themeToggle, headerActions.firstChild);
+                }
+            },
+
+            cycleTheme() {
+                const themes = Object.keys(this.themes);
+                const currentIndex = themes.indexOf(this.currentTheme);
+                const nextIndex = (currentIndex + 1) % themes.length;
+                const nextTheme = themes[nextIndex];
+                
+                this.applyTheme(nextTheme);
+                Utils.showNotification(`Switched to ${this.themes[nextTheme].name}`, 'info', 2000);
+            },
+
+            updateThemeToggle() {
+                const toggle = document.querySelector('.theme-toggle i');
+                if (!toggle) return;
+
+                const icons = {
+                    light: 'fas fa-sun',
+                    dark: 'fas fa-moon',
+                    auto: 'fas fa-adjust'
+                };
+
+                toggle.className = icons[this.currentTheme] || 'fas fa-adjust';
+            }
+        };
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 SkillSync Dashboard v2.2.0 Initializing...');
+            
+            // Initialize all managers
+            DashboardController.init();
+            SessionManager.init();
+            NavigationManager.navigate('dashboard');
+            PerformanceMonitor.init();
+            AccessibilityManager.init();
+            ThemeManager.init();
+            
+            console.log('✅ All systems initialized successfully');
+            
+            // Performance logging in development
+            if (window.location.hostname === 'localhost') {
+                setTimeout(() => {
+                    PerformanceMonitor.logMetrics();
+                }, 5000);
+            }
+        });
+
+        // Service Worker Registration (for PWA capabilities)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('✅ ServiceWorker registered successfully');
+                    })
+                    .catch((error) => {
+                        console.log('❌ ServiceWorker registration failed');
+                    });
+            });
+        }
+
+        // Export for global access
+        window.SkillSyncDashboard = {
+            AppState,
+            Utils,
+            DashboardController,
+            CandidateManager,
+            JobManager,
+            SessionManager,
+            NavigationManager,
+            PerformanceMonitor,
+            AccessibilityManager,
+            ThemeManager
+        };
+
     </script>
 </body>
 </html>
+
