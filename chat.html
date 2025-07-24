@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messages - SkillSync AI</title>
+    <title>Messages - SkillSync</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -105,6 +105,7 @@
             color: var(--dashboard-text);
             text-decoration: none;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
@@ -178,33 +179,6 @@
             font-size: 1rem;
         }
 
-        .chat-tabs {
-            display: flex;
-            margin-top: 1rem;
-            background: white;
-            border-radius: 12px;
-            padding: 0.25rem;
-            border: 1px solid var(--dashboard-border);
-        }
-
-        .chat-tab {
-            flex: 1;
-            padding: 0.5rem 1rem;
-            border: none;
-            background: transparent;
-            color: var(--dashboard-text-light);
-            font-weight: 600;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .chat-tab.active {
-            background: var(--primary-gradient);
-            color: white;
-        }
-
         .chat-list {
             flex: 1;
             overflow-y: auto;
@@ -261,10 +235,6 @@
             background: var(--dashboard-text-light);
         }
 
-        .bot-avatar {
-            background: var(--warning-gradient);
-        }
-
         .recruiter-avatar {
             background: var(--secondary-gradient);
         }
@@ -287,15 +257,6 @@
         .verified-badge {
             color: var(--success-color);
             font-size: 0.8rem;
-        }
-
-        .bot-badge {
-            background: var(--warning-gradient);
-            color: white;
-            padding: 0.1rem 0.4rem;
-            border-radius: 8px;
-            font-size: 0.6rem;
-            font-weight: 700;
         }
 
         .chat-preview {
@@ -670,7 +631,12 @@
         }
 
         .emoji-btn {
-            background: var(--warning-gradient);
+            background: #fbbf24;
+            color: white;
+        }
+
+        .voice-btn {
+            background: var(--success-color);
             color: white;
         }
 
@@ -695,48 +661,23 @@
             transform: none;
         }
 
-        /* Quick Replies */
-        .quick-replies {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-top: 1px solid var(--dashboard-border);
-            display: none;
-        }
-
-        .quick-replies.show {
-            display: block;
-        }
-
-        .quick-replies h5 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--dashboard-text);
-            margin-bottom: 0.75rem;
-        }
-
-        .quick-reply-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .quick-reply-btn {
-            padding: 0.5rem 1rem;
-            background: white;
-            color: var(--dashboard-text);
-            border: 1px solid var(--dashboard-border);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quick-reply-btn:hover {
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: none;
             background: var(--primary-gradient);
             color: white;
-            border-color: transparent;
-            transform: translateY(-1px);
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
         }
 
         /* Responsive Design */
@@ -747,17 +688,24 @@
         }
 
         @media (max-width: 768px) {
+            .dashboard-header-content {
+                padding: 0 1rem;
+            }
+
             .chat-container {
                 grid-template-columns: 1fr;
+                position: relative;
             }
 
             .chat-sidebar {
                 position: fixed;
                 left: -100%;
-                width: 300px;
-                height: 100%;
-                z-index: 1000;
+                width: 100%;
+                max-width: 350px;
+                height: calc(100vh - var(--dashboard-header-height));
+                z-index: 1001;
                 transition: left 0.3s ease;
+                top: var(--dashboard-header-height);
             }
 
             .chat-sidebar.open {
@@ -766,12 +714,12 @@
 
             .mobile-sidebar-overlay {
                 position: fixed;
-                top: 0;
+                top: var(--dashboard-header-height);
                 left: 0;
                 width: 100%;
-                height: 100%;
+                height: calc(100vh - var(--dashboard-header-height));
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
+                z-index: 1000;
                 display: none;
             }
 
@@ -784,24 +732,43 @@
             }
 
             .mobile-menu-btn {
-                position: absolute;
-                left: 1rem;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 40px;
-                height: 40px;
-                border: none;
-                background: var(--primary-gradient);
-                color: white;
-                border-radius: 8px;
-                cursor: pointer;
                 display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             .message {
                 max-width: 85%;
+            }
+
+            .chat-input {
+                padding: 1rem;
+            }
+
+            .empty-chat .start-chat-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header-content {
+                padding: 0 0.5rem;
+            }
+
+            .chat-sidebar {
+                width: 100%;
+                max-width: none;
+            }
+
+            .empty-chat {
+                padding: 2rem 1rem;
+            }
+
+            .empty-chat h3 {
+                font-size: 1.2rem;
+            }
+
+            .empty-chat p {
+                font-size: 0.9rem;
             }
         }
 
@@ -836,20 +803,20 @@
     <header class="dashboard-header">
         <div class="dashboard-header-content">
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="student-dashboard.html" class="back-btn">
+                <button onclick="showChatSelection()" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
                     <span>Back to Dashboard</span>
-                </a>
+                </button>
                 <div class="dashboard-logo">
                     <a href="index.html">
                         <i class="fas fa-network-wired"></i>
-                        <span>SkillSync AI</span>
+                        <span>SkillSync</span>
                     </a>
                 </div>
             </div>
             
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--chat-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--chat-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">A</div>
                 <span style="font-weight: 600; color: var(--dashboard-text);">Ayush Kumar</span>
             </div>
         </div>
@@ -866,34 +833,9 @@
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" placeholder="Search conversations..." id="searchInput">
                 </div>
-
-                <div class="chat-tabs">
-                    <button class="chat-tab active" onclick="switchTab('all')">All</button>
-                    <button class="chat-tab" onclick="switchTab('recruiters')">Recruiters</button>
-                    <button class="chat-tab" onclick="switchTab('ai')">AI Helper</button>
-                </div>
             </div>
 
             <div class="chat-list" id="chatList">
-                <!-- AI Helper -->
-                <div class="chat-item" onclick="openChat('ai-helper')" data-type="ai">
-                    <div class="chat-avatar bot-avatar">
-                        🤖
-                        <div class="online-status"></div>
-                    </div>
-                    <div class="chat-info">
-                        <div class="chat-name">
-                            SkillSync AI Helper
-                            <span class="bot-badge">BOT</span>
-                        </div>
-                        <div class="chat-preview">How can I help you with your job search today?</div>
-                    </div>
-                    <div class="chat-meta">
-                        <div class="chat-time">Now</div>
-                        <div class="unread-badge">1</div>
-                    </div>
-                </div>
-
                 <!-- Recruiter 1 -->
                 <div class="chat-item" onclick="openChat('recruiter-1')" data-type="recruiters">
                     <div class="chat-avatar recruiter-avatar">
@@ -960,6 +902,36 @@
                         <div class="chat-time">11:45 AM</div>
                     </div>
                 </div>
+
+                <!-- Marketing Manager -->
+                <div class="chat-item" onclick="openChat('marketing-1')" data-type="recruiters">
+                    <div class="chat-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        D
+                        <div class="online-status"></div>
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Diana Smith - Creative Agency</div>
+                        <div class="chat-preview">We have an exciting creative role that matches your portfolio...</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Yesterday</div>
+                    </div>
+                </div>
+
+                <!-- Remote Company -->
+                <div class="chat-item" onclick="openChat('remote-1')" data-type="recruiters">
+                    <div class="chat-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        RC
+                        <div class="online-status"></div>
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">RemoteCorp Talent Team</div>
+                        <div class="chat-preview">100% remote position available. Interested in learning more?</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">2 days ago</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -968,9 +940,9 @@
             <div class="empty-chat">
                 <i class="fas fa-comments"></i>
                 <h3>Welcome to SkillSync Messages!</h3>
-                <p>Select a conversation to start chatting with recruiters and our AI helper.</p>
-                <button class="start-chat-btn" onclick="openChat('ai-helper')">
-                    🤖 Chat with AI Helper
+                <p>Select a conversation to start chatting with recruiters and companies.</p>
+                <button class="start-chat-btn" onclick="showChatSelection()">
+                    💬 Select Chat
                 </button>
             </div>
         </div>
@@ -984,23 +956,9 @@
         // Global variables
         let currentChat = null;
         let isTyping = false;
-        let messageHistory = {};
 
-        // Initialize chat data
+        // Initialize chat data (AI Helper removed)
         const chatData = {
-            'ai-helper': {
-                name: 'SkillSync AI Helper',
-                avatar: '🤖',
-                status: 'Always online to help',
-                type: 'bot',
-                messages: [
-                    {
-                        type: 'received',
-                        content: 'Hi! I\'m your personal career assistant. I can help you with job searching, interview preparation, resume tips, and career advice. What would you like to know?',
-                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                    }
-                ]
-            },
             'recruiter-1': {
                 name: 'Sarah Chen',
                 avatar: 'S',
@@ -1072,89 +1030,67 @@
                         time: '11:45 AM'
                     }
                 ]
+            },
+            'marketing-1': {
+                name: 'Diana Smith - Creative Agency',
+                avatar: 'D',
+                status: 'Online • Marketing Director',
+                type: 'company',
+                messages: [
+                    {
+                        type: 'received',
+                        content: 'Hi! We\'re impressed with your creative portfolio. We have a Digital Marketing role that could be perfect for you.',
+                        time: 'Yesterday'
+                    },
+                    {
+                        type: 'received',
+                        content: 'Would you like to schedule a call to discuss this opportunity further?',
+                        time: 'Yesterday'
+                    }
+                ]
+            },
+            'remote-1': {
+                name: 'RemoteCorp Talent Team',
+                avatar: 'RC',
+                status: 'Online • Remote-First Company',
+                type: 'company',
+                messages: [
+                    {
+                        type: 'received',
+                        content: 'Hello! We\'re a 100% remote company looking for talented developers. Your skills align perfectly with what we need.',
+                        time: '2 days ago'
+                    },
+                    {
+                        type: 'received',
+                        content: 'We offer flexible hours, competitive pay, and amazing benefits. Interested?',
+                        time: '2 days ago'
+                    }
+                ]
             }
-        };
-
-        // AI Responses for different topics
-        const aiResponses = {
-            job_search: [
-                "I can help you find the perfect job! First, let me understand what type of role you're looking for. What's your preferred tech stack?",
-                "Great question! Here are some tips for effective job searching: 1) Optimize your profile with relevant keywords 2) Network actively 3) Apply to companies that align with your values 4) Follow up on applications professionally.",
-                "Job searching can be overwhelming, but I'm here to help! What specific aspect would you like assistance with - resume optimization, interview prep, or finding the right companies?"
-            ],
-            resume: [
-                "I'd be happy to help with your resume! A great tech resume should highlight your projects, quantify your impact, and showcase relevant skills. Would you like me to review specific sections?",
-                "Here are key resume tips: 1) Start with a strong summary 2) Focus on achievements, not just responsibilities 3) Include metrics and results 4) Keep it ATS-friendly 5) Tailor it for each application.",
-                "Your resume is your first impression! For tech roles, make sure to include: technical skills, relevant projects with GitHub links, measurable achievements, and any certifications you have."
-            ],
-            interview: [
-                "Interview preparation is crucial! I can help you practice common questions, technical challenges, and behavioral scenarios. What type of interview are you preparing for?",
-                "Great! Here's my interview prep strategy: 1) Research the company thoroughly 2) Practice coding problems 3) Prepare STAR method stories 4) Have thoughtful questions ready 5) Do mock interviews.",
-                "I'm excited to help you ace your interview! Let's start with the basics - tell me about the role and company you're interviewing with."
-            ],
-            salary: [
-                "Salary negotiation is important! Research market rates for your role and location. Consider the total package including benefits, equity, and growth opportunities. Want me to help you research salary ranges?",
-                "Here are negotiation tips: 1) Research thoroughly 2) Consider the entire package 3) Be confident but flexible 4) Have a target range 5) Don't accept immediately - take time to consider.",
-                "I can help you understand your market value! What's your role, experience level, and location? I'll help you research appropriate salary ranges."
-            ],
-            skills: [
-                "Skill development is key to career growth! What technologies or skills are you most interested in learning? I can suggest learning paths and resources.",
-                "Continuous learning is essential in tech! Focus on: 1) Core technical skills for your role 2) Soft skills like communication 3) Industry trends 4) Tools and frameworks used by your target companies.",
-                "I love helping with skill development! Are you looking to deepen existing skills or learn something completely new? Let me know your current level and goals."
-            ],
-            career: [
-                "Career planning is so important! Let's discuss your goals. Where do you see yourself in 2-5 years? What type of company culture appeals to you?",
-                "Career growth in tech can take many paths - IC track, management, consulting, entrepreneurship. What interests you most? I can help you plan the steps to get there.",
-                "I'm here to help with your career journey! What's your biggest career question right now? Whether it's switching roles, companies, or industries - let's figure it out together."
-            ],
-            default: [
-                "That's a great question! I'm here to help with all aspects of your job search and career development. Could you be more specific about what you'd like assistance with?",
-                "I'm happy to help! I can assist with job searching, resume optimization, interview preparation, salary negotiation, skill development, and career planning. What interests you most?",
-                "Thanks for reaching out! I have experience helping candidates like you succeed in their job search. What's the most pressing career challenge you're facing right now?"
-            ]
         };
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('💬 Chat Page Loaded');
+            console.log('💬 Messages Page Loaded');
             setupEventListeners();
+            
+            // Check if mobile and show sidebar by default
+            if (window.innerWidth <= 768) {
+                showChatSelection();
+            }
         });
 
         // Setup event listeners
         function setupEventListeners() {
             // Search functionality
             document.getElementById('searchInput').addEventListener('input', handleSearch);
-            
-            // Message input
-            const messageInput = document.getElementById('messageInput');
-            if (messageInput) {
-                messageInput.addEventListener('keypress', handleKeyPress);
-                messageInput.addEventListener('input', handleInputChange);
-            }
-
-            // Auto-resize textarea
-            function autoResize(textarea) {
-                textarea.style.height = 'auto';
-                textarea.style.height = textarea.scrollHeight + 'px';
-            }
         }
 
-        // Switch tabs
-        function switchTab(tab) {
-            // Update active tab
-            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // Filter chat items
-            const chatItems = document.querySelectorAll('.chat-item');
-            chatItems.forEach(item => {
-                const itemType = item.getAttribute('data-type');
-                if (tab === 'all' || itemType === tab) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+        // Show chat selection (mobile-friendly)
+        function showChatSelection() {
+            if (window.innerWidth <= 768) {
+                openMobileSidebar();
+            }
         }
 
         // Handle search
@@ -1201,14 +1137,14 @@
             
             chatMain.innerHTML = `
                 <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" onclick="openMobileSidebar()" style="display: none;">
+                <button class="mobile-menu-btn" onclick="openMobileSidebar()">
                     <i class="fas fa-bars"></i>
                 </button>
 
                 <!-- Chat Header -->
                 <div class="chat-header">
                     <div class="chat-user-info">
-                        <div class="chat-user-avatar ${chat.type === 'bot' ? 'bot-avatar' : chat.type === 'recruiter' ? 'recruiter-avatar' : ''}" style="${chat.type === 'recruiter' ? '' : 'background: var(--' + chat.type + '-gradient);'}">
+                        <div class="chat-user-avatar ${chat.type === 'recruiter' ? 'recruiter-avatar' : ''}" style="${chat.type === 'recruiter' ? '' : 'background: var(--' + chat.type + '-gradient);'}">
                             ${chat.avatar}
                             ${chat.status.includes('Online') ? '<div class="online-status"></div>' : ''}
                         </div>
@@ -1239,7 +1175,7 @@
                     
                     <!-- Typing Indicator -->
                     <div class="typing-indicator" id="typingIndicator">
-                        <div class="message-avatar ${chat.type === 'bot' ? 'bot-avatar' : 'recruiter-avatar'}">
+                        <div class="message-avatar recruiter-avatar">
                             ${chat.avatar}
                         </div>
                         <div class="typing-bubble">
@@ -1253,35 +1189,22 @@
                     </div>
                 </div>
 
-                ${chat.type === 'bot' ? `
-                <!-- Quick Replies for AI -->
-                <div class="quick-replies show">
-                    <h5>Quick Questions:</h5>
-                    <div class="quick-reply-buttons">
-                        <button class="quick-reply-btn" onclick="sendQuickReply('How do I improve my resume?')">Resume Tips</button>
-                        <button class="quick-reply-btn" onclick="sendQuickReply('Help me prepare for interviews')">Interview Prep</button>
-                        <button class="quick-reply-btn" onclick="sendQuickReply('What salary should I expect?')">Salary Guide</button>
-                        <button class="quick-reply-btn" onclick="sendQuickReply('How do I find the right job?')">Job Search</button>
-                        <button class="quick-reply-btn" onclick="sendQuickReply('What skills should I learn?')">Skill Development</button>
-                    </div>
-                </div>
-                ` : ''}
-
                 <!-- Chat Input -->
                 <div class="chat-input">
                     <div class="input-container">
+                        <button class="input-action-btn emoji-btn" title="Emoji" onclick="toggleEmojiPicker()">
+                            😊
+                        </button>
                         <textarea class="message-input" id="messageInput" placeholder="Type your message here..." rows="1"></textarea>
-                        <div class="input-actions">
-                            <button class="input-action-btn emoji-btn" title="Emoji">
-                                😊
-                            </button>
-                            <button class="input-action-btn attachment-btn" title="Attach File">
-                                <i class="fas fa-paperclip"></i>
-                            </button>
-                            <button class="input-action-btn send-btn" id="sendBtn" onclick="sendMessage()" title="Send Message">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
+                        <button class="input-action-btn voice-btn" title="Voice Message" onclick="startVoiceRecording()">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="input-action-btn attachment-btn" title="Attach File" onclick="attachFile()">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <button class="input-action-btn send-btn" id="sendBtn" onclick="sendMessage()" title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             `;
@@ -1294,21 +1217,16 @@
 
             // Setup input listeners for this chat
             setupChatInputListeners();
-
-            // Show mobile menu button on mobile
-            if (window.innerWidth <= 768) {
-                document.querySelector('.mobile-menu-btn').style.display = 'flex';
-            }
         }
 
         // Render messages
         function renderMessages(messages) {
             return messages.map(message => `
                 <div class="message ${message.type}">
-                    <div class="message-avatar ${message.type === 'received' ? (currentChat === 'ai-helper' ? 'bot-avatar' : 'recruiter-avatar') : ''}">
+                    <div class="message-avatar ${message.type === 'received' ? 'recruiter-avatar' : ''}">
                         ${message.type === 'received' ? 
-                            (currentChat === 'ai-helper' ? '🤖' : chatData[currentChat]?.avatar || 'U') : 
-                            'R'
+                            (chatData[currentChat]?.avatar || 'U') : 
+                            'A'
                         }
                     </div>
                     <div class="message-content">
@@ -1369,24 +1287,10 @@
             sendBtn.disabled = true;
             sendBtn.style.opacity = '0.5';
 
-            // Show typing indicator and generate response
-            if (currentChat === 'ai-helper') {
-                showTypingIndicator();
-                setTimeout(() => {
-                    generateAIResponse(message);
-                }, 1500 + Math.random() * 1000);
-            } else {
-                // Simulate recruiter response
-                setTimeout(() => {
-                    generateRecruiterResponse(message);
-                }, 2000 + Math.random() * 2000);
-            }
-        }
-
-        // Send quick reply
-        function sendQuickReply(message) {
-            document.getElementById('messageInput').value = message;
-            sendMessage();
+            // Simulate recruiter response
+            setTimeout(() => {
+                generateRecruiterResponse(message);
+            }, 2000 + Math.random() * 2000);
         }
 
         // Add message to chat
@@ -1397,10 +1301,10 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
             messageDiv.innerHTML = `
-                <div class="message-avatar ${type === 'received' ? (currentChat === 'ai-helper' ? 'bot-avatar' : 'recruiter-avatar') : ''}">
+                <div class="message-avatar ${type === 'received' ? 'recruiter-avatar' : ''}">
                     ${type === 'received' ? 
-                        (currentChat === 'ai-helper' ? '🤖' : chatData[currentChat]?.avatar || 'U') : 
-                        'R'
+                        (chatData[currentChat]?.avatar || 'U') : 
+                        'A'
                     }
                 </div>
                 <div class="message-content">
@@ -1442,33 +1346,6 @@
             }
         }
 
-        // Generate AI response
-        function generateAIResponse(userMessage) {
-            const message = userMessage.toLowerCase();
-            let responseCategory = 'default';
-            
-            // Determine response category
-            if (message.includes('job') || message.includes('search') || message.includes('find')) {
-                responseCategory = 'job_search';
-            } else if (message.includes('resume') || message.includes('cv')) {
-                responseCategory = 'resume';
-            } else if (message.includes('interview') || message.includes('prepare')) {
-                responseCategory = 'interview';
-            } else if (message.includes('salary') || message.includes('money') || message.includes('pay')) {
-                responseCategory = 'salary';
-            } else if (message.includes('skill') || message.includes('learn') || message.includes('technology')) {
-                responseCategory = 'skills';
-            } else if (message.includes('career') || message.includes('growth') || message.includes('future')) {
-                responseCategory = 'career';
-            }
-            
-            // Get appropriate response
-            const responses = aiResponses[responseCategory];
-            const response = responses[Math.floor(Math.random() * responses.length)];
-            
-            addMessage('received', response);
-        }
-
         // Generate recruiter response
         function generateRecruiterResponse(userMessage) {
             const recruiterResponses = [
@@ -1477,7 +1354,11 @@
                 "Perfect! I'll send you more details about the role and the team.",
                 "I appreciate your interest! Let me check with the hiring manager and get back to you.",
                 "Excellent! Based on what you've told me, I think you'd be a great fit for this position.",
-                "That's exactly what we're looking for! I'll schedule you for the next round of interviews."
+                "That's exactly what we're looking for! I'll schedule you for the next round of interviews.",
+                "Great to hear from you! Let me share more details about this exciting opportunity.",
+                "Your background seems perfect for this role. Can we schedule a brief call this week?",
+                "I'm excited about your interest! This position offers great growth opportunities.",
+                "Thanks for your response! I'll connect you with our hiring manager soon."
             ];
             
             const response = recruiterResponses[Math.floor(Math.random() * recruiterResponses.length)];
@@ -1486,6 +1367,28 @@
             setTimeout(() => {
                 addMessage('received', response);
             }, 1500);
+        }
+
+        // Input action functions
+        function toggleEmojiPicker() {
+            alert('Emoji picker functionality will be implemented here!');
+        }
+
+        function startVoiceRecording() {
+            alert('Voice recording functionality will be implemented here!');
+        }
+
+        function attachFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*,video/*,audio/*,.pdf,.doc,.docx';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    alert(`File selected: ${file.name}\nFile upload functionality will be implemented here!`);
+                }
+            };
+            input.click();
         }
 
         // Mobile sidebar functions
@@ -1501,25 +1404,11 @@
 
         // Handle window resize
         window.addEventListener('resize', function() {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            if (mobileMenuBtn) {
-                if (window.innerWidth <= 768) {
-                    mobileMenuBtn.style.display = 'flex';
-                } else {
-                    mobileMenuBtn.style.display = 'none';
-                    closeMobileSidebar();
-                }
+            if (window.innerWidth > 768) {
+                closeMobileSidebar();
             }
         });
-
-        // Auto-start AI chat for demo
-        setTimeout(() => {
-            if (!currentChat) {
-                openChat('ai-helper');
-                // Simulate clicking on AI helper
-                document.querySelector('[onclick="openChat(\'ai-helper\')"]').click();
-            }
-        }, 1000);
     </script>
 </body>
 </html>
+ 
