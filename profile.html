@@ -16,7 +16,7 @@
         :root {
             --dashboard-header-height: 70px;
             
-            /* Unique Profile Color Palette */
+            /* Updated Color Palette - White Background */
             --profile-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --profile-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --profile-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -24,7 +24,7 @@
             --profile-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             --profile-cool: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             
-            --dashboard-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --dashboard-bg: #ffffff; /* Changed to white */
             --profile-card-bg: #ffffff;
             --profile-border: #e2e8f0;
             --profile-text: #2d3748;
@@ -134,6 +134,7 @@
             box-shadow: var(--shadow-xl);
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--profile-border);
         }
 
         .profile-cover {
@@ -181,13 +182,13 @@
             position: relative;
         }
 
-       .profile-avatar-section {
-    display: flex;
-    align-items: end;
-    gap: 2rem;
-    margin-top: 0; /* ❌ Remove -80px */
-    margin-bottom: 2rem;
-}
+        .profile-avatar-section {
+            display: flex;
+            align-items: end;
+            gap: 2rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
 
         .avatar-container {
             position: relative;
@@ -238,14 +239,13 @@
         }
 
         .profile-main-info .user-name {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #4f46e5, #9333ea); /* Indigo to Purple */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #4f46e5, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         .profile-role {
             font-size: 1.4rem;
@@ -490,18 +490,17 @@
             gap: 2rem;
         }
 
-        .skill-category {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid var(--profile-border);
+        .skill-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
         .category-title {
             font-size: 1.2rem;
             font-weight: 800;
             color: var(--profile-text);
-            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -517,6 +516,30 @@
             align-items: center;
             justify-content: center;
             font-size: 1rem;
+        }
+
+        .add-skill-btn {
+            padding: 0.5rem 1rem;
+            background: var(--profile-success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .add-skill-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--profile-border);
         }
 
         .skills-grid {
@@ -535,6 +558,7 @@
             transition: all 0.3s ease;
             border: 1px solid var(--profile-border);
             box-shadow: var(--shadow-sm);
+            position: relative;
         }
 
         .skill-tag:hover {
@@ -542,6 +566,29 @@
             box-shadow: var(--shadow-md);
             background: var(--profile-primary);
             color: white;
+        }
+
+        .skill-tag:hover .remove-skill-btn {
+            opacity: 1;
+        }
+
+        .remove-skill-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--error-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .skill-icon-small {
@@ -578,7 +625,33 @@
             transition: width 0.3s ease;
         }
 
-        /* Experience Section */
+        /* Experience & Certification Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .add-item-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--profile-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-item-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         .experience-timeline {
             position: relative;
             padding-left: 2rem;
@@ -614,18 +687,43 @@
             box-shadow: var(--shadow-md);
         }
 
-        .experience-card {
+        .experience-card, .certification-card {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             border-radius: 20px;
             padding: 2rem;
             transition: all 0.3s ease;
             border: 1px solid var(--profile-border);
+            position: relative;
         }
 
-        .experience-card:hover {
+        .experience-card:hover, .certification-card:hover {
             transform: translateX(10px);
             box-shadow: var(--shadow-lg);
             background: white;
+        }
+
+        .remove-item-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 30px;
+            height: 30px;
+            background: var(--error-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .experience-card:hover .remove-item-btn,
+        .certification-card:hover .remove-item-btn {
+            opacity: 1;
         }
 
         .experience-header {
@@ -661,6 +759,31 @@
             color: var(--profile-text);
             font-size: 1rem;
             line-height: 1.7;
+        }
+
+        /* Certification specific styles */
+        .certification-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--profile-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-issuer {
+            color: var(--profile-text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            display: inline-block;
         }
 
         /* Sidebar Cards */
@@ -1192,21 +1315,23 @@
                             </div>
                             <div class="card-subtitle">My technical expertise</div>
                         </div>
-                        <button class="edit-card-btn" onclick="openEditModal('skills')">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
                     </div>
                     <div class="card-content">
-                        <div class="skills-container">
+                        <div class="skills-container" id="skillsContainer">
+                            <!-- Frontend Skills -->
                             <div class="skill-category">
-                                <div class="category-title">
-                                    <div class="category-icon">
-                                        <i class="fas fa-laptop-code"></i>
+                                <div class="skill-category-header">
+                                    <div class="category-title">
+                                        <div class="category-icon">
+                                            <i class="fas fa-laptop-code"></i>
+                                        </div>
+                                        Frontend Development
                                     </div>
-                                    Frontend Development
+                                    <button class="add-skill-btn" onclick="openSkillModal('frontend')">
+                                        <i class="fas fa-plus"></i> Add Skill
+                                    </button>
                                 </div>
-                                <div class="skills-grid">
+                                <div class="skills-grid" id="frontendSkills">
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">JS</div>
                                         <div>
@@ -1215,6 +1340,7 @@
                                                 <div class="skill-level-fill" style="width: 95%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">R</div>
@@ -1224,6 +1350,7 @@
                                                 <div class="skill-level-fill" style="width: 90%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">V</div>
@@ -1233,18 +1360,25 @@
                                                 <div class="skill-level-fill" style="width: 85%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                 </div>
                             </div>
                             
+                            <!-- Backend Skills -->
                             <div class="skill-category">
-                                <div class="category-title">
-                                    <div class="category-icon">
-                                        <i class="fas fa-server"></i>
+                                <div class="skill-category-header">
+                                    <div class="category-title">
+                                        <div class="category-icon">
+                                            <i class="fas fa-server"></i>
+                                        </div>
+                                        Backend Development
                                     </div>
-                                    Backend Development
+                                    <button class="add-skill-btn" onclick="openSkillModal('backend')">
+                                        <i class="fas fa-plus"></i> Add Skill
+                                    </button>
                                 </div>
-                                <div class="skills-grid">
+                                <div class="skills-grid" id="backendSkills">
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">N</div>
                                         <div>
@@ -1253,6 +1387,7 @@
                                                 <div class="skill-level-fill" style="width: 88%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">P</div>
@@ -1262,6 +1397,7 @@
                                                 <div class="skill-level-fill" style="width: 75%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                     <div class="skill-tag">
                                         <div class="skill-icon-small">M</div>
@@ -1271,6 +1407,7 @@
                                                 <div class="skill-level-fill" style="width: 82%;"></div>
                                             </div>
                                         </div>
+                                        <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
                                     </div>
                                 </div>
                             </div>
@@ -1288,15 +1425,19 @@
                             </div>
                             <div class="card-subtitle">My professional journey</div>
                         </div>
-                        <button class="edit-card-btn" onclick="openEditModal('experience')">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
                     </div>
                     <div class="card-content">
-                        <div class="experience-timeline">
+                        <div class="section-header">
+                            <h3>Experience Timeline</h3>
+                            <button class="add-item-btn" onclick="openEditModal('add-experience')">
+                                <i class="fas fa-plus"></i>
+                                Add Experience
+                            </button>
+                        </div>
+                        <div class="experience-timeline" id="experienceTimeline">
                             <div class="timeline-item">
                                 <div class="experience-card">
+                                    <button class="remove-item-btn" onclick="removeExperience(this)">×</button>
                                     <div class="experience-header">
                                         <div>
                                             <div class="experience-role">Senior Full Stack Developer</div>
@@ -1314,6 +1455,7 @@
                             
                             <div class="timeline-item">
                                 <div class="experience-card">
+                                    <button class="remove-item-btn" onclick="removeExperience(this)">×</button>
                                     <div class="experience-header">
                                         <div>
                                             <div class="experience-role">Full Stack Developer</div>
@@ -1331,6 +1473,7 @@
                             
                             <div class="timeline-item">
                                 <div class="experience-card">
+                                    <button class="remove-item-btn" onclick="removeExperience(this)">×</button>
                                     <div class="experience-header">
                                         <div>
                                             <div class="experience-role">Frontend Developer</div>
@@ -1343,6 +1486,56 @@
                                         Implemented pixel-perfect designs and ensured cross-browser compatibility. 
                                         Contributed to increasing user engagement by 35% through improved UX.
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications Section -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">
+                                <i class="fas fa-certificate"></i>
+                                Certifications & Achievements
+                            </div>
+                            <div class="card-subtitle">My professional certifications</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="section-header">
+                            <h3>Certifications</h3>
+                            <button class="add-item-btn" onclick="openEditModal('add-certification')">
+                                <i class="fas fa-plus"></i>
+                                Add Certification
+                            </button>
+                        </div>
+                        <div class="experience-timeline" id="certificationsTimeline">
+                            <div class="timeline-item">
+                                <div class="certification-card">
+                                    <button class="remove-item-btn" onclick="removeCertification(this)">×</button>
+                                    <div class="certification-name">AWS Certified Solutions Architect</div>
+                                    <div class="certification-issuer">Amazon Web Services (AWS)</div>
+                                    <div class="certification-date">Issued: March 2023</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="certification-card">
+                                    <button class="remove-item-btn" onclick="removeCertification(this)">×</button>
+                                    <div class="certification-name">React Developer Certification</div>
+                                    <div class="certification-issuer">Meta (Facebook)</div>
+                                    <div class="certification-date">Issued: January 2023</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="certification-card">
+                                    <button class="remove-item-btn" onclick="removeCertification(this)">×</button>
+                                    <div class="certification-name">Google Cloud Professional Developer</div>
+                                    <div class="certification-issuer">Google Cloud Platform</div>
+                                    <div class="certification-date">Issued: November 2022</div>
                                 </div>
                             </div>
                         </div>
@@ -1542,6 +1735,150 @@
             showNotification('Opening your portfolio in new tab...', 'info');
         }
 
+        // Skills Management
+        function openSkillModal(category) {
+            const modal = document.getElementById('editProfileModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('editModalContent');
+            
+            title.textContent = `Add ${category.charAt(0).toUpperCase() + category.slice(1)} Skill`;
+            
+            content.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Skill Name</label>
+                    <input type="text" class="form-control" id="skillNameInput" placeholder="e.g. JavaScript, React, Python">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Proficiency Level</label>
+                    <select class="form-control" id="skillLevelInput">
+                        <option value="60">Beginner (60%)</option>
+                        <option value="75">Intermediate (75%)</option>
+                        <option value="85">Advanced (85%)</option>
+                        <option value="95">Expert (95%)</option>
+                    </select>
+                </div>
+                <button class="save-btn" onclick="addSkill('${category}')">
+                    <i class="fas fa-plus"></i> Add Skill
+                </button>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        function addSkill(category) {
+            const skillName = document.getElementById('skillNameInput').value.trim();
+            const skillLevel = document.getElementById('skillLevelInput').value;
+            
+            if (!skillName) {
+                showNotification('Please enter a skill name', 'error');
+                return;
+            }
+            
+            const skillsGrid = document.getElementById(category + 'Skills');
+            const skillIcon = skillName.charAt(0).toUpperCase();
+            
+            const skillTag = document.createElement('div');
+            skillTag.className = 'skill-tag';
+            skillTag.innerHTML = `
+                <div class="skill-icon-small">${skillIcon}</div>
+                <div>
+                    <div class="skill-name">${skillName}</div>
+                    <div class="skill-level-indicator">
+                        <div class="skill-level-fill" style="width: ${skillLevel}%;"></div>
+                    </div>
+                </div>
+                <button class="remove-skill-btn" onclick="removeSkill(this)">×</button>
+            `;
+            
+            skillsGrid.appendChild(skillTag);
+            closeEditModal();
+            showNotification(`${skillName} added successfully! ✨`, 'success');
+        }
+
+        function removeSkill(button) {
+            const skillTag = button.closest('.skill-tag');
+            const skillName = skillTag.querySelector('.skill-name').textContent;
+            skillTag.remove();
+            showNotification(`${skillName} removed from skills`, 'info');
+        }
+
+        // Experience Management
+        function removeExperience(button) {
+            const timelineItem = button.closest('.timeline-item');
+            const role = timelineItem.querySelector('.experience-role').textContent;
+            timelineItem.remove();
+            showNotification(`${role} experience removed`, 'info');
+        }
+
+        function addExperience() {
+            const role = document.getElementById('jobRoleInput').value.trim();
+            const company = document.getElementById('companyInput').value.trim();
+            const startDate = document.getElementById('startDateInput').value.trim();
+            const endDate = document.getElementById('endDateInput').value.trim();
+            const description = document.getElementById('descriptionInput').value.trim();
+            
+            if (!role || !company || !startDate || !endDate || !description) {
+                showNotification('Please fill all fields', 'error');
+                return;
+            }
+            
+            const timeline = document.getElementById('experienceTimeline');
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            timelineItem.innerHTML = `
+                <div class="experience-card">
+                    <button class="remove-item-btn" onclick="removeExperience(this)">×</button>
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-role">${role}</div>
+                            <div class="experience-company">${company}</div>
+                        </div>
+                        <div class="experience-duration">${startDate} - ${endDate}</div>
+                    </div>
+                    <div class="experience-description">${description}</div>
+                </div>
+            `;
+            
+            timeline.insertBefore(timelineItem, timeline.firstChild);
+            closeEditModal();
+            showNotification('Experience added successfully! 🎉', 'success');
+        }
+
+        // Certification Management
+        function removeCertification(button) {
+            const timelineItem = button.closest('.timeline-item');
+            const certName = timelineItem.querySelector('.certification-name').textContent;
+            timelineItem.remove();
+            showNotification(`${certName} certification removed`, 'info');
+        }
+
+        function addCertification() {
+            const name = document.getElementById('certNameInput').value.trim();
+            const issuer = document.getElementById('certIssuerInput').value.trim();
+            const date = document.getElementById('certDateInput').value.trim();
+            
+            if (!name || !issuer || !date) {
+                showNotification('Please fill all fields', 'error');
+                return;
+            }
+            
+            const timeline = document.getElementById('certificationsTimeline');
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            timelineItem.innerHTML = `
+                <div class="certification-card">
+                    <button class="remove-item-btn" onclick="removeCertification(this)">×</button>
+                    <div class="certification-name">${name}</div>
+                    <div class="certification-issuer">${issuer}</div>
+                    <div class="certification-date">Issued: ${date}</div>
+                </div>
+            `;
+            
+            timeline.insertBefore(timelineItem, timeline.firstChild);
+            closeEditModal();
+            showNotification('Certification added successfully! 🏆', 'success');
+        }
+
         // Modal functions
         function openEditModal(section = 'basic') {
             currentEditSection = section;
@@ -1594,72 +1931,65 @@
                         </div>
                     `;
                     break;
-                case 'skills':
-                    title.textContent = 'Edit Skills & Technologies';
-                    formHTML = `
-                        <div class="form-group">
-                            <label class="form-label">Add New Skill</label>
-                            <input type="text" class="form-control" placeholder="Enter skill name" id="newSkillInput">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Skill Category</label>
-                            <select class="form-control" id="skillCategorySelect">
-                                <option>Frontend Development</option>
-                                <option>Backend Development</option>
-                                <option>Database & Tools</option>
-                                <option>DevOps & Cloud</option>
-                                <option>Mobile Development</option>
-                                <option>Design & UI/UX</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Proficiency Level</label>
-                            <select class="form-control" id="skillLevelSelect">
-                                <option value="60">Beginner (60%)</option>
-                                <option value="75">Intermediate (75%)</option>
-                                <option value="85">Advanced (85%)</option>
-                                <option value="95">Expert (95%)</option>
-                            </select>
-                        </div>
-                        <button type="button" style="background: var(--profile-success); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 700; margin-bottom: 1.5rem; width: 100%;" onclick="addNewSkill()">
-                            <i class="fas fa-plus"></i> Add Skill
-                        </button>
-                    `;
-                    break;
-                case 'experience':
+                case 'add-experience':
                     title.textContent = 'Add Work Experience';
                     formHTML = `
                         <div class="form-group">
                             <label class="form-label">Job Title</label>
-                            <input type="text" class="form-control" placeholder="e.g. Senior Full Stack Developer">
+                            <input type="text" class="form-control" id="jobRoleInput" placeholder="e.g. Senior Full Stack Developer">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Company Name</label>
-                            <input type="text" class="form-control" placeholder="e.g. TechCorp Solutions">
+                            <input type="text" class="form-control" id="companyInput" placeholder="e.g. TechCorp Solutions">
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="form-group">
                                 <label class="form-label">Start Date</label>
-                                <input type="text" class="form-control" placeholder="e.g. Jan 2022">
+                                <input type="text" class="form-control" id="startDateInput" placeholder="e.g. Jan 2022">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">End Date</label>
-                                <input type="text" class="form-control" placeholder="e.g. Present">
+                                <input type="text" class="form-control" id="endDateInput" placeholder="e.g. Present">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Job Description</label>
-                            <textarea class="form-control" rows="5" placeholder="Describe your key responsibilities, achievements, and impact in this role..."></textarea>
+                            <textarea class="form-control" id="descriptionInput" rows="5" placeholder="Describe your key responsibilities, achievements, and impact in this role..."></textarea>
                         </div>
+                        <button class="save-btn" onclick="addExperience()">
+                            <i class="fas fa-plus"></i> Add Experience
+                        </button>
+                    `;
+                    break;
+                case 'add-certification':
+                    title.textContent = 'Add Certification';
+                    formHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Certification Name</label>
+                            <input type="text" class="form-control" id="certNameInput" placeholder="e.g. AWS Certified Developer">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Issuing Organization</label>
+                            <input type="text" class="form-control" id="certIssuerInput" placeholder="e.g. Amazon Web Services">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Issue Date</label>
+                            <input type="text" class="form-control" id="certDateInput" placeholder="e.g. March 2023">
+                        </div>
+                        <button class="save-btn" onclick="addCertification()">
+                            <i class="fas fa-plus"></i> Add Certification
+                        </button>
                     `;
                     break;
             }
             
-            formHTML += `
-                <button class="save-btn" onclick="saveProfileChanges()">
-                    <i class="fas fa-save"></i> Save Changes
-                </button>
-            `;
+            if (section === 'basic' || section === 'about') {
+                formHTML += `
+                    <button class="save-btn" onclick="saveProfileChanges()">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                `;
+            }
             
             content.innerHTML = formHTML;
             modal.classList.add('active');
@@ -1668,24 +1998,6 @@
         function closeEditModal() {
             const modal = document.getElementById('editProfileModal');
             modal.classList.remove('active');
-        }
-
-        function addNewSkill() {
-            const skillInput = document.getElementById('newSkillInput');
-            const categorySelect = document.getElementById('skillCategorySelect');
-            const levelSelect = document.getElementById('skillLevelSelect');
-            
-            const skillName = skillInput.value.trim();
-            const category = categorySelect.value;
-            const level = levelSelect.value;
-            
-            if (!skillName) {
-                showNotification('Please enter a skill name', 'error');
-                return;
-            }
-            
-            skillInput.value = '';
-            showNotification(`${skillName} added to ${category} with ${level}% proficiency!`, 'success');
         }
 
         function saveProfileChanges() {
@@ -1718,7 +2030,7 @@
             }
         });
 
-        console.log('🚀 Profile page fully loaded with advanced features!');
+        console.log('🚀 Profile page fully loaded with CRUD functionality!');
     </script>
 </body>
 </html>
