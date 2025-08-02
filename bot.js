@@ -6,7 +6,7 @@ class StudentAIChatBot {
         this.messages = [];
         this.conversationHistory = [];
         // Gemini API Configuration
-        this.GEMINI_API_KEY = 'AIzaSyAY2a_gtsVhymOw9G_AS_vM5AAHfxgtKJU'; // Replace with your actual API key
+        this.GEMINI_API_KEY = ''; // Replace with your actual API key
         this.GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
         this.init();
     }
@@ -1088,3 +1088,4 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = StudentAIChatBot;
 }
+
