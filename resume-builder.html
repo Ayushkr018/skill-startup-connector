@@ -11,6 +11,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- jsPDF Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
         /* Enhanced Resume Builder Variables */
         :root {
@@ -331,29 +335,30 @@
             padding: 2rem;
             background: white;
             min-height: 600px;
-            font-family: 'Times New Roman', serif;
             line-height: 1.6;
         }
 
-        /* Resume Styles */
+        /* ATS-Friendly Resume Styles */
         .resume-header {
             text-align: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-color);
+            border-bottom: 1px solid #333;
         }
 
         .resume-name {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #333;
             margin-bottom: 0.5rem;
+            font-family: Arial, sans-serif;
         }
 
         .resume-title {
             font-size: 1.2rem;
-            color: var(--dashboard-text-light);
+            color: #666;
             margin-bottom: 1rem;
+            font-family: Arial, sans-serif;
         }
 
         .contact-info {
@@ -361,6 +366,7 @@
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
+            font-family: Arial, sans-serif;
         }
 
         .contact-item {
@@ -368,7 +374,7 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            color: var(--dashboard-text);
+            color: #333;
         }
 
         .resume-section {
@@ -378,20 +384,18 @@
         .resume-section h3 {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #333;
             margin-bottom: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-family: Arial, sans-serif;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.25rem;
         }
 
         .experience-item, .education-item {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .experience-item:last-child, .education-item:last-child {
-            border-bottom: none;
+            margin-bottom: 1.2rem;
+            font-family: Arial, sans-serif;
         }
 
         .item-header {
@@ -403,34 +407,33 @@
 
         .item-title {
             font-weight: 700;
-            color: var(--dashboard-text);
+            color: #333;
+            font-size: 1rem;
         }
 
         .item-company, .item-school {
             font-weight: 600;
-            color: var(--dashboard-text-light);
+            color: #555;
             margin-bottom: 0.25rem;
-        }
-
-        .item-duration {
-            font-size: 0.85rem;
-            color: var(--dashboard-text-light);
             font-style: italic;
         }
 
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        .item-duration {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
         }
 
-        .skill-item {
-            padding: 0.3rem 0.75rem;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .resume-section p {
+            color: #333;
+            font-family: Arial, sans-serif;
+            white-space: pre-line;
+        }
+
+        .skills-list {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.8;
         }
 
         /* Template Selector */
@@ -533,6 +536,23 @@
                 opacity: 1;
             }
         }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -570,18 +590,18 @@
         <!-- Resume Editor -->
         <div class="resume-editor">
             <div class="editor-header">
-                <h1>📝 Resume Builder</h1>
-                <p style="color: var(--dashboard-text-light);">Create your professional resume in minutes</p>
+                <h1>📝 ATS-Friendly Resume Builder</h1>
+                <p style="color: var(--dashboard-text-light);">Create your ATS-optimized professional resume</p>
             </div>
 
             <div class="editor-content">
                 <!-- Template Selector -->
                 <div class="template-selector">
-                    <h4>Choose Template:</h4>
+                    <h4>Choose ATS-Friendly Template:</h4>
                     <div class="template-options">
-                        <div class="template-option active" onclick="selectTemplate('modern')">Modern</div>
-                        <div class="template-option" onclick="selectTemplate('classic')">Classic</div>
-                        <div class="template-option" onclick="selectTemplate('minimal')">Minimal</div>
+                        <div class="template-option active" onclick="selectTemplate('ats')">ATS-Optimized</div>
+                        <div class="template-option" onclick="selectTemplate('professional')">Professional</div>
+                        <div class="template-option" onclick="selectTemplate('clean')">Clean</div>
                     </div>
                 </div>
 
@@ -600,7 +620,7 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" class="form-control" id="email" placeholder="your.email@example.com" value="Ayush@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="your.email@example.com" value="ayush@example.com">
                         </div>
                         <div class="form-group">
                             <label>Phone *</label>
@@ -611,11 +631,11 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                         <div class="form-group">
                             <label>LinkedIn</label>
-                            <input type="url" class="form-control" id="linkedin" placeholder="linkedin.com/in/yourprofile">
+                            <input type="url" class="form-control" id="linkedin" placeholder="linkedin.com/in/yourprofile" value="linkedin.com/in/ayushkumar">
                         </div>
                         <div class="form-group">
-                            <label>Portfolio/Website</label>
-                            <input type="url" class="form-control" id="website" placeholder="www.yourwebsite.com">
+                            <label>Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="City, State" value="Mumbai, Maharashtra">
                         </div>
                     </div>
                     
@@ -626,7 +646,7 @@
                     
                     <div class="form-group">
                         <label>Professional Summary</label>
-                        <textarea class="form-control" id="summary" placeholder="Write a brief summary about yourself, your experience, and career goals..." rows="4">Passionate Full Stack Developer with 3+ years of experience in building scalable web applications. Expertise in React, Node.js, and modern web technologies. Strong problem-solving skills and passion for creating user-friendly solutions.</textarea>
+                        <textarea class="form-control" id="summary" placeholder="Write a brief summary about yourself, your experience, and career goals..." rows="4">Experienced Full Stack Developer with 3+ years of expertise in building scalable web applications using React, Node.js, and modern web technologies. Proven track record of improving application performance by 40% and leading development teams. Strong problem-solving skills with passion for creating user-friendly solutions.</textarea>
                     </div>
                 </div>
 
@@ -640,15 +660,17 @@
                     <div id="experienceList" class="dynamic-list">
                         <div class="list-item">
                             <div style="flex: 1;">
-                                <input type="text" placeholder="Job Title" value="Senior Developer" style="margin-bottom: 0.5rem;">
+                                <input type="text" placeholder="Job Title" value="Senior Full Stack Developer" style="margin-bottom: 0.5rem;">
                                 <input type="text" placeholder="Company Name" value="TechCorp Solutions" style="margin-bottom: 0.5rem;">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                    <input type="text" placeholder="Start Date" value="Jan 2022">
+                                    <input type="text" placeholder="Start Date" value="January 2022">
                                     <input type="text" placeholder="End Date" value="Present">
                                 </div>
-                                <textarea placeholder="Describe your key responsibilities and achievements..." rows="3">• Led development of 5+ web applications using React and Node.js
-• Improved application performance by 40% through code optimization
-• Mentored junior developers and conducted code reviews</textarea>
+                                <textarea placeholder="Describe your key responsibilities and achievements..." rows="4">• Led development of 5+ scalable web applications using React.js and Node.js
+• Improved application performance by 40% through code optimization and database tuning
+• Mentored team of 3 junior developers and conducted regular code reviews
+• Implemented CI/CD pipelines reducing deployment time by 60%
+• Collaborated with cross-functional teams to deliver projects on time and within budget</textarea>
                             </div>
                             <button class="remove-btn" onclick="removeExperience(this)">
                                 <i class="fas fa-trash"></i>
@@ -671,8 +693,8 @@
                     <div id="educationList" class="dynamic-list">
                         <div class="list-item">
                             <div style="flex: 1;">
-                                <input type="text" placeholder="Degree" value="Bachelor of Technology" style="margin-bottom: 0.5rem;">
-                                <input type="text" placeholder="Institution" value="ABC University" style="margin-bottom: 0.5rem;">
+                                <input type="text" placeholder="Degree" value="Bachelor of Technology in Computer Science" style="margin-bottom: 0.5rem;">
+                                <input type="text" placeholder="Institution" value="Indian Institute of Technology" style="margin-bottom: 0.5rem;">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
                                     <input type="text" placeholder="Year" value="2019-2023">
                                     <input type="text" placeholder="Grade/CGPA" value="8.5 CGPA">
@@ -693,17 +715,20 @@
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-code"></i>
-                        Skills
+                        Technical Skills
                     </div>
                     
                     <div class="form-group">
                         <label>Add Skills (Press Enter after each skill)</label>
                         <input type="text" class="form-control" id="skillInput" placeholder="e.g., JavaScript, React, Node.js">
-                        <div id="skillsList" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="skill-item">JavaScript <i class="fas fa-times" onclick="removeSkill(this)" style="margin-left: 0.5rem; cursor: pointer;"></i></span>
-                            <span class="skill-item">React <i class="fas fa-times" onclick="removeSkill(this)" style="margin-left: 0.5rem; cursor: pointer;"></i></span>
-                            <span class="skill-item">Node.js <i class="fas fa-times" onclick="removeSkill(this)" style="margin-left: 0.5rem; cursor: pointer;"></i></span>
-                            <span class="skill-item">MongoDB <i class="fas fa-times" onclick="removeSkill(this)" style="margin-left: 0.5rem; cursor: pointer;"></i></span>
+                        <div id="skillsList" style="margin-top: 1rem;">
+                            <div style="color: #333; font-family: Arial, sans-serif; line-height: 1.8;">
+                                <strong>Programming Languages:</strong> JavaScript, Python, Java, TypeScript<br>
+                                <strong>Frontend:</strong> React.js, HTML5, CSS3, Bootstrap, Material-UI<br>
+                                <strong>Backend:</strong> Node.js, Express.js, REST APIs, GraphQL<br>
+                                <strong>Databases:</strong> MongoDB, PostgreSQL, MySQL, Redis<br>
+                                <strong>Tools & Technologies:</strong> Git, Docker, AWS, Jenkins, Webpack
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -718,9 +743,12 @@
                     <div id="projectsList" class="dynamic-list">
                         <div class="list-item">
                             <div style="flex: 1;">
-                                <input type="text" placeholder="Project Name" value="E-commerce Web App" style="margin-bottom: 0.5rem;">
-                                <input type="text" placeholder="Technologies Used" value="React, Node.js, MongoDB" style="margin-bottom: 0.5rem;">
-                                <textarea placeholder="Project description and your role..." rows="2">Built a full-stack e-commerce application with user authentication, payment integration, and admin dashboard. Implemented responsive design and optimized for performance.</textarea>
+                                <input type="text" placeholder="Project Name" value="E-commerce Web Application" style="margin-bottom: 0.5rem;">
+                                <input type="text" placeholder="Technologies Used" value="React.js, Node.js, MongoDB, Stripe API" style="margin-bottom: 0.5rem;">
+                                <textarea placeholder="Project description and your role..." rows="3">• Built full-stack e-commerce application with user authentication and payment integration
+• Implemented responsive design supporting 1000+ concurrent users
+• Integrated Stripe payment gateway with 99.9% transaction success rate
+• Deployed on AWS with automated CI/CD pipeline</textarea>
                             </div>
                             <button class="remove-btn" onclick="removeProject(this)">
                                 <i class="fas fa-trash"></i>
@@ -738,102 +766,27 @@
         <!-- Resume Preview -->
         <div class="resume-preview">
             <div class="preview-header">
-                <h2>📄 Live Preview</h2>
+                <h2>📄 ATS-Friendly Preview</h2>
                 <button class="download-btn" onclick="downloadResume()">
+                    <div class="loading-spinner"></div>
                     <i class="fas fa-download"></i>
-                    Download PDF
+                    <span class="btn-text">Download PDF</span>
                 </button>
             </div>
 
             <div class="preview-content" id="resumePreview">
                 <!-- Resume content will be dynamically generated -->
-                <div class="resume-header">
-                    <div class="resume-name">Ayush Kumar</div>
-                    <div class="resume-title">Full Stack Developer</div>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>Ayush@example.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+91 98765 43210</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-linkedin"></i>
-                            <span>LinkedIn Profile</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h3>Professional Summary</h3>
-                    <p>Passionate Full Stack Developer with 3+ years of experience in building scalable web applications. Expertise in React, Node.js, and modern web technologies. Strong problem-solving skills and passion for creating user-friendly solutions.</p>
-                </div>
-
-                <div class="resume-section">
-                    <h3>Work Experience</h3>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div>
-                                <div class="item-title">Senior Developer</div>
-                                <div class="item-company">TechCorp Solutions</div>
-                            </div>
-                            <div class="item-duration">Jan 2022 - Present</div>
-                        </div>
-                        <p>• Led development of 5+ web applications using React and Node.js<br>
-                        • Improved application performance by 40% through code optimization<br>
-                        • Mentored junior developers and conducted code reviews</p>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h3>Education</h3>
-                    <div class="education-item">
-                        <div class="item-header">
-                            <div>
-                                <div class="item-title">Bachelor of Technology</div>
-                                <div class="item-school">ABC University</div>
-                            </div>
-                            <div class="item-duration">2019-2023 | 8.5 CGPA</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h3>Technical Skills</h3>
-                    <div class="skills-list">
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">MongoDB</span>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h3>Projects</h3>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div>
-                                <div class="item-title">E-commerce Web App</div>
-                                <div class="item-company">React, Node.js, MongoDB</div>
-                            </div>
-                        </div>
-                        <p>Built a full-stack e-commerce application with user authentication, payment integration, and admin dashboard. Implemented responsive design and optimized for performance.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script>
-        let currentTemplate = 'modern';
-        let skills = ['JavaScript', 'React', 'Node.js', 'MongoDB'];
+        let currentTemplate = 'ats';
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📝 Resume Builder Loaded');
+            console.log('📝 ATS Resume Builder Loaded');
             
             // Add event listeners
             setupEventListeners();
@@ -864,38 +817,15 @@
             
             if (!skillName) return;
             
-            if (skills.includes(skillName)) {
-                showNotification('Skill already added!', 'error');
-                return;
-            }
+            const skillsList = document.getElementById('skillsList');
+            const currentSkills = skillsList.querySelector('div').innerHTML;
             
-            skills.push(skillName);
+            // Add new skill to the skills text
+            skillsList.querySelector('div').innerHTML = currentSkills + ', ' + skillName;
             skillInput.value = '';
             
-            renderSkills();
             updatePreview();
             showNotification('Skill added successfully!', 'success');
-        }
-
-        // Remove skill
-        function removeSkill(element) {
-            const skillItem = element.closest('.skill-item');
-            const skillName = skillItem.textContent.replace('×', '').trim();
-            
-            skills = skills.filter(skill => skill !== skillName);
-            renderSkills();
-            updatePreview();
-        }
-
-        // Render skills
-        function renderSkills() {
-            const skillsList = document.getElementById('skillsList');
-            skillsList.innerHTML = skills.map(skill => `
-                <span class="skill-item">
-                    ${skill} 
-                    <i class="fas fa-times" onclick="removeSkill(this)" style="margin-left: 0.5rem; cursor: pointer;"></i>
-                </span>
-            `).join('');
         }
 
         // Add experience
@@ -911,7 +841,7 @@
                         <input type="text" placeholder="Start Date">
                         <input type="text" placeholder="End Date">
                     </div>
-                    <textarea placeholder="Describe your key responsibilities and achievements..." rows="3"></textarea>
+                    <textarea placeholder="Describe your key responsibilities and achievements..." rows="4"></textarea>
                 </div>
                 <button class="remove-btn" onclick="removeExperience(this)">
                     <i class="fas fa-trash"></i>
@@ -976,7 +906,7 @@
                 <div style="flex: 1;">
                     <input type="text" placeholder="Project Name" style="margin-bottom: 0.5rem;">
                     <input type="text" placeholder="Technologies Used" style="margin-bottom: 0.5rem;">
-                    <textarea placeholder="Project description and your role..." rows="2"></textarea>
+                    <textarea placeholder="Project description and your role..." rows="3"></textarea>
                 </div>
                 <button class="remove-btn" onclick="removeProject(this)">
                     <i class="fas fa-trash"></i>
@@ -1022,32 +952,28 @@
                 email: document.getElementById('email').value || 'your.email@example.com',
                 phone: document.getElementById('phone').value || '+91 98765 43210',
                 linkedin: document.getElementById('linkedin').value,
-                website: document.getElementById('website').value,
+                location: document.getElementById('location').value,
                 title: document.getElementById('professionalTitle').value || 'Your Professional Title',
                 summary: document.getElementById('summary').value || 'Write your professional summary here...',
             };
 
-            // Generate preview HTML
+            // Generate ATS-friendly preview HTML
             let previewHTML = `
                 <div class="resume-header">
                     <div class="resume-name">${formData.name}</div>
                     <div class="resume-title">${formData.title}</div>
                     <div class="contact-info">
                         <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>${formData.email}</span>
+                            <span>Email: ${formData.email}</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>${formData.phone}</span>
+                            <span>Phone: ${formData.phone}</span>
                         </div>
                         ${formData.linkedin ? `<div class="contact-item">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
+                            <span>LinkedIn: ${formData.linkedin}</span>
                         </div>` : ''}
-                        ${formData.website ? `<div class="contact-item">
-                            <i class="fas fa-globe"></i>
-                            <span>Portfolio</span>
+                        ${formData.location ? `<div class="contact-item">
+                            <span>Location: ${formData.location}</span>
                         </div>` : ''}
                     </div>
                 </div>
@@ -1113,12 +1039,9 @@
             }
 
             // Add skills
-            if (skills.length > 0) {
-                previewHTML += '<div class="resume-section"><h3>Technical Skills</h3><div class="skills-list">';
-                skills.forEach(skill => {
-                    previewHTML += `<span class="skill-item">${skill}</span>`;
-                });
-                previewHTML += '</div></div>';
+            const skillsContent = document.getElementById('skillsList').querySelector('div').innerHTML;
+            if (skillsContent) {
+                previewHTML += `<div class="resume-section"><h3>Technical Skills</h3><div class="skills-list">${skillsContent}</div></div>`;
             }
 
             // Add projects
@@ -1155,10 +1078,76 @@
             // In real app, this would save to backend
         }
 
-        // Download resume
-        function downloadResume() {
-            showNotification('Resume download started! 📄', 'success');
-            // In real app, this would generate PDF
+        // Download resume as PDF
+        async function downloadResume() {
+            const downloadBtn = document.querySelector('.download-btn');
+            const spinner = downloadBtn.querySelector('.loading-spinner');
+            const btnText = downloadBtn.querySelector('.btn-text');
+            
+            // Show loading state
+            spinner.style.display = 'inline-block';
+            btnText.textContent = 'Generating PDF...';
+            downloadBtn.disabled = true;
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                // Get resume content
+                const resumeContent = document.getElementById('resumePreview');
+                
+                // Use html2canvas to convert HTML to canvas
+                const canvas = await html2canvas(resumeContent, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff'
+                });
+                
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Calculate dimensions
+                const imgWidth = 210;
+                const pageHeight = 295;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                
+                let position = 0;
+                
+                // Add first page
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // Add additional pages if needed
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                // Get user name for filename
+                const userName = document.getElementById('fullName').value || 'Resume';
+                const filename = `${userName.replace(/\s+/g, '_')}_Resume.pdf`;
+                
+                // Save the PDF
+                pdf.save(filename);
+                
+                showNotification('Resume downloaded successfully! 📄', 'success');
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showNotification('Error generating PDF. Please try again.', 'error');
+            } finally {
+                // Hide loading state
+                spinner.style.display = 'none';
+                btnText.textContent = 'Download PDF';
+                downloadBtn.disabled = false;
+            }
         }
 
         // Show notification
