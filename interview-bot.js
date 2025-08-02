@@ -13,7 +13,7 @@ class InterviewBot {
         this.conversationHistory = [];
         
         // Gemini API configuration
-        this.GEMINI_API_KEY = 'AIzaSyDI0gM24u0L6iDOiwwqrXjnH27E8yp3q_4'; // Replace with your actual API key
+        this.GEMINI_API_KEY = ''; // Replace with your actual API key
         this.GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
         
         this.init();
@@ -598,3 +598,4 @@ Good luck with your upcoming interviews! 🚀`;
 window.InterviewBot = InterviewBot;
 
 console.log('✅ InterviewBot with SkillSync  AI loaded successfully!');
+
