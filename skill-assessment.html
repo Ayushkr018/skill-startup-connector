@@ -7,9 +7,16 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- jsPDF Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         /* Enhanced Skill Test Variables */
@@ -22,6 +29,10 @@
             --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             --tech-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --silver-gradient: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
+            --bronze-gradient: linear-gradient(135deg, #CD7F32 0%, #B87333 100%);
+            --certificate-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #FFD700 50%, #764ba2 75%, #667eea 100%);
             
             --dashboard-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --dashboard-card-bg: #ffffff;
@@ -43,8 +54,14 @@
             --shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
         }
 
-        /* Reset and Base Styles */
+        /* FIXED - Reset and Base Styles - NO GAP */
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -56,9 +73,11 @@
             color: var(--dashboard-text);
             min-height: 100vh;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Dashboard Header */
+        /* FIXED - Dashboard Header - NO GAP */
         .dashboard-header {
             position: fixed;
             top: 0;
@@ -70,6 +89,8 @@
             border-bottom: 1px solid var(--dashboard-border);
             z-index: 1000;
             box-shadow: var(--shadow-md);
+            margin: 0;
+            padding: 0;
         }
 
         .dashboard-header-content {
@@ -79,6 +100,8 @@
             height: 100%;
             padding: 0 2rem;
             gap: 2rem;
+            margin: 0;
+            box-sizing: border-box;
         }
 
         .dashboard-logo a {
@@ -115,19 +138,24 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* Main Container */
+        /* FIXED - Main Container - NO GAP */
         .skills-container {
-            padding-top: var(--dashboard-header-height);
-            min-height: calc(100vh - var(--dashboard-header-height));
-            padding: calc(var(--dashboard-header-height) + 2rem) 2rem 2rem;
+            padding-top: 70px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 2rem;
             max-width: 1400px;
             margin: 0 auto;
+            display: block;
+            position: relative;
         }
 
-        /* Page Header */
+        /* FIXED - Page Header - NO GAP */
         .page-header {
             text-align: center;
             margin-bottom: 3rem;
+            margin-top: 0;
+            padding-top: 0;
         }
 
         .page-header h1 {
@@ -251,6 +279,26 @@
             justify-content: center;
             font-size: 1.8rem;
             box-shadow: var(--shadow-md);
+        }
+
+        .category-icon.design {
+            background: var(--secondary-gradient);
+        }
+
+        .category-icon.marketing {
+            background: var(--warning-gradient);
+        }
+
+        .category-icon.data {
+            background: var(--success-gradient);
+        }
+
+        .category-icon.business {
+            background: var(--gold-gradient);
+        }
+
+        .category-icon.cybersecurity {
+            background: var(--silver-gradient);
         }
 
         .category-info h3 {
@@ -637,22 +685,479 @@
             font-weight: 600;
         }
 
+        /* Name Input Modal */
+        .name-input-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .name-input-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .name-input-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .name-input-modal.active .name-input-content {
+            transform: scale(1);
+        }
+
+        .name-input-header {
+            margin-bottom: 2rem;
+        }
+
+        .name-input-header h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .name-input-header p {
+            color: var(--dashboard-text-light);
+            font-size: 1rem;
+        }
+
+        .name-input-form {
+            margin-bottom: 2rem;
+        }
+
+        .name-input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .name-input-field:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .name-input-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .cancel-name-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--dashboard-text);
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-name-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-name-btn:hover {
+            background: var(--dashboard-text);
+            color: white;
+        }
+
+        .confirm-name-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* PREMIUM CERTIFICATE CANVAS - FIXED GAP FREE VERSION */
+        .certificate-canvas {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 1400px;
+            height: 900px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+            border-radius: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        /* Certificate Header with SkillSync Branding */
+        .certificate-header-section {
+            background: var(--primary-gradient);
+            padding: 2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .certificate-company-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .certificate-company-logo {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .certificate-company-logo i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .certificate-header-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .certificate-header-text p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .certificate-badge {
+            width: 100px;
+            height: 100px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .certificate-badge i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        /* Certificate Main Content */
+        .certificate-main-content {
+            flex: 1;
+            padding: 2rem 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 500px;
+        }
+
+        .certificate-achievement-section {
+            margin-bottom: 2rem;
+        }
+
+        .certificate-achievement-icon {
+            width: 140px;
+            height: 140px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 30px 80px rgba(255, 215, 0, 0.4);
+            border: 6px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .certificate-achievement-icon i {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .certificate-completion-text {
+            font-size: 1.6rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .certificate-recipient-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .certificate-course-section {
+            margin-bottom: 2rem;
+        }
+
+        .certificate-course-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .certificate-score-section {
+            margin: 2rem 0;
+        }
+
+        .certificate-score-badge {
+            display: inline-block;
+            background: var(--success-gradient);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4);
+            border: 4px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .certificate-date-section {
+            margin-top: 2rem;
+        }
+
+        .certificate-date-completion {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-issue-date {
+            font-size: 1.4rem;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        /* ENHANCED CERTIFICATE FOOTER - ISSUED BY SKILLSYNC */
+        .certificate-footer-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid rgba(102, 126, 234, 0.1);
+            z-index: 2;
+            position: relative;
+            margin-top: auto;
+            min-height: 120px;
+        }
+
+        .certificate-issuer {
+            text-align: left;
+        }
+
+        .certificate-issuer h4 {
+            font-size: 1.3rem;
+            color: #2d3748;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-issuer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+
+        .certificate-issuer-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .certificate-authority-section {
+            text-align: center;
+        }
+
+        .certificate-signature-area {
+            margin-bottom: 1rem;
+        }
+
+        .authority-signature {
+            width: 220px;
+            height: 100px;
+            margin: 0 auto 0.5rem;
+            position: relative;
+            background-color: transparent;
+        }
+
+        .signature-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .certificate-authority-name {
+            font-size: 1.3rem;
+            color: #2d3748;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .certificate-authority-title {
+            font-size: 1.1rem;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .certificate-verification {
+            text-align: right;
+        }
+
+        .certificate-verification h4 {
+            font-size: 1.2rem;
+            color: #2d3748;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-id-number {
+            font-size: 1rem;
+            color: #718096;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            max-width: 200px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        /* Enhanced Decorative Elements */
+        .certificate-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            color: rgba(102, 126, 234, 0.02);
+            font-weight: 900;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Try Again Button */
+        .try-again-btn {
+            padding: 1rem 2rem;
+            background: var(--warning-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .try-again-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         /* Hidden class for filtering */
         .hidden {
             display: none !important;
         }
 
-        /* Responsive Design */
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* FIXED - Mobile Responsive - NO GAP */
         @media (max-width: 1024px) {
             .test-categories {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
+            
+            .certificate-canvas {
+                width: 1200px;
+                height: 800px;
+            }
         }
 
         @media (max-width: 768px) {
             .skills-container {
-                padding: calc(var(--dashboard-header-height) + 1rem) 1rem 1rem;
+                padding: 70px 1rem 1rem 1rem;
             }
 
             .page-header h1 {
@@ -679,6 +1184,48 @@
 
             .search-container {
                 max-width: 100%;
+            }
+
+            .certificate-canvas {
+                width: 1000px;
+                height: 700px;
+            }
+
+            .certificate-footer-section {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+                padding: 1rem 2rem;
+                min-height: 100px;
+            }
+
+            .certificate-verification {
+                text-align: center;
+            }
+
+            .certificate-issuer {
+                text-align: center;
+            }
+
+            .certificate-header-section {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .certificate-company-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .certificate-main-content {
+                padding: 1.5rem 2rem;
+                min-height: 450px;
+            }
+
+            .dashboard-header-content {
+                padding: 0 1rem;
+                gap: 1rem;
             }
         }
 
@@ -721,6 +1268,56 @@
                 opacity: 1;
             }
         }
+
+        /* Share Modal Styles */
+        .share-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--dashboard-card-bg);
+            border: 2px solid var(--dashboard-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--dashboard-text);
+            text-decoration: none;
+        }
+        
+        .share-option:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+        
+        .share-option i {
+            font-size: 1.5rem;
+        }
+        
+        .copy-link-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .copy-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .copy-link-btn.copied {
+            background: var(--success-gradient);
+        }
     </style>
 </head>
 <body>
@@ -747,12 +1344,158 @@
         </div>
     </header>
 
+    <!-- ENHANCED PROFESSIONAL CERTIFICATE CANVAS - FIXED VERSION -->
+    <div class="certificate-canvas" id="certificateCanvas">
+        <!-- Enhanced Watermark -->
+        <div class="certificate-watermark">SKILLSYNC</div>
+        
+        <!-- Premium Certificate Header -->
+        <div class="certificate-header-section">
+            <div class="certificate-company-section">
+                <div class="certificate-company-logo">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="certificate-header-text">
+                    <h1>Certificate</h1>
+                    <p>of Professional Excellence</p>
+                </div>
+            </div>
+            <div class="certificate-badge">
+                <i class="fas fa-award"></i>
+            </div>
+        </div>
+        
+        <!-- Enhanced Certificate Main Content -->
+        <div class="certificate-main-content">
+            <div class="certificate-achievement-section">
+                <div class="certificate-achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+            </div>
+            
+            <div class="certificate-completion-text">
+                This certifies that
+            </div>
+            
+            <div class="certificate-recipient-name" id="certName">
+                Ayush Kumar
+            </div>
+            
+            <div class="certificate-completion-text">
+                has successfully completed the
+            </div>
+            
+            <div class="certificate-course-section">
+                <div class="certificate-course-title" id="certTest">
+                    JavaScript Fundamentals Assessment
+                </div>
+                
+                <div class="certificate-score-section">
+                    <div class="certificate-completion-text">
+                        with an outstanding score of
+                    </div>
+                    <div class="certificate-score-badge" id="certScore">
+                        85%
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certificate-date-section">
+                <div class="certificate-date-completion">
+                    Completed on <span id="certDate">August 02, 2025</span>
+                </div>
+                <div class="certificate-issue-date">
+                    Duration: <span id="certDuration">45 minutes</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ENHANCED Certificate Footer - ISSUED BY SKILLSYNC -->
+        <div class="certificate-footer-section">
+            <div class="certificate-issuer">
+                <h4>Issued by</h4>
+                <div class="certificate-issuer-name">SkillSync AI</div>
+                <div class="certificate-issuer-subtitle">Professional Learning Platform</div>
+            </div>
+            
+            <div class="certificate-authority-section">
+                <div class="certificate-signature-area">
+                    <div class="authority-signature">
+                        <!-- Enhanced Professional Authority Signature -->
+                        <svg class="signature-svg" viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Professional Authority Signature Paths -->
+                            <path d="M20,60 Q35,30 60,45 Q85,60 110,35 Q135,55 160,40 Q185,25 210,50 Q235,65 250,45" 
+                                  stroke="#2d3748" 
+                                  stroke-width="3" 
+                                  fill="none" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round"/>
+                            <path d="M25,70 Q45,55 65,65 Q85,75 105,60 Q125,70 145,65" 
+                                  stroke="#2d3748" 
+                                  stroke-width="2.5" 
+                                  fill="none" 
+                                  stroke-linecap="round"/>
+                            <path d="M160,65 Q180,50 200,60 Q220,70 240,55" 
+                                  stroke="#2d3748" 
+                                  stroke-width="2.5" 
+                                  fill="none" 
+                                  stroke-linecap="round"/>
+                            <!-- Professional Authority Name -->
+                            <text x="50" y="85" 
+                                  font-family="Dancing Script, cursive" 
+                                  font-size="20" 
+                                  fill="#2d3748" 
+                                  font-weight="700" 
+                                  opacity="0.8">Dr. Rajesh Sharma</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="certificate-authority-name">Dr. Rajesh Sharma</div>
+                <div class="certificate-authority-title">Director of Education</div>
+            </div>
+            
+            <div class="certificate-verification">
+                <h4>Certificate ID</h4>
+                <div class="certificate-id-number" id="certId">
+                    SS-2025-AK001
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Name Input Modal -->
+    <div class="name-input-modal" id="nameInputModal">
+        <div class="name-input-content">
+            <div class="name-input-header">
+                <h3>🏆 Generate Premium Certificate</h3>
+                <p>Enter your name as you want it to appear on the certificate</p>
+            </div>
+            
+            <div class="name-input-form">
+                <input type="text" 
+                       class="name-input-field" 
+                       id="certificateName" 
+                       placeholder="Enter your full name" 
+                       maxlength="50">
+            </div>
+            
+            <div class="name-input-actions">
+                <button class="cancel-name-btn" onclick="cancelNameInput()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="confirm-name-btn" onclick="confirmNameAndDownload()">
+                    <i class="fas fa-download"></i> Generate Certificate
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Container -->
     <div class="skills-container">
         <!-- Page Header -->
         <div class="page-header">
             <h1>🏆 Skill Assessments</h1>
-            <p>Test your skills, get certified, and boost your profile credibility!</p>
+            <p>Test your skills, get certified, and boost your profile credibility across all domains!</p>
         </div>
 
         <!-- Search Section -->
@@ -765,7 +1508,7 @@
 
         <!-- Test Categories -->
         <div class="test-categories" id="testCategories">
-            <!-- Programming Tests -->
+            <!-- Programming & Development Tests -->
             <div class="category-card" data-category="programming">
                 <div class="category-header">
                     <div class="category-icon">
@@ -773,21 +1516,21 @@
                     </div>
                     <div class="category-info">
                         <h3>Programming & Development</h3>
-                        <p>Test your coding skills across various technologies</p>
+                        <p>Test your coding skills across various technologies and frameworks</p>
                     </div>
                 </div>
                 
                 <div class="category-stats">
                     <div class="stat-item">
-                        <div class="stat-number">25</div>
+                        <div class="stat-number">28</div>
                         <div class="stat-label">Tests Available</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">12k+</div>
+                        <div class="stat-number">15k+</div>
                         <div class="stat-label">Students Tested</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">4.8</div>
+                        <div class="stat-number">4.9</div>
                         <div class="stat-label">Average Rating</div>
                     </div>
                 </div>
@@ -834,33 +1577,33 @@
                 </div>
 
                 <button class="view-all-btn" onclick="viewAllTests('programming')">
-                    View All Programming Tests (22 more)
+                    View All Programming Tests (25 more)
                 </button>
             </div>
 
-            <!-- Design Tests -->
+            <!-- Design & Creativity Tests -->
             <div class="category-card" data-category="design">
                 <div class="category-header">
-                    <div class="category-icon">
+                    <div class="category-icon design">
                         <i class="fas fa-palette"></i>
                     </div>
                     <div class="category-info">
                         <h3>Design & Creativity</h3>
-                        <p>Assess your design thinking and creative skills</p>
+                        <p>Assess your design thinking, UI/UX, and creative problem-solving skills</p>
                     </div>
                 </div>
                 
                 <div class="category-stats">
                     <div class="stat-item">
-                        <div class="stat-number">18</div>
+                        <div class="stat-number">22</div>
                         <div class="stat-label">Tests Available</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">8k+</div>
+                        <div class="stat-number">11k+</div>
                         <div class="stat-label">Students Tested</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">4.7</div>
+                        <div class="stat-number">4.8</div>
                         <div class="stat-label">Average Rating</div>
                     </div>
                 </div>
@@ -907,25 +1650,171 @@
                 </div>
 
                 <button class="view-all-btn" onclick="viewAllTests('design')">
-                    View All Design Tests (15 more)
+                    View All Design Tests (19 more)
                 </button>
             </div>
 
-            <!-- Marketing Tests -->
+            <!-- Digital Marketing Tests -->
             <div class="category-card" data-category="marketing">
                 <div class="category-header">
-                    <div class="category-icon">
+                    <div class="category-icon marketing">
                         <i class="fas fa-bullhorn"></i>
                     </div>
                     <div class="category-info">
                         <h3>Digital Marketing</h3>
-                        <p>Prove your marketing and analytics expertise</p>
+                        <p>Master social media, SEO, content marketing, and digital advertising</p>
                     </div>
                 </div>
                 
                 <div class="category-stats">
                     <div class="stat-item">
-                        <div class="stat-number">15</div>
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">9k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.7</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Social Media Marketing</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Social Media Marketing', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>SEO & Content Strategy</h5>
+                                <div class="test-meta">30 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('SEO & Content Strategy', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Google Ads & Analytics</h5>
+                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Google Ads & Analytics', 'marketing')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('marketing')">
+                    View All Marketing Tests (15 more)
+                </button>
+            </div>
+
+            <!-- Data Science & Analytics -->
+            <div class="category-card" data-category="data">
+                <div class="category-header">
+                    <div class="category-icon data">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Data Science & Analytics</h3>
+                        <p>Test your skills in data analysis, machine learning, and statistics</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Tests Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7k+</div>
+                        <div class="stat-label">Students Tested</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="test-list">
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-beginner">Beginner</div>
+                            <div class="test-details">
+                                <h5>Statistics Fundamentals</h5>
+                                <div class="test-meta">25 questions • 40 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Statistics Fundamentals', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
+                            <div class="test-details">
+                                <h5>Excel Data Analysis</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Excel Data Analysis', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+
+                    <div class="test-item">
+                        <div class="test-info">
+                            <div class="test-difficulty difficulty-advanced">Advanced</div>
+                            <div class="test-details">
+                                <h5>Machine Learning Basics</h5>
+                                <div class="test-meta">35 questions • 55 mins • Certificate included</div>
+                            </div>
+                        </div>
+                        <button class="start-test-btn" onclick="startTest('Machine Learning Basics', 'data')">
+                            Start Test
+                        </button>
+                    </div>
+                </div>
+
+                <button class="view-all-btn" onclick="viewAllTests('data')">
+                    View All Data Science Tests (17 more)
+                </button>
+            </div>
+
+            <!-- Business & Management -->
+            <div class="category-card" data-category="business">
+                <div class="category-header">
+                    <div class="category-icon business">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Business & Management</h3>
+                        <p>Develop leadership, project management, and business strategy skills</p>
+                    </div>
+                </div>
+                
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">16</div>
                         <div class="stat-label">Tests Available</div>
                     </div>
                     <div class="stat-item">
@@ -943,11 +1832,11 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-beginner">Beginner</div>
                             <div class="test-details">
-                                <h5>Digital Marketing Basics</h5>
-                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
+                                <h5>Project Management Basics</h5>
+                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('Digital Marketing Basics', 'marketing')">
+                        <button class="start-test-btn" onclick="startTest('Project Management Basics', 'business')">
                             Start Test
                         </button>
                     </div>
@@ -956,11 +1845,11 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-intermediate">Intermediate</div>
                             <div class="test-details">
-                                <h5>SEO & Analytics</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
+                                <h5>Leadership & Team Management</h5>
+                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('SEO & Analytics', 'marketing')">
+                        <button class="start-test-btn" onclick="startTest('Leadership & Team Management', 'business')">
                             Start Test
                         </button>
                     </div>
@@ -969,36 +1858,36 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-advanced">Advanced</div>
                             <div class="test-details">
-                                <h5>Social Media Strategy</h5>
-                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
+                                <h5>Business Strategy & Planning</h5>
+                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('Social Media Strategy', 'marketing')">
+                        <button class="start-test-btn" onclick="startTest('Business Strategy & Planning', 'business')">
                             Start Test
                         </button>
                     </div>
                 </div>
 
-                <button class="view-all-btn" onclick="viewAllTests('marketing')">
-                    View All Marketing Tests (12 more)
+                <button class="view-all-btn" onclick="viewAllTests('business')">
+                    View All Business Tests (13 more)
                 </button>
             </div>
 
-            <!-- Data Science Tests -->
-            <div class="category-card" data-category="data">
+            <!-- Cybersecurity -->
+            <div class="category-card" data-category="cybersecurity">
                 <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="category-icon cybersecurity">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="category-info">
-                        <h3>Data Science & Analytics</h3>
-                        <p>Validate your data analysis and ML skills</p>
+                        <h3>Cybersecurity</h3>
+                        <p>Master network security, ethical hacking, and information protection</p>
                     </div>
                 </div>
                 
                 <div class="category-stats">
                     <div class="stat-item">
-                        <div class="stat-number">20</div>
+                        <div class="stat-number">14</div>
                         <div class="stat-label">Tests Available</div>
                     </div>
                     <div class="stat-item">
@@ -1016,11 +1905,11 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-beginner">Beginner</div>
                             <div class="test-details">
-                                <h5>Excel Data Analysis</h5>
+                                <h5>Cybersecurity Fundamentals</h5>
                                 <div class="test-meta">20 questions • 30 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('Excel Data Analysis', 'data')">
+                        <button class="start-test-btn" onclick="startTest('Cybersecurity Fundamentals', 'cybersecurity')">
                             Start Test
                         </button>
                     </div>
@@ -1029,157 +1918,11 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-intermediate">Intermediate</div>
                             <div class="test-details">
-                                <h5>SQL Database Queries</h5>
-                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('SQL Database Queries', 'data')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>Machine Learning Fundamentals</h5>
-                                <div class="test-meta">40 questions • 60 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Machine Learning Fundamentals', 'data')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('data')">
-                    View All Data Science Tests (17 more)
-                </button>
-            </div>
-
-            <!-- Business & Management -->
-            <div class="category-card" data-category="business">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Business & Management</h3>
-                        <p>Test your business acumen and leadership skills</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.5</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>Business Communication</h5>
-                                <div class="test-meta">15 questions • 25 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Business Communication', 'business')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Project Management</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Project Management', 'business')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>Strategic Planning</h5>
+                                <h5>Network Security</h5>
                                 <div class="test-meta">25 questions • 40 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('Strategic Planning', 'business')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('business')">
-                    View All Business Tests (9 more)
-                </button>
-            </div>
-
-            <!-- Cloud & DevOps -->
-            <div class="category-card" data-category="cloud">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Cloud & DevOps</h3>
-                        <p>Master cloud platforms and DevOps practices</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">16</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">3k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.7</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>AWS Cloud Fundamentals</h5>
-                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('AWS Cloud Fundamentals', 'cloud')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Docker & Containerization</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Docker & Containerization', 'cloud')">
+                        <button class="start-test-btn" onclick="startTest('Network Security', 'cybersecurity')">
                             Start Test
                         </button>
                     </div>
@@ -1188,383 +1931,18 @@
                         <div class="test-info">
                             <div class="test-difficulty difficulty-advanced">Advanced</div>
                             <div class="test-details">
-                                <h5>Kubernetes Orchestration</h5>
-                                <div class="test-meta">35 questions • 55 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Kubernetes Orchestration', 'cloud')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('cloud')">
-                    View All Cloud & DevOps Tests (13 more)
-                </button>
-            </div>
-
-            <!-- Cybersecurity -->
-            <div class="category-card" data-category="security">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Cybersecurity</h3>
-                        <p>Assess your security knowledge and practices</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">14</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">2k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.8</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>Network Security Basics</h5>
-                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Network Security Basics', 'security')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Ethical Hacking</h5>
+                                <h5>Ethical Hacking & Penetration Testing</h5>
                                 <div class="test-meta">35 questions • 50 mins • Certificate included</div>
                             </div>
                         </div>
-                        <button class="start-test-btn" onclick="startTest('Ethical Hacking', 'security')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>Security Audit & Compliance</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Security Audit & Compliance', 'security')">
+                        <button class="start-test-btn" onclick="startTest('Ethical Hacking & Penetration Testing', 'cybersecurity')">
                             Start Test
                         </button>
                     </div>
                 </div>
 
-                <button class="view-all-btn" onclick="viewAllTests('security')">
+                <button class="view-all-btn" onclick="viewAllTests('cybersecurity')">
                     View All Cybersecurity Tests (11 more)
-                </button>
-            </div>
-
-            <!-- Mobile Development -->
-            <div class="category-card" data-category="mobile">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Mobile Development</h3>
-                        <p>Test your mobile app development skills</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">18</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">7k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.6</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>Android Development Basics</h5>
-                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Android Development Basics', 'mobile')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>React Native Development</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('React Native Development', 'mobile')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>iOS Swift Programming</h5>
-                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('iOS Swift Programming', 'mobile')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('mobile')">
-                    View All Mobile Development Tests (15 more)
-                </button>
-            </div>
-
-            <!-- AI & Machine Learning -->
-            <div class="category-card" data-category="ai">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>AI & Machine Learning</h3>
-                        <p>Validate your AI/ML knowledge and implementation skills</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">22</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.9</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>AI Fundamentals</h5>
-                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('AI Fundamentals', 'ai')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Python for Machine Learning</h5>
-                                <div class="test-meta">35 questions • 50 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Python for Machine Learning', 'ai')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>Deep Learning & Neural Networks</h5>
-                                <div class="test-meta">40 questions • 60 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Deep Learning & Neural Networks', 'ai')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('ai')">
-                    View All AI & ML Tests (19 more)
-                </button>
-            </div>
-
-            <!-- Quality Assurance -->
-            <div class="category-card" data-category="qa">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Quality Assurance</h3>
-                        <p>Master software testing and QA methodologies</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">13</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">3k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.5</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>Software Testing Fundamentals</h5>
-                                <div class="test-meta">25 questions • 35 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Software Testing Fundamentals', 'qa')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Automated Testing with Selenium</h5>
-                                <div class="test-meta">30 questions • 45 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Automated Testing with Selenium', 'qa')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>Performance Testing</h5>
-                                <div class="test-meta">28 questions • 40 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Performance Testing', 'qa')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('qa')">
-                    View All QA Tests (10 more)
-                </button>
-            </div>
-
-            <!-- Blockchain & Crypto -->
-            <div class="category-card" data-category="blockchain">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="fas fa-link"></i>
-                    </div>
-                    <div class="category-info">
-                        <h3>Blockchain & Cryptocurrency</h3>
-                        <p>Explore decentralized technologies and smart contracts</p>
-                    </div>
-                </div>
-                
-                <div class="category-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">10</div>
-                        <div class="stat-label">Tests Available</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1k+</div>
-                        <div class="stat-label">Students Tested</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.7</div>
-                        <div class="stat-label">Average Rating</div>
-                    </div>
-                </div>
-
-                <div class="test-list">
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-beginner">Beginner</div>
-                            <div class="test-details">
-                                <h5>Blockchain Basics</h5>
-                                <div class="test-meta">20 questions • 30 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Blockchain Basics', 'blockchain')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-intermediate">Intermediate</div>
-                            <div class="test-details">
-                                <h5>Ethereum Smart Contracts</h5>
-                                <div class="test-meta">25 questions • 40 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('Ethereum Smart Contracts', 'blockchain')">
-                            Start Test
-                        </button>
-                    </div>
-
-                    <div class="test-item">
-                        <div class="test-info">
-                            <div class="test-difficulty difficulty-advanced">Advanced</div>
-                            <div class="test-details">
-                                <h5>DeFi & Web3 Development</h5>
-                                <div class="test-meta">30 questions • 50 mins • Certificate included</div>
-                            </div>
-                        </div>
-                        <button class="start-test-btn" onclick="startTest('DeFi & Web3 Development', 'blockchain')">
-                            Start Test
-                        </button>
-                    </div>
-                </div>
-
-                <button class="view-all-btn" onclick="viewAllTests('blockchain')">
-                    View All Blockchain Tests (7 more)
                 </button>
             </div>
         </div>
@@ -1599,22 +1977,7 @@
                     </div>
                     
                     <div class="options-list" id="optionsList">
-                        <div class="option-item" onclick="selectOption(this, 0)">
-                            <div class="option-radio"></div>
-                            <span>var myVariable;</span>
-                        </div>
-                        <div class="option-item" onclick="selectOption(this, 1)">
-                            <div class="option-radio"></div>
-                            <span>let myVariable;</span>
-                        </div>
-                        <div class="option-item" onclick="selectOption(this, 2)">
-                            <div class="option-radio"></div>
-                            <span>const myVariable;</span>
-                        </div>
-                        <div class="option-item" onclick="selectOption(this, 3)">
-                            <div class="option-radio"></div>
-                            <span>All of the above</span>
-                        </div>
+                        <!-- Options will be dynamically loaded -->
                     </div>
                 </div>
             </div>
@@ -1657,13 +2020,8 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <button class="start-test-btn" style="margin-right: 1rem;" onclick="downloadCertificate()">
-                        <i class="fas fa-download"></i> Download Certificate
-                    </button>
-                    <button class="view-all-btn" onclick="shareResults()">
-                        <i class="fas fa-share"></i> Share Results
-                    </button>
+                <div style="margin-top: 2rem;" id="resultActions">
+                    <!-- Actions will be dynamically added based on score -->
                 </div>
             </div>
         </div>
@@ -1677,8 +2035,10 @@
         let selectedAnswers = [];
         let testTimer = null;
         let timeLeft = 0;
+        let finalTestScore = 0;
+        let certificateUserName = '';
 
-        // Demo questions for different tests
+        // Comprehensive demo questions for all departments
         const testQuestions = {
             'JavaScript Fundamentals': [
                 {
@@ -1760,12 +2120,417 @@
                     options: ["To save ink", "To improve readability and focus", "To make it look empty", "To reduce file size"],
                     correct: 1
                 }
+            ],
+            'Python Basics': [
+                {
+                    question: "What is the correct file extension for Python files?",
+                    options: [".python", ".py", ".pt", ".pyt"],
+                    correct: 1
+                },
+                {
+                    question: "Which of the following is used to define a function in Python?",
+                    options: ["function", "def", "define", "func"],
+                    correct: 1
+                },
+                {
+                    question: "How do you create a comment in Python?",
+                    options: ["// comment", "<!-- comment -->", "# comment", "/* comment */"],
+                    correct: 2
+                },
+                {
+                    question: "Which data type is ordered and changeable in Python?",
+                    options: ["Tuple", "Set", "List", "Dictionary"],
+                    correct: 2
+                },
+                {
+                    question: "What does the len() function do?",
+                    options: ["Returns the length of an object", "Creates a new list", "Sorts an array", "Converts to string"],
+                    correct: 0
+                }
+            ],
+            'Social Media Marketing': [
+                {
+                    question: "What is the ideal posting frequency for Instagram?",
+                    options: ["Once a week", "1-2 times per day", "5-10 times per day", "Once a month"],
+                    correct: 1
+                },
+                {
+                    question: "Which metric measures engagement on social media?",
+                    options: ["Impressions", "Reach", "Likes, comments, shares", "Followers"],
+                    correct: 2
+                },
+                {
+                    question: "What is the character limit for Twitter posts?",
+                    options: ["140 characters", "280 characters", "500 characters", "No limit"],
+                    correct: 1
+                },
+                {
+                    question: "Which platform is best for B2B marketing?",
+                    options: ["Instagram", "TikTok", "LinkedIn", "Snapchat"],
+                    correct: 2
+                },
+                {
+                    question: "What does CTR stand for in digital marketing?",
+                    options: ["Click Through Rate", "Cost To Run", "Customer Target Reach", "Content Target Rating"],
+                    correct: 0
+                }
+            ],
+            'Statistics Fundamentals': [
+                {
+                    question: "What is the mean of the numbers 2, 4, 6, 8, 10?",
+                    options: ["4", "6", "8", "10"],
+                    correct: 1
+                },
+                {
+                    question: "Which measure of central tendency is most affected by outliers?",
+                    options: ["Mean", "Median", "Mode", "Range"],
+                    correct: 0
+                },
+                {
+                    question: "What does a correlation coefficient of 0.8 indicate?",
+                    options: ["Weak positive correlation", "Strong positive correlation", "No correlation", "Strong negative correlation"],
+                    correct: 1
+                },
+                {
+                    question: "In a normal distribution, what percentage of data falls within one standard deviation?",
+                    options: ["68%", "95%", "99.7%", "50%"],
+                    correct: 0
+                },
+                {
+                    question: "What is the purpose of a hypothesis test?",
+                    options: ["To describe data", "To make inferences about populations", "To create graphs", "To calculate averages"],
+                    correct: 1
+                }
+            ],
+            'Project Management Basics': [
+                {
+                    question: "What are the five phases of project management?",
+                    options: ["Plan, Do, Check, Act, Review", "Initiation, Planning, Execution, Monitoring, Closure", "Start, Middle, End, Review, Close", "Research, Plan, Execute, Test, Deploy"],
+                    correct: 1
+                },
+                {
+                    question: "What is a Gantt chart used for?",
+                    options: ["Budget tracking", "Resource allocation", "Project timeline visualization", "Risk assessment"],
+                    correct: 2
+                },
+                {
+                    question: "What does the critical path represent?",
+                    options: ["The most expensive tasks", "The longest sequence of dependent tasks", "The most important stakeholders", "The riskiest activities"],
+                    correct: 1
+                },
+                {
+                    question: "What is scope creep?",
+                    options: ["Reducing project budget", "Uncontrolled expansion of project scope", "Delaying project timeline", "Changing project manager"],
+                    correct: 1
+                },
+                {
+                    question: "Which methodology emphasizes iterative development?",
+                    options: ["Waterfall", "Agile", "Traditional", "Linear"],
+                    correct: 1
+                }
+            ],
+            'Cybersecurity Fundamentals': [
+                {
+                    question: "What does CIA stand for in cybersecurity?",
+                    options: ["Central Intelligence Agency", "Confidentiality, Integrity, Availability", "Computer Information Access", "Cyber Intelligence Analysis"],
+                    correct: 1
+                },
+                {
+                    question: "What is phishing?",
+                    options: ["A type of malware", "A social engineering attack", "A firewall technique", "A data encryption method"],
+                    correct: 1
+                },
+                {
+                    question: "Which of the following is the strongest password?",
+                    options: ["password123", "MyDog'sName", "Tr0ub4dor&3", "P@ssw0rd!2024#Secure"],
+                    correct: 3
+                },
+                {
+                    question: "What is two-factor authentication?",
+                    options: ["Using two passwords", "Using two security questions", "Using two different verification methods", "Using two different devices"],
+                    correct: 2
+                },
+                {
+                    question: "What is the primary purpose of a firewall?",
+                    options: ["To encrypt data", "To backup files", "To control network traffic", "To scan for viruses"],
+                    correct: 2
+                }
+            ],
+            'Figma Mastery': [
+                {
+                    question: "What is Figma primarily used for?",
+                    options: ["Video editing", "UI/UX Design", "3D modeling", "Photo editing"],
+                    correct: 1
+                },
+                {
+                    question: "Which feature allows real-time collaboration in Figma?",
+                    options: ["Multiplayer editing", "Version control", "Auto-save", "Cloud sync"],
+                    correct: 0
+                },
+                {
+                    question: "What is a component in Figma?",
+                    options: ["A color palette", "A reusable design element", "A font family", "A layer effect"],
+                    correct: 1
+                },
+                {
+                    question: "How do you create a prototype in Figma?",
+                    options: ["Using the prototype tab", "Through code", "With plugins only", "It's automatic"],
+                    correct: 0
+                },
+                {
+                    question: "What is the purpose of constraints in Figma?",
+                    options: ["To limit colors", "To control responsive behavior", "To restrict text", "To set permissions"],
+                    correct: 1
+                }
+            ],
+            'Graphic Design Fundamentals': [
+                {
+                    question: "What is the golden ratio in design?",
+                    options: ["1:1", "1:1.618", "2:3", "3:4"],
+                    correct: 1
+                },
+                {
+                    question: "Which color model is primarily used for print design?",
+                    options: ["RGB", "CMYK", "HSB", "LAB"],
+                    correct: 1
+                },
+                {
+                    question: "What does DPI stand for?",
+                    options: ["Dots Per Inch", "Design Per Image", "Digital Print Interface", "Data Processing Instruction"],
+                    correct: 0
+                },
+                {
+                    question: "Which principle creates visual stability in design?",
+                    options: ["Movement", "Balance", "Contrast", "Emphasis"],
+                    correct: 1
+                },
+                {
+                    question: "What is kerning in typography?",
+                    options: ["Line spacing", "Letter spacing", "Word spacing", "Paragraph spacing"],
+                    correct: 1
+                }
+            ],
+            'SEO & Content Strategy': [
+                {
+                    question: "What does SEO stand for?",
+                    options: ["Search Engine Optimization", "Social Engagement Online", "Strategic Email Outreach", "Site Engagement Optimization"],
+                    correct: 0
+                },
+                {
+                    question: "Which factor is most important for on-page SEO?",
+                    options: ["Backlinks", "Title tags and meta descriptions", "Social media shares", "Page loading speed"],
+                    correct: 1
+                },
+                {
+                    question: "What is keyword density?",
+                    options: ["Number of keywords on a page", "Percentage of keywords in content", "Quality of keywords used", "Keywords in title tags"],
+                    correct: 1
+                },
+                {
+                    question: "Which content length typically ranks better in search results?",
+                    options: ["Under 500 words", "500-1000 words", "1000-2000 words", "Over 2000 words"],
+                    correct: 2
+                },
+                {
+                    question: "What is the ideal frequency for publishing blog content?",
+                    options: ["Daily", "2-3 times per week", "Once a week", "Once a month"],
+                    correct: 1
+                }
+            ],
+            'Google Ads & Analytics': [
+                {
+                    question: "What is Quality Score in Google Ads?",
+                    options: ["Ad relevance rating", "Website loading speed", "Number of clicks", "Budget allocation"],
+                    correct: 0
+                },
+                {
+                    question: "Which bidding strategy maximizes conversions?",
+                    options: ["Manual CPC", "Target CPA", "Maximize conversions", "Enhanced CPC"],
+                    correct: 2
+                },
+                {
+                    question: "What does CTR stand for in Google Ads?",
+                    options: ["Cost To Run", "Click Through Rate", "Conversion Tracking Rate", "Campaign Target Reach"],
+                    correct: 1
+                },
+                {
+                    question: "Which Google Analytics metric shows user engagement?",
+                    options: ["Bounce rate", "Page views", "Sessions", "Users"],
+                    correct: 0
+                },
+                {
+                    question: "What is a conversion in Google Ads?",
+                    options: ["A click on an ad", "A desired user action", "An impression", "A keyword match"],
+                    correct: 1
+                }
+            ],
+            'Excel Data Analysis': [
+                {
+                    question: "Which Excel function is used to find the average of a range?",
+                    options: ["SUM", "AVERAGE", "MEAN", "COUNT"],
+                    correct: 1
+                },
+                {
+                    question: "What is a pivot table used for?",
+                    options: ["Creating charts", "Summarizing data", "Formatting cells", "Printing reports"],
+                    correct: 1
+                },
+                {
+                    question: "Which function helps find a value in a table?",
+                    options: ["FIND", "SEARCH", "VLOOKUP", "MATCH"],
+                    correct: 2
+                },
+                {
+                    question: "What does the IF function do?",
+                    options: ["Adds numbers", "Makes logical comparisons", "Counts cells", "Formats text"],
+                    correct: 1
+                },
+                {
+                    question: "Which chart type is best for showing trends over time?",
+                    options: ["Pie chart", "Bar chart", "Line chart", "Scatter plot"],
+                    correct: 2
+                }
+            ],
+            'Machine Learning Basics': [
+                {
+                    question: "What is supervised learning?",
+                    options: ["Learning without data", "Learning with labeled data", "Learning without labels", "Learning with images only"],
+                    correct: 1
+                },
+                {
+                    question: "Which algorithm is commonly used for classification?",
+                    options: ["Linear regression", "Decision tree", "K-means clustering", "Principal component analysis"],
+                    correct: 1
+                },
+                {
+                    question: "What is overfitting in machine learning?",
+                    options: ["Model performs well on all data", "Model memorizes training data", "Model is too simple", "Model has no patterns"],
+                    correct: 1
+                },
+                {
+                    question: "What does cross-validation help with?",
+                    options: ["Data cleaning", "Model evaluation", "Feature selection", "Data visualization"],
+                    correct: 1
+                },
+                {
+                    question: "Which metric is used for regression problems?",
+                    options: ["Accuracy", "Precision", "Mean Squared Error", "F1-score"],
+                    correct: 2
+                }
+            ],
+            'Leadership & Team Management': [
+                {
+                    question: "What is the most important quality of a good leader?",
+                    options: ["Technical skills", "Communication skills", "Authority", "Experience"],
+                    correct: 1
+                },
+                {
+                    question: "Which leadership style involves shared decision-making?",
+                    options: ["Autocratic", "Democratic", "Laissez-faire", "Transactional"],
+                    correct: 1
+                },
+                {
+                    question: "What is emotional intelligence in leadership?",
+                    options: ["IQ level", "Ability to manage emotions", "Technical knowledge", "Years of experience"],
+                    correct: 1
+                },
+                {
+                    question: "How should conflicts in teams be resolved?",
+                    options: ["Ignore them", "Address them directly", "Let team members sort it out", "Escalate to management"],
+                    correct: 1
+                },
+                {
+                    question: "What motivates team members most effectively?",
+                    options: ["Money only", "Recognition and growth", "Fear of consequences", "Strict deadlines"],
+                    correct: 1
+                }
+            ],
+            'Business Strategy & Planning': [
+                {
+                    question: "What is a SWOT analysis used for?",
+                    options: ["Financial planning", "Strategic planning", "HR management", "Marketing campaigns"],
+                    correct: 1
+                },
+                {
+                    question: "Which framework helps analyze competitive forces?",
+                    options: ["SWOT", "Porter's Five Forces", "PESTEL", "Balanced Scorecard"],
+                    correct: 1
+                },
+                {
+                    question: "What is a business model canvas?",
+                    options: ["Financial statement", "Strategic planning tool", "Marketing plan", "Organizational chart"],
+                    correct: 1
+                },
+                {
+                    question: "What does ROI stand for?",
+                    options: ["Rate of Interest", "Return on Investment", "Revenue over Income", "Risk of Investment"],
+                    correct: 1
+                },
+                {
+                    question: "Which metric measures customer retention?",
+                    options: ["Customer Acquisition Cost", "Customer Lifetime Value", "Churn Rate", "Net Promoter Score"],
+                    correct: 2
+                }
+            ],
+            'Network Security': [
+                {
+                    question: "What is a VPN used for?",
+                    options: ["Speeding up internet", "Secure remote access", "Blocking websites", "Managing passwords"],
+                    correct: 1
+                },
+                {
+                    question: "Which protocol is used for secure web browsing?",
+                    options: ["HTTP", "HTTPS", "FTP", "SMTP"],
+                    correct: 1
+                },
+                {
+                    question: "What is network segmentation?",
+                    options: ["Dividing network into smaller parts", "Combining networks", "Encrypting data", "Monitoring traffic"],
+                    correct: 0
+                },
+                {
+                    question: "Which device filters network traffic?",
+                    options: ["Router", "Switch", "Firewall", "Hub"],
+                    correct: 2
+                },
+                {
+                    question: "What is an intrusion detection system?",
+                    options: ["Prevents all attacks", "Monitors for suspicious activity", "Blocks websites", "Manages passwords"],
+                    correct: 1
+                }
+            ],
+            'Ethical Hacking & Penetration Testing': [
+                {
+                    question: "What is the first phase of penetration testing?",
+                    options: ["Exploitation", "Reconnaissance", "Post-exploitation", "Reporting"],
+                    correct: 1
+                },
+                {
+                    question: "Which tool is commonly used for network scanning?",
+                    options: ["Wireshark", "Nmap", "Metasploit", "Burp Suite"],
+                    correct: 1
+                },
+                {
+                    question: "What is social engineering in cybersecurity?",
+                    options: ["Technical hacking", "Manipulating people", "Network scanning", "Code injection"],
+                    correct: 1
+                },
+                {
+                    question: "What does SQL injection target?",
+                    options: ["Web servers", "Databases", "Network routers", "Email systems"],
+                    correct: 1
+                },
+                {
+                    question: "Which methodology is standard for penetration testing?",
+                    options: ["OWASP", "PTES", "NIST", "ISO 27001"],
+                    correct: 1
+                }
             ]
         };
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🏆 Skill Assessments Loaded');
+            console.log('🏆 Enhanced Professional SkillSync Certificate System Loaded - Fixed Version');
             
             // Initialize search functionality
             initializeSearch();
@@ -1786,7 +2551,6 @@
             const categoryCards = document.querySelectorAll('.category-card');
             
             if (!query) {
-                // Show all cards if search is empty
                 categoryCards.forEach(card => {
                     card.classList.remove('hidden');
                 });
@@ -1799,7 +2563,6 @@
                 const testNames = Array.from(card.querySelectorAll('.test-details h5'))
                     .map(h5 => h5.textContent.toLowerCase());
                 
-                // Check if query matches category name, description, or any test name
                 const matches = categoryName.includes(query) || 
                                categoryDescription.includes(query) || 
                                testNames.some(name => name.includes(query));
@@ -1811,7 +2574,6 @@
                 }
             });
             
-            // Show notification for search results
             const visibleCards = document.querySelectorAll('.category-card:not(.hidden)').length;
             if (visibleCards === 0) {
                 showNotification(`No tests found for "${query}" 🔍`, 'info');
@@ -1824,236 +2586,639 @@
         function startTest(testName, category) {
             console.log(`Starting test: ${testName}`);
             
-            // Set up test data
-            currentTestData = {
-                name: testName,
-                category: category,
-                questions: testQuestions[testName] || testQuestions['JavaScript Fundamentals'],
-                timeLimit: 45 * 60 // 45 minutes in seconds
-            };
+                   currentTestData = {
+            name: testName,
+            category: category,
+            questions: testQuestions[testName] || testQuestions['JavaScript Fundamentals'],
+            timeLimit: 45 * 60
+        };
+        
+        currentQuestionIndex = 0;
+        selectedAnswers = new Array(currentTestData.questions.length).fill(-1);
+        timeLeft = currentTestData.timeLimit;
+        
+        document.getElementById('testTitle').textContent = testName;
+        document.getElementById('totalQuestions').textContent = currentTestData.questions.length;
+        document.getElementById('testModal').classList.add('active');
+        
+        loadQuestion();
+        startTestTimer();
+        
+        showNotification(`${testName} test started! Good luck! 🚀`, 'success');
+    }
+
+    // Load current question
+    function loadQuestion() {
+        const question = currentTestData.questions[currentQuestionIndex];
+        
+        document.getElementById('questionText').textContent = question.question;
+        document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+        
+        const progress = ((currentQuestionIndex + 1) / currentTestData.questions.length) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+        
+        const optionsList = document.getElementById('optionsList');
+        optionsList.innerHTML = '';
+        
+        question.options.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option-item';
+            optionDiv.onclick = () => selectOption(optionDiv, index);
             
-            currentQuestionIndex = 0;
-            selectedAnswers = new Array(currentTestData.questions.length).fill(-1);
-            timeLeft = currentTestData.timeLimit;
+            if (selectedAnswers[currentQuestionIndex] === index) {
+                optionDiv.classList.add('selected');
+            }
             
-            // Open test modal
-            document.getElementById('testTitle').textContent = testName;
-            document.getElementById('totalQuestions').textContent = currentTestData.questions.length;
-            document.getElementById('testModal').classList.add('active');
+            optionDiv.innerHTML = `
+                <div class="option-radio"></div>
+                <span>${option}</span>
+            `;
             
-            // Load first question
+            optionsList.appendChild(optionDiv);
+        });
+        
+        document.querySelector('.prev-btn').disabled = currentQuestionIndex === 0;
+        
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentQuestionIndex === currentTestData.questions.length - 1) {
+            nextBtn.textContent = 'Submit Test';
+            nextBtn.className = 'submit-btn';
+        } else {
+            nextBtn.textContent = 'Next Question';
+            nextBtn.className = 'next-btn';
+        }
+    }
+
+    // Select an option
+    function selectOption(element, optionIndex) {
+        element.parentNode.querySelectorAll('.option-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+        
+        element.classList.add('selected');
+        selectedAnswers[currentQuestionIndex] = optionIndex;
+    }
+
+    // Next question
+    function nextQuestion() {
+        if (currentQuestionIndex === currentTestData.questions.length - 1) {
+            submitTest();
+        } else {
+            currentQuestionIndex++;
             loadQuestion();
-            
-            // Start timer
-            startTestTimer();
-            
-            showNotification(`${testName} test started! Good luck! 🚀`, 'success');
         }
+    }
 
-        // Load current question
-        function loadQuestion() {
-            const question = currentTestData.questions[currentQuestionIndex];
-            
-            document.getElementById('questionText').textContent = question.question;
-            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-            
-            // Update progress
-            const progress = ((currentQuestionIndex + 1) / currentTestData.questions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            
-            // Load options
-            const optionsList = document.getElementById('optionsList');
-            optionsList.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-item';
-                optionDiv.onclick = () => selectOption(optionDiv, index);
-                
-                // Check if this option was previously selected
-                if (selectedAnswers[currentQuestionIndex] === index) {
-                    optionDiv.classList.add('selected');
-                }
-                
-                optionDiv.innerHTML = `
-                    <div class="option-radio"></div>
-                    <span>${option}</span>
-                `;
-                
-                optionsList.appendChild(optionDiv);
-            });
-            
-            // Update buttons
-            document.querySelector('.prev-btn').disabled = currentQuestionIndex === 0;
-            
-            const nextBtn = document.getElementById('nextBtn');
-            if (currentQuestionIndex === currentTestData.questions.length - 1) {
-                nextBtn.textContent = 'Submit Test';
-                nextBtn.className = 'submit-btn';
-            } else {
-                nextBtn.textContent = 'Next Question';
-                nextBtn.className = 'next-btn';
-            }
+    // Previous question
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion();
         }
+    }
 
-        // Select an option
-        function selectOption(element, optionIndex) {
-            // Remove previous selection
-            element.parentNode.querySelectorAll('.option-item').forEach(item => {
-                item.classList.remove('selected');
-            });
+    // Start test timer
+    function startTestTimer() {
+        testTimer = setInterval(() => {
+            timeLeft--;
             
-            // Select current option
-            element.classList.add('selected');
-            selectedAnswers[currentQuestionIndex] = optionIndex;
-        }
-
-        // Next question
-        function nextQuestion() {
-            if (currentQuestionIndex === currentTestData.questions.length - 1) {
-                // Submit test
-                submitTest();
-            } else {
-                currentQuestionIndex++;
-                loadQuestion();
-            }
-        }
-
-        // Previous question
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
-        }
-
-        // Start test timer
-        function startTestTimer() {
-            testTimer = setInterval(() => {
-                timeLeft--;
-                
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                
-                document.getElementById('timeRemaining').textContent = 
-                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (timeLeft <= 0) {
-                    // Time up - auto submit
-                    clearInterval(testTimer);
-                    submitTest();
-                }
-            }, 1000);
-        }
-
-        // Submit test
-        function submitTest() {
-            clearInterval(testTimer);
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
             
-            // Calculate score
-            let correctCount = 0;
-            currentTestData.questions.forEach((question, index) => {
-                if (selectedAnswers[index] === question.correct) {
-                    correctCount++;
-                }
-            });
+            document.getElementById('timeRemaining').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            const scorePercentage = Math.round((correctCount / currentTestData.questions.length) * 100);
-            const timeTaken = Math.round((currentTestData.timeLimit - timeLeft) / 60);
-            
-            // Show results
-            document.getElementById('finalScore').textContent = scorePercentage + '%';
-            document.getElementById('correctAnswers').textContent = correctCount;
-            document.getElementById('totalTime').textContent = timeTaken;
-            
-            let message = '';
-            let rank = '';
-            
-            if (scorePercentage >= 80) {
-                message = 'Excellent! You\'ve mastered this skill! 🌟';
-                rank = 'Top 10%';
-            } else if (scorePercentage >= 60) {
-                message = 'Good job! Keep practicing to improve! 👍';
-                rank = 'Top 30%';
-            } else {
-                message = 'Keep learning and try again! 📚';
-                rank = 'Keep Improving';
-            }
-            
-            document.getElementById('resultsMessage').textContent = message;
-            document.getElementById('rankPercentile').textContent = rank;
-            
-            // Close test modal and show results
-            document.getElementById('testModal').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('resultsModal').classList.add('active');
-            }, 300);
-            
-            showNotification('Test submitted successfully! 🎉', 'success');
-        }
-
-        // Close test
-        function closeTest() {
-            if (confirm('Are you sure you want to exit the test? Your progress will be lost.')) {
+            if (timeLeft <= 0) {
                 clearInterval(testTimer);
-                document.getElementById('testModal').classList.remove('active');
+                submitTest();
             }
-        }
+        }, 1000);
+    }
 
-        // Close results
-        function closeResults() {
-            document.getElementById('resultsModal').classList.remove('active');
-        }
-
-        // Download certificate
-        function downloadCertificate() {
-            showNotification('Certificate download started! 📄', 'success');
-            // In real app, this would generate and download certificate
-        }
-
-        // Share results
-        function shareResults() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My SkillSync Test Results',
-                    text: `I just scored ${document.getElementById('finalScore').textContent} on ${currentTestData.name}!`,
-                    url: window.location.href,
-                });
-            } else {
-                showNotification('Results copied to clipboard! 📋', 'success');
-            }
-        }
-
-        // View all tests
-        function viewAllTests(category) {
-            showNotification(`Showing all ${category} tests...`, 'info');
-            // In real app, this would show expanded test list
-        }
-
-        // Show notification
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type} show`;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-
-        // Close modals when clicking outside
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal-overlay')) {
-                if (e.target.id === 'testModal') {
-                    closeTest();
-                } else if (e.target.id === 'resultsModal') {
-                    closeResults();
-                }
+    // Submit test
+    function submitTest() {
+        clearInterval(testTimer);
+        
+        let correctCount = 0;
+        currentTestData.questions.forEach((question, index) => {
+            if (selectedAnswers[index] === question.correct) {
+                correctCount++;
             }
         });
+        
+        const scorePercentage = Math.round((correctCount / currentTestData.questions.length) * 100);
+        const timeTaken = Math.round((currentTestData.timeLimit - timeLeft) / 60);
+        
+        finalTestScore = scorePercentage;
+        
+        document.getElementById('finalScore').textContent = scorePercentage + '%';
+        document.getElementById('correctAnswers').textContent = correctCount;
+        document.getElementById('totalTime').textContent = timeTaken;
+        
+        let message = '';
+        let rank = '';
+        
+        if (scorePercentage >= 80) {
+            message = 'Excellent! You\'ve passed the test! 🌟';
+            rank = 'Top 10%';
+        } else if (scorePercentage >= 60) {
+            message = 'Good job! Keep practicing to improve! 👍';
+            rank = 'Top 30%';
+        } else {
+            message = 'Keep learning and try again! 📚';
+            rank = 'Keep Improving';
+        }
+        
+        document.getElementById('resultsMessage').textContent = message;
+        document.getElementById('rankPercentile').textContent = rank;
+        
+        // Show appropriate action buttons based on score
+        showResultActions(scorePercentage);
+        
+        document.getElementById('testModal').classList.remove('active');
+        setTimeout(() => {
+            document.getElementById('resultsModal').classList.add('active');
+        }, 300);
+        
+        showNotification('Test submitted successfully! 🎉', 'success');
+    }
+
+    // Show result actions based on score
+    function showResultActions(score) {
+        const resultActions = document.getElementById('resultActions');
+        
+        if (score >= 80) {
+            // Show download certificate button for 80% and above
+            resultActions.innerHTML = `
+                <button class="start-test-btn" style="margin-right: 1rem;" onclick="showNameInput()">
+                    <i class="fas fa-download"></i> 
+                    <span class="btn-text">Download Premium Certificate</span>
+                </button>
+                <button class="view-all-btn" onclick="shareResults()">
+                    <i class="fas fa-share"></i> Share Results
+                </button>
+            `;
+        } else {
+            // Show try again button for below 80%
+            resultActions.innerHTML = `
+                <button class="try-again-btn" onclick="retakeTest()">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+                <button class="view-all-btn" onclick="shareResults()">
+                    <i class="fas fa-share"></i> Share Results
+                </button>
+            `;
+        }
+    }
+
+    // Show name input modal
+    function showNameInput() {
+        if (finalTestScore < 80) {
+            showNotification('Premium Certificate is only available for scores 80% and above! 🏆', 'error');
+            return;
+        }
+
+        // Pre-fill with default name
+        document.getElementById('certificateName').value = 'Ayush Kumar';
+        document.getElementById('nameInputModal').classList.add('active');
+        
+        // Focus on input field
+        setTimeout(() => {
+            document.getElementById('certificateName').focus();
+            document.getElementById('certificateName').select();
+        }, 300);
+    }
+
+    // Cancel name input
+    function cancelNameInput() {
+        document.getElementById('nameInputModal').classList.remove('active');
+    }
+
+    // Confirm name and download certificate
+    async function confirmNameAndDownload() {
+        const nameInput = document.getElementById('certificateName');
+        const userName = nameInput.value.trim();
+        
+        if (!userName) {
+            showNotification('Please enter your name! 📝', 'error');
+            nameInput.focus();
+            return;
+        }
+
+        if (userName.length < 2) {
+            showNotification('Name must be at least 2 characters long! ✍️', 'error');
+            nameInput.focus();
+            return;
+        }
+
+        certificateUserName = userName;
+        
+        // Close name input modal
+        document.getElementById('nameInputModal').classList.remove('active');
+        
+        // Start certificate generation
+        await downloadCertificate();
+    }
+
+    // ENHANCED PREMIUM CERTIFICATE DOWNLOAD - GAP FREE VERSION
+    async function downloadCertificate() {
+        try {
+            updateCertificate();
+            showNotification('Generating gap-free premium certificate... 🎨', 'info');
+            
+            const { jsPDF } = window.jspdf;
+            const certificateElement = document.getElementById('certificateCanvas');
+            
+            // Fixed positioning for perfect capture
+            certificateElement.style.position = 'fixed';
+            certificateElement.style.top = '0';
+            certificateElement.style.left = '0';
+            certificateElement.style.zIndex = '999999';
+            certificateElement.style.width = '1400px';
+            certificateElement.style.height = '900px';
+            certificateElement.style.margin = '0';
+            certificateElement.style.padding = '0';
+            certificateElement.style.border = 'none';
+            certificateElement.style.overflow = 'hidden';
+            
+            // Wait for proper rendering
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Enhanced canvas settings - NO GAPS
+            const canvas = await html2canvas(certificateElement, {
+                scale: 2.5,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                width: 1400,
+                height: 900,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: 1400,
+                windowHeight: 900,
+                x: 0,
+                y: 0,
+                ignoreElements: function(element) {
+                    // Ignore any potential gap-causing elements
+                    return element.classList && element.classList.contains('gap-element');
+                }
+            });
+            
+            // Hide certificate
+            certificateElement.style.position = 'absolute';
+            certificateElement.style.top = '-9999px';
+            certificateElement.style.left = '-9999px';
+            certificateElement.style.zIndex = 'auto';
+            
+            const imgData = canvas.toDataURL('image/png', 1.0);
+            
+            // Create PDF with perfect fit - NO GAPS
+            const pdf = new jsPDF({
+                orientation: 'landscape',
+                unit: 'mm',
+                format: [297, 210], // Exact A4 landscape
+                compress: true
+            });
+            
+            // Perfect fit calculation
+            const pdfWidth = 297;
+            const pdfHeight = 210;
+            
+            // Add image with exact fit - NO MARGINS/GAPS
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, '', 'FAST');
+            
+            const filename = `SkillSync_Certificate_${certificateUserName.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0, 10)}.pdf`;
+            pdf.save(filename);
+            
+            showNotification(`✨ Gap-free certificate downloaded successfully!`, 'success');
+            
+        } catch (error) {
+            console.error('Error generating certificate:', error);
+            showNotification('Error generating certificate. Please try again. 🔄', 'error');
+        }
+    }
+
+    // Update certificate with user's name and test data (Enhanced)
+    function updateCertificate() {
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Generate unique certificate ID
+        const certId = `SS-${new Date().getFullYear()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+        
+        // Calculate duration
+        const totalQuestions = currentTestData.questions.length;
+        const estimatedDuration = `${totalQuestions * 1.5} minutes`;
+        
+        document.getElementById('certName').textContent = certificateUserName || 'John Doe';
+        document.getElementById('certTest').textContent = currentTestData.name + ' Assessment';
+        document.getElementById('certScore').textContent = finalTestScore + '%';
+        document.getElementById('certDate').textContent = currentDate;
+        document.getElementById('certDuration').textContent = estimatedDuration;
+        document.getElementById('certId').textContent = certId;
+    }
+
+    // Retake test
+    function retakeTest() {
+        closeResults();
+        setTimeout(() => {
+            startTest(currentTestData.name, currentTestData.category);
+        }, 500);
+    }
+
+    // Close test
+    function closeTest() {
+        if (confirm('Are you sure you want to exit the test? Your progress will be lost.')) {
+            clearInterval(testTimer);
+            document.getElementById('testModal').classList.remove('active');
+        }
+    }
+
+    // Close results
+    function closeResults() {
+        document.getElementById('resultsModal').classList.remove('active');
+    }
+
+    // Share results
+    function shareResults() {
+        const shareText = `I just scored ${document.getElementById('finalScore').textContent} on ${currentTestData.name} at SkillSync AI! 🎉 #SkillSync #PremiumCertificate`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'My SkillSync Test Results',
+                text: shareText,
+                url: window.location.href,
+            });
+        } else {
+            // Fallback - Create custom share modal
+            createShareModal(shareText);
+        }
+    }
+
+    // Create custom share modal for browsers that don't support navigator.share
+    function createShareModal(shareText) {
+        // Remove existing share modal if any
+        const existingModal = document.getElementById('customShareModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        // Create share modal HTML
+        const shareModal = document.createElement('div');
+        shareModal.id = 'customShareModal';
+        shareModal.className = 'modal-overlay';
+        shareModal.style.zIndex = '30000';
+        
+        shareModal.innerHTML = `
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3>🎉 Share Your Achievement!</h3>
+                    <button class="close-modal" onclick="closeShareModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div style="padding: 2rem 0;">
+                    <div style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--dashboard-border);">
+                        <p style="font-size: 1.1rem; color: var(--dashboard-text); font-weight: 500; line-height: 1.6; margin: 0;">
+                            ${shareText}
+                        </p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <!-- Twitter Share -->
+                        <button class="share-option" onclick="shareToTwitter('${encodeURIComponent(shareText)}')">
+                            <i class="fab fa-twitter" style="color: #1DA1F2;"></i>
+                            <span>Share on Twitter</span>
+                        </button>
+                        
+                        <!-- LinkedIn Share -->
+                        <button class="share-option" onclick="shareToLinkedIn('${encodeURIComponent(shareText)}')">
+                            <i class="fab fa-linkedin" style="color: #0077B5;"></i>
+                            <span>Share on LinkedIn</span>
+                        </button>
+                        
+                        <!-- Facebook Share -->
+                        <button class="share-option" onclick="shareToFacebook()">
+                            <i class="fab fa-facebook" style="color: #4267B2;"></i>
+                            <span>Share on Facebook</span>
+                        </button>
+                        
+                        <!-- WhatsApp Share -->
+                        <button class="share-option" onclick="shareToWhatsApp('${encodeURIComponent(shareText)}')">
+                            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                            <span>Share on WhatsApp</span>
+                        </button>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="copy-link-btn" onclick="copyShareText('${shareText.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-copy"></i>
+                            <span>Copy Text</span>
+                            <span class="loading-spinner"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(shareModal);
+        
+        // Add styles for share modal
+        if (!document.getElementById('shareModalStyles')) {
+            const shareStyles = document.createElement('style');
+            shareStyles.id = 'shareModalStyles';
+            shareStyles.textContent = `
+                .share-option {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 1rem;
+                    background: var(--dashboard-card-bg);
+                    border: 2px solid var(--dashboard-border);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-weight: 600;
+                    color: var(--dashboard-text);
+                    text-decoration: none;
+                }
+                
+                .share-option:hover {
+                    transform: translateY(-2px);
+                    box-shadow: var(--shadow-md);
+                    border-color: var(--primary-color);
+                }
+                
+                .share-option i {
+                    font-size: 1.5rem;
+                }
+                
+                .copy-link-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 1rem 2rem;
+                    background: var(--primary-gradient);
+                    color: white;
+                    border: none;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    position: relative;
+                }
+                
+                .copy-link-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: var(--shadow-md);
+                }
+                
+                .copy-link-btn.copied {
+                    background: var(--success-gradient);
+                }
+            `;
+            document.head.appendChild(shareStyles);
+        }
+        
+        // Show modal with animation
+        setTimeout(() => {
+            shareModal.classList.add('active');
+        }, 10);
+    }
+
+    // Close share modal
+    function closeShareModal() {
+        const shareModal = document.getElementById('customShareModal');
+        if (shareModal) {
+            shareModal.classList.remove('active');
+            setTimeout(() => {
+                shareModal.remove();
+            }, 300);
+        }
+    }
+
+    // Share to Twitter
+    function shareToTwitter(text) {
+        const url = `https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.href)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    // Share to LinkedIn
+    function shareToLinkedIn(text) {
+        const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    // Share to Facebook
+    function shareToFacebook() {
+        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    // Share to WhatsApp
+    function shareToWhatsApp(text) {
+        const url = `https://wa.me/?text=${text}%20${encodeURIComponent(window.location.href)}`;
+        window.open(url, '_blank');
+        closeShareModal();
+    }
+
+    // Copy share text to clipboard
+    async function copyShareText(text) {
+        const copyBtn = document.querySelector('.copy-link-btn');
+        const spinner = copyBtn.querySelector('.loading-spinner');
+        const btnText = copyBtn.querySelector('span:not(.loading-spinner)');
+        
+        try {
+            // Show loading
+            spinner.style.display = 'block';
+            btnText.textContent = 'Copying...';
+            
+            // Copy to clipboard
+            await navigator.clipboard.writeText(text);
+            
+            // Show success
+            copyBtn.classList.add('copied');
+            btnText.textContent = 'Copied!';
+            copyBtn.querySelector('i').className = 'fas fa-check';
+            
+            showNotification('Share text copied to clipboard! 📋', 'success');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                btnText.textContent = 'Copy Text';
+                copyBtn.querySelector('i').className = 'fas fa-copy';
+                copyBtn.classList.remove('copied');
+                spinner.style.display = 'none';
+            }, 2000);
+            
+        } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            copyBtn.classList.add('copied');
+            btnText.textContent = 'Copied!';
+            copyBtn.querySelector('i').className = 'fas fa-check';
+            
+            showNotification('Share text copied to clipboard! 📋', 'success');
+            
+            setTimeout(() => {
+                btnText.textContent = 'Copy Text';
+                copyBtn.querySelector('i').className = 'fas fa-copy';
+                copyBtn.classList.remove('copied');
+                spinner.style.display = 'none';
+            }, 2000);
+        }
+    }
+
+    // View all tests function
+    function viewAllTests(category) {
+        showNotification(`Showing all ${category} tests! More tests coming soon... 🚀`, 'info');
+        
+        // Here you can implement navigation to a dedicated page showing all tests
+        // For now, just show a notification
+        console.log(`Viewing all tests for category: ${category}`);
+    }
+
+    // Show notification function
+    function showNotification(message, type = 'success') {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notif => notif.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        // Hide notification after 4 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }, 4000);
+    }
     </script>
 </body>
 </html>
+
