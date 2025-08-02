@@ -172,6 +172,62 @@
             box-shadow: var(--shadow-md);
         }
 
+        .filter-btn.active, .sort-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Filter Panel */
+        .filter-panel {
+            background: var(--dashboard-card-bg);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+
+        .filter-panel.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-option {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 2px solid var(--dashboard-border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .filter-option:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .filter-option.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
         /* Stats Section */
         .stats-grid {
             display: grid;
@@ -264,6 +320,10 @@
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
+        }
+
+        .application-card.hidden {
+            display: none;
         }
 
         .application-card::before {
@@ -513,6 +573,82 @@
             color: white;
         }
 
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--dashboard-border);
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dashboard-text-light);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--dashboard-border);
+            color: var(--dashboard-text);
+        }
+
+        .modal-body {
+            line-height: 1.6;
+            color: var(--dashboard-text);
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -684,6 +820,18 @@
             </div>
         </div>
 
+        <!-- Filter Panel -->
+        <div class="filter-panel" id="filterPanel">
+            <h4 style="margin-bottom: 1rem; color: var(--dashboard-text); font-weight: 700;">Filter by Status:</h4>
+            <div class="filter-options">
+                <button class="filter-option active" onclick="filterByStatus('all')">All Applications</button>
+                <button class="filter-option" onclick="filterByStatus('pending')">Pending</button>
+                <button class="filter-option" onclick="filterByStatus('interview')">Interview</button>
+                <button class="filter-option" onclick="filterByStatus('accepted')">Accepted</button>
+                <button class="filter-option" onclick="filterByStatus('rejected')">Rejected</button>
+            </div>
+        </div>
+
         <!-- Stats Section -->
         <div class="stats-grid">
             <div class="stat-card">
@@ -691,7 +839,7 @@
                     <i class="fas fa-paper-plane"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">12</div>
+                    <div class="stat-number" id="totalApps">12</div>
                     <div class="stat-label">Total Applications</div>
                 </div>
             </div>
@@ -700,7 +848,7 @@
                     <i class="fas fa-clock"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">8</div>
+                    <div class="stat-number" id="pendingApps">8</div>
                     <div class="stat-label">Pending Review</div>
                 </div>
             </div>
@@ -709,7 +857,7 @@
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">3</div>
+                    <div class="stat-number" id="interviewApps">3</div>
                     <div class="stat-label">Interviews Scheduled</div>
                 </div>
             </div>
@@ -718,7 +866,7 @@
                     <i class="fas fa-times-circle"></i>
                 </div>
                 <div class="stat-content">
-                    <div class="stat-number">1</div>
+                    <div class="stat-number" id="rejectedApps">1</div>
                     <div class="stat-label">Rejected</div>
                 </div>
             </div>
@@ -727,7 +875,7 @@
         <!-- Applications List -->
         <div class="applications-list">
             <!-- Application 1 - Interview Stage -->
-            <div class="application-card">
+            <div class="application-card" data-status="interview" data-days="5">
                 <div class="application-header">
                     <div class="company-info">
                         <div class="company-logo">TS</div>
@@ -766,44 +914,35 @@
 
                     <div class="application-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-check"></i></div>
                             <div class="timeline-text">Application Submitted</div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-eye"></i></div>
                             <div class="timeline-text">Profile Reviewed</div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-calendar"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-calendar"></i></div>
                             <div class="timeline-text">Interview Scheduled</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="application-actions">
-                    <button class="action-btn btn-primary" onclick="viewInterviewDetails()">
-                        <i class="fas fa-video"></i>
-                        View Interview Details
+                    <button class="action-btn btn-primary" onclick="viewInterviewDetails('TechStart Inc.')">
+                        <i class="fas fa-video"></i> View Interview Details
                     </button>
-                    <button class="action-btn btn-secondary" onclick="sendMessage('techstart')">
-                        <i class="fas fa-envelope"></i>
-                        Send Message
+                    <button class="action-btn btn-secondary" onclick="sendMessage('TechStart Inc.')">
+                        <i class="fas fa-envelope"></i> Send Message
                     </button>
-                    <button class="action-btn btn-secondary" onclick="viewJobDetails('techstart')">
-                        <i class="fas fa-external-link-alt"></i>
-                        View Job Posting
+                    <button class="action-btn btn-secondary" onclick="viewJobDetails('TechStart Inc.', 'Senior Full Stack Developer')">
+                        <i class="fas fa-external-link-alt"></i> View Job Posting
                     </button>
                 </div>
             </div>
 
             <!-- Application 2 - Pending -->
-            <div class="application-card">
+            <div class="application-card" data-status="pending" data-days="3">
                 <div class="application-header">
                     <div class="company-info">
                         <div class="company-logo" style="background: var(--success-gradient);">DC</div>
@@ -842,38 +981,31 @@
 
                     <div class="application-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-check"></i></div>
                             <div class="timeline-text">Application Submitted</div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-clock"></i></div>
                             <div class="timeline-text">Waiting for Review</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="application-actions">
-                    <button class="action-btn btn-secondary" onclick="sendMessage('designcorp')">
-                        <i class="fas fa-envelope"></i>
-                        Follow Up
+                    <button class="action-btn btn-secondary" onclick="sendMessage('DesignCorp')">
+                        <i class="fas fa-envelope"></i> Follow Up
                     </button>
-                    <button class="action-btn btn-secondary" onclick="viewJobDetails('designcorp')">
-                        <i class="fas fa-external-link-alt"></i>
-                        View Job Posting
+                    <button class="action-btn btn-secondary" onclick="viewJobDetails('DesignCorp', 'Frontend Developer')">
+                        <i class="fas fa-external-link-alt"></i> View Job Posting
                     </button>
-                    <button class="action-btn btn-danger" onclick="withdrawApplication('designcorp')">
-                        <i class="fas fa-times"></i>
-                        Withdraw
+                    <button class="action-btn btn-danger" onclick="withdrawApplication(this, 'DesignCorp')">
+                        <i class="fas fa-times"></i> Withdraw
                     </button>
                 </div>
             </div>
 
             <!-- Application 3 - Accepted -->
-            <div class="application-card">
+            <div class="application-card" data-status="accepted" data-days="14">
                 <div class="application-header">
                     <div class="company-info">
                         <div class="company-logo" style="background: var(--warning-gradient);">AI</div>
@@ -912,107 +1044,397 @@
 
                     <div class="application-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-check"></i></div>
                             <div class="timeline-text">Application Submitted</div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-video"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-video"></i></div>
                             <div class="timeline-text">Interview Completed</div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-star"></i></div>
                             <div class="timeline-text">Offer Received</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="application-actions">
-                    <button class="action-btn btn-primary" onclick="viewOffer('ai-innovations')">
-                        <i class="fas fa-file-contract"></i>
-                        View Offer Details
+                    <button class="action-btn btn-primary" onclick="viewOffer('AI Innovations')">
+                        <i class="fas fa-file-contract"></i> View Offer Details
                     </button>
-                    <button class="action-btn btn-primary" onclick="acceptOffer('ai-innovations')">
-                        <i class="fas fa-handshake"></i>
-                        Accept Offer
+                    <button class="action-btn btn-primary" onclick="acceptOffer('AI Innovations')">
+                        <i class="fas fa-handshake"></i> Accept Offer
                     </button>
-                    <button class="action-btn btn-secondary" onclick="negotiateOffer('ai-innovations')">
-                        <i class="fas fa-comments"></i>
-                        Negotiate
+                    <button class="action-btn btn-secondary" onclick="negotiateOffer('AI Innovations')">
+                        <i class="fas fa-comments"></i> Negotiate
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- More applications can be added here -->
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Details</h3>
+                <button class="close-modal" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be dynamically loaded here -->
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script>
+        // Global variables
+        let sortAscending = false;
+        let currentFilter = 'all';
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📋 Applications Page Loaded');
+            console.log('📋 Applications Page Loaded with Full Functionality');
+            updateStats();
         });
 
-        // Filter applications
-        function toggleFilter() {
-            showNotification('Filter options coming soon! 🔍', 'info');
+        // Parse applied date text and return days ago
+        function parseAppliedDate(text) {
+            const daysMatch = text.match(/(\d+)\s+days?\s+ago/i);
+            const weeksMatch = text.match(/(\d+)\s+weeks?\s+ago/i);
+            
+            if (daysMatch) {
+                return parseInt(daysMatch[1]);
+            } else if (weeksMatch) {
+                return parseInt(weeksMatch[1]) * 7;
+            }
+            return 0;
         }
 
-        // Sort applications
+        // Toggle filter panel
+        function toggleFilter() {
+            const filterPanel = document.getElementById('filterPanel');
+            const filterBtn = document.querySelector('.filter-btn');
+            
+            if (filterPanel.classList.contains('active')) {
+                filterPanel.classList.remove('active');
+                filterBtn.classList.remove('active');
+            } else {
+                filterPanel.classList.add('active');
+                filterBtn.classList.add('active');
+            }
+        }
+
+        // Filter by status
+        function filterByStatus(status) {
+            currentFilter = status;
+            const cards = document.querySelectorAll('.application-card');
+            const filterOptions = document.querySelectorAll('.filter-option');
+            
+            // Update active filter button
+            filterOptions.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+                if (status === 'all' || cardStatus === status) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            updateStats();
+            showNotification(`Filtered applications by: ${status === 'all' ? 'All' : status}`, 'success');
+        }
+
+        // Toggle sort by date
         function toggleSort() {
-            showNotification('Sorting applications by date... 📅', 'info');
+            sortAscending = !sortAscending;
+            const container = document.querySelector('.applications-list');
+            const cards = Array.from(container.children);
+            const sortBtn = document.querySelector('.sort-btn');
+            
+            cards.sort((a, b) => {
+                const aDays = parseInt(a.getAttribute('data-days'));
+                const bDays = parseInt(b.getAttribute('data-days'));
+                return sortAscending ? aDays - bDays : bDays - aDays;
+            });
+            
+            // Update DOM
+            cards.forEach(card => container.appendChild(card));
+            
+            // Update button text
+            sortBtn.innerHTML = `<i class="fas fa-sort"></i> Sort by Date ${sortAscending ? '▲' : '▼'}`;
+            sortBtn.classList.add('active');
+            
+            showNotification(`Applications sorted by date ${sortAscending ? 'ascending' : 'descending'}`, 'success');
         }
 
         // View interview details
-        function viewInterviewDetails() {
-            showNotification('Opening interview details... 🎥', 'info');
-            // In real app, this would open interview modal
+        function viewInterviewDetails(company) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Interview Details - ${company}`;
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-video" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--dashboard-text); margin-bottom: 1rem;">Video Interview Scheduled</h4>
+                </div>
+                <div style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <p><strong>📅 Date:</strong> Tomorrow, August 3rd, 2025</p>
+                    <p><strong>⏰ Time:</strong> 2:00 PM - 3:00 PM IST</p>
+                    <p><strong>🔗 Meeting Link:</strong> <a href="#" style="color: var(--primary-color);">teams.microsoft.com/join/xyz123</a></p>
+                    <p><strong>👤 Interviewer:</strong> Sarah Johnson (Tech Lead)</p>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--dashboard-text); margin-bottom: 0.5rem;">Interview Focus Areas:</h5>
+                    <ul style="color: var(--dashboard-text-light); line-height: 1.8;">
+                        <li>React & Node.js technical assessment</li>
+                        <li>System design discussion</li>
+                        <li>Coding problem solving</li>
+                        <li>Cultural fit & team collaboration</li>
+                    </ul>
+                </div>
+                <div style="text-align: center;">
+                    <button class="action-btn btn-primary" onclick="showNotification('Interview reminder set! 📅', 'success'); closeModal();">
+                        <i class="fas fa-bell"></i> Set Reminder
+                    </button>
+                </div>
+            `;
+            
+            showModal();
         }
 
         // Send message to recruiter
         function sendMessage(company) {
-            showNotification(`Opening chat with ${company}... 💬`, 'info');
-            // In real app, this would open chat interface
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Send Message - ${company}`;
+            modalBody.innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--dashboard-text);">Message:</label>
+                    <textarea id="messageText" 
+                              style="width: 100%; height: 120px; padding: 1rem; border: 2px solid var(--dashboard-border); border-radius: 8px; resize: vertical; font-family: inherit;" 
+                              placeholder="Hi, I wanted to follow up on my application for the position..."></textarea>
+                </div>
+                <div style="text-align: center;">
+                    <button class="action-btn btn-primary" onclick="sendMessageToRecruiter('${company}')">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </div>
+            `;
+            
+            showModal();
+        }
+
+        function sendMessageToRecruiter(company) {
+            const messageText = document.getElementById('messageText').value;
+            if (messageText.trim()) {
+                showNotification(`Message sent to ${company} recruiter! 📨`, 'success');
+                closeModal();
+            } else {
+                showNotification('Please write a message first! ✍️', 'error');
+            }
         }
 
         // View job details
-        function viewJobDetails(company) {
-            showNotification(`Opening job posting for ${company}... 🔗`, 'info');
-            // In real app, this would open job posting
+        function viewJobDetails(company, position) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Job Details - ${position}`;
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h4 style="color: var(--dashboard-text); margin-bottom: 0.5rem;">${position}</h4>
+                    <p style="color: var(--dashboard-text-light); font-weight: 600;">${company}</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--dashboard-text); margin-bottom: 1rem;">Job Requirements:</h5>
+                    <ul style="color: var(--dashboard-text-light); line-height: 1.8;">
+                        <li>3+ years of experience in full-stack development</li>
+                        <li>Proficiency in React, Node.js, and modern JavaScript</li>
+                        <li>Experience with cloud platforms (AWS/Azure)</li>
+                        <li>Strong problem-solving and communication skills</li>
+                        <li>Bachelor's degree in Computer Science or related field</li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--dashboard-text); margin-bottom: 0.5rem;">Benefits:</h5>
+                    <ul style="color: var(--dashboard-text-light); line-height: 1.8;">
+                        <li>Competitive salary package</li>
+                        <li>Health insurance and wellness programs</li>
+                        <li>Flexible work arrangements</li>
+                        <li>Professional development opportunities</li>
+                    </ul>
+                </div>
+                <div style="text-align: center;">
+                    <button class="action-btn btn-secondary" onclick="showNotification('Opening company website... 🌐', 'info'); closeModal();">
+                        <i class="fas fa-external-link-alt"></i> View on Company Site
+                    </button>
+                </div>
+            `;
+            
+            showModal();
         }
 
         // Withdraw application
-        function withdrawApplication(company) {
-            if (confirm('Are you sure you want to withdraw this application?')) {
-                showNotification(`Application withdrawn from ${company} ❌`, 'error');
-                // In real app, this would update the application status
+        function withdrawApplication(button, company) {
+            if (confirm(`Are you sure you want to withdraw your application from ${company}?`)) {
+                const card = button.closest('.application-card');
+                card.style.transform = 'translateX(-100%)';
+                card.style.opacity = '0';
+                
+                setTimeout(() => {
+                    card.remove();
+                    updateStats();
+                    showNotification(`Application withdrawn from ${company} ❌`, 'error');
+                }, 300);
             }
         }
 
         // View offer details
         function viewOffer(company) {
-            showNotification('Opening offer letter... 📄', 'success');
-            // In real app, this would show detailed offer
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Offer Details - ${company}`;
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-star" style="font-size: 3rem; color: #FFD700; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--dashboard-text); margin-bottom: 0.5rem;">Congratulations! 🎉</h4>
+                    <p style="color: var(--dashboard-text-light);">You have received an offer from ${company}</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h5 style="color: var(--dashboard-text); margin-bottom: 1rem;">Offer Details:</h5>
+                    <div style="display: grid; gap: 1rem;">
+                        <p><strong>💰 Salary:</strong> ₹12,00,000 per annum</p>
+                        <p><strong>📍 Location:</strong> Hyderabad (Hybrid)</p>
+                        <p><strong>📅 Start Date:</strong> September 1st, 2025</p>
+                        <p><strong>🏥 Benefits:</strong> Health Insurance, Stock Options, Flexible PTO</p>
+                        <p><strong>⏰ Response Required:</strong> Within 7 days</p>
+                    </div>
+                </div>
+                <div style="text-align: center; display: flex; gap: 1rem; justify-content: center;">
+                    <button class="action-btn btn-primary" onclick="acceptOfferModal('${company}')">
+                        <i class="fas fa-handshake"></i> Accept Offer
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="negotiateOfferModal('${company}')">
+                        <i class="fas fa-comments"></i> Negotiate
+                    </button>
+                </div>
+            `;
+            
+            showModal();
         }
 
         // Accept offer
         function acceptOffer(company) {
-            if (confirm('Are you sure you want to accept this offer?')) {
-                showNotification('🎉 Congratulations! Offer accepted successfully!', 'success');
-                // In real app, this would process offer acceptance
+            if (confirm(`Are you sure you want to accept the offer from ${company}?`)) {
+                showNotification(`🎉 Congratulations! Offer from ${company} accepted successfully!`, 'success');
+                // Update card status
+                const card = document.querySelector(`[onclick*="${company}"]`).closest('.application-card');
+                const statusBadge = card.querySelector('.status-badge');
+                statusBadge.textContent = 'Offer Accepted';
+                statusBadge.className = 'status-badge status-accepted';
+            }
+        }
+
+        function acceptOfferModal(company) {
+            if (confirm(`Are you sure you want to accept this offer from ${company}?`)) {
+                showNotification(`🎉 Offer accepted! Welcome to ${company}!`, 'success');
+                closeModal();
             }
         }
 
         // Negotiate offer
         function negotiateOffer(company) {
-            showNotification('Opening negotiation chat... 💼', 'info');
-            // In real app, this would open negotiation interface
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Negotiate Offer - ${company}`;
+            modalBody.innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <h5 style="color: var(--dashboard-text); margin-bottom: 1rem;">What would you like to negotiate?</h5>
+                    <div style="display: grid; gap: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="salary"> 💰 Salary Package
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="startDate"> 📅 Start Date
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="benefits"> 🏥 Benefits Package
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="remote"> 🏠 Remote Work Options
+                        </label>
+                    </div>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--dashboard-text);">Additional Comments:</label>
+                    <textarea id="negotiationComments" 
+                              style="width: 100%; height: 100px; padding: 1rem; border: 2px solid var(--dashboard-border); border-radius: 8px; resize: vertical; font-family: inherit;" 
+                              placeholder="Please explain your negotiation points..."></textarea>
+                </div>
+                <div style="text-align: center;">
+                    <button class="action-btn btn-primary" onclick="submitNegotiation('${company}')">
+                        <i class="fas fa-paper-plane"></i> Submit Negotiation
+                    </button>
+                </div>
+            `;
+            
+            showModal();
+        }
+
+        function negotiateOfferModal(company) {
+            negotiateOffer(company);
+        }
+
+        function submitNegotiation(company) {
+            showNotification(`Negotiation request sent to ${company}! 💬`, 'info');
+            closeModal();
+        }
+
+        // Modal functions
+        function showModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('active');
+        }
+
+        // Update statistics
+        function updateStats() {
+            const visibleCards = document.querySelectorAll('.application-card:not(.hidden)');
+            const totalCards = document.querySelectorAll('.application-card');
+            
+            let total = totalCards.length;
+            let pending = 0;
+            let interview = 0;
+            let rejected = 0;
+            
+            totalCards.forEach(card => {
+                const status = card.getAttribute('data-status');
+                switch(status) {
+                    case 'pending': pending++; break;
+                    case 'interview': interview++; break;
+                    case 'rejected': rejected++; break;
+                }
+            });
+            
+            document.getElementById('totalApps').textContent = total;
+            document.getElementById('pendingApps').textContent = pending;
+            document.getElementById('interviewApps').textContent = interview;
+            document.getElementById('rejectedApps').textContent = rejected;
         }
 
         // Show notification
@@ -1028,6 +1450,13 @@
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
